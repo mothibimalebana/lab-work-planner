@@ -1,9 +1,32 @@
 @import "tailwindcss";
 
+@font-face {
+    font-family: 'DM Sans';
+    src: url('./assets/fonts/dm-sans/DMSans-9ptRegular.woff2') format('woff2'),
+        url('./assets/fonts/dm-sans/DMSans-9ptRegular.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'DM Sans Bold';
+    src: url('./assets/fonts/dm-sans-bold/DMSans-Bold.woff2') format('woff2'),
+        url('./assets/fonts/dm-sans-bold/DMSans-Bold.woff') format('woff');
+    font-weight: bold;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'DM Sans Bold', system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
-  font-weight: 400;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 162.5% */
 
   color-scheme: light dark;
   background-color: rgba(255, 255, 255, 0.87);
@@ -42,3 +65,10 @@ h1 {
   line-height: 1.1;
 }
 
+li {
+  line-height: 1.5;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 26px; /* 162.5% */
+}
