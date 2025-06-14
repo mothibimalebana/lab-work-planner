@@ -1,7 +1,7 @@
 const Navbar = () => {
     return (
         <>
-        <div className="nav flex bg-[#021E35]">
+        <div className="nav flex bg-[#021E35] ">
             <div className="nav-left flex">
                 <ul className="links flex items-center">
                     <li>
