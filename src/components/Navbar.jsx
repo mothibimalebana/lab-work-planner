@@ -19,7 +19,7 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="nav-right flex">
-                <ul className="links flex gap-5 items-center"> 
+                <ul className="links flex justify-end gap-5 items-center"> 
                     <li>
                         <Link to='Notifications'>
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
