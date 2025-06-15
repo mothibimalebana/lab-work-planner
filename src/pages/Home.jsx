@@ -1,10 +1,11 @@
-import Navbar from "../components/Navbar";
+import BreadCrumbs from "../components/BreadCrumbs";
 
 const Home = () => {
-    console.log('Hello World!')
     return(
         <>
-        <Navbar/>
+            <div className="home">
+                <BreadCrumbs currPage="TimeTable" />
+            </div>
         </>
     )
 }
