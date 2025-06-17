@@ -4,8 +4,8 @@ Link
 const Navbar = () => {
     return (
         <>
-        <div className="nav flex bg-[#021E35] justify-between h-[68px]">
-            <div className="nav-left pl-[20px] flex">
+        <div className="nav flex justify-between h-[68px]">
+            <div className="nav-left flex">
                 <ul className="links flex items-center gap-2">
                     <li>
                         <img width='64' height='47' src="src/assets/img/ul.svg" alt="University Of Limpopo Logo"/>
@@ -18,7 +18,7 @@ const Navbar = () => {
                     </div>
                 </ul>
             </div>
-            <div className="nav-righ pr-[20px] gap-5 flex">
+            <div className="nav-right gap-5 flex">
                 <ul className="links flex gap-[5px] justify-end items-center"> 
                     <li>
                         <Link to='No ifications'>

@@ -8,10 +8,14 @@ function App() {
   return (
     <>
     <div className="app">
-      <Navbar />
+      <div className="navbar px-[2rem] bg-[#021E35]">
+        <Navbar />
+      </div>
+      <div className="content px-[2rem]">
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>
+      </div>
     </div>
     </>
   )
