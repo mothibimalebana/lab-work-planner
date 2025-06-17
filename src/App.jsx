@@ -8,10 +8,10 @@ function App() {
   return (
     <>
     <div className="app">
-      <div className="navbar px-[2rem] bg-[#021E35]">
+      <div className="navbar px-[5rem] py-[0.75rem] bg-[#021E35]">
         <Navbar />
       </div>
-      <div className="content px-[2rem]">
+      <div className="content px-[5rem]">
       <Routes>
         <Route path="/" element={<Home />} />
       </Routes>

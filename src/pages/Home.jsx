@@ -11,8 +11,8 @@ const Home = () => {
                 </div>
                 <div className="header flex items-center justify-between pt-[16px]">
                     <CurrDate/>
-                    <div className="buttons flex">
-                        <button className="button bg-[#FFFFFF] rounded-[4px] text-[#000000] h-[40px] w-[140px]">Filter</button>
+                    <div className="buttons flex gap-[15px]">
+                        <button className="button bg-[#FFFFFF] border-2 border-[#E5E8EB] rounded-[4px] text-[#000000] h-[40px] w-[140px]">Filter</button>
                         <button className="button bg-[#161127] rounded-[4px] h-[40px] w-[140px]">Updates</button>
                     </div>
                 </div>
