@@ -1,3 +1,4 @@
-:root {
-    color: '#FFF';
+.app {
+    display: grid;
+    grid-template-rows: auto 1fr; 
 }
