@@ -14,6 +14,8 @@ function App() {
       <div className="content px-[5rem]">
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/Timetable" element={<Home />} />
+
       </Routes>
       </div>
     </div>
