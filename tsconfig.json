@@ -1,0 +1,14 @@
+{
+  "files": [],
+  "compilerOptions": {
+    "skipLibCheck": true,
+  },
+  "verbatimModuleSyntax": true,
+  "esModuleInterop": true,
+  "moduleDetection": "force",
+  "noUncheckedIndexedAccess": true,
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
+}
