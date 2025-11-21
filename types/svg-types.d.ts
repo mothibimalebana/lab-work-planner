@@ -1,5 +1,5 @@
 export type SVG = {
-    name: string;
+    name?: string;
     element: JSX.Element;
     active?: boolean;
     disabledElement?: JSX.Element;
