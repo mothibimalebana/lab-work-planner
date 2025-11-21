@@ -8,8 +8,8 @@ import SVGElement from "./SVGElement";
  */
 const Navbar = () => {
     return (
-        <div className="nav-bar flex bg-[#021E35]">
-            <div className="left flex">
+        <div className="nav-bar hidden md:flex justify-between bg-[#021E35] px-[5.12rem] min-h-17">
+            <div className="left flex gap-4 items-center">
                 <div className="svg">
                     <SVGElement element={universityIcon.element} />
                 </div>
@@ -23,7 +23,7 @@ const Navbar = () => {
                     <Link to="/Form">Form</Link>
                 </div>
             </div>
-            <div className="right flex">
+            <div className="right flex gap-4 items-center">
                 <div className="notifications">
                     <Link to="/Notifications">{notificationIcon.element}</Link>
                 </div>
