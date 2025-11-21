@@ -1,26 +1,25 @@
-import { Link } from "react-router";
-import { notificationIcon, settingsIcon, universityIcon } from "../assets/SVG";
+import { Link } from "react-router-dom";
+import { notificationIcon, settingsIcon, universityIcon } from "../assets/svg/SVG";
 import SVGElement from "./SVGElement";
 
 /**
  * Navbar will help navigate between different pages on the main app component
- * @params - none
- * @returns -Nav JSX with link to timetable, dashboard, form, notifications, settings 
+ * @returns Nav JSX with Link to timetable, dashboard, form, notifications, settings 
  */
-const Navbar = ( ) => {
+const Navbar = () => {
     return (
-        <div className="nav-bar">
+        <div className="nav-bar flex bg-[#021E35]">
             <div className="left flex">
                 <div className="svg">
-                    <SVGElement element={universityIcon.element}/>
+                    <SVGElement element={universityIcon.element} />
                 </div>
                 <div className="timetable">
-                    <Link to="/Timetable" >Timetable</Link>
+                    <Link to="/Timetable">Timetable</Link>
                 </div>
-                <div className="/Dashboard">
-                    <Link to="/Dashboard" >Dashboard</Link>
+                <div className="dashboard">
+                    <Link to="/Dashboard">Dashboard</Link>
                 </div>
-                <div className="Form">
+                <div className="form">
                     <Link to="/Form">Form</Link>
                 </div>
             </div>
@@ -33,7 +32,7 @@ const Navbar = ( ) => {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default Navbar
+export default Navbar;
