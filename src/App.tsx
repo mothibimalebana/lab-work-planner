@@ -1,6 +1,5 @@
 import './App.css'
-import {  universityIcon } from './assets/SVG'
-import SVGElement from './components/SVGElement'
+// import Navbar from './components/Navbar'
 
 
 
@@ -8,7 +7,7 @@ function App() {
 
   return (
     <>
-      <SVGElement element={universityIcon.element}/>
+      
     </>
   )
 }

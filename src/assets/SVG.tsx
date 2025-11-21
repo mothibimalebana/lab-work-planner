@@ -1,4 +1,3 @@
-import type React from 'react'
 import type { SVG } from '../../types/svg-types'
 
 
