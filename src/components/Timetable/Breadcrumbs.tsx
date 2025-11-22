@@ -1,4 +1,4 @@
-import { dropDownIcon, filterIcon, notificationIcon } from "../../assets/svg/SVG";
+import { dropDownIcon, filterIcon, hourMilestone, notificationIcon, salaryMilestone } from "../../assets/svg/SVG";
 
 const BreadCrumbs = () => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -34,15 +34,17 @@ const BreadCrumbs = () => {
                 <div className="hours">
                     <div className="p">Total Hours Worked:</div>
                     <div className="info">
-
+                        {hourMilestone.element}
                     </div>
                 </div>
                 <div className="salary">
                     <div className="info">
                         <p>Employee working time</p>
+                        {salaryMilestone.element}
                     </div>
                     <div className="total">
-                        <p>Total for <span>April:</span></p>
+                        <p className="text-[#6C6C6C]">Total for <span className="text-black font-bold">April:</span></p>
+                        <h3 className="text-black font-semibold text-[1.25rem]">R219</h3>
                     </div>
                 </div>
             </div>
