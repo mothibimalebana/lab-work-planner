@@ -30,7 +30,22 @@ const BreadCrumbs = () => {
                     return mm === month ? <div className="monthCarousel flex items-center h-4 text-[1rem] px-[1.2rem]"><p className="text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-4 bg-white">{month}</p></div> : <div className="monthCarousel flex items-center text-[1rem] h-4"><p className="text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]">{month}</p></div>
                 })}
             </div>
-            <div className="salaryDashboard"></div>
+            <div className="salaryDashboard grid">
+                <div className="hours">
+                    <div className="p">Total Hours Worked:</div>
+                    <div className="info">
+
+                    </div>
+                </div>
+                <div className="salary">
+                    <div className="info">
+                        <p>Employee working time</p>
+                    </div>
+                    <div className="total">
+                        <p>Total for <span>April:</span></p>
+                    </div>
+                </div>
+            </div>
             <div className="chips"></div>
         </div>
     )
