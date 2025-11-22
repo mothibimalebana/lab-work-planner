@@ -8,7 +8,6 @@ const BreadCrumbs = () => {
     const mm = months[Number(date.slice(3,5)) - 1];
     const yyyy = date.slice(6)
     const dateString = dd + ' ' + ' ' + mm + ' '  + yyyy
-    console.log(dd, mm, yyyy)
 
     return (
         <div className="md:breadCrumbs flex flex-col px-[5.12rem] h-full w-full">
@@ -26,7 +25,11 @@ const BreadCrumbs = () => {
                     </button>
                 </div>
             </div>
-            <div className="month"></div>
+            <div className="month flex justify-evenly py-2 px-4 mt-3 rounded-sm bg-[#FBFBFB] border-[1px_solid_#E5E8EB] divide-x-2 divide-solid divide-[#E5E8EB]">
+                {months.map((month) => {
+                    return mm === month ? <div className="monthCarousel flex items-center h-4 text-[1rem] px-[1.2rem]"><p className="text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-4 bg-white">{month}</p></div> : <div className="monthCarousel flex items-center text-[1rem] h-4"><p className="text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]">{month}</p></div>
+                })}
+            </div>
             <div className="salaryDashboard"></div>
             <div className="chips"></div>
         </div>
