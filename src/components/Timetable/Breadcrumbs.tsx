@@ -30,22 +30,24 @@ const BreadCrumbs = () => {
                     return mm === month ? <div className="monthCarousel flex items-center h-4 text-[1rem] px-[1.2rem]"><p className="text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-4 bg-white">{month}</p></div> : <div className="monthCarousel flex items-center text-[1rem] h-4"><p className="text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]">{month}</p></div>
                 })}
             </div>
-            <div className="salaryDashboard grid">
-                <div className="hours">
+            <div className="salaryDashboard grid grid-cols-[15rem_0.8fr_13rem]">
+                <div className="hours grid grid-rows-2">
                     <div className="p">Total Hours Worked:</div>
                     <div className="info">
                         {hourMilestone.element}
                     </div>
                 </div>
-                <div className="salary">
-                    <div className="info">
-                        <p>Employee working time</p>
+                <div className="salary grid grid-rows-2">
+                    <div className="info ">
+                        <div className="div"><p>Employee working time</p></div>
+                        <div className="info row-start-2">
                         {salaryMilestone.element}
+                        </div>
                     </div>
-                    <div className="total">
-                        <p className="text-[#6C6C6C]">Total for <span className="text-black font-bold">April:</span></p>
-                        <h3 className="text-black font-semibold text-[1.25rem]">R219</h3>
-                    </div>
+                </div>
+                <div className="total col-start-3 col-end-4">
+                    <p className="text-[#6C6C6C]">Total for <span className="text-black font-bold">April:</span></p>
+                    <h3 className="text-black font-semibold text-[1.25rem]">R219</h3>
                 </div>
             </div>
             <div className="chips"></div>
