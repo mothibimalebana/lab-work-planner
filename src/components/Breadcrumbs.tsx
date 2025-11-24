@@ -49,7 +49,7 @@ const BreadCrumbs = ({hours = 0 }) => {
                     </div>
                 </div>
                 <div className="total col-start-3 col-end-4">
-                    <p className="text-[#6C6C6C]">Total for <span className="text-black font-bold">April:</span></p>
+                    <p className="text-[#6C6C6C]">Total for <span className="text-black font-bold">{mm}:</span></p>
                     <h3 className="text-black font-semibold text-[1.25rem]">R219</h3>
                 </div>
             </div>
