@@ -66,24 +66,24 @@ const Primitive = (  ) => {
                     </tr>
                     <tr className="rounded-lg border-b border-b-solid border-b-[#E5E8EB]">
                         <td className="w-[2.13rem] bg-[rgba(236,236,240,0.30)] p-[1.73425rem_0.01363rem_1.61369rem_0.62906rem] text-left font-normal">08:00 <br />11:00</td>
-                        {schedule[0].map((shift) => shift.shift ? <td><div className="cell">Working</div></td> : <td><div className="cell">Free slot</div></td>)}
+                        {schedule[0].map((shift) => shift.shift ? <td><div className="working flex p-[0.64rem] rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)] w-[9.79344rem] h-[4.61288rem]"><div className="cell w-full">Working</div></div></td> : <td><div className="freeSlot text-center p-[1.0645rem_0.42581rem] text-[#99A1AF] w-[9.79344rem] h-[3.40644rem] rounded-lg border border-solid border-[#E5E8EB] cell w-full">Free slot</div></td>)}
                     </tr>
                     <tr className="rounded-lg border-b border-b-solid border-b-[#E5E8EB]">
                         <td className="w-[2.13rem] bg-[rgba(236,236,240,0.30)] p-[1.73425rem_0.01363rem_1.61369rem_0.62906rem] text-left font-normal">11:00 <br />14:00</td>
-                        {schedule[1].map((shift) => shift.shift ? <td><div className="cell">Working</div></td> : <td><div className="cell">Free slot</div></td>)}
+                        {schedule[1].map((shift) => shift.shift ? <td><div className="working flex p-[0.64rem] rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)] w-[9.79344rem] h-[4.61288rem]"><div className="cell w-full">Working</div></div></td> : <td><div className="freeSlot text-center p-[1.0645rem_0.42581rem] text-[#99A1AF] w-[9.79344rem] h-[3.40644rem] rounded-lg border border-solid border-[#E5E8EB] cell w-full">Free slot</div></td>)}
                     </tr>
                     <tr className="rounded-lg border-b border-b-solid border-b-[#E5E8EB]">
                         <td className="w-[2.13rem] bg-[rgba(236,236,240,0.30)] p-[1.73425rem_0.01363rem_1.61369rem_0.62906rem] text-left font-normal">14:00 <br />17:00</td>
-                        {schedule[2].map((shift) => shift.shift ? <td><div className="cell">Working</div></td> : <td><div className="cell">Free slot</div></td>)}
+                        {schedule[2].map((shift) => shift.shift ? <td><div className="working flex p-[0.64rem] rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)] w-[9.79344rem] h-[4.61288rem]"><div className="cell w-full">Working</div></div></td> : <td><div className="freeSlot text-center p-[1.0645rem_0.42581rem] text-[#99A1AF] w-[9.79344rem] h-[3.40644rem] rounded-lg border border-solid border-[#E5E8EB] cell w-full">Free slot</div></td>)}
 
                     </tr>
                     <tr className="rounded-lg border-b border-b-solid border-b-[#E5E8EB]">
                         <td className="w-[2.13rem] bg-[rgba(236,236,240,0.30)] p-[1.73425rem_0.01363rem_1.61369rem_0.62906rem] text-left font-normal">17:00 <br />20:00</td>
-                        {schedule[3].map((shift) => shift.shift ? <td><div className="cell">Working</div></td> : <td><div className="cell">Free slot</div></td>)}
+                        {schedule[3].map((shift) => shift.shift ? <td><div className="cell w-full">Working</div></td> : <td><div className="freeSlot text-center p-[1.0645rem_0.42581rem] text-[#99A1AF] w-[9.79344rem] h-[3.40644rem] rounded-lg border border-solid border-[#E5E8EB] cell w-full">Free slot</div></td>)}
                     </tr>
                     <tr className="rounded-lg border-b border-b-solid border-b-[#E5E8EB]">
                         <td className="w-[2.13rem] bg-[rgba(236,236,240,0.30)] p-[1.73425rem_0.01363rem_1.61369rem_0.62906rem] text-left font-normal">20:00 <br />00:00</td>
-                        {schedule[4].map((shift) => shift.shift ? <td><div className="cell">Working</div></td> : <td><div className="cell">Free slot</div></td>)}
+                        {schedule[4].map((shift) => shift.shift ? <td><div className="working flex p-[0.64rem] rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)] w-[9.79344rem] h-[4.61288rem]"><div className="cell w-full">Working</div></div></td> : <td><div className="freeSlot text-center p-[1.0645rem_0.42581rem] text-[#99A1AF] w-[9.79344rem] h-[3.40644rem] rounded-lg border border-solid border-[#E5E8EB] cell w-full">Free slot</div></td>)}
                     </tr>
                 </tbody>
             </table>
