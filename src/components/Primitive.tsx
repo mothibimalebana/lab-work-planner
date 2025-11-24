@@ -56,13 +56,13 @@ const Primitive = (  ) => {
                 <tbody>
                     <tr className="rounded-lg border-b border-b-solid border-b-[#E5E8EB]">
                     <th className="pl-[0.65rem] w-[2.13rem] bg-[rgba(236,236,240,0.30)]  text-left font-normal">Time</th>
-                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] p-[0.69194rem_6.81881rem_0.58588rem_0.63869rem] text-left pl-[0.63rem] pr-[2.21rem] pt-[1.73rem] pb-[1.61rem]">Monday</th>
-                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] p-[0.69194rem_6.81881rem_0.58588rem_0.63869rem] text-left pl-[0.63rem] pr-[2.21rem] pt-[1.73rem] pb-[1.61rem]">Tuesday</th>
-                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] p-[0.69194rem_6.81881rem_0.58588rem_0.63869rem] text-left pl-[0.63rem] pr-[2.21rem] pt-[1.73rem] pb-[1.61rem]">Wednsday</th>
-                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] p-[0.69194rem_6.81881rem_0.58588rem_0.63869rem] text-left pl-[0.63rem] pr-[2.21rem] pt-[1.73rem] pb-[1.61rem]">Thursday</th>
-                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] p-[0.69194rem_6.81881rem_0.58588rem_0.63869rem] text-left pl-[0.63rem] pr-[2.21rem] pt-[1.73rem] pb-[1.61rem]">Friday</th>
-                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] p-[0.69194rem_6.81881rem_0.58588rem_0.63869rem] text-left pl-[0.63rem] pr-[2.21rem] pt-[1.73rem] pb-[1.61rem]">Saturday</th>
-                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] p-[0.69194rem_6.81881rem_0.58588rem_0.63869rem] text-left pl-[0.63rem] pr-[2.21rem] pt-[1.73rem] pb-[1.61rem]">Sunday</th>
+                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] text-left">Monday</th>
+                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] text-left">Tuesday</th>
+                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] text-left">Wednsday</th>
+                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] text-left">Thursday</th>
+                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] text-left">Friday</th>
+                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] text-left">Saturday</th>
+                        <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] text-left">Sunday</th>
                     </tr>
                     <tr className="rounded-lg border-b border-b-solid border-b-[#E5E8EB]">
                         <td className="w-[2.13rem] bg-[rgba(236,236,240,0.30)]  text-left font-normal">08:00 <br />11:00</td>

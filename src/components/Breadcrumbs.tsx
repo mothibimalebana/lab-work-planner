@@ -1,12 +1,13 @@
-import { dropDownIcon, filterIcon, greenEllipseIcon, hourMilestone, notificationIcon, redEllipseIcon, salaryMilestone } from "../assets/svg/SVG";
+import { dropDownIcon, greenEllipseIcon, hourMilestone, notificationIcon, redEllipseIcon, salaryMilestone } from "../assets/svg/SVG";
 
 interface BreadCrumbsProps {
     hours?: number;
     setMode: (mode: string) => void;
     mode: string;
+    rate?: number;
 }
 
-const BreadCrumbs = ({ hours = 0, setMode, mode }: BreadCrumbsProps) => {
+const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps) => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const today = new Date();
     const date = today.toLocaleDateString();
@@ -28,11 +29,6 @@ const BreadCrumbs = ({ hours = 0, setMode, mode }: BreadCrumbsProps) => {
             <div className="top flex justify-between">
                 <div className="date font-bold text-[1.875rem]">{dateString}</div>
                 <div className="btns flex gap-[0.87rem]">
-                    <button className="flex text-center items-center gap-2.5">
-                        <div className="icon">{filterIcon.element}</div>
-                        <p><b>Filters</b></p>
-                        <div className="icon">{dropDownIcon.element}</div>
-                    </button>
                     <button className="flex text-center text-white bg-[#021E35] items-center gap-2.5">
                         <div className="icon">{notificationIcon.element}</div>
                         <p><b>Updates</b></p>
@@ -64,19 +60,26 @@ const BreadCrumbs = ({ hours = 0, setMode, mode }: BreadCrumbsProps) => {
                 </div>
                 <div className="total col-start-3 col-end-4">
                     <p className="text-[#6C6C6C]">Total for <span className="text-black font-bold">{mm}:</span></p>
-                    <h3 className="text-black font-semibold text-[1.25rem]">R219</h3>
+                    <h3 className="text-black font-semibold text-[1.25rem]">R{hours * rate}</h3>
                 </div>
             </div>
             <div className="chips flex items-center mt-3 justify-between">
-                <div className="attendanceChips flex gap-3.5">
-                    <div className="present rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                <div className="attendanceChips">
+                    {
+                    mode === 'Lab Assistant' ? 
+                    (<div className="present rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <div className="icon">{greenEllipseIcon.element}</div>
                         <p>Shift</p>
                     </div>
+                    ) 
+                    :
+                    (
                     <div className="absent rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <div className="icon">{redEllipseIcon.element}</div>
-                        <p>Absent</p>
+                        <p>Booked</p>
                     </div>
+                    )
+                    }
                 </div>
                 <div className="mode items-center">
                     <div onClick={changeMode} className="mode rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
