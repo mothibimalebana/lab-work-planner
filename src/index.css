@@ -89,3 +89,10 @@ button:focus-visible {
 table {
   border-radius: 0.25rem;
 }
+
+td {
+  width: 9.79344rem;
+  height: 5.1288rem;
+  padding: 0.33869rem 0.63869rem;
+
+}

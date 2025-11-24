@@ -1,6 +1,12 @@
 import { dropDownIcon, filterIcon, greenEllipseIcon, hourMilestone, notificationIcon, redEllipseIcon, salaryMilestone } from "../assets/svg/SVG";
 
-const BreadCrumbs = ({hours = 0 }) => {
+interface BreadCrumbsProps {
+    hours?: number;
+    setMode: (mode: string) => void;
+    mode: string;
+}
+
+const BreadCrumbs = ({ hours = 0, setMode, mode }: BreadCrumbsProps) => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const today = new Date();
     const date = today.toLocaleDateString();
@@ -8,6 +14,14 @@ const BreadCrumbs = ({hours = 0 }) => {
     const mm = months[Number(date.slice(3,5)) - 1];
     const yyyy = date.slice(6);
     const dateString = dd + ' ' + ' ' + mm + ' '  + yyyy
+
+    const changeMode = () => {
+        if (mode === 'Lab Assistant') {
+            setMode('Bookings');
+        } else {
+            setMode('Lab Assistant');
+        }
+    }
 
     return (
         <div className="md:breadCrumbs flex flex-col px-[5.12rem] h-full w-full">
@@ -57,7 +71,7 @@ const BreadCrumbs = ({hours = 0 }) => {
                 <div className="attendanceChips flex gap-3.5">
                     <div className="present rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <div className="icon">{greenEllipseIcon.element}</div>
-                        <p>Present</p>
+                        <p>Shift</p>
                     </div>
                     <div className="absent rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <div className="icon">{redEllipseIcon.element}</div>
@@ -66,8 +80,8 @@ const BreadCrumbs = ({hours = 0 }) => {
                 </div>
                 <div className="mode items-center">
                     <div className="mode rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
-                        <p>Lab Assistant</p>
-                        <div className="dropDown">{dropDownIcon.element}</div>
+                        <p>{mode}</p>
+                        <div className="dropDown" onClick={changeMode}>{dropDownIcon.element}</div>
                     </div>
                 </div>
             </div>
