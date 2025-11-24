@@ -51,10 +51,11 @@ const Primitive = (  ) => {
 
     console.log(schedule[0])
     return (
-        <div className="table px-[5.12rem]">
-            <table>
+        <div className="table px-[5.12rem] w-full">
+            <table className="w-full">
                 <tbody>
                     <tr>
+                        <th>Time</th>
                         <th>Monday</th>
                         <th>Tuesday</th>
                         <th>Wednsday</th>
