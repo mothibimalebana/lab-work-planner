@@ -1,4 +1,4 @@
-import { dropDownIcon, filterIcon, hourMilestone, notificationIcon, salaryMilestone } from "../../assets/svg/SVG";
+import { dropDownIcon, filterIcon, greenEllipseIcon, hourMilestone, notificationIcon, redEllipseIcon, salaryMilestone } from "../../assets/svg/SVG";
 
 const BreadCrumbs = ({hours = 6}) => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -53,7 +53,24 @@ const BreadCrumbs = ({hours = 6}) => {
                     <h3 className="text-black font-semibold text-[1.25rem]">R219</h3>
                 </div>
             </div>
-            <div className="chips"></div>
+            <div className="chips flex items-center mt-3 justify-between">
+                <div className="attendanceChips flex gap-3.5">
+                    <div className="present flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                        <div className="icon">{greenEllipseIcon.element}</div>
+                        <p>Present</p>
+                    </div>
+                    <div className="absent flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                        <div className="icon">{redEllipseIcon.element}</div>
+                        <p>Absent</p>
+                    </div>
+                </div>
+                <div className="mode items-center">
+                    <div className="mode flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                        <p>Lab Assistant</p>
+                        <div className="dropDown">{dropDownIcon.element}</div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
