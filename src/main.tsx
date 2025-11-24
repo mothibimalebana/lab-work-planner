@@ -4,7 +4,7 @@ import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import './index.css'
 import App from './App.tsx'
-import Timetable from './components/Timetable/Timetable.tsx';
+import Timetable from './pages/Timetable.tsx';
 
 const router = createBrowserRouter([
   {

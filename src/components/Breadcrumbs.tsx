@@ -1,6 +1,6 @@
-import { dropDownIcon, filterIcon, greenEllipseIcon, hourMilestone, notificationIcon, redEllipseIcon, salaryMilestone } from "../../assets/svg/SVG";
+import { dropDownIcon, filterIcon, greenEllipseIcon, hourMilestone, notificationIcon, redEllipseIcon, salaryMilestone } from "../assets/svg/SVG";
 
-const BreadCrumbs = ({hours = 6}) => {
+const BreadCrumbs = ({hours = 0 }) => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const today = new Date();
     const date = today.toLocaleDateString();
