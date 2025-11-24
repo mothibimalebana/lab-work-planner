@@ -55,14 +55,14 @@ const Primitive = (  ) => {
             <table className="w-full">
                 <tbody>
                     <tr>
-                        <th>Time</th>
-                        <th>Monday</th>
-                        <th>Tuesday</th>
-                        <th>Wednsday</th>
-                        <th>Thursday</th>
-                        <th>Friday</th>
-                        <th>Saturday</th>
-                        <th>Sunday</th>
+                        <th className="text-left">Time</th>
+                        <th className="text-left">Monday</th>
+                        <th className="text-left">Tuesday</th>
+                        <th className="text-left">Wednsday</th>
+                        <th className="text-left">Thursday</th>
+                        <th className="text-left">Friday</th>
+                        <th className="text-left">Saturday</th>
+                        <th className="text-left">Sunday</th>
                     </tr>
                     <tr>
                         <td>08:00 <br />11:00</td>
