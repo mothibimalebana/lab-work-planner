@@ -79,9 +79,9 @@ const BreadCrumbs = ({ hours = 0, setMode, mode }: BreadCrumbsProps) => {
                     </div>
                 </div>
                 <div className="mode items-center">
-                    <div className="mode rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                    <div onClick={changeMode} className="mode rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <p>{mode}</p>
-                        <div className="dropDown" onClick={changeMode}>{dropDownIcon.element}</div>
+                        <div className="dropDown">{dropDownIcon.element}</div>
                     </div>
                 </div>
             </div>
