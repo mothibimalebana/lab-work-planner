@@ -1,12 +1,12 @@
 import { dropDownIcon, filterIcon, hourMilestone, notificationIcon, salaryMilestone } from "../../assets/svg/SVG";
 
-const BreadCrumbs = () => {
+const BreadCrumbs = ({hours = 6}) => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const today = new Date();
     const date = today.toLocaleDateString();
     const dd = date.slice(0,2);
     const mm = months[Number(date.slice(3,5)) - 1];
-    const yyyy = date.slice(6)
+    const yyyy = date.slice(6);
     const dateString = dd + ' ' + ' ' + mm + ' '  + yyyy
 
     return (
@@ -30,18 +30,21 @@ const BreadCrumbs = () => {
                     return mm === month ? <div className="monthCarousel flex items-center h-4 text-[1rem] px-[1.2rem]"><p className="text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-4 bg-white">{month}</p></div> : <div className="monthCarousel flex items-center text-[1rem] h-4"><p className="text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]">{month}</p></div>
                 })}
             </div>
-            <div className="salaryDashboard grid grid-cols-[15rem_0.8fr_13rem]">
-                <div className="hours grid grid-rows-2">
-                    <div className="p">Total Hours Worked:</div>
-                    <div className="info">
-                        {hourMilestone.element}
+            <div className="salaryDashboard flex justify-between mt-7 text-[0.75rem]">
+                <div className="salarInfo flex gap-[1.8rem]">
+                    <div className="hours flex flex-col justify-between pr-6 border-r border-r-[#E5E8EB] rounded-[0.0625rem] border-r-solid">
+                        <div className="p">Total Hours Worked:</div>
+                        <div className="info flex items-center h-6">
+                            {hourMilestone.element}
+                            <p className="text-[1.25rem] font-bold">{`${hours}/80`}<span className="text-[">h</span></p>
+                        </div>
                     </div>
-                </div>
-                <div className="salary grid grid-rows-2">
-                    <div className="info ">
-                        <div className="div"><p>Employee working time</p></div>
-                        <div className="info row-start-2">
-                        {salaryMilestone.element}
+                    <div className="salary flex">
+                        <div className="info flex flex-col justify-between ">
+                            <div className="div"><p>Employee working time</p></div>
+                            <div className="info flex items-center h-6">
+                                {salaryMilestone.element}
+                            </div>
                         </div>
                     </div>
                 </div>
