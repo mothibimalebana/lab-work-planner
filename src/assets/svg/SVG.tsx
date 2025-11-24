@@ -155,6 +155,6 @@ export const hourMilestone = (hours: number) => {
 export const salaryMilestone = (hours: number) => {
   return (<svg xmlns="http://www.w3.org/2000/svg" width="750" height="6" viewBox="0 0 750 6" fill="none">
             <rect width="750" height="6" rx="3" fill="#8EB8BE" fillOpacity="0.2"/>
-            <rect width={ hours * 5.77} height="6" rx="3" fill="#337E89"/>
+            <rect width={ hours * 9.375} height="6" rx="3" fill="#337E89"/>
           </svg>)
 }
