@@ -30,7 +30,7 @@ const BreadCrumbs = ({hours = 0 }) => {
                     return mm === month ? <div className="monthCarousel flex items-center h-4 text-[1rem] px-[1.2rem]"><p className="text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-4 bg-white">{month}</p></div> : <div className="monthCarousel flex items-center text-[1rem] h-4"><p className="text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]">{month}</p></div>
                 })}
             </div>
-            <div className="salaryDashboard py-6 px-4 border border-solid border-[#E5E8EB] bg-white flex justify-between mt-7 text-[0.75rem]">
+            <div className="salaryDashboard rounded-sm py-6 px-4 border border-solid border-[#E5E8EB] bg-white flex justify-between mt-7 text-[0.75rem]">
                 <div className="salarInfo flex gap-[1.8rem]">
                     <div className="hours  flex flex-col justify-between pr-6 border-r border-r-[#E5E8EB] rounded-[0.0625rem] border-r-solid">
                         <div className="p">Total Hours WorkedThis Month:</div>
@@ -55,17 +55,17 @@ const BreadCrumbs = ({hours = 0 }) => {
             </div>
             <div className="chips flex items-center mt-3 justify-between">
                 <div className="attendanceChips flex gap-3.5">
-                    <div className="present flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                    <div className="present rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <div className="icon">{greenEllipseIcon.element}</div>
                         <p>Present</p>
                     </div>
-                    <div className="absent flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                    <div className="absent rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <div className="icon">{redEllipseIcon.element}</div>
                         <p>Absent</p>
                     </div>
                 </div>
                 <div className="mode items-center">
-                    <div className="mode flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                    <div className="mode rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <p>Lab Assistant</p>
                         <div className="dropDown">{dropDownIcon.element}</div>
                     </div>
