@@ -25,17 +25,17 @@ const BreadCrumbs = ({hours = 6}) => {
                     </button>
                 </div>
             </div>
-            <div className="month flex justify-evenly py-2 px-4 mt-3 rounded-sm bg-[#FBFBFB] border-[1px_solid_#E5E8EB] divide-x-2 divide-solid divide-[#E5E8EB]">
+            <div className="month flex justify-evenly py-2 px-4 mt-3 rounded-sm bg-[#FBFBFB] border border-solid border-[#E5E8EB] divide-x-2 divide-solid divide-[#E5E8EB]">
                 {months.map((month) => {
                     return mm === month ? <div className="monthCarousel flex items-center h-4 text-[1rem] px-[1.2rem]"><p className="text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-4 bg-white">{month}</p></div> : <div className="monthCarousel flex items-center text-[1rem] h-4"><p className="text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]">{month}</p></div>
                 })}
             </div>
-            <div className="salaryDashboard flex justify-between mt-7 text-[0.75rem]">
+            <div className="salaryDashboard py-6 px-4 border border-solid border-[#E5E8EB] bg-white flex justify-between mt-7 text-[0.75rem]">
                 <div className="salarInfo flex gap-[1.8rem]">
-                    <div className="hours flex flex-col justify-between pr-6 border-r border-r-[#E5E8EB] rounded-[0.0625rem] border-r-solid">
-                        <div className="p">Total Hours Worked:</div>
+                    <div className="hours  flex flex-col justify-between pr-6 border-r border-r-[#E5E8EB] rounded-[0.0625rem] border-r-solid">
+                        <div className="p">Total Hours WorkedThis Month:</div>
                         <div className="info flex items-center h-6">
-                            {hourMilestone.element}
+                            <div className="hoursMilestone">{hourMilestone(hours)}</div>
                             <p className="text-[1.25rem] font-bold">{`${hours}/80`}<span className="text-[">h</span></p>
                         </div>
                     </div>
@@ -43,7 +43,7 @@ const BreadCrumbs = ({hours = 6}) => {
                         <div className="info flex flex-col justify-between ">
                             <div className="div"><p>Employee working time</p></div>
                             <div className="info flex items-center h-6">
-                                {salaryMilestone.element}
+                                {salaryMilestone(hours)}
                             </div>
                         </div>
                     </div>

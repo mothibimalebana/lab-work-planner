@@ -143,20 +143,18 @@ export const redEllipseIcon: SVG = {
     </svg>
 }
 
-export const hourMilestone: SVG = {
-  name: "hours milestone",
-  element:
-      <svg xmlns="http://www.w3.org/2000/svg" width="130" height="6" viewBox="0 0 130 6" fill="none">
-        <rect width="130" height="6" rx="3" fill="#8EB8BE" fillOpacity="0.2"/>
-        <rect width="25" height="6" rx="3" fill="#337E89"/>
-      </svg>
+export const hourMilestone = (hours: number) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="130" height="6" viewBox="0 0 130 6" fill="none">
+    <rect width="130" height="6" rx="3" fill="#8EB8BE" fillOpacity="0.2"/>
+    <rect width={ hours * 1.625 } height="6" rx="3" fill="#337E89"/>
+  </svg>
+  )
 }
 
-export const salaryMilestone: SVG = {
-  name: "salary milestone",
-  element: 
-      <svg xmlns="http://www.w3.org/2000/svg" width="832" height="6" viewBox="0 0 832 6" fill="none">
-        <rect width="832" height="6" rx="3" fill="#8EB8BE" fillOpacity="0.2"/>
-        <rect width="25" height="6" rx="3" fill="#337E89"/>
-      </svg>
+export const salaryMilestone = (hours: number) => {
+  return (<svg xmlns="http://www.w3.org/2000/svg" width="750" height="6" viewBox="0 0 750 6" fill="none">
+            <rect width="750" height="6" rx="3" fill="#8EB8BE" fillOpacity="0.2"/>
+            <rect width={ hours * 5.77} height="6" rx="3" fill="#337E89"/>
+          </svg>)
 }
