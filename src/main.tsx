@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router/dom";
 import './index.css'
 import App from './App.tsx'
 import Timetable from './pages/Timetable.tsx';
+import LandingPage from './pages/LandingPage.tsx';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       }
     ]
   },
+  {
+    path: "/Home",
+    element: <LandingPage/>,
+  }
 ]);
 
 createRoot(document.getElementById('root')!).render(
