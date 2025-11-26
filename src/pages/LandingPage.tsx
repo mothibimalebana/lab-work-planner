@@ -1,4 +1,13 @@
 import { aiLogo, arrowLogo, logOut, universityIcon } from "../assets/svg/SVG"
+import swoosh from "../assets/svg/swoosh.svg"
+import AI from "../assets/svg/AI.svg"
+import safe from "../assets/svg/Safe.svg"
+import people from "../assets/svg/People.svg"
+import clock from "../assets/svg/Clock.svg"
+import calendar from "../assets/svg/Calendar.svg"
+
+
+
 
 const LandingPage = () => {
     return (
@@ -33,7 +42,40 @@ const LandingPage = () => {
                 </div>
             </div>
             <div className="main">
-                <div className="container">    
+                <div className="card-container flex justify-between mx-5 mt-20">  
+                    <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
+                        <div className="icon mb-[1.12rem]">
+                            <img src={swoosh} alt="tick" />
+                        </div>
+                        <div className="header text-[#021E35] mb-[0.44rem] font-bold">
+                            <h5>Automatic Conflict Prevention</h5>
+                        </div>
+                        <div className="cardInfo">
+                            <p>Select your enrolled modules and the system automatically blocks out your class times</p>
+                        </div>
+                    </div>
+                    <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
+                        <div className="icon mb-[1.12rem]">
+                            <img src={AI} alt="magic icon" />
+                        </div>
+                        <div className="header text-[#021E35] mb-[0.44rem] font-bold">
+                            <h5>AI Powered Scheduling</h5>
+                        </div>
+                        <div className="cardInfo">
+                            <p>Generates optimal schedules with exactly 3 assistants per slot and even workload distribution</p>
+                        </div>
+                    </div>
+                    <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
+                        <div className="icon mb-[1.12rem]">
+                            <img src={clock} alt="" />
+                        </div>
+                        <div className="header text-[#021E35] mb-[0.44rem] font-bold">
+                            <h5>Manual Override</h5>
+                        </div>
+                        <div className="cardInfo">
+                            <p>Supervisors can click any time slot to manually adjust assignments for edge cases</p>
+                        </div>
+                    </div>  
                 </div>
                 <div className="container"></div>
                 <div className="container"></div>
