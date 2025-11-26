@@ -64,7 +64,7 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
                 </div>
             </div>
             <div className="chips flex items-center mt-3 justify-between">
-                <div className="attendanceChips">
+                <div className="Chips">
                     {
                     mode === 'Lab Assistant' ? 
                     (<div className="present rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
@@ -82,7 +82,7 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
                     }
                 </div>
                 <div className="mode items-center">
-                    <div onClick={changeMode} className="mode rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                    <div onClick={changeMode} className="mode cursor-pointer rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <p>{mode}</p>
                         <div className="dropDown">{dropDownIcon.element}</div>
                     </div>
