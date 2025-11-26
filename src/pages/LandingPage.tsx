@@ -88,7 +88,7 @@ const LandingPage = () => {
                             <div className="icon self-center justify-center items-center mb-[1.12rem] rounded-sm bg-[#337E89] w-16 h-16 p-4">
                                 <img src={people} alt="tick" />
                             </div>
-                            <div className="header self-center text-[#021E35] mb-[0.44rem] font-semibold">
+                            <div className="header self-center text-[#021E35] mb-[0.44rem] font-medium">
                                 <h5>Lab Assistant</h5>
                             </div>
                             <div className="cardInfo mb-5">
@@ -109,7 +109,7 @@ const LandingPage = () => {
                             <div className="icon self-center justify-center items-center mb-[1.12rem] rounded-sm bg-[#021E35] w-16 h-16 p-4">
                                 <img src={people} alt="tick" />
                             </div>
-                            <div className="header self-center text-[#021E35] mb-[0.44rem] font-semibold">
+                            <div className="header self-center text-[#021E35] mb-[0.44rem] font-medium">
                                 <h5>Lab Supervisor</h5>
                             </div>
                             <div className="cardInfo mb-5">
@@ -130,7 +130,7 @@ const LandingPage = () => {
                             <div className="icon self-center justify-center items-center mb-[1.12rem] rounded-sm bg-[#6C6C6C] w-16 h-16 p-4">
                                 <img src={people} alt="tick" />
                             </div>
-                            <div className="header self-center text-[#021E35] mb-[0.44rem] font-semibold">
+                            <div className="header self-center text-[#021E35] mb-[0.44rem] font-medium">
                                 <h5>Lab Assistant</h5>
                             </div>
                             <div className="cardInfo mb-5">
@@ -149,7 +149,31 @@ const LandingPage = () => {
                         </div>
                     </div>
                 </div>
-                <div className="container"></div>
+                <div className="container mt-20 flex flex-col">
+                <div className="header mb-8 text-[#021E35] text-3xl self-center font-bold"><h2>How It Works:</h2></div>
+                    <div className="circles-container flex justify-between mx-5 mt-5">  
+                        <div className="info flex flex-col">
+                            <h3 className="circle mb-4 self-center bg-[#337E89] rounded-full text-white w-12 h-12 flex justify-center items-center" >1</h3>
+                            <h5 className="self-center mb-2 text-[#021E35] font-medium">Submit Modules</h5>
+                            <p className="w-44 text-center">Lab assistants select their enrolled modules</p>
+                        </div>
+                        <div className="info flex flex-col">
+                            <h3 className="circle mb-4 self-center bg-[#337E89] rounded-full text-white w-12 h-12 flex justify-center items-center" >2</h3>
+                            <h5 className="self-center mb-2 text-[#021E35] font-medium">Auto-Block Classes</h5>
+                            <p className="w-44 flex text-center">System blocks out class times automatically</p>
+                        </div>
+                        <div className="info flex flex-col">
+                            <h3 className="circle mb-4 self-center bg-[#337E89] rounded-full text-white w-12 h-12 flex justify-center items-center" >3</h3>
+                            <h5 className="self-center mb-2 text-[#021E35] font-medium">AI Scheduling</h5>
+                            <p className="w-44 text-center">Algorithm assigns 3 assistants per shift</p>
+                        </div>
+                        <div className="info flex flex-col">
+                            <h3 className="circle mb-4 self-center bg-[#337E89] rounded-full text-white w-12 h-12 flex justify-center items-center" >4</h3>
+                            <h5 className="self-center mb-2 text-[#021E35] font-medium">Review & Publish</h5>
+                            <p className="w-44 text-center">Supervisors review and publish the schedule</p>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div className="footer">
 
