@@ -179,3 +179,12 @@ export const aiLogo: SVG = {
   <path d="M2.66659 14.6667C3.40297 14.6667 3.99992 14.0697 3.99992 13.3333C3.99992 12.597 3.40297 12 2.66659 12C1.93021 12 1.33325 12.597 1.33325 13.3333C1.33325 14.0697 1.93021 14.6667 2.66659 14.6667Z" stroke="#337E89" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 }
+
+export const arrowLogo: SVG = {
+  name: "arrow right",
+  element: 
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+  <path d="M3.33325 8H12.6666" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M8 3.33325L12.6667 7.99992L8 12.6666" stroke="white" stroke-width="1.33333" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+}
