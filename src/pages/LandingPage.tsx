@@ -5,6 +5,10 @@ import safe from "../assets/svg/Safe.svg"
 import people from "../assets/svg/People.svg"
 import clock from "../assets/svg/Clock.svg"
 import calendar from "../assets/svg/Calendar.svg"
+import greenBullet from "../assets/svg/greenBullet.svg"
+import blueBullet from "../assets/svg/blueBullet.svg"
+import greyB from "../assets/svg/greyB.svg"
+
 
 
 
@@ -81,41 +85,68 @@ const LandingPage = () => {
                     <div className="header text-[#021E35] text-3xl self-center font-bold"><h2>Your Role:</h2></div>
                     <div className="card-container flex justify-between mx-5 mt-5">  
                         <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
-                            <div className="icon flex justify-center items-center rounded-sm mb-[1.12rem] rounded-sm bg-[#337E89] w-16 h-16 p-4">
+                            <div className="icon self-center justify-center items-center mb-[1.12rem] rounded-sm bg-[#337E89] w-16 h-16 p-4">
                                 <img src={people} alt="tick" />
                             </div>
-                            <div className="header text-[#021E35] mb-[0.44rem] font-bold">
+                            <div className="header self-center text-[#021E35] mb-[0.44rem] font-semibold">
                                 <h5>Lab Assistant</h5>
                             </div>
-                            <div className="cardInfo">
-                                <p>Submit your enrolled modules and availability preferences</p>
+                            <div className="cardInfo mb-5">
+                                <p className="text-[#6C6C6C]">Submit your enrolled modules and availability preferences</p>
                             </div>
                             <div className="bullets">
-                                
+                                <ul>
+                                    <li className="li-icon flex items-center gap-2"><img className="self-center" src={greenBullet} alt="" /> <p className="li-text text-[0.875rem] text-[#6C6C6C]">Select enrolled modules</p></li>
+                                    <li className="li-icon flex items-center gap-2"><img className="self-center" src={greenBullet} alt="" /> <p className="li-text text-[0.875rem] text-[#6C6C6C]">Mark additional unavailable times</p></li>
+                                    <li className="li-icon flex items-center gap-2"><img className="self-center" src={greenBullet} alt="" /> <p className="li-text text-[0.875rem] text-[#6C6C6C]">View your assigned shifts</p></li>
+                                </ul>
+                            </div>
+                            <div className="button mt-8">
+                                <button className="role-btn text-white bg-[#337E89] w-full">Submit Availability</button>
                             </div>
                         </div>
                         <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
-                            <div className="icon mb-[1.12rem] rounded-sm bg-[rgba(142,184,190,0.20)] w-12 h-12 p-[0.75rem]">
-                                <img src={AI} alt="magic icon" />
+                            <div className="icon self-center justify-center items-center mb-[1.12rem] rounded-sm bg-[#021E35] w-16 h-16 p-4">
+                                <img src={people} alt="tick" />
                             </div>
-                            <div className="header text-[#021E35] mb-[0.44rem] font-bold">
-                                <h5>AI Powered Scheduling</h5>
+                            <div className="header self-center text-[#021E35] mb-[0.44rem] font-semibold">
+                                <h5>Lab Supervisor</h5>
                             </div>
-                            <div className="cardInfo">
-                                <p>Generates optimal schedules with exactly 3 assistants per slot and even workload distribution</p>
+                            <div className="cardInfo mb-5">
+                                <p className="text-[#6C6C6C]">Generate schedules and manage shift assignments</p>
+                            </div>
+                            <div className="bullets">
+                                <ul>
+                                    <li className="li-icon flex items-center gap-2"><img className="self-center" src={blueBullet} alt="" /> <p className="li-text text-[0.875rem] text-[#6C6C6C]">Generate AI schedules instantly</p></li>
+                                    <li className="li-icon flex items-center gap-2"><img className="self-center" src={blueBullet} alt="" /> <p className="li-text text-[0.875rem] text-[#6C6C6C]">Edit assignments manually</p></li>
+                                    <li className="li-icon flex items-center gap-2"><img className="self-center" src={blueBullet} alt="" /> <p className="li-text text-[0.875rem] text-[#6C6C6C]">View analytics and reports</p></li>
+                                </ul>
+                            </div>
+                            <div className="button mt-8">
+                                <button className="role-btn text-white bg-[#021E35] w-full">Supervisor Dashboard</button>
                             </div>
                         </div>
                         <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
-                            <div className="icon mb-[1.12rem] rounded-sm bg-[rgba(142,184,190,0.20)] w-12 h-12 p-[0.75rem]">
-                                <img src={clock} alt="" />
+                            <div className="icon self-center justify-center items-center mb-[1.12rem] rounded-sm bg-[#6C6C6C] w-16 h-16 p-4">
+                                <img src={people} alt="tick" />
                             </div>
-                            <div className="header text-[#021E35] mb-[0.44rem] font-bold">
-                                <h5>Manual Override</h5>
+                            <div className="header self-center text-[#021E35] mb-[0.44rem] font-semibold">
+                                <h5>Lab Assistant</h5>
                             </div>
-                            <div className="cardInfo">
-                                <p>Supervisors can click any time slot to manually adjust assignments for edge cases</p>
+                            <div className="cardInfo mb-5">
+                                <p className="text-[#6C6C6C]">Oversee system and import data from Google Forms</p>
                             </div>
-                        </div>  
+                            <div className="bullets">
+                                <ul>
+                                    <li className="li-icon flex items-center gap-2"><img className="self-center" src={greyB} alt="" /> <p className="li-text text-[0.875rem] text-[#6C6C6C]">Import CSV from Google Forms</p></li>
+                                    <li className="li-icon flex items-center gap-2"><img className="self-center" src={greyB} alt="" /> <p className="li-text text-[0.875rem] text-[#6C6C6C]">Manage all users</p></li>
+                                    <li className="li-icon flex items-center gap-2"><img className="self-center" src={greyB} alt="" /> <p className="li-text text-[0.875rem] text-[#6C6C6C]">System-wide analytics</p></li>
+                                </ul>
+                            </div>
+                            <div className="button mt-8">
+                                <button className="role-btn text-white bg-[#6C6C6C] w-full">Admin Dashboard</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="container"></div>
