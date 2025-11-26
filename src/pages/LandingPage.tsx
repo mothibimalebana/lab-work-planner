@@ -28,13 +28,12 @@ const LandingPage = () => {
                         <p className="text-white flex items-center h-full">View Timetable</p>
                         <div className="svg bg-[#021E35]">{arrowLogo.element}</div>
                         </button>
-                        <button className="w-52">Submit Availability</button>
+                        <button className="w-52 text-[#337E89] outline outline-solid outline-[#337E89]">Submit Availability</button>
                     </div>
                 </div>
             </div>
             <div className="main">
-                <div className="container">
-                    
+                <div className="container">    
                 </div>
                 <div className="container"></div>
                 <div className="container"></div>
