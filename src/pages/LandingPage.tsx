@@ -17,10 +17,10 @@ const LandingPage = () => {
                         {universityIcon.element}
                         <p className="flex items-center text-[1.125rem] text-[#021E35]">Lab Work Planner</p>
                     </div>
-                    <div className="right flex gap-2 items-center">
+                    <button className="right flex gap-2 items-center">
                         {logOut.element}
                         <p className="text-[#6C6C6C] text-[0.875rem]">Login</p>
-                    </div>
+                    </button>
                 </div>
             <div className="header flex flex-col items-center mt-7.5">
                 <div className="breadCrumbs flex flex-col">
@@ -42,9 +42,9 @@ const LandingPage = () => {
                 </div>
             </div>
             <div className="main">
-                <div className="card-container flex justify-between mx-5 mt-20">  
+                <div className="card-container flex justify-between mx-5 mt-20 mb-20">  
                     <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
-                        <div className="icon mb-[1.12rem]">
+                        <div className="icon mb-[1.12rem] rounded-sm bg-[rgba(142,184,190,0.20)] w-12 h-12 p-[0.75rem]">
                             <img src={swoosh} alt="tick" />
                         </div>
                         <div className="header text-[#021E35] mb-[0.44rem] font-bold">
@@ -55,7 +55,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
-                        <div className="icon mb-[1.12rem]">
+                        <div className="icon mb-[1.12rem] rounded-sm bg-[rgba(142,184,190,0.20)] w-12 h-12 p-[0.75rem]">
                             <img src={AI} alt="magic icon" />
                         </div>
                         <div className="header text-[#021E35] mb-[0.44rem] font-bold">
@@ -66,7 +66,7 @@ const LandingPage = () => {
                         </div>
                     </div>
                     <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
-                        <div className="icon mb-[1.12rem]">
+                        <div className="icon mb-[1.12rem] rounded-sm bg-[rgba(142,184,190,0.20)] w-12 h-12 p-[0.75rem]">
                             <img src={clock} alt="" />
                         </div>
                         <div className="header text-[#021E35] mb-[0.44rem] font-bold">
@@ -77,7 +77,47 @@ const LandingPage = () => {
                         </div>
                     </div>  
                 </div>
-                <div className="container"></div>
+                <div className="container flex flex-col">
+                    <div className="header text-[#021E35] text-3xl self-center font-bold"><h2>Your Role:</h2></div>
+                    <div className="card-container flex justify-between mx-5 mt-5">  
+                        <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
+                            <div className="icon flex justify-center items-center rounded-sm mb-[1.12rem] rounded-sm bg-[#337E89] w-16 h-16 p-4">
+                                <img src={people} alt="tick" />
+                            </div>
+                            <div className="header text-[#021E35] mb-[0.44rem] font-bold">
+                                <h5>Lab Assistant</h5>
+                            </div>
+                            <div className="cardInfo">
+                                <p>Submit your enrolled modules and availability preferences</p>
+                            </div>
+                            <div className="bullets">
+                                
+                            </div>
+                        </div>
+                        <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
+                            <div className="icon mb-[1.12rem] rounded-sm bg-[rgba(142,184,190,0.20)] w-12 h-12 p-[0.75rem]">
+                                <img src={AI} alt="magic icon" />
+                            </div>
+                            <div className="header text-[#021E35] mb-[0.44rem] font-bold">
+                                <h5>AI Powered Scheduling</h5>
+                            </div>
+                            <div className="cardInfo">
+                                <p>Generates optimal schedules with exactly 3 assistants per slot and even workload distribution</p>
+                            </div>
+                        </div>
+                        <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
+                            <div className="icon mb-[1.12rem] rounded-sm bg-[rgba(142,184,190,0.20)] w-12 h-12 p-[0.75rem]">
+                                <img src={clock} alt="" />
+                            </div>
+                            <div className="header text-[#021E35] mb-[0.44rem] font-bold">
+                                <h5>Manual Override</h5>
+                            </div>
+                            <div className="cardInfo">
+                                <p>Supervisors can click any time slot to manually adjust assignments for edge cases</p>
+                            </div>
+                        </div>  
+                    </div>
+                </div>
                 <div className="container"></div>
             </div>
             <div className="footer">
