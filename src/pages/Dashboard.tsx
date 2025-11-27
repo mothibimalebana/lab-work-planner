@@ -1,9 +1,66 @@
-import type React from "react";
+import student from "../assets/svg/student.svg"
+import exclamation from "../assets/svg/exclamation.svg"
+import up from "../assets/svg/up.svg"
+import people from "../assets/svg/People.svg"
+import type DashboardProps from '../../types/student' 
 
-const Dashboard: React.FC = () => {
+
+function Dashboard ( {activeAssistants, activeSupervisors, inactiveEmployees, totalEmployees}:DashboardProps )  {
+
     return(
-        <div className="dashboard">
+        <div className="dashboard px-[5.12rem] w-full mt-14">
+            <div className="header flex justify-between">
 
+                {/**Active Lab Assistants */}
+                <div className="card flex flex-col justify-between alig w-60 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                    <div className="top flex justify-between">
+                        <div className="left"><p>Total Lab Assistants</p></div>
+                        <div className="right flex items-center justify-between"><img src={student} alt="grad cap" /></div>
+                    </div>
+                    <div className="bottom">
+                        <div className="top"><h4 className="font-bold text-2xl">{activeAssistants}</h4></div>
+                        <div className="bottom text-[0.75rem]"><p>assistants active in system</p></div>
+                    </div>
+                </div>
+
+                {/**Active Lab Supervisors */}
+                <div className="card flex flex-col justify-between w-60 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                    <div className="top flex justify-between">
+                        <div className="left"><p>Total Lab Supervisors</p></div>
+                        <div className="right flex items-center justify-between"><img src={exclamation} alt="grad cap" /></div>
+                    </div>
+                    <div className="bottom">
+                        <div className="top"><h4 className="font-bold text-2xl">{activeSupervisors}</h4></div>
+                        <div className="bottom text-[0.75rem]"><p>currently managing labs</p></div>
+                    </div>
+                </div>
+            
+                {/**Inactive Employees */}
+                <div className="card flex flex-col justify-between w-60 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                    <div className="top flex justify-between">
+                        <div className="left"><p>Inactive Employees</p></div>
+                        <div className="right flex items-center justify-between"><img src={up} alt="grad cap" /></div>
+                    </div>
+                    <div className="bottom">
+                        <div className="top"><h4 className="font-bold text-2xl">{inactiveEmployees}</h4></div>
+                        <div className="bottom text-[0.75rem]"><p>Missed a shift</p></div>
+                    </div>
+                </div>
+                student
+                {/***Total number of employees*/}
+                <div className="card flex flex-col justify-between w-60 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                    <div className="top flex justify-between">
+                        <div className="left"><p>Total number of users</p></div>
+                        <div className="right flex items-center justify-between"><img src={people} alt="grad cap" /></div>
+                    </div>
+                    <div className="bottom">
+                        <div className="top"><h4 className="font-bold text-2xl">{totalEmployees}</h4></div>
+                        <div className="bottom text-[0.75rem]"><p>In the system</p></div>
+                    </div>
+                </div>
+            </div>
+            <div className="nav"></div>
+            <div className="table"></div>
         </div>
     )
 }

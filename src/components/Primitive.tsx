@@ -53,7 +53,6 @@ const Primitive = (  ) => {
         ]
       ];
 
-    console.log(schedule[0])
     return (
         <div className="table px-[5.12rem] w-full mt-2.5">
             <table className="w-full rounded-md border border-solid border-[#E5E8EB] bg-white">
