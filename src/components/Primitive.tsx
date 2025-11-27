@@ -1,6 +1,10 @@
 
 
 const Primitive = (  ) => {
+  /**
+   * @params - The Primitive component takes a nested array, with each cell representing a slot on the timetable
+   * return - The timetable component
+   */
     const schedule = [
         [
           { shift: true, attended: true, supervisor: 'Moholola M', lab: 2},
