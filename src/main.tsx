@@ -6,6 +6,7 @@ import './index.css'
 import App from './App.tsx'
 import Timetable from './pages/Timetable.tsx';
 import LandingPage from './pages/LandingPage.tsx';
+import LoginPage from './pages/Login.tsx';
 
 const router = createBrowserRouter([
   {
@@ -13,14 +14,18 @@ const router = createBrowserRouter([
     element: <App/>,
     children: [
       {
-        path: "/Timetable",
+        path: "/timetable",
         element: <Timetable/>
       }
     ]
   },
   {
-    path: "/Home",
-    element: <LandingPage/>,
+    path: "/home",
+    element: <LandingPage/>
+  },
+  {
+    path: "/login",
+    element: <LoginPage/>
   }
 ]);
 

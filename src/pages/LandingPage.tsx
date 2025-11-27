@@ -13,7 +13,7 @@ import greyB from "../assets/svg/greyB.svg"
 
 const LandingPage = () => {
     return (
-        <div className="landing-page">
+        <div className="landing-page font-[Arimo]">
                 <div className="nav flex border bg-[#FFF] p-[0.5rem_1rem] border-solid border-[#E5E8EB] justify-between">
                     <div className="left flex gap-6">
                         {universityIcon.element}
