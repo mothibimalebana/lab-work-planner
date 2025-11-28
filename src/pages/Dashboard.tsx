@@ -2,7 +2,9 @@ import student from "../assets/svg/student.svg"
 import exclamation from "../assets/svg/exclamation.svg"
 import up from "../assets/svg/up.svg"
 import people from "../assets/svg/people.svg"
-import type DashboardProps from '../../types/student' 
+import overview from "../assets/svg/overview.svg"
+import type { DashboardMode, DashboardProps } from '../../types/student' 
+import { useState } from "react"
 
 
 
@@ -60,7 +62,19 @@ function Cards( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees 
     )
 }
 
-function ButtonCarousel( {mode} )
+function ButtonCarousel( { mode = 'overview' }: {mode: DashboardMode} ){
+    const [active, setActive] = useState(mode);
+    const switchToOverview = () => { setActive("overview") };
+    const switchToAssistant = () => { setActive("assistants") };
+    const switchToSupervisor = () => { setActive("supervisors")};
+    return(
+        <div className="buttonCarousel rounded-xl mt-8 flex justify-between font-[Arimo] text-[#0A0A0A] text-[0.86988rem] w-full bg-[#ECECF0]">
+            { active === 'overview' ?  <button onClick={switchToOverview} className="w-[26.6rem] bg-[#FFFFFF]">Overview</button> : <button onClick={switchToOverview} className="w-[20rem] bg-[#ECECF0]">Overview</button> }
+            { active === 'assistants' ? <button onClick={switchToAssistant} className="w-[26.6rem] bg-[#FFFFFF]">Lab Assistants </button> : <button onClick={switchToAssistant} className="w-[20rem] bg-[#ECECF0]">Lab Assistants</button> }
+            { active === 'supervisors' ? <button onClick={switchToSupervisor} className="w-[26.6rem] bg-[#FFFFFF]">Lab Supervisor </button> : <button onClick={switchToSupervisor} className="w-[20rem] bg-[#ECECF0]">Lab Supervisor</button> }
+        </div>
+    )
+}
 
 
 function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees = 31, totalEmployees = 35}:DashboardProps )  {
@@ -74,6 +88,7 @@ function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmploy
                 inactiveEmployees={inactiveEmployees}
                 totalEmployees={totalEmployees}
                 />
+                <ButtonCarousel mode="overview"/>
             </div>
             <div className="nav"></div>
             <div className="table"></div>

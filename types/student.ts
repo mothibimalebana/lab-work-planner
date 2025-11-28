@@ -1,8 +1,8 @@
-type DashboardProps = {
+export type DashboardProps = {
     activeAssistants?: number;
     activeSupervisors?: number;
     inactiveEmployees?:  number;
     totalEmployees?: number;
 };
 
-export default DashboardProps;
+export type DashboardMode = "overview" | "assistants" | "supervisors"
