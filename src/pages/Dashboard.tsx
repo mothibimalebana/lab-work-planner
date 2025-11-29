@@ -6,8 +6,10 @@ import type { DashboardMode, DashboardProps } from '../../types/student'
 import { useState } from "react"
 
 
-
-function Cards( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees = 31, totalEmployees = 35}:DashboardProps ){
+/**
+ * Card component, takes input of assisntant info and returns a card component 
+ */
+function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees = 31, totalEmployees = 35}:DashboardProps ){
     return(
         <div className="cards flex justify-between">
                 {/**Active Lab Assistants */}
@@ -81,7 +83,7 @@ function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmploy
     return(
         <div className="dashboard px-[5.12rem] w-full mt-14">
             <div className="header">
-                <Cards
+                <Card
                 activeAssistants={activeAssistants}
                 activeSupervisors={activeSupervisors}
                 inactiveEmployees={inactiveEmployees}
