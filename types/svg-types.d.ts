@@ -5,4 +5,3 @@ export type SVG = {
     disabledElement?: JSX.Element;
 };
 
-export type SVGList = SVG[];
