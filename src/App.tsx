@@ -1,8 +1,7 @@
 import { Outlet } from "react-router"
 import Header from "./components/Header"
 import Navbar from "./components/Navbar"
-import phoneError from "/home/mothibi/workspace/github.com/mothibimalebana/lab-work-planner-local/src/assets/svg/phone-error-svgrepo-com.svg"
-
+import phoneError from "./assets/svg/phone-error-svgrepo-com.svg"
 
 function App() {
 

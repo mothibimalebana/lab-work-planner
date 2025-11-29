@@ -1,10 +1,8 @@
 import { aiLogo, arrowLogo, logOut, universityIcon } from "../assets/svg/SVG"
 import swoosh from "../assets/svg/swoosh.svg"
 import AI from "../assets/svg/AI.svg"
-import safe from "../assets/svg/Safe.svg"
 import people from "../assets/svg/People.svg"
 import clock from "../assets/svg/Clock.svg"
-import calendar from "../assets/svg/Calendar.svg"
 import greenBullet from "../assets/svg/greenBullet.svg"
 import blueBullet from "../assets/svg/blueBullet.svg"
 import greyB from "../assets/svg/greyB.svg"
@@ -15,7 +13,7 @@ import greyB from "../assets/svg/greyB.svg"
 
 const LandingPage = () => {
     return (
-        <div className="landing-page">
+        <div className="landing-page font-[Arimo]">
                 <div className="nav flex border bg-[#FFF] p-[0.5rem_1rem] border-solid border-[#E5E8EB] justify-between">
                     <div className="left flex gap-6">
                         {universityIcon.element}
