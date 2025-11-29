@@ -7,13 +7,13 @@ import { useState } from "react"
 
 
 /**
- * Card component, takes input of assisntant info and returns a card component 
+ * Card component, takes input of assisntant info and returns a card component with active, inactive and total number of employees.
  */
 function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees = 31, totalEmployees = 35}:DashboardProps ){
     return(
         <div className="cards flex justify-between">
                 {/**Active Lab Assistants */}
-                <div className="card flex flex-col justify-between alig w-60 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                <div className="card flex flex-col justify-between  w-60 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
                     <div className="top flex justify-between">
                         <div className="left"><p>Total Lab Assistants</p></div>
                         <div className="right flex items-center justify-between"><img src={student} alt="grad cap" /></div>

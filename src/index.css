@@ -1,6 +1,7 @@
 @import "tailwindcss";
-
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 @layer base {
 @font-face {
@@ -43,7 +44,6 @@
   font-display: swap;
 }
 }
-
 
 :root {
   font-family: 'DM Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
