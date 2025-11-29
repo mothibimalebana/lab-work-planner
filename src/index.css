@@ -15,6 +15,17 @@
 
 
 @font-face {
+  font-family: 'Arimo';
+  src: url('../src/assets/fonts/Arimo-Regular.woff2') format('woff2'),
+      url('../src/assets/fonts/Arimo-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+
+@font-face {
   font-family: 'DM Sans';
   src: url('../src/assets/fonts/DMSans-9ptRegular.woff2') format('woff2'),
       url('../src/assets/fonts/DMSans-9ptRegular.woff') format('woff');
@@ -110,3 +121,7 @@ td {
   padding: 0.33869rem 0.63869rem;
 
 }
+
+/* form {
+  font-family: 'Arimo';
+} */

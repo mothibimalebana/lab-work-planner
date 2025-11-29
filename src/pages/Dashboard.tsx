@@ -2,6 +2,7 @@ import student from "../assets/svg/student.svg"
 import exclamation from "../assets/svg/exclamation.svg"
 import up from "../assets/svg/up.svg"
 import people from "../assets/svg/people.svg"
+import overview from "../assets/svg/overview.svg"
 import type { DashboardMode, DashboardProps } from '../../types/student' 
 import { useState } from "react"
 
