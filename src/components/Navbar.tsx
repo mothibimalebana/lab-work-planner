@@ -5,7 +5,11 @@ import SVGElement from "./SVGElement";
 /**
  * Navbar will help navigate between different pages on the main app component
  * @returns Nav JSX with Link to timetable, dashboard, form, notifications, settings 
+ * 
+ * The Navbar links to the following: /Timetable, /Form, /Notifications, /Settings.
+ * This component is always at the top of the Table, Dashboard Component
  */
+
 const Navbar = () => {
     return (
         <div className="nav-bar hidden md:flex justify-between bg-[#021E35] px-[5.12rem] min-h-17">

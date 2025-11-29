@@ -14,7 +14,7 @@ function App() {
       </div>
       <div className="mobile flex flex-col md:hidden">
         <div className="icon"><img src={phoneError} alt="disconnected phone"/></div>
-        <div className="p text-2xl"><h1>The application is not available on mobile devices, yet!</h1></div>
+        <div className="p text-2xl"><h1>The application is not available on mobile devices yet</h1></div>
       </div>
     </div>
   )
