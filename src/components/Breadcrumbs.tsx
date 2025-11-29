@@ -11,10 +11,12 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     const today = new Date();
     const date = today.toLocaleDateString();
-    const dd = date.slice(0,2);
-    const mm = months[Number(date.slice(3,5)) - 1];
+    const dd = date.slice(3,5);
+    const mm = months[Number(date.slice(0,2)) - 1];
     const yyyy = date.slice(6);
     const dateString = dd + ' ' + ' ' + mm + ' '  + yyyy
+
+    console.log(dd)
 
     const changeMode = () => {
         if (mode === 'Lab Assistant') {
