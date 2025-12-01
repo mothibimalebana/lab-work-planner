@@ -7,3 +7,14 @@ export type DashboardProps = {
 };
 
 export type DashboardMode = "overview" | "assistants" | "supervisors";
+export type schoolLevel = "undergraduate" | "postgraduate";
+
+export type dashboardTimetable = {
+    mode: DashboardMode,
+    data: {
+        fullName: string
+        modules: string[]
+        availability: number,
+        level: schoolLevel,
+    }[],
+}

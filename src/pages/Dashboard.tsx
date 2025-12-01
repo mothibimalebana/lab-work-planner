@@ -4,10 +4,9 @@ import people from "../assets/svg/people.svg"
 import student from "../assets/svg/student.svg"
 import overview from "../assets/svg/overview.svg"
 import supervisor from "../assets/svg/supervisor.svg"
-
-import type { DashboardMode, DashboardProps } from '../../types/student' 
+import searchIcon from "../assets/svg/searchIcon.svg"
+import type { DashboardMode, DashboardProps, dashboardTimetable } from '../../types/student' 
 import { useState } from "react"
-
 
 /**
  * Card component, takes input of assisntant info and returns a card component with active, inactive and total number of employees.
@@ -66,11 +65,70 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees =
     )
 }
 
+function DashboardTable(
+    {
+        mode = 'overview',
+        data = 
+        [
+            {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
+            {fullName: 'Mot Malebana', modules: ['SCOA031', 'SSTB021'], availability: 35, level: 'undergraduate' },
+            {fullName: 'Mothibi Mana', modules: ['SCOA0321', 'SSTB231'], availability: 35, level: 'undergraduate' },
+            {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSB031'], availability: 35, level: 'postgraduate' },
+            {fullName: 'Moti bana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
+        ]
+        }
+        :
+        dashboardTimetable
+    )
+    {
+    return(
+        
+        <div className="dashboardTable flex flex-col w-full">
+            <div className="header flex justify-between">
+                <div className="title">
+                    <h5 className="text-[0.99413rem]! font-semibold leading-[0.99413rem]!">
+                        {
+                            mode === 'overview' && 'Overview'
+                            ||
+                            mode === 'assistants' && 'Lab Assistant Manegment'
+                            ||
+                            mode === 'supervisors' && 'Lab Supervisor Manegment'
+                        }
+                    </h5>
+                    <p className="text-[0.99413rem]!">
+                        {
+                            mode === 'overview' && 'Registered assistants and supervisors'
+                            ||
+                            mode === 'assistants' && 'View and manage all assistants'
+                            ||
+                            mode === 'supervisors' && 'View and manage all supervisors' 
+                        }
+                    </p>
+                </div>
+                <div className="search flex gap-2 items-center w-[15.9055rem] rounded-md! bg-[#F3F3F5] h-[2.23688rem]! p-[0.24856rem_0.74563rem_0.24856rem_1.98831rem]">
+                    <img src={searchIcon} className="flex w-[0.99319rem] h-[0.99319rem]" alt="search icon" />
+                    <input placeholder={`Search...`} type="search" name="search"/>
+                </div>
+            </div>
+            <div className="content">
+
+            </div>
+        </div>
+    )
+}
+
+/**
+ * 
+ * Button carousel to toggle between 'overview', 'lab assistants' and 'lab supervisors'
+ */
 function ButtonCarousel( { mode = 'overview' }: {mode: DashboardMode} ){
     const [active, setActive] = useState(mode);
+
+    //functions to facilitate toggling between different options
     const switchToOverview = () => { setActive("overview") };
     const switchToAssistant = () => { setActive("assistants") };
     const switchToSupervisor = () => { setActive("supervisors")};
+
     return(
         <div className="buttonCarousel rounded-[0.86988rem]! mt-8 flex items-center justify-between font-[Arimo] text-[#0A0A0A] text-[0.86988rem] w-full bg-[#ECECF0]">
             <button onClick={switchToOverview} className={active === 'overview' ? 'flex justify-center items-center gap-[0.87rem] w-[26.38638rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] h-[1.85969rem]! text-[0.86988rem] text-[#0A0A0A] font-Arimo bg-[#FFFFFF] rounded-[0.86988rem]!' : 'w-[26.38638rem] h-[1.85969rem]! flex justify-center items-center gap-[0.87rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] bg-[#ECECF0] rounded-[0.86988rem]!'}><img src={overview} className="h-[0.99319rem]! w-[0.99319rem]!" alt="overview page" /> <p>Overview</p></button>
@@ -80,7 +138,7 @@ function ButtonCarousel( { mode = 'overview' }: {mode: DashboardMode} ){
     )
 }
 
-
+/** Actual Dashboard Page, contains all the components above **/
 function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees = 31, totalEmployees = 35, dashboardMode = 'overview'}:DashboardProps )  {
 
     return(
@@ -92,12 +150,28 @@ function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmploy
                 inactiveEmployees={inactiveEmployees}
                 totalEmployees={totalEmployees}
                 />
-                <ButtonCarousel mode="overview"/>
             </div>
-            <div className="nav"></div>
-            <div className="table"></div>
+            <div className="nav">
+                <ButtonCarousel mode={dashboardMode}/>
+            </div>
+            <div className="table w-full mt-8">
+                <DashboardTable 
+                    mode={dashboardMode} 
+                    data={
+                        [
+                            {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
+                            {fullName: 'Mot Malebana', modules: ['SCOA031', 'SSTB021'], availability: 35, level: 'undergraduate' },
+                            {fullName: 'Mothibi Mana', modules: ['SCOA0321', 'SSTB231'], availability: 35, level: 'undergraduate' },
+                            {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSB031'], availability: 35, level: 'postgraduate' },
+                            {fullName: 'Moti bana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
+                        ]
+                    }
+                />
+            </div>
         </div>
     )
 }
+
+
 
 export default Dashboard
