@@ -1,6 +1,9 @@
 @import "tailwindcss";
+@tailwind utilities;
 
+@layer components{
 
+}
 
 @layer base {
 @font-face {
@@ -43,7 +46,6 @@
   font-display: swap;
 }
 }
-
 
 :root {
   font-family: 'DM Sans', system-ui, Avenir, Helvetica, Arial, sans-serif;
@@ -90,13 +92,7 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
+
 
 @media (prefers-color-scheme: light) {
   :root {
