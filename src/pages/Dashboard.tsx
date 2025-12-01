@@ -5,7 +5,7 @@ import student from "../assets/svg/student.svg"
 import overview from "../assets/svg/overview.svg"
 import supervisor from "../assets/svg/supervisor.svg"
 import searchIcon from "../assets/svg/searchIcon.svg"
-import type { DashboardMode, DashboardProps, dashboardTimetable } from '../../types/student' 
+import type { DashboardMode, DashboardProps, dashboardTimetable, schoolData } from '../../types/student' 
 import { useState } from "react"
 
 /**
@@ -15,7 +15,7 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees =
     return(
         <div className="cards flex justify-between">
                 {/**Active Lab Assistants */}
-                <div className="card flex flex-col justify-between  w-60 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                <div className="card flex bg-white flex-col justify-between  w-70 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
                     <div className="top flex justify-between">
                         <div className="left"><p>Total Lab Assistants</p></div>
                         <div className="right flex items-center justify-between"><img src={student} alt="grad cap" /></div>
@@ -27,7 +27,7 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees =
                 </div>
 
                 {/**Active Lab Supervisors */}
-                <div className="card flex flex-col justify-between w-60 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                <div className="card flex bg-white flex-col justify-between w-70 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
                     <div className="top flex justify-between">
                         <div className="left"><p>Total Lab Supervisors</p></div>
                         <div className="right flex items-center justify-between"><img src={people} alt="grad cap" /></div>
@@ -39,7 +39,7 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees =
                 </div>
             
                 {/**Inactive Employees */}
-                <div className="card flex flex-col justify-between w-60 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                <div className="card flex bg-white flex-col justify-between w-70 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
                     <div className="top flex justify-between">
                         <div className="left"><p>Inactive Employees</p></div>
                         <div className="right flex items-center justify-between"><img src={exclamation} alt="grad cap" /></div>
@@ -51,7 +51,7 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees =
                 </div>
 
                 {/***Total number of employees*/}
-                <div className="card flex flex-col justify-between w-60 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                <div className="card flex bg-white flex-col justify-between w-70 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
                     <div className="top flex justify-between">
                         <div className="left"><p>Total number of users</p></div>
                         <div className="right flex items-center justify-between"><img src={up} alt="grad cap" /></div>
@@ -61,6 +61,29 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees =
                         <div className="bottom text-[0.75rem]"><p>In the system</p></div>
                     </div>
                 </div>
+        </div>
+    )
+}
+
+function Overview({ data }: dashboardTimetable){
+    return(
+        <div className="overview font-[Arimo] flex justify-between">
+            <div className="assistants min-w-[49%] border border-solid text-[0.995rem] rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
+                <div className="header flex justify-between">
+                    <div className="title">
+                        <h5 className="text-[0.99413rem]! text-[#0A0A0A] leading-[0.99413rem]!">Lab Assistant Manegment</h5>
+                        <p className="text-[0.99413rem]! text-[#717182]">View and manage all assistants</p>
+                    </div>
+                </div>
+            </div>
+            <div className="supervisors min-w-[49%] border border-solid text-[0.995rem] rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
+                <div className="header flex justify-between">
+                    <div className="title">
+                        <h5 className="text-[0.99413rem]! text-[#0A0A0A] leading-[0.99413rem]!">Lab Supervisor Manegment</h5>
+                        <p className="text-[0.99413rem]! text-[#717182]">View and manage all supervisor</p>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }
@@ -84,35 +107,48 @@ function DashboardTable(
     return(
         
         <div className="dashboardTable flex flex-col w-full">
-            <div className="header flex justify-between">
-                <div className="title">
-                    <h5 className="text-[0.99413rem]! font-semibold leading-[0.99413rem]!">
-                        {
-                            mode === 'overview' && 'Overview'
-                            ||
-                            mode === 'assistants' && 'Lab Assistant Manegment'
-                            ||
-                            mode === 'supervisors' && 'Lab Supervisor Manegment'
-                        }
-                    </h5>
-                    <p className="text-[0.99413rem]!">
-                        {
-                            mode === 'overview' && 'Registered assistants and supervisors'
-                            ||
-                            mode === 'assistants' && 'View and manage all assistants'
-                            ||
-                            mode === 'supervisors' && 'View and manage all supervisors' 
-                        }
-                    </p>
-                </div>
-                <div className="search flex gap-2 items-center w-[15.9055rem] rounded-md! bg-[#F3F3F5] h-[2.23688rem]! p-[0.24856rem_0.74563rem_0.24856rem_1.98831rem]">
-                    <img src={searchIcon} className="flex w-[0.99319rem] h-[0.99319rem]" alt="search icon" />
-                    <input placeholder={`Search...`} type="search" name="search"/>
+            {
+            mode === 'overview' 
+            ?
+            <Overview 
+                mode={mode}
+                data=
+                {
+                    [
+                        {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
+                        {fullName: 'Mot Malebana', modules: ['SCOA031', 'SSTB021'], availability: 35, level: 'undergraduate' },
+                        {fullName: 'Mothibi Mana', modules: ['SCOA0321', 'SSTB231'], availability: 35, level: 'undergraduate' },
+                        {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSB031'], availability: 35, level: 'postgraduate' },
+                        {fullName: 'Moti bana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
+                    ]
+                }
+            />
+            :
+            <div className="alt border border-solid rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
+                <div className="header flex justify-between">
+                    <div className="title">
+                        <h5 className="text-[0.99413rem]! text-[#0A0A0A] leading-[0.99413rem]!">
+                            {
+                                mode === 'assistants' && 'Lab Assistant Manegment'
+                                ||
+                                mode === 'supervisors' && 'Lab Supervisor Manegment'
+                            }
+                        </h5>
+                        <p className="text-[0.99413rem]! text-[#717182]">
+                            {
+                                mode === 'assistants' && 'View and manage all assistants'
+                                ||
+                                mode === 'supervisors' && 'View and manage all supervisors' 
+                            }
+                        </p>
+                    </div>
+                    <div className="search flex gap-2 items-center w-[15.9055rem] rounded-md! bg-[#F3F3F5] h-[2.23688rem]! p-[0.24856rem_0.74563rem_0.24856rem_1.98831rem]">
+                        <img src={searchIcon} className="flex w-[0.99319rem] h-[0.99319rem]" alt="search icon" />
+                        <input placeholder={`Search...`} type="search" name="search"/>
+                    </div>
                 </div>
             </div>
-            <div className="content">
-
-            </div>
+            }
         </div>
     )
 }
@@ -121,8 +157,7 @@ function DashboardTable(
  * 
  * Button carousel to toggle between 'overview', 'lab assistants' and 'lab supervisors'
  */
-function ButtonCarousel( { mode = 'overview' }: {mode: DashboardMode} ){
-    const [active, setActive] = useState(mode);
+function ButtonCarousel( { active = 'overview' , setActive} ){
 
     //functions to facilitate toggling between different options
     const switchToOverview = () => { setActive("overview") };
@@ -140,9 +175,10 @@ function ButtonCarousel( { mode = 'overview' }: {mode: DashboardMode} ){
 
 /** Actual Dashboard Page, contains all the components above **/
 function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees = 31, totalEmployees = 35, dashboardMode = 'overview'}:DashboardProps )  {
-
+    const [mode, setMode] = useState<DashboardMode>(dashboardMode);
+    
     return(
-        <div className="dashboard px-[5.12rem] bg-white w-full mt-14">
+        <div className="dashboard px-[5.12rem] w-full mt-14">
             <div className="header">
                 <Card
                 activeAssistants={activeAssistants}
@@ -152,11 +188,11 @@ function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmploy
                 />
             </div>
             <div className="nav">
-                <ButtonCarousel mode={dashboardMode}/>
+                <ButtonCarousel active={mode} setActive={setMode}/>
             </div>
-            <div className="table w-full mt-8 border border-solid rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
+            <div className="table w-full mt-8">
                 <DashboardTable 
-                    mode={dashboardMode} 
+                    mode={mode} 
                     data={
                         [
                             {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },

@@ -18,3 +18,10 @@ export type dashboardTimetable = {
         level: schoolLevel,
     }[],
 }
+
+export type schoolData = {
+    fullName: string
+    modules: string[]
+    availability: number,
+    level: schoolLevel,
+}
