@@ -3,6 +3,10 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer components{
+
+}
+
 @layer base {
 @font-face {
   font-family: 'Arimo';

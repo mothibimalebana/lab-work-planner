@@ -19,10 +19,6 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
     const yyyy = date.slice(6);
     const dateString = dd + ' ' + ' ' + mm + ' '  + yyyy;
 
-    console.log(splitDate)
-
-    console.log(dd)
-
     const changeMode = () => {
         if (mode === 'Lab Assistant') {
             setMode('Bookings');
@@ -32,7 +28,7 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
     }
 
     return (
-        <div className="md:breadCrumbs flex flex-col px-[5.12rem] h-full w-full">
+        <div className="breadCrumbs flex flex-col px-[5.12rem] h-full w-full">
             <div className="top flex justify-between">
                 <div className="date font-bold text-[1.875rem]">{dateString}</div>
                 <div className="btns flex gap-[0.87rem]">

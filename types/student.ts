@@ -5,4 +5,4 @@ export type DashboardProps = {
     totalEmployees?: number;
 };
 
-export type DashboardMode = "overview" | "assistants" | "supervisors"
+export type DashboardMode = "overview" | "assistants" | "supervisors";

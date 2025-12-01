@@ -70,9 +70,9 @@ function ButtonCarousel( { mode = 'overview' }: {mode: DashboardMode} ){
     const switchToSupervisor = () => { setActive("supervisors")};
     return(
         <div className="buttonCarousel rounded-xl mt-8 flex justify-between font-[Arimo] text-[#0A0A0A] text-[0.86988rem] w-full bg-[#ECECF0]">
-            { active === 'overview' ?  <button onClick={switchToOverview} className="w-[26.6rem] bg-[#FFFFFF]">Overview</button> : <button onClick={switchToOverview} className="w-[20rem] bg-[#ECECF0]">Overview</button> }
-            { active === 'assistants' ? <button onClick={switchToAssistant} className="w-[26.6rem] bg-[#FFFFFF]">Lab Assistants </button> : <button onClick={switchToAssistant} className="w-[20rem] bg-[#ECECF0]">Lab Assistants</button> }
-            { active === 'supervisors' ? <button onClick={switchToSupervisor} className="w-[26.6rem] bg-[#FFFFFF]">Lab Supervisor </button> : <button onClick={switchToSupervisor} className="w-[20rem] bg-[#ECECF0]">Lab Supervisor</button> }
+            <button onClick={switchToOverview} className={active === 'overview' ? 'w-[26.6rem] bg-[#FFFFFF]' : 'w-[20rem] bg-[#ECECF0]'}>Overview</button>
+            <button onClick={switchToAssistant} className={active === 'assistants' ? 'w-[26.6rem] bg-[#FFFFFF]' : 'w-[20rem] bg-[#ECECF0]'}>Lab Assistants</button>
+            <button onClick={switchToSupervisor} className={active === 'supervisors' ? 'w-[26.6rem] bg-[#FFFFFF]' : 'w-[20rem] bg-[#ECECF0]'}>Lab Supervisor</button>
         </div>
     )
 }

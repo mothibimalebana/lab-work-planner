@@ -1,0 +1,1 @@
+export type timetableMode = "Lab Assistant" | "Bookings";
