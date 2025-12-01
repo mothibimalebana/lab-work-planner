@@ -7,6 +7,7 @@ export type DashboardProps = {
 };
 
 export type DashboardMode = "overview" | "assistants" | "supervisors";
+export type jobTitle = 'Lab Assistant' | 'Lab Supervisor';
 export type schoolLevel = "undergraduate" | "postgraduate";
 
 export type dashboardTimetable = {
@@ -24,4 +25,12 @@ export type schoolData = {
     modules: string[]
     availability: number,
     level: schoolLevel,
+}
+export type schoolDataPopUp = {
+    fullName: string
+    modules: string[]
+    availability: number,
+    level?: schoolLevel,
+    view: false
+    title: jobTitle,
 }

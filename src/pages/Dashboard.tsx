@@ -202,7 +202,7 @@ function DashboardTable(
                                                         <p>{eachStudent.modules.length} modules enrolled</p>
                                                     </div>
                                                     <div className="view flex justify-center">
-                                                        <button className="w-25! border-none! flex justify-center items-center gap-1.5">
+                                                        <button className="w-25! border-none! flex justify-center items-center gap-1.5 hover:bg-[#F3F3F5]">
                                                             <img src={view} alt="eye logo" />
                                                             <p className="text-[0.86988rem]">view</p>
                                                         </button>
@@ -227,7 +227,7 @@ function DashboardTable(
                                                         <p>{eachStudent.modules.length} modules enrolled</p>
                                                     </div>
                                                     <div className="view flex justify-center">
-                                                        <button className="w-25! border-none! flex justify-center items-center gap-1.5">
+                                                        <button className=" w-25! border-none! flex justify-center items-center gap-1.5 hover:bg-[#F3F3F5]">
                                                             <img src={view} alt="eye logo" />
                                                             <p className="text-[0.86988rem]">view</p>
                                                         </button>
