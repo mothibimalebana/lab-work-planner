@@ -69,10 +69,10 @@ function ButtonCarousel( { mode = 'overview' }: {mode: DashboardMode} ){
     const switchToAssistant = () => { setActive("assistants") };
     const switchToSupervisor = () => { setActive("supervisors")};
     return(
-        <div className="buttonCarousel rounded-xl mt-8 flex justify-between font-[Arimo] text-[#0A0A0A] text-[0.86988rem] w-full bg-[#ECECF0]">
-            <button onClick={switchToOverview} className={active === 'overview' ? 'w-[26.6rem] bg-[#FFFFFF]' : 'w-[20rem] bg-[#ECECF0]'}>Overview</button>
-            <button onClick={switchToAssistant} className={active === 'assistants' ? 'w-[26.6rem] bg-[#FFFFFF]' : 'w-[20rem] bg-[#ECECF0]'}>Lab Assistants</button>
-            <button onClick={switchToSupervisor} className={active === 'supervisors' ? 'w-[26.6rem] bg-[#FFFFFF]' : 'w-[20rem] bg-[#ECECF0]'}>Lab Supervisor</button>
+        <div className="buttonCarousel rounded-[0.86988rem]! mt-8 flex items-center justify-between font-[Arimo] text-[#0A0A0A] text-[0.86988rem] w-full bg-[#ECECF0]">
+            <button onClick={switchToOverview} className={active === 'overview' ? 'flex justify-center items-center  w-[26.38638rem]  px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] h-[1.85969rem]! text-[0.86988rem] text-[#0A0A0A] font-Arimo bg-[#FFFFFF] rounded-[0.86988rem]!' : 'w-[26.38638rem] h-[1.85969rem]! flex justify-center items-center px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] bg-[#ECECF0] rounded-[0.86988rem]!'}>Overview</button>
+            <button onClick={switchToAssistant} className={active === 'assistants' ? 'flex justify-center items-center  w-[26.38638rem]  px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] h-[1.85969rem]! text-[0.86988rem] text-[#0A0A0A] font-Arimo bg-[#FFFFFF] rounded-[0.86988rem]!' : 'w-[26.38638rem] h-[1.85969rem]! flex justify-center items-center px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] bg-[#ECECF0] rounded-[0.86988rem]!'}>Lab Assistants</button>
+            <button onClick={switchToSupervisor} className={active === 'supervisors' ? 'flex justify-center items-center  w-[26.38638rem]  px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] h-[1.85969rem]! text-[0.86988rem] text-[#0A0A0A] font-Arimo bg-[#FFFFFF] rounded-[0.86988rem]!' : 'w-[26.38638rem] h-[1.85969rem]! flex justify-center items-center px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] bg-[#ECECF0] rounded-[0.86988rem]!'}>Lab Supervisor</button>
         </div>
     )
 }
