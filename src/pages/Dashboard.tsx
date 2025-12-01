@@ -142,7 +142,7 @@ function ButtonCarousel( { mode = 'overview' }: {mode: DashboardMode} ){
 function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees = 31, totalEmployees = 35, dashboardMode = 'overview'}:DashboardProps )  {
 
     return(
-        <div className="dashboard px-[5.12rem] w-full mt-14">
+        <div className="dashboard px-[5.12rem] bg-white w-full mt-14">
             <div className="header">
                 <Card
                 activeAssistants={activeAssistants}
@@ -154,7 +154,7 @@ function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmploy
             <div className="nav">
                 <ButtonCarousel mode={dashboardMode}/>
             </div>
-            <div className="table w-full mt-8">
+            <div className="table w-full mt-8 border border-solid rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
                 <DashboardTable 
                     mode={dashboardMode} 
                     data={
