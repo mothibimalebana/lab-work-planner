@@ -5,6 +5,8 @@ import student from "../assets/svg/student.svg"
 import overview from "../assets/svg/overview.svg"
 import supervisor from "../assets/svg/supervisor.svg"
 import searchIcon from "../assets/svg/searchIcon.svg"
+import view from "../assets/svg/view.svg"
+
 import type { DashboardMode, DashboardProps, dashboardTimetable, schoolData } from '../../types/student' 
 import { useState } from "react"
 
@@ -68,20 +70,54 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees =
 function Overview({ data }: dashboardTimetable){
     return(
         <div className="overview font-[Arimo] flex justify-between">
-            <div className="assistants min-w-[49%] border border-solid text-[0.995rem] rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
+            <div className="assistants bg-white min-w-[49%] border border-solid text-[0.995rem] rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
                 <div className="header flex justify-between">
                     <div className="title">
                         <h5 className="text-[0.99413rem]! text-[#0A0A0A] leading-[0.99413rem]!">Lab Assistant Manegment</h5>
                         <p className="text-[0.99413rem]! text-[#717182]">View and manage all assistants</p>
                     </div>
                 </div>
+                <div className="content overflow-y-auto">
+                    <table className="w-full rounded-md  bg-white">
+                        <tbody>
+                            {data.map((eachStudent) => {
+                                return(
+                                    <tr key={eachStudent.fullName} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
+                                        <td className="w-fit text-left font-normal">
+                                            <h6>{eachStudent.fullName}</h6>
+                                            <p>{eachStudent.modules.length} modules enrolled</p>
+                                        </td>
+                                    </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div className="supervisors min-w-[49%] border border-solid text-[0.995rem] rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
+            <div className="supervisors bg-white min-w-[49%] border border-solid text-[0.995rem] rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
                 <div className="header flex justify-between">
                     <div className="title">
                         <h5 className="text-[0.99413rem]! text-[#0A0A0A] leading-[0.99413rem]!">Lab Supervisor Manegment</h5>
                         <p className="text-[0.99413rem]! text-[#717182]">View and manage all supervisor</p>
                     </div>
+                </div>
+                <div className="content overflow-y-auto">
+                    <table className="w-full rounded-md  bg-white">
+                        <tbody>
+                            {data.map((eachStudent) => {
+                                return(
+                                    <tr key={eachStudent.fullName} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
+                                        <td className="w-fit text-left font-normal">
+                                            <h6>{eachStudent.fullName}</h6>
+                                            <p>{eachStudent.modules.length} modules enrolled</p>
+                                        </td>
+                                    </tr>
+                                    )
+                                })
+                            }
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -124,7 +160,7 @@ function DashboardTable(
                 }
             />
             :
-            <div className="alt border border-solid rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
+            <div className="alt bg-white border border-solid rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
                 <div className="header flex justify-between">
                     <div className="title">
                         <h5 className="text-[0.99413rem]! text-[#0A0A0A] leading-[0.99413rem]!">
@@ -146,6 +182,63 @@ function DashboardTable(
                         <img src={searchIcon} className="flex w-[0.99319rem] h-[0.99319rem]" alt="search icon" />
                         <input placeholder={`Search...`} type="search" name="search"/>
                     </div>
+                </div>
+                <div className="content overflow-y-auto w-full">
+                    <table className="w-full rounded-md mt-8 bg-white">
+                        { 
+                        mode === 'assistants' 
+                            ?
+                                <tbody>
+                                    <tr>
+                                        <th className="text-left text-[0.99413rem]! text-[#0A0A0A] py-3 font-normal rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]" >Name</th>
+                                    </tr>
+                                    {
+                                    data.map((eachStudent) => {
+                                        return(
+                                            <tr key={eachStudent.fullName} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
+                                                <td className="w-full! justify-between items-center flex text-left font-normal text-[0.99413rem]! text-[#0A0A0A]">
+                                                    <div className="data">
+                                                        <h6>{eachStudent.fullName}</h6>
+                                                        <p>{eachStudent.modules.length} modules enrolled</p>
+                                                    </div>
+                                                    <div className="view flex justify-center">
+                                                        <button className="w-25! border-none! flex justify-center items-center gap-1.5">
+                                                            <img src={view} alt="eye logo" />
+                                                            <p className="text-[0.86988rem]">view</p>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                            :
+                                <tbody>
+                                    <tr>
+                                        <th className="text-left text-[0.99413rem]! text-[#0A0A0A] py-3 font-normal rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]" >Name</th>
+                                    </tr>
+                                    {
+                                    data.map((eachStudent) => {
+                                        return(
+                                            <tr key={eachStudent.fullName} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
+                                                <td className="w-full! justify-between items-center flex text-left font-normal text-[0.99413rem]! text-[#0A0A0A]">
+                                                    <div className="data">
+                                                        <h6>{eachStudent.fullName}</h6>
+                                                        <p>{eachStudent.modules.length} modules enrolled</p>
+                                                    </div>
+                                                    <div className="view flex justify-center">
+                                                        <button className="w-25! border-none! flex justify-center items-center gap-1.5">
+                                                            <img src={view} alt="eye logo" />
+                                                            <p className="text-[0.86988rem]">view</p>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        )
+                                    })}
+                                </tbody>
+                        }
+                    </table>
                 </div>
             </div>
             }
@@ -178,7 +271,7 @@ function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmploy
     const [mode, setMode] = useState<DashboardMode>(dashboardMode);
     
     return(
-        <div className="dashboard px-[5.12rem] w-full mt-14">
+        <div className="dashboard px-[5.12rem] pb-20 w-full mt-14">
             <div className="header">
                 <Card
                 activeAssistants={activeAssistants}
