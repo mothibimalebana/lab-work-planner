@@ -9,12 +9,17 @@ interface BreadCrumbsProps {
 
 const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps) => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-    const today = new Date();
-    const date = today.toLocaleDateString();
-    const dd = date.slice(3,5);
-    const mm = months[Number(date.slice(0,2)) - 1];
+    
+    
+    const today = new Date(); //get today's date
+    const date = today.toLocaleDateString(); //convert today's date to a mm/dd/yyyy format
+    const splitDate = date.split('/') //get dd, mm, yyyy individually
+    const dd = splitDate[1];
+    const mm = months[Number(splitDate[0]) - 1];
     const yyyy = date.slice(6);
-    const dateString = dd + ' ' + ' ' + mm + ' '  + yyyy
+    const dateString = dd + ' ' + ' ' + mm + ' '  + yyyy;
+
+    console.log(splitDate)
 
     console.log(dd)
 
