@@ -196,7 +196,7 @@ function DashboardTable(
                     </div>
                 </div>
                 <div className="content overflow-y-auto w-full">
-                    <table className="w-full rounded-md mt-8 bg-white">
+                    <table className="w-full rounded-md mt-3 bg-white">
                         { 
                         mode === 'assistants' 
                             ?
