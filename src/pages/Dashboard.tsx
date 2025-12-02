@@ -143,6 +143,7 @@ function DashboardTable(
     {
         const [employee, setEmployee] = useState<schoolDataPopUp | null>(null);
         const [viewEmployee, setViewEmployee] = useState<boolean>(false);
+        const [searchItem, setSearchItem] = useState<string>("")
 
         //function to pop up modal
         function onClick(employee: schoolData, view: boolean, title: jobTitle){
@@ -151,10 +152,8 @@ function DashboardTable(
             setEmployee(employeeData)
         }
 
-        const closeEmployeeModal = () => {
-        setViewEmployee(false);
-        setEmployee(null);
-        };
+        //search button
+        const filteredItems = data.filter((item) => item.fullName.toLowerCase().includes(searchItem?.toLowerCase()))
 
     return(
         
@@ -194,10 +193,6 @@ function DashboardTable(
                                 mode === 'supervisors' && 'View and manage all supervisors' 
                             }
                         </p>
-                    </div>
-                    <div className="search flex gap-2 items-center w-[15.9055rem] rounded-md! bg-[#F3F3F5] h-[2.23688rem]! p-[0.24856rem_0.74563rem_0.24856rem_1.98831rem]">
-                        <img src={searchIcon} className="flex w-[0.99319rem] h-[0.99319rem]" alt="search icon" />
-                        <input placeholder={`Search...`} type="search" name="search"/>
                     </div>
                 </div>
                 <div className="content overflow-y-auto w-full">
