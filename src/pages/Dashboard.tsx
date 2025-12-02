@@ -7,8 +7,9 @@ import supervisor from "../assets/svg/supervisor.svg"
 import searchIcon from "../assets/svg/searchIcon.svg"
 import view from "../assets/svg/view.svg"
 
-import type { DashboardMode, DashboardProps, dashboardTimetable, schoolData } from '../../types/student' 
+import type { DashboardMode, DashboardProps, dashboardTimetable, jobTitle, schoolData, schoolDataPopUp } from '../../types/student' 
 import { useState } from "react"
+import ViewEmployee from "./pop-up/Dashboard"
 
 /**
  * Card component, takes input of assisntant info and returns a card component with active, inactive and total number of employees.
@@ -140,6 +141,21 @@ function DashboardTable(
         dashboardTimetable
     )
     {
+        const [employee, setEmployee] = useState<schoolDataPopUp | null>(null);
+        const [viewEmployee, setViewEmployee] = useState<boolean>(false);
+
+        //function to pop up modal
+        function onClick(employee: schoolData, view: boolean, title: jobTitle){
+            setViewEmployee(true);
+            const employeeData = {...employee, view, title}
+            setEmployee(employeeData)
+        }
+
+        const closeEmployeeModal = () => {
+        setViewEmployee(false);
+        setEmployee(null);
+        };
+
     return(
         
         <div className="dashboardTable flex flex-col w-full">
@@ -161,6 +177,7 @@ function DashboardTable(
             />
             :
             <div className="alt bg-white border border-solid rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
+                {employee && viewEmployee && <ViewEmployee fullName={employee.fullName} modules={employee.modules} availability={employee.availability} view={viewEmployee} title="Lab Assistant" setView={setViewEmployee} /> }       
                 <div className="header flex justify-between">
                     <div className="title">
                         <h5 className="text-[0.99413rem]! text-[#0A0A0A] leading-[0.99413rem]!">
@@ -202,7 +219,7 @@ function DashboardTable(
                                                         <p>{eachStudent.modules.length} modules enrolled</p>
                                                     </div>
                                                     <div className="view flex justify-center">
-                                                        <button className="w-25! border-none! flex justify-center items-center gap-1.5 hover:bg-[#F3F3F5]">
+                                                        <button onClick={() => onClick && onClick(eachStudent, viewEmployee, "Lab Assistant")} className="w-25! border-none! flex justify-center items-center gap-1.5 hover:bg-[#F3F3F5]">
                                                             <img src={view} alt="eye logo" />
                                                             <p className="text-[0.86988rem]">view</p>
                                                         </button>

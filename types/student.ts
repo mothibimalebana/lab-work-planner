@@ -27,10 +27,11 @@ export type schoolData = {
     level: schoolLevel,
 }
 export type schoolDataPopUp = {
-    fullName: string
-    modules: string[]
-    availability: number,
+    fullName: string | null | undefined;
+    modules: string[] | null | undefined;
+    availability: number | null | undefined;
     level?: schoolLevel,
-    view: false
-    title: jobTitle,
+    view: boolean | null | undefined;
+    title: jobTitle | null | undefined;
+    setView?: (value: boolean) => void;
 }

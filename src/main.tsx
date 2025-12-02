@@ -8,6 +8,7 @@ import Timetable from './pages/Timetable.tsx';
 import LandingPage from './pages/LandingPage.tsx';
 import LoginPage from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
+ './pages/Dashboard.tsx';
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/dashboard",
-        element: <Dashboard/>
+        element: <Dashboard dashboardMode='overview'/>
       }
     ]
   },
@@ -31,7 +32,7 @@ const router = createBrowserRouter([
   {
     path: "/login",
     element: <LoginPage/>
-  }
+  },
 ]);
 
 createRoot(document.getElementById('root')!).render(
