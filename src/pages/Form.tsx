@@ -1,52 +1,84 @@
+import { useState } from "react";
+
 function Registration(){
+    const [freeSlots, setFreeSlots] = useState(35);
+    const [classes, setClasses] = useState(35);
+    const [marked, unavailable] = useState(0);
+
     const schedule = [
     [
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null }
+        { class: true, unavailable: false, id: 0 },
+        { class: false, unavailable: false, id: 1 },
+        { class: false, unavailable: false, id: 2 },
+        { class: false, unavailable: false, id: 3 },
+        { class: false, unavailable: false, id: 4 },
+        { class: false, unavailable: false, id: 5 },
+        { class: false, unavailable: false, id: 6 },
     ],
     [
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null }
+        { class: false, unavailable: false, id: 0 },
+        { class: false, unavailable: false, id: 1 },
+        { class: false, unavailable: false, id: 2 },
+        { class: false, unavailable: false, id: 3 },
+        { class: false, unavailable: false, id: 4 },
+        { class: false, unavailable: false, id: 5 },
+        { class: false, unavailable: false, id: 6 },
     ],
     [
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null }
+        { class: false, unavailable: false, id: 0 },
+        { class: false, unavailable: false, id: 1 },
+        { class: false, unavailable: false, id: 2 },
+        { class: false, unavailable: false, id: 3 },
+        { class: false, unavailable: false, id: 4 },
+        { class: false, unavailable: false, id: 5 },
+        { class: false, unavailable: false, id: 6 },
     ],
     [
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null }
+        { class: false, unavailable: false, id: 0 },
+        { class: false, unavailable: false, id: 1 },
+        { class: false, unavailable: false, id: 2 },
+        { class: false, unavailable: false, id: 3 },
+        { class: false, unavailable: false, id: 4 },
+        { class: false, unavailable: false, id: 5 },
+        { class: false, unavailable: false, id: 6 },
     ],
     [
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null },
-        { shift: false, attended: false, supervisor: null, lab: null }
+        { class: false, unavailable: false, id: 0 },
+        { class: false, unavailable: false, id: 1 },
+        { class: false, unavailable: false, id: 2 },
+        { class: false, unavailable: false, id: 3 },
+        { class: false, unavailable: false, id: 4 },
+        { class: false, unavailable: false, id: 5 },
+        { class: false, unavailable: false, id: 6 },
     ]
     ];
 
+    const [myTimeTable, setMyTimeTable] = useState(schedule)
+
+    const updateSchedule = (index: number, secondIndex: number) => {
+        if(myTimeTable[index][secondIndex].unavailable === true){
+            const newTimetable = [...myTimeTable];
+            newTimetable[index][secondIndex].unavailable = false;
+            setMyTimeTable(newTimetable);
+        } else{
+            const newTimetable = [...myTimeTable];
+            newTimetable[index][secondIndex].unavailable = true;
+            setMyTimeTable(newTimetable);
+        }
+    }
+
+
+//       const updateState = (index, secondIndex) => {
+//     if (array[index][secondIndex].state === 'true') {
+//       const newArray = [...array]; //new copy of array
+//       newArray[index][secondIndex].state = 'false';
+//       setArray(newArray, newArray[index][secondIndex].state);
+//     } else {
+//       const newArray = [...array]; //new copy of array
+//       newArray[index][secondIndex].state = 'true';
+//       setArray(newArray, newArray[index][secondIndex].state);
+//     }
+//   };
 
     return(
         <div className="registration px-[5.12rem] font-[Arimo] mt-6">
@@ -94,9 +126,21 @@ function Registration(){
 
                         </div>
                         <div className="text mb-5">
+                            <h4>Availabilty schedule</h4>
                             <p>***Click on available slots to mark additional times when you're unavailable</p>
+                            <div className="keys">
+                                {/* Orange Key */}
+                                <div className="key"></div>
+                                <div className="text"></div>
+                                {/** Red Key */}
+                                <div className="key"></div>
+                                <div className="text"></div>
+                                { /**Green Key */}
+                                <div className="key"></div>
+                                <div className="text"></div>
+                            </div>
                         </div>
-                        <div className="table w-[ mt-2.5">
+                        <div className="flex flex-col mt-2.5">
                             <table className="w-full text-[0.62713rem] rounded-md border border-solid border-[#E5E8EB] bg-white">
                                 <tbody>
                                     <tr className="rounded-lg border-b border-b-solid border-b-[#E5E8EB]">
@@ -111,30 +155,81 @@ function Registration(){
                                     </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                         <td className="w-[4.43731rem]! text-left font-normal">08:00 <br />11:00</td>
-                                        {schedule[0].map((shift) => shift.shift ? <td className="h-[2.59031rem]! w-[4.43731rem]!"><div className="working h-[2.59031rem]! flex w-[4.43731rem]!1  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]"><div className="cell p-[0.65rem] text-[0.74513rem]"> <h6>Lab Assistant</h6> <p>{shift.supervisor}</p> <p>Lab: {shift.lab}</p> </div></div></td> : <td className="h-[2.59031rem]! w-[4.43731rem]!"><div className="freeSlot bg-[#DCFCE7] border border-solid  border-[#05DF72] h-[2.59031rem]! text-left w-[4.43731rem]! text-[#99A1AF] rounded-lg  cell p-[0.65rem] text-[0.74513rem] hover:bg-[#8CFFB4]"></div></td>)}
+                                            {myTimeTable[0].map((shift) => (
+                                                <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
+                                                    <div 
+                                                        onClick={() => updateSchedule(0, shift.id)}
+                                                        className={`h-[2.59031rem]! text-left w-[4.43731rem]! text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
+                                                            ${shift.class 
+                                                                ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
+                                                                : ( shift.unavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
+                                                            }`}
+                                                    />
+                                                </td>
+                                            ))}
                                     </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                         <td className="w-[4.43731rem]!  text-left font-normal">11:00 <br />14:00</td>
-                                        {schedule[1].map((shift) => shift.shift ? <td className="h-[2.59031rem]! w-[4.43731rem]!"><div className="working h-[2.59031rem]! flex w-[4.43731rem]!  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)] "><div className="cell p-[0.65rem] text-[0.74513rem]"> <h6>Lab Assistant</h6> <p>{shift.supervisor}</p> <p>Lab: {shift.lab}</p> </div></div></td> : <td className="h-[2.59031rem]! w-[4.43731rem]!"><div className="freeSlot bg-[#DCFCE7] border border-solid  border-[#05DF72] h-[2.59031rem]! text-left w-[4.43731rem]! text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] hover:bg-[#8CFFB4]"></div></td>)}
-                                    </tr>
+                                            {myTimeTable[1].map((shift) => (
+                                                <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
+                                                    <div 
+                                                        onClick={() => updateSchedule(1, shift.id)}
+                                                        className={`h-[2.59031rem]! text-left w-[4.43731rem]! text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
+                                                            ${shift.class 
+                                                                ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
+                                                                : ( shift.unavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
+                                                            }`}
+                                                    />
+                                                </td>
+                                            ))}                                    </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                         <td className="w-[4.43731rem]!  text-left font-normal">14:00 <br />17:00</td>
-                                        {schedule[2].map((shift) => shift.shift ? <td className="h-[2.59031rem]! w-[4.43731rem]!"><div className="working h-[2.59031rem]! flex w-[4.43731rem]!  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)] "><div className="cell p-[0.65rem] text-[0.74513rem]"> <h6>Lab Assistant</h6> <p>{shift.supervisor}</p> <p>Lab: {shift.lab}</p> </div></div></td> : <td className="h-[2.59031rem]! w-[4.43731rem]!"><div className="freeSlot bg-[#DCFCE7] border border-solid  border-[#05DF72] h-[2.59031rem]! text-left w-[4.43731rem]! text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] hover:bg-[#8CFFB4]"></div></td>)}
-
+                                            {myTimeTable[2].map((shift) => (
+                                                <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
+                                                    <div 
+                                                        onClick={() => updateSchedule(2, shift.id)}
+                                                        className={`h-[2.59031rem]! text-left w-[4.43731rem]! text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
+                                                            ${shift.class 
+                                                                ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
+                                                                : ( shift.unavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
+                                                            }`}
+                                                    />
+                                                </td>
+                                            ))}
                                     </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                         <td className="w-[4.43731rem]! text-left font-normal">17:00 <br />20:00</td>
-                                        {schedule[3].map((shift) => shift.shift ? <td className="h-[2.59031rem]! w-[4.43731rem]!"><div className="cell p-[0.65rem] text-[0.74513rem]"> <h6>Lab Assistant</h6> <p>{shift.supervisor}</p> <p>Lab: {shift.lab}</p> </div></td> : <td><div className="freeSlot bg-[#DCFCE7] h-[2.59031rem]! text-left w-[4.43731rem]! text-[#99A1AF] rounded-lg border border-solid border-[#05DF72] cell p-[0.65rem] text-[0.74513rem]"></div></td>)}
-                                    </tr>
+                                            {myTimeTable[3].map((shift) => (
+                                                <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
+                                                    <div 
+                                                        onClick={() => updateSchedule(3, shift.id)}
+                                                        className={`h-[2.59031rem]! text-left w-[4.43731rem]! text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
+                                                            ${shift.class 
+                                                                ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
+                                                                : ( shift.unavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
+                                                            }`}
+                                                    />
+                                                </td>
+                                            ))}                                    </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                         <td className="w-[4.43731rem]! text-left font-normal">20:00 <br />00:00</td>
-                                        {schedule[4].map((shift) => shift.shift ? <td className="h-[2.59031rem]! w-[4.43731rem]!"><div className="working h-[2.59031rem]! flex w-[4.43731rem]!  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)] "><div className="cell p-[0.65rem] text-[0.74513rem]"> <h6>Lab Assistant</h6> <p>{shift.supervisor}</p> <p>Lab: {shift.lab}</p> </div></div></td> : <td className="h-[2.59031rem]! w-[4.43731rem]!"><div className="freeSlot h-[2.59031rem]! text-left w-[4.43731rem]! text-[#99A1AF] rounded-lg border bg-[#DCFCE7] border-solid border-[#05DF72] cell p-[0.65rem] text-[0.74513rem]"></div></td>)}
-                                    </tr>
+                                            {myTimeTable[4].map((shift) => (
+                                                <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
+                                                    <div 
+                                                        onClick={() => updateSchedule(4, shift.id)}
+                                                        className={`h-[2.59031rem]! text-left w-[4.43731rem]! text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
+                                                            ${shift.class 
+                                                                ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
+                                                                : ( shift.unavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
+                                                            }`}
+                                                    />
+                                                </td>
+                                            ))}                                   </tr>
                                 </tbody>
                             </table>
                         </div>
-                        <div className="summary bg-[#EFF6FF]">
-                            <h4>Summary</h4>
+                        <div className="summary mt-14 px-6 py-3 rounded-[0.52263rem] bg-[#EFF6FF] border border-solid border-[#BEDBFF] text-[#1C398E]">
+                            <h4 className="font-bold">Summary</h4>
                             <p>Available slots: {} / 35</p>
                             <p>Blocked by classes: {}</p>
                             <p>Marked unavailable: {}</p>
