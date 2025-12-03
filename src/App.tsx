@@ -2,13 +2,13 @@ import { Outlet } from "react-router"
 import Header from "./components/Header"
 import Navbar from "./components/Navbar"
 import phoneError from "./assets/svg/phone-error-svgrepo-com.svg"
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-function App() {
-  const [page, setPage] = useState('Timetable');
-  
+function App() {  
   const getPage = window.location.pathname.slice(5);
   const currPage = getPage[0].toUpperCase() + getPage.slice(1);
+
+    const [page, setPage] = useState(currPage);
 
   return (
     <div className="app">
