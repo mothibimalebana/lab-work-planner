@@ -24,7 +24,7 @@ const Navbar = ({setPage}) => {
                     <Link onClick={() => setPage("Dashboard")} to="/app/dashboard">Dashboard</Link>
                 </div>
                 <div className="form">
-                    <Link onClick={() => setPage("Form")} to="/app/orm">Form</Link>
+                    <Link onClick={() => setPage("Form")} to="/app/form">Form</Link>
                 </div>
             </div>
             <div className="right flex gap-4 items-center">
