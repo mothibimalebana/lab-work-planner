@@ -1,9 +1,11 @@
 import { useState } from "react";
+import x from "../assets/svg/x.svg"
 
 function Registration(){
     const [freeSlots, setFreeSlots] = useState(35);
     const [classes, setClasses] = useState(35);
     const [marked, unavailable] = useState(0);
+
 
     const schedule = [
     [
@@ -67,18 +69,6 @@ function Registration(){
         }
     }
 
-
-//       const updateState = (index, secondIndex) => {
-//     if (array[index][secondIndex].state === 'true') {
-//       const newArray = [...array]; //new copy of array
-//       newArray[index][secondIndex].state = 'false';
-//       setArray(newArray, newArray[index][secondIndex].state);
-//     } else {
-//       const newArray = [...array]; //new copy of array
-//       newArray[index][secondIndex].state = 'true';
-//       setArray(newArray, newArray[index][secondIndex].state);
-//     }
-//   };
 
     return(
         <div className="registration px-[5.12rem] font-[Arimo] mt-6">
@@ -159,12 +149,16 @@ function Registration(){
                                                 <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
                                                     <div 
                                                         onClick={() => updateSchedule(0, shift.id)}
-                                                        className={`h-[2.59031rem]! text-left w-[4.43731rem]! text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
+
+                                                        className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${shift.class 
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
                                                                 : ( shift.unavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
                                                             }`}
-                                                    />
+                                                    >
+                                                        {shift.class && <img src={x}/> }
+
+                                                    </div>
                                                 </td>
                                             ))}
                                     </tr>
