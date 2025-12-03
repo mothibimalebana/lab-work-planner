@@ -4,7 +4,6 @@ import people from "../assets/svg/people.svg"
 import student from "../assets/svg/student.svg"
 import overview from "../assets/svg/overview.svg"
 import supervisor from "../assets/svg/supervisor.svg"
-import searchIcon from "../assets/svg/searchIcon.svg"
 import view from "../assets/svg/view.svg"
 
 import type { DashboardMode, DashboardProps, dashboardTimetable, jobTitle, schoolData, schoolDataPopUp } from '../../types/student' 

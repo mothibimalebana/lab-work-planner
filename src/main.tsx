@@ -8,26 +8,31 @@ import Timetable from './pages/Timetable.tsx';
 import LandingPage from './pages/LandingPage.tsx';
 import LoginPage from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
+import Registration from './pages/Form.tsx';
  './pages/Dashboard.tsx';
 
 const router = createBrowserRouter([
   {
     path: "/",
+    element: <LandingPage/>
+  },
+  {
+    path: "/app",
     element: <App/>,
     children: [
       {
-        path: "/timetable",
+        path: "timetable",
         element: <Timetable/>
       },
       {
-        path: "/dashboard",
+        path: "dashboard",
         element: <Dashboard dashboardMode='overview'/>
+      },
+      {
+        path: "form",
+        element: <Registration/>
       }
     ]
-  },
-  {
-    path: "/home",
-    element: <LandingPage/>
   },
   {
     path: "/login",
