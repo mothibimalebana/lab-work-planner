@@ -18,13 +18,13 @@ const Navbar = () => {
                     <SVGElement element={universityIcon.element} />
                 </div>
                 <div className="timetable">
-                    <Link to="/Timetable">Timetable</Link>
+                    <Link to="/app/timetable">Timetable</Link>
                 </div>
                 <div className="dashboard">
-                    <Link to="/Dashboard">Dashboard</Link>
+                    <Link to="/app/dashboard">Dashboard</Link>
                 </div>
                 <div className="form">
-                    <Link to="/Form">Form</Link>
+                    <Link to="/app/orm">Form</Link>
                 </div>
             </div>
             <div className="right flex gap-4 items-center">
