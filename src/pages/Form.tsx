@@ -111,12 +111,32 @@ function Registration(){
                         </fieldset>
                     </div>
                     <div className="modules mb-5">
-                        <h4>Your enrolled modules</h4>
-                        <p>
+                        <h4 className="text-[#0A0A0A] font-bold text-2xl">Your enrolled modules</h4>
+                        <p className="text-[#4A5565] font-normal text-2">
                             Select the modules you are currently enrolled in. You will NOT be allocated shifts during these class times.
                         </p>
-                        <ul className="grid grid-cols-4">
-                            {modules.map((module) => <li><input type="checkbox" name={module.code} />{module.code}</li>)}
+                        <ul className="flex flex-col">
+                            <div className="second-year-main mb-6 flex flex-col">
+                                <h2 className="text-[#4A5565] font-normal text-[1.5rem]">2nd Year Main:</h2>
+                                <div className="modules grid grid-cols-3 font-[Arimo]">
+                                    {modules[0].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                    {modules[1].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                </div>
+                            </div>
+                            <div className="second-year-main mb-6 flex flex-col">
+                                <h2 className="text-[#4A5565] font-normal text-[1.5rem]">2nd Year Extended:</h2>
+                                <div className="modules grid grid-cols-3 font-[Arimo]">
+                                    {modules[2].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                    {modules[3].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                </div>
+                            </div>
+                            <div className="second-year-main mb-6 flex flex-col">
+                                <h2 className="text-[#4A5565] font-normal text-[1.5rem]">Final year:</h2>
+                                <div className="modules grid grid-cols-3 font-[Arimo]">
+                                    {modules[4].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                    {modules[5].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                </div>
+                            </div>
                         </ul>
 
                     </div>
