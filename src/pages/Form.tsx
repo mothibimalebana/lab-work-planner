@@ -275,11 +275,15 @@ function Registration(){
                                 </tbody>
                             </table>
                         </div>
-                        <div className="summary mt-14 px-6 py-3 rounded-[0.52263rem] bg-[#EFF6FF] border border-solid border-[#BEDBFF] text-[#1C398E]">
+
+                        {/* <div className="summary mt-14 px-6 py-3 rounded-[0.52263rem] bg-[#EFF6FF] border border-solid border-[#BEDBFF] text-[#1C398E]">
                             <h4 className="font-bold">Summary</h4>
                             <p>Available slots: {freeSlots} / 35</p>
                             <p>Blocked by classes: {classes}</p>
                             <p>Marked unavailable: {marked}</p>
+                        </div> */}
+                        <div className="submit mt-2.5">
+                            <button className="bg-[#337E89] px-3 py-1 text-white">Submit Availability</button>
                         </div>
                     </div>
                 </form>
