@@ -1,10 +1,12 @@
 import { useState } from "react";
 import x from "../assets/svg/x.svg"
+import modules from "../assets/modules";
 
 function Registration(){
     const [freeSlots, setFreeSlots] = useState(35);
     const [classes, setClasses] = useState(35);
     const [marked, unavailable] = useState(0);
+
 
 
     const schedule = [
@@ -109,6 +111,13 @@ function Registration(){
                         </fieldset>
                     </div>
                     <div className="modules mb-5">
+                        <h4>Your enrolled modules</h4>
+                        <p>
+                            Select the modules you are currently enrolled in. You will NOT be allocated shifts during these class times.
+                        </p>
+                        <ul className="grid grid-cols-4">
+                            {modules.map((module) => <li><input type="checkbox" name={module.code} />{module.code}</li>)}
+                        </ul>
 
                     </div>
                     <div className="availability mb-5">
@@ -224,9 +233,9 @@ function Registration(){
                         </div>
                         <div className="summary mt-14 px-6 py-3 rounded-[0.52263rem] bg-[#EFF6FF] border border-solid border-[#BEDBFF] text-[#1C398E]">
                             <h4 className="font-bold">Summary</h4>
-                            <p>Available slots: {} / 35</p>
-                            <p>Blocked by classes: {}</p>
-                            <p>Marked unavailable: {}</p>
+                            <p>Available slots: {freeSlots} / 35</p>
+                            <p>Blocked by classes: {classes}</p>
+                            <p>Marked unavailable: {marked}</p>
                         </div>
                     </div>
                 </form>
