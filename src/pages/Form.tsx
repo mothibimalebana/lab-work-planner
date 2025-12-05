@@ -53,9 +53,9 @@ function Registration(){
 ];
     const [myTimeTable, setMyTimeTable] = useState(schedule);
 
-    const [freeSlots, setFreeSlots] = useState(35);
-    const [classes, setClasses] = useState(35);
-    const [marked, unavailable] = useState(0);
+    // const [freeSlots, setFreeSlots] = useState(35);
+    // const [classes, setClasses] = useState(35);
+    // const [marked, unavailable] = useState(0);
 
     const updateSchedule = (index: number, secondIndex: number) => {
         if(myTimeTable[index][secondIndex].unavailable === true){
@@ -80,11 +80,15 @@ function Registration(){
 
     }
 
+    const onSubmit = (event: Event) => {
+        event.preventDefault();
+    }
+
 
     return(
         <div className="registration px-[5.12rem] font-[Arimo] mt-6">
             <div className="form bg-white px-8 py-5 rounded-[0.73163rem]! border border-solid border-[rgba(0,0,0,0.10)]!">
-                <form action="# flex flex-col">
+                <form method="POST" className="flex flex-col">
                     <div className="head mb-5">
                         <h6 className="font-normal">Lab Assistant Form</h6>
                         <p className="text-[#717182]">Select your enrolled modules and mark any additional times you're unavailable</p>
@@ -237,7 +241,7 @@ function Registration(){
                                             ))}
                                     </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                                        <td className="w-[4.43731rem]! text-left font-normal">08:00 <br />11:00</td>
+                                        <td className="w-[4.43731rem]! text-left font-normal">17:00 <br />20:00</td>
                                             {myTimeTable[3].map((shift) => (
                                                 <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
                                                     <div 
@@ -255,7 +259,7 @@ function Registration(){
                                             ))}
                                     </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                                        <td className="w-[4.43731rem]! text-left font-normal">08:00 <br />11:00</td>
+                                        <td className="w-[4.43731rem]! text-left font-normal">20:00 <br />00:00</td>
                                             {myTimeTable[4].map((shift) => (
                                                 <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
                                                     <div 
@@ -282,10 +286,8 @@ function Registration(){
                             <p>Blocked by classes: {classes}</p>
                             <p>Marked unavailable: {marked}</p>
                         </div> */}
-                        <div className="submit mt-2.5">
-                            <button className="bg-[#337E89] px-3 py-1 text-white">Submit Availability</button>
-                        </div>
                     </div>
+                    <button onSubmit={() => onSubmit} type="submit" className="flex w-fit bg-[#337E89] px-3 py-1 text-white">Submit Availability</button>
                 </form>
             </div>
         </div>

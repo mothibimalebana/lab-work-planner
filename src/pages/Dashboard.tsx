@@ -142,7 +142,6 @@ function DashboardTable(
     {
         const [employee, setEmployee] = useState<schoolDataPopUp | null>(null);
         const [viewEmployee, setViewEmployee] = useState<boolean>(false);
-        const [searchItem, setSearchItem] = useState<string>("")
 
         //function to pop up modal
         function onClick(employee: schoolData, view: boolean, title: jobTitle){
@@ -150,9 +149,6 @@ function DashboardTable(
             const employeeData = {...employee, view, title}
             setEmployee(employeeData)
         }
-
-        //search button
-        const filteredItems = data.filter((item) => item.fullName.toLowerCase().includes(searchItem?.toLowerCase()))
 
     return(
         
@@ -261,7 +257,7 @@ function DashboardTable(
  * 
  * Button carousel to toggle between 'overview', 'lab assistants' and 'lab supervisors'
  */
-function ButtonCarousel( { active = 'overview' , setActive} ){
+function ButtonCarousel( { active = 'overview' , setActive}: {active: any, setActive: any} ){
 
     //functions to facilitate toggling between different options
     const switchToOverview = () => { setActive("overview") };

@@ -10,7 +10,7 @@ import SVGElement from "./SVGElement";
  * This component is always at the top of the Table, Dashboard Component
  */
 
-const Navbar = ({setPage}) => {
+const Navbar = ({setPage}: {setPage: any}) => {
     return (
         <div className="nav-bar hidden md:flex justify-between bg-[#021E35] px-[5.12rem] min-h-17">
             <div className="left flex gap-4 items-center">
