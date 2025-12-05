@@ -2,14 +2,19 @@ import { Outlet } from "react-router"
 import Header from "./components/Header"
 import Navbar from "./components/Navbar"
 import phoneError from "./assets/svg/phone-error-svgrepo-com.svg"
+import { useState } from "react";
 
-function App() {
+function App() {  
+  const getPage = window.location.pathname.slice(5);
+  const currPage = getPage[0].toUpperCase() + getPage.slice(1);
+
+    const [page, setPage] = useState(currPage);
 
   return (
     <div className="app">
       <div className="desktop hidden md:flex flex-col overflow-x-hidden">
-        <Navbar/>
-        <Header/>
+        <Navbar setPage={setPage}/>
+        <Header page={page}/>
         <Outlet/>
       </div>
       <div className="mobile flex flex-col md:hidden">

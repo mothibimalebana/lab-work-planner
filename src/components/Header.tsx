@@ -1,6 +1,7 @@
-const Header = () => {
-    const page = window.location.pathname.slice(1)
-    console.log(page)
+const Header = ({page}: {page: string}) => {
+
+
+
     return(
         <div className="md:header px-[5.12rem] mt-7">
             <div className="breadCrumbs">

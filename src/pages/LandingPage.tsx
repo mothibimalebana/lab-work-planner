@@ -6,6 +6,7 @@ import clock from "../assets/svg/Clock.svg"
 import greenBullet from "../assets/svg/greenBullet.svg"
 import blueBullet from "../assets/svg/blueBullet.svg"
 import greyB from "../assets/svg/greyB.svg"
+import { Link } from "react-router"
 
 
 
@@ -36,7 +37,7 @@ const LandingPage = () => {
                     </div>
                     <div className="bottom mt-4 self-center flex items-center gap-7">
                         <button className="view rounded-sm flex gap-1.5 h-full text-center bg-[#021E35] items-center">
-                        <p className="text-white flex items-center h-full">View Timetable</p>
+                        <Link className="text-white flex items-center h-full" to="/app/timetable">View Timetable</Link>
                         <div className="svg bg-[#021E35]">{arrowLogo.element}</div>
                         </button>
                         <button className="w-52 text-[#337E89] outline outline-solid outline-[#337E89]">Submit Availability</button>

@@ -10,7 +10,7 @@ import SVGElement from "./SVGElement";
  * This component is always at the top of the Table, Dashboard Component
  */
 
-const Navbar = () => {
+const Navbar = ({setPage}: {setPage: any}) => {
     return (
         <div className="nav-bar hidden md:flex justify-between bg-[#021E35] px-[5.12rem] min-h-17">
             <div className="left flex gap-4 items-center">
@@ -18,13 +18,13 @@ const Navbar = () => {
                     <SVGElement element={universityIcon.element} />
                 </div>
                 <div className="timetable">
-                    <Link to="/Timetable">Timetable</Link>
+                    <Link onClick={() => setPage("Timetable")} to="/app/timetable">Timetable</Link>
                 </div>
                 <div className="dashboard">
-                    <Link to="/Dashboard">Dashboard</Link>
+                    <Link onClick={() => setPage("Dashboard")} to="/app/dashboard">Dashboard</Link>
                 </div>
                 <div className="form">
-                    <Link to="/Form">Form</Link>
+                    <Link onClick={() => setPage("Form")} to="/app/form">Form</Link>
                 </div>
             </div>
             <div className="right flex gap-4 items-center">

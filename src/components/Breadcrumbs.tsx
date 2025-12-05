@@ -16,7 +16,7 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
     const splitDate = date.split('/') //get dd, mm, yyyy individually
     const dd = splitDate[1];
     const mm = months[Number(splitDate[0]) - 1];
-    const yyyy = date.slice(6);
+    const yyyy = date.slice(5);
     const dateString = dd + ' ' + ' ' + mm + ' '  + yyyy;
 
     const changeMode = () => {
