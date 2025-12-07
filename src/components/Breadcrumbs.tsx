@@ -38,7 +38,7 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
             <div className="top flex justify-between">
                 <div className="date font-bold text-[1.875rem]">{dateString}</div>
                 <div className="btns flex gap-[0.87rem]">
-                    <button className="flex text-center text-white bg-[#021E35] items-center gap-2.5">
+                    <button className="blue-button">
                         <div className="icon">{notificationIcon.element}</div>
                         <p><b>Updates</b></p>
                     </button>
@@ -48,7 +48,7 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
                 {months.map((month) => {
                     return(
                     <div key={month} className={ `w-fit flex-1 ${mm === month ? `monthCarousel flex items-center h-4 text-[1rem] px-[0.7rem]`: `monthCarousel flex items-center text-[1rem] h-4`}`}>
-                        <p className={  `flex-1 ${mm === month ? `text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-4 bg-white` : `text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]`}`}>{month}</p>
+                        <p className={  `flex-1 ${mm === month ? `text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-6 bg-white` : `text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]`}`}>{month}</p>
                     </div>
                     )
                 })}
