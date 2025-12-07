@@ -21,14 +21,14 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
     const yyyy = date.slice(5);
     const dateString = dd + ' ' + ' ' + mm + ' '  + yyyy;
 
-    //Switch between Lab Assistant view and Bookings
+    //Switch between Shifts view and Bookings
     const changeMode = () => {
-        if (mode === "Lab Assistant") {
+        if (mode === "Shifts") {
             const newMode: modeValue = "Bookings";
             setMode(newMode)
             
         } else {
-            const newMode: modeValue = "Lab Assistant";
+            const newMode: modeValue = "Shifts";
             setMode(newMode)
         }
     }
@@ -40,7 +40,7 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
                 <div className="btns flex gap-[0.87rem]">
                     <button className="blue-button">
                         <div className="icon">{notificationIcon.element}</div>
-                        <p><b>Updates</b></p>
+                        <p className="font-normal">Updates</p>
                     </button>
                 </div>
             </div>
@@ -48,7 +48,7 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
                 {months.map((month) => {
                     return(
                     <div key={month} className={ `w-fit flex-1 ${mm === month ? `monthCarousel flex items-center h-4 text-[1rem] px-[0.7rem]`: `monthCarousel flex items-center text-[1rem] h-4`}`}>
-                        <p className={  `flex-1 ${mm === month ? `text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-6 bg-white` : `text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]`}`}>{month}</p>
+                        <p className={  `flex-1 ${mm === month ? `text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-5 bg-white` : `text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]`}`}>{month}</p>
                     </div>
                     )
                 })}
@@ -72,14 +72,14 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
                     </div>
                 </div>
                 <div className="total col-start-3 col-end-4">
-                    <p className="text-[#6C6C6C]">Total for <span className="text-black font-bold">{mm}:</span></p>
+                    <p className="text-[#6C6C6C]">Total for <span className="text-black font-normal">{mm}:</span></p>
                     <h3 className="text-black font-semibold text-[1.25rem]">R{hours * rate}</h3>
                 </div>
             </div>
             <div className="chips flex items-center mt-3 justify-between">
                 <div className="Chips">
                     {
-                    mode === 'Lab Assistant' ? 
+                    mode === 'Shifts' ? 
                     (<div className="present rounded-sm flex bg-white border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <div className="icon">{greenEllipseIcon.element}</div>
                         <p>Shift</p>

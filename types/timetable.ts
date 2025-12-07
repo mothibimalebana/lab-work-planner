@@ -1,18 +1,18 @@
-export type modeValue = "Lab Assistant" | "Bookings";
-type role = "assistant" | "supervisor";
+export type modeValue = "Shifts" | "Bookings";
+export type role = "assistant" | "supervisor";
 
 type LabScheduleSlot = {
     shift: boolean;
     attended: boolean;
     supervisor: string | null;
-    Assistants: string | null;
-    lab: string | null;
+    assistants: string[] | null;
+    lab: number | null;
     role: role;
 
 };
 
 // Or if you want to be more explicit about the 5 weeks and 7 days:
-type schedule = [
+export type schedule = [
     [LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot],
     [LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot],
     [LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot, LabScheduleSlot],
