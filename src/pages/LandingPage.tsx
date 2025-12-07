@@ -15,16 +15,21 @@ import { Link } from "react-router"
 const LandingPage = () => {
     return (
         <div className="landing-page font-[Arimo]">
+            {/**Navbar */}
                 <div className="nav flex border bg-[#FFF] p-[0.5rem_1rem] border-solid border-[#E5E8EB] justify-between">
                     <div className="left flex gap-6">
                         {universityIcon.element}
                         <p className="flex items-center text-[1.125rem] text-[#021E35]">Lab Work Planner</p>
                     </div>
-                    <button className="right flex gap-2 items-center">
-                        {logOut.element}
-                        <p className="text-[#6C6C6C] text-[0.875rem]">Login</p>
+                    <button className="right flex gap-2 items-center w-fit!">
+                        <Link to="/login" className="flex items-center gap-2">
+                            {logOut.element}
+                            <p className="text-[#6C6C6C] text-[0.875rem]">Login</p>
+                        </Link>
                     </button>
                 </div>
+
+            {/**Header*/}
             <div className="header flex flex-col items-center mt-7.5">
                 <div className="breadCrumbs flex flex-col">
                     <div className="top mb-3 self-center flex w-fit h-10.5 rounded-2xl border border-solid border-[#E5E8EB] bg-[rgba(142,184,190,0.20)] p-[0.5625rem_1.0625rem]">
@@ -46,7 +51,10 @@ const LandingPage = () => {
                     </div>
                 </div>
             </div>
+
+            {/**Main content */}
             <div className="main flex flex-col items-center">
+                {/*** Info Card Components */}
                 <div className="card-container w-full">  
                     <div className="card-list flex justify-between mx-15 mt-20 mb-20">
                         <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
@@ -84,6 +92,8 @@ const LandingPage = () => {
                         </div> 
                     </div> 
                 </div>
+
+                {/**Role */}
                 <div className="role w-full flex flex-col">
                     <div className="header text-[#021E35] text-3xl self-center font-bold"><h2>Your Role:</h2></div>
                     <div className="card-container flex justify-between mx-15 mt-5">  
@@ -105,7 +115,9 @@ const LandingPage = () => {
                                 </ul>
                             </div>
                             <div className="button mt-8">
-                                <button className="role-btn leading-5 text-white bg-[#337E89] w-full">Submit Availability</button>
+                                <button className="role-btn leading-5 text-white bg-[#337E89] w-full">
+                                    <Link to="app/form" className="leading-5 text-white bg-[#337E89]">Submit Availability</Link>
+                                </button>
                             </div>
                         </div>
                         <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
@@ -156,6 +168,8 @@ const LandingPage = () => {
                         </div>
                     </div>
                 </div>
+
+                {/**How it works */}
                 <div className="features w-full mt-20 flex flex-col">
                 <div className="header mx-5 mb-8 text-[#021E35] text-3xl self-center font-bold"><h2>How It Works:</h2></div>
                     <div className="circles-container flex justify-between mx-15 mt-5">  
