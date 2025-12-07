@@ -9,7 +9,6 @@ import LandingPage from './pages/LandingPage.tsx';
 import LoginPage from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import Registration from './pages/Form.tsx';
- './pages/Dashboard.tsx';
 
 const router = createBrowserRouter([
   {

@@ -6,104 +6,101 @@ const Primitive = (  ) => {
    * return - The timetable component
    */
 
+    const schedule = [
+    [
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null }
+    ],
+    [
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null }
+    ],
+    [
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null }
+    ],
+    [
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null }
+    ],
+    [
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null },
+        { shift: false, attended: false, supervisor: null, lab: null }
+    ]
+    ];
 
     // const schedule = [
-    // [
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null }
-    // ],
-    // [
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null }
-    // ],
-    // [
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null }
-    // ],
-    // [
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null }
-    // ],
-    // [
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null },
-    //     { shift: false, attended: false, supervisor: null, lab: null }
-    // ]
-    // ];
-
-
-
-    const schedule = [
-        [
-          { shift: true, attended: true, supervisor: 'Moholola M', lab: 2},
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false }
-        ],
-        [
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: true, attended: true, supervisor: 'Moholola M', lab: 2},
-          { shift: false, attended: false },
-          { shift: true, attended: true, supervisor: 'Moholola M', lab: 2},
-          { shift: false, attended: false },
-          { shift: true, attended: true, supervisor: 'Moholola M', lab: 2}
-        ],
-        [
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: true, attended: true, supervisor: 'Moholola M', lab: 2},
-          { shift: false, attended: false },
-          { shift: true, attended: true, supervisor: 'Moholola M', lab: 2},
-          { shift: false, attended: false },
-          { shift: true, attended: true, supervisor: 'Moholola M', lab: 2}
-        ],
-        [
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false }
-        ],
-        [
-          { shift: false, attended: false },
-          { shift: true, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false },
-          { shift: false, attended: false }
-        ]
-      ];
+    //     [
+    //       { shift: true, attended: true, supervisor: 'Moholola M', lab: 2, assistants: ['ass1',  'ass2', 'ass3']},
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false }
+    //     ],
+    //     [
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: true, attended: true, supervisor: 'Moholola M', lab: 2},
+    //       { shift: false, attended: false },
+    //       { shift: true, attended: true, supervisor: 'Moholola M', lab: 2},
+    //       { shift: false, attended: false },
+    //       { shift: true, attended: true, supervisor: 'Moholola M', lab: 2}
+    //     ],
+    //     [
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: true, attended: true, supervisor: 'Moholola M', lab: 2},
+    //       { shift: false, attended: false },
+    //       { shift: true, attended: true, supervisor: 'Moholola M', lab: 2},
+    //       { shift: false, attended: false },
+    //       { shift: true, attended: true, supervisor: 'Moholola M', lab: 2}
+    //     ],
+    //     [
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false }
+    //     ],
+    //     [
+    //       { shift: false, attended: false },
+    //       { shift: true, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false },
+    //       { shift: false, attended: false }
+    //     ]
+    //   ];
 
     return (
         <div className="table px-[5.12rem] w-full mt-2.5">
