@@ -1,14 +1,7 @@
 import { Link } from "react-router-dom";
 import { notificationIcon, settingsIcon, universityIcon } from "../assets/svg/SVG";
 import SVGElement from "./SVGElement";
-
-type navLink = "Dashboard" | "Timetable" | "Form";
-
-
-interface navLinkState  {
-    link?: navLink
-    setLink: (link: navLink) => void
-}
+import type { navLinkState} from "../../types/navbar"
 
 const Navbar = ({setLink}: navLinkState) => {
     return (
