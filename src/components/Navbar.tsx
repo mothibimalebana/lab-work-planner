@@ -1,39 +1,37 @@
 import { Link } from "react-router-dom";
 import { notificationIcon, settingsIcon, universityIcon } from "../assets/svg/SVG";
 import SVGElement from "./SVGElement";
+import type { navLinkState} from "../../types/navbar"
 
-/**
- * Navbar will help navigate between different pages on the main app component
- * @returns Nav JSX with Link to timetable, dashboard, form, notifications, settings 
- * 
- * The Navbar links to the following: /Timetable, /Form, /Notifications, /Settings.
- * This component is always at the top of the Table, Dashboard Component
- */
 
-const Navbar = ({setPage}: {setPage: any}) => {
+
+
+const Navbar = ({setLink}: navLinkState) => {
     return (
         <div className="nav-bar hidden md:flex justify-between bg-[#021E35] px-[5.12rem] min-h-17">
             <div className="left flex gap-4 items-center">
                 <div className="svg">
-                    <SVGElement element={universityIcon.element} />
+                   <Link to="/">
+                        <SVGElement element={universityIcon.element} />
+                   </Link>
                 </div>
-                <div className="timetable">
-                    <Link onClick={() => setPage("Timetable")} to="/app/timetable">Timetable</Link>
-                </div>
-                <div className="dashboard">
-                    <Link onClick={() => setPage("Dashboard")} to="/app/dashboard">Dashboard</Link>
-                </div>
-                <div className="form">
-                    <Link onClick={() => setPage("Form")} to="/app/form">Form</Link>
-                </div>
+                <button className="blue-button border-none!">
+                    <Link onClick={() => setLink("Timetable")} to="/app/timetable" className="hover:border-b border-b-solid border-b-white">Timetable</Link>
+                </button>
+                <button className="blue-button border-none!">
+                    <Link onClick={() => setLink("Dashboard")} to="/app/dashboard" className="hover:border-b border-b-solid border-b-white">Dashboard</Link>
+                </button>
+                <button className="blue-button border-none!">
+                    <Link onClick={() => setLink("Form")} to="/app/form" className="hover:border-b border-b-solid border-b-white">Form</Link>
+                </button>
             </div>
             <div className="right flex gap-4 items-center">
-                <div className="notifications">
+                <button className="blue-button border-none!">
                     <Link to="/Notifications">{notificationIcon.element}</Link>
-                </div>
-                <div className="settings">
+                </button>
+                <button className="blue-button border-none!">
                     <Link to="/Settings">{settingsIcon.element}</Link>
-                </div>
+                </button>
             </div>
         </div>
     );

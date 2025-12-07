@@ -8,8 +8,7 @@ import Timetable from './pages/Timetable.tsx';
 import LandingPage from './pages/LandingPage.tsx';
 import LoginPage from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
-import Registration from './pages/Form.tsx';
- './pages/Dashboard.tsx';
+import Form from './pages/Form.tsx';
 
 const router = createBrowserRouter([
   {
@@ -30,7 +29,7 @@ const router = createBrowserRouter([
       },
       {
         path: "form",
-        element: <Registration/>
+        element: <Form/>
       }
     ]
   },

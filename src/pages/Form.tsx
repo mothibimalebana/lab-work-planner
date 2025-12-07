@@ -2,7 +2,7 @@ import { useState } from "react";
 import x from "../assets/svg/x.svg"
 import modules from "../assets/modules";
 
-function Registration(){
+function Form(){
 
     const schedule = [
     [
@@ -294,4 +294,4 @@ function Registration(){
     )
 }
 
-export default Registration
+export default Form
