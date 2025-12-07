@@ -1,13 +1,16 @@
-import { Link } from "react-router"
+import { Link, useNavigate } from "react-router"
 import back from "../assets/svg/Bacj.svg"
 import { useFormStatus } from "react-dom";
 
 
+
 const LoginPage: React.FC = () => {
+    const navigate = useNavigate();
 
     const { pending } = useFormStatus();
 
     const onSubmit = (formData: FormData) => {
+
 
 
         const getStudentNumber = formData.get("studentNumber");
@@ -16,9 +19,12 @@ const LoginPage: React.FC = () => {
         const user = {
             studentNumber: getStudentNumber,
             password: getPassword,
+
+
         }
 
-        console.log(user)
+        console.log(user);
+        navigate("/app/timetable")
     }
 
     return(
