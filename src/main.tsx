@@ -4,11 +4,11 @@ import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import './index.css'
 import App from './App.tsx'
-import Timetable from './pages/Timetable.tsx';
+// import Timetable from './pages/Timetable.tsx';
 import LandingPage from './pages/LandingPage.tsx';
 import LoginPage from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
-import Registration from './pages/Form.tsx';
+// import Registration from './pages/Form.tsx';
 
 const router = createBrowserRouter([
   {
@@ -19,18 +19,18 @@ const router = createBrowserRouter([
     path: "/app",
     element: <App/>,
     children: [
-      {
-        path: "timetable",
-        element: <Timetable/>
-      },
+      // {
+      //   path: "timetable",
+      //   element: <Timetable/>
+      // },
       {
         path: "dashboard",
         element: <Dashboard dashboardMode='overview'/>
       },
-      {
-        path: "form",
-        element: <Registration/>
-      }
+      // {
+      //   path: "form",
+      //   element: <Registration/>
+      // }
     ]
   },
   {

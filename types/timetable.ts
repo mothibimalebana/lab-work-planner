@@ -1,1 +1,2 @@
-export type timetableMode = "Lab Assistant" | "Bookings";
+export type modeValue = "Lab Assistant" | "Bookings"
+

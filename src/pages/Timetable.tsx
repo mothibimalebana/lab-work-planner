@@ -1,15 +1,15 @@
 import { useState } from "react";
 import BreadCrumbs from "../components/Breadcrumbs"
-import Primitive from "../components/Primitive";
-import Bookings from "../components/Bookings";
+// import Table from "../components/Table";
+import { type modeValue } from "../../types/timetable";
 
 const Timetable = () => {
-    const [mode, setMode] = useState('Lab Assistant');
+    const [mode, setMode] = useState<modeValue>("Lab Assistant");
 
     return(
         <div className="timetable">
             <BreadCrumbs mode={mode} setMode={setMode}/>
-            {mode === 'Lab Assistant' ? <Primitive/> : <Bookings/>}
+            {/* <Table mode={mode}/> */}
         </div>
     )
 }

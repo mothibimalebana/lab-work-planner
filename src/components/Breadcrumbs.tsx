@@ -1,10 +1,12 @@
+import type { modeValue } from "../../types/timetable";
 import { dropDownIcon, greenEllipseIcon, hourMilestone, notificationIcon, redEllipseIcon, salaryMilestone } from "../assets/svg/SVG";
 
 interface BreadCrumbsProps {
     hours?: number;
-    setMode: (mode: string) => void;
-    mode: string;
     rate?: number;
+    setMode: (mode:modeValue) => void;
+    mode: modeValue;
+
 }
 
 const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps) => {
@@ -21,10 +23,13 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
 
     //Switch between Lab Assistant view and Bookings
     const changeMode = () => {
-        if (mode === 'Lab Assistant') {
-            setMode('Bookings');
+        if (mode === "Lab Assistant") {
+            const newMode: modeValue = "Bookings";
+            setMode(newMode)
+            
         } else {
-            setMode('Lab Assistant');
+            const newMode: modeValue = "Bookings";
+            setMode(newMode)
         }
     }
 
@@ -53,12 +58,12 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
                     <div className="hours  flex flex-col justify-between pr-6 border-r border-r-[#E5E8EB] rounded-[0.0625rem] border-r-solid">
                         <div className="p">Total Hours WorkedThis Month:</div>
                         <div className="info flex items-center h-6">
-                            <div className="hoursMilestone">{hourMilestone(hours)}</div>
+                            <div className="w-full flex-1 hoursMilestone">{hourMilestone(hours)}</div>
                             <p className="text-[1.25rem] font-bold">{`${hours}/80`}<span className="text-[">h</span></p>
                         </div>
                     </div>
                     <div className="salary flex">
-                        <div className="info flex flex-col justify-between ">
+                        <div className="info flex w-full flex-1 flex-col justify-between ">
                             <div className="div"><p>Employee working time</p></div>
                             <div className="info flex items-center h-6">
                                 {salaryMilestone(hours)}

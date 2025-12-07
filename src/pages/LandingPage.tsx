@@ -37,17 +37,17 @@ const LandingPage = () => {
                     </div>
                     <div className="bottom mt-4 self-center flex items-center gap-7">
                         <button className="view rounded-sm flex gap-1.5 h-full text-center bg-[#021E35] items-center">
-                        <Link className="text-white flex items-center h-full" to="/app/timetable">View Timetable</Link>
+                        <Link className="text-white font-light! flex items-center h-full" to="/app/timetable">View Timetable</Link>
                         <div className="svg bg-[#021E35]">{arrowLogo.element}</div>
                         </button>
-                        <button className="w-52 text-[#337E89] outline outline-solid outline-[#337E89]">Submit Availability</button>
+                        <button className="self-center leading-5 w-52 text-[#337E89] outline outline-solid outline-[#337E89]">Submit Availability</button>
                     </div>
                 </div>
             </div>
             <div className="main">
                 <div className="card-container flex justify-between mx-5 mt-20 mb-20">  
                     <div className="card border bg-white border-solid border-[#E5E8EB] rounded-sm p-6 flex flex-col w-[19.666rem]">
-                        <div className="icon mb-[1.12rem] rounded-sm bg-[rgba(142,184,190,0.20)] w-12 h-12 p-[0.75rem]">
+                        <div className="icon mb-[1.12rem] rounded-sm bg-[rgba(142,184,190,0.20)] w-12 h-12 p-3">
                             <img src={swoosh} alt="tick" />
                         </div>
                         <div className="header text-[#021E35] mb-[0.44rem] font-bold">

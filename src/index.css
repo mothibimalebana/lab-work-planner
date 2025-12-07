@@ -91,6 +91,8 @@ button {
   font-weight: 500;
   cursor: pointer;
   transition: border-color 0.25s;
+  text-align: center;
+  
 }
 
 
