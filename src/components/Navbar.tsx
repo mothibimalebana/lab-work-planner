@@ -15,23 +15,23 @@ const Navbar = ({setLink}: navLinkState) => {
                         <SVGElement element={universityIcon.element} />
                    </Link>
                 </div>
-                <div className="timetable">
+                <button className="blue-button border-none!">
                     <Link onClick={() => setLink("Timetable")} to="/app/timetable">Timetable</Link>
-                </div>
-                <div className="dashboard">
+                </button>
+                <button className="blue-button border-none!">
                     <Link onClick={() => setLink("Dashboard")} to="/app/dashboard">Dashboard</Link>
-                </div>
-                <div className="form">
+                </button>
+                <button className="blue-button border-none!">
                     <Link onClick={() => setLink("Form")} to="/app/form">Form</Link>
-                </div>
+                </button>
             </div>
             <div className="right flex gap-4 items-center">
-                <div className="notifications">
+                <button className="blue-button border-none!">
                     <Link to="/Notifications">{notificationIcon.element}</Link>
-                </div>
-                <div className="settings">
+                </button>
+                <button className="blue-button border-none!">
                     <Link to="/Settings">{settingsIcon.element}</Link>
-                </div>
+                </button>
             </div>
         </div>
     );
