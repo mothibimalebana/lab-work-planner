@@ -45,8 +45,8 @@ const LandingPage = () => {
                         <Link className="text-white font-normal! flex items-center h-full" to="/app/timetable">View Timetable</Link>
                         <div className="svg bg-inherit">{arrowLogo.element}</div>
                         </button>
-                        <button className="self-center bg-white leading-5 w-52 text-[#337E89] outline outline-solid outline-[#337E89] hover:bg-[rgba(51,126,137,0.09)]">
-                            <Link to="/app/form" className="text-[#337E89]! leading-5! font-normal!">Submit Availability</Link>
+                        <button className="white-green-button">
+                            <Link to="/app/form" className="text-[#337E89]! font-normal!">Submit Availability</Link>
                         </button>
                     </div>
                 </div>
@@ -115,8 +115,8 @@ const LandingPage = () => {
                                 </ul>
                             </div>
                             <div className="button mt-8">
-                                <button className="role-btn leading-5 text-white bg-[#337E89] w-full">
-                                    <Link to="app/form" className="leading-5 text-white bg-[#337E89]">Submit Availability</Link>
+                                <button className="green-button w-full">
+                                    <Link to="app/form" >Submit Availability</Link>
                                 </button>
                             </div>
                         </div>
@@ -138,8 +138,8 @@ const LandingPage = () => {
                                 </ul>
                             </div>
                             <div className="button mt-8">
-                                <button className="role-btn  leading-5! w-full text-white bg-[#021E35]">
-                                    <Link to="/app/dashboard" className="leading-5! font-normal! text-white bg-[#021E35]">Supervisor Dashboard</Link>
+                                <button className="blue-button w-full">
+                                    <Link to="/app/dashboard">Supervisor Dashboard</Link>
                                 </button>
                             </div>
                         </div>
@@ -161,8 +161,8 @@ const LandingPage = () => {
                                 </ul>
                             </div>
                             <div className="button mt-8">
-                                <button className="role-btn leading-5! bg-[#6C6C6C] w-full">
-                                    <Link to="/app/dashboard" className="role-btn leading-5! font-normal! text-white bg-[#6C6C6C]">Admin Dashboard</Link>
+                                <button className="grey-button w-full">
+                                    <Link to="/app/dashboard">Admin Dashboard</Link>
                                 </button>
                             </div>
                         </div>
