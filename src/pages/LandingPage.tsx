@@ -21,7 +21,7 @@ const LandingPage = () => {
                         {universityIcon.element}
                         <p className="flex items-center text-[1.125rem] text-[#021E35]">Lab Work Planner</p>
                     </div>
-                    <button className="right flex gap-2 items-center w-fit!">
+                    <button className="white-button">
                         <Link to="/login" className="flex items-center gap-2">
                             {logOut.element}
                             <p className="text-[#6C6C6C] text-[0.875rem]">Login</p>
@@ -41,11 +41,11 @@ const LandingPage = () => {
                         <p className="w-100 self-center text-[#6C6C6C]">A smart, automated lab scheduling system designed for University Computer Science departments</p>
                     </div>
                     <div className="bottom mt-4 self-center flex items-center gap-7">
-                        <button className="view rounded-sm flex gap-1.5 h-full text-center bg-[#021E35] items-center">
+                        <button className="blue-button">
                         <Link className="text-white font-normal! flex items-center h-full" to="/app/timetable">View Timetable</Link>
-                        <div className="svg bg-[#021E35]">{arrowLogo.element}</div>
+                        <div className="svg bg-inherit">{arrowLogo.element}</div>
                         </button>
-                        <button className="self-center leading-5 w-52 text-[#337E89] outline outline-solid outline-[#337E89]">
+                        <button className="self-center bg-white leading-5 w-52 text-[#337E89] outline outline-solid outline-[#337E89] hover:bg-[rgba(51,126,137,0.09)]">
                             <Link to="/app/form" className="text-[#337E89]! leading-5! font-normal!">Submit Availability</Link>
                         </button>
                     </div>
