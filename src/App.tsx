@@ -13,7 +13,7 @@ function App() {
   return (
     <div className="app">
       <div className="desktop hidden md:flex flex-col overflow-x-hidden">
-        <Navbar setPage={setPage}/>
+        <Navbar setLink={setPage}/>
         <Header page={page}/>
         <Outlet/>
       </div>

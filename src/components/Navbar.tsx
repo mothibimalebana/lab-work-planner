@@ -3,6 +3,9 @@ import { notificationIcon, settingsIcon, universityIcon } from "../assets/svg/SV
 import SVGElement from "./SVGElement";
 import type { navLinkState} from "../../types/navbar"
 
+
+
+
 const Navbar = ({setLink}: navLinkState) => {
     return (
         <div className="nav-bar hidden md:flex justify-between bg-[#021E35] px-[5.12rem] min-h-17">

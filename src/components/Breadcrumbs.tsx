@@ -28,7 +28,7 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
             setMode(newMode)
             
         } else {
-            const newMode: modeValue = "Bookings";
+            const newMode: modeValue = "Lab Assistant";
             setMode(newMode)
         }
     }
@@ -80,14 +80,14 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
                 <div className="Chips">
                     {
                     mode === 'Lab Assistant' ? 
-                    (<div className="present rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                    (<div className="present rounded-sm flex bg-white border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <div className="icon">{greenEllipseIcon.element}</div>
                         <p>Shift</p>
                     </div>
                     ) 
                     :
                     (
-                    <div className="absent rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                    <div className="absent rounded-sm flex bg-white border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
                         <div className="icon">{redEllipseIcon.element}</div>
                         <p>Booked</p>
                     </div>
@@ -95,10 +95,10 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
                     }
                 </div>
                 <div className="mode items-center">
-                    <div onClick={changeMode} className="mode cursor-pointer rounded-sm flex bg-[#F8F8F9] border border-solid border-[#E5E8EB] p-2 items-center gap-0.5">
+                    <button onClick={changeMode} className="white-button text-black">
                         <p>{mode}</p>
                         <div className="dropDown">{dropDownIcon.element}</div>
-                    </div>
+                    </button>
                 </div>
             </div>
         </div>
