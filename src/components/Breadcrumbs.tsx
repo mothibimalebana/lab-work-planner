@@ -10,7 +10,7 @@ interface BreadCrumbsProps {
 const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps) => {
     const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
     
-    
+    // Get date of that particular day
     const today = new Date(); //get today's date
     const date = today.toLocaleDateString(); //convert today's date to a mm/dd/yyyy format
     const splitDate = date.split('/') //get dd, mm, yyyy individually
@@ -19,6 +19,7 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
     const yyyy = date.slice(5);
     const dateString = dd + ' ' + ' ' + mm + ' '  + yyyy;
 
+    //Switch between Lab Assistant view and Bookings
     const changeMode = () => {
         if (mode === 'Lab Assistant') {
             setMode('Bookings');
@@ -28,7 +29,7 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
     }
 
     return (
-        <div className="breadCrumbs flex flex-col px-[5.12rem] h-full w-full">
+        <div className="md:breadCrumbs flex flex-col px-[5.12rem] h-full w-full">
             <div className="top flex justify-between">
                 <div className="date font-bold text-[1.875rem]">{dateString}</div>
                 <div className="btns flex gap-[0.87rem]">
@@ -41,8 +42,8 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
             <div className="month flex justify-evenly py-2 px-4 mt-3 rounded-sm bg-[#FBFBFB] border border-solid border-[#E5E8EB] divide-x-2 divide-solid divide-[#E5E8EB]">
                 {months.map((month) => {
                     return(
-                    <div key={month} className={ mm === month ? `monthCarousel flex items-center h-4 text-[1rem] px-[1.2rem]`: `monthCarousel flex items-center text-[1rem] h-4`}>
-                        <p className={ mm === month ? `text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-4 bg-white` : `text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]`}>{month}</p>
+                    <div key={month} className={ `w-8 flex-1 ${mm === month ? `monthCarousel flex items-center h-4 text-[1rem] px-[1.2rem]`: `monthCarousel flex items-center text-[1rem] h-4`}`}>
+                        <p className={  `flex-1 text-center ${mm === month ? `text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-4 bg-white` : `text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]`}`}>{month}</p>
                     </div>
                     )
                 })}
