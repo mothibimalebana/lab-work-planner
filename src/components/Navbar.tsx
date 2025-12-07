@@ -16,13 +16,13 @@ const Navbar = ({setLink}: navLinkState) => {
                    </Link>
                 </div>
                 <button className="blue-button border-none!">
-                    <Link onClick={() => setLink("Timetable")} to="/app/timetable">Timetable</Link>
+                    <Link onClick={() => setLink("Timetable")} to="/app/timetable" className="hover:border-b border-b-solid border-b-white">Timetable</Link>
                 </button>
                 <button className="blue-button border-none!">
-                    <Link onClick={() => setLink("Dashboard")} to="/app/dashboard">Dashboard</Link>
+                    <Link onClick={() => setLink("Dashboard")} to="/app/dashboard" className="hover:border-b border-b-solid border-b-white">Dashboard</Link>
                 </button>
                 <button className="blue-button border-none!">
-                    <Link onClick={() => setLink("Form")} to="/app/form">Form</Link>
+                    <Link onClick={() => setLink("Form")} to="/app/form" className="hover:border-b border-b-solid border-b-white">Form</Link>
                 </button>
             </div>
             <div className="right flex gap-4 items-center">

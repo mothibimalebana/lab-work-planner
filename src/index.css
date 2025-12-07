@@ -84,15 +84,6 @@
   font-style: normal;
   font-display: swap;
 }
-
-@font-face {
-  font-family: 'DM Sans Italic';
-  src: url('../src/assets/fonts/DMSans-9ptItalic.woff2') format('woff2'),
-      url('../src/assets/fonts/DMSans-9ptItalic.woff') format('woff');
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap;
-}
 }
 
 :root {
