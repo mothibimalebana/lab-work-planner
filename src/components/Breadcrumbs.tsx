@@ -40,7 +40,11 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
             </div>
             <div className="month flex justify-evenly py-2 px-4 mt-3 rounded-sm bg-[#FBFBFB] border border-solid border-[#E5E8EB] divide-x-2 divide-solid divide-[#E5E8EB]">
                 {months.map((month) => {
-                    return mm === month ? <div className="monthCarousel flex items-center h-4 text-[1rem] px-[1.2rem]"><p className="text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-4 bg-white">{month}</p></div> : <div className="monthCarousel flex items-center text-[1rem] h-4"><p className="text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]">{month}</p></div>
+                    return(
+                    <div key={month} className={ mm === month ? `monthCarousel flex items-center h-4 text-[1rem] px-[1.2rem]`: `monthCarousel flex items-center text-[1rem] h-4`}>
+                        <p className={ mm === month ? `text-black shadow-[0_2px_4px_0_rgba(112,112,112,0.15)] h-5.5 rounded-sm  px-4 bg-white` : `text-[#6C6C6C] h-5.5 text-[1rem] px-[1.2rem]`}>{month}</p>
+                    </div>
+                    )
                 })}
             </div>
             <div className="salaryDashboard rounded-sm py-6 px-4 border border-solid border-[#E5E8EB] bg-white flex justify-between mt-7 text-[0.75rem]">
