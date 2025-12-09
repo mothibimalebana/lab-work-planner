@@ -2,54 +2,60 @@
 @tailwind utilities;
 
 @layer components {
+  /* Landing page components */
   /* White Button */
   .white-button {
     @apply inline-flex items-center justify-center
            text-[#6C6C6C] bg-white border border-gray-300
-           px-4 py-2.5 rounded-lg font-normal!
+           px-4 py-2.5 rounded-lg font-normal
            transition-all duration-200 ease-in-out
            hover:bg-[rgba(108,108,108,0.05)] hover:border-gray-400
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
+  
   /* White-Green Button */
   .white-green-button {
     @apply inline-flex items-center justify-center
-           bg-white
-           px-4 py-2.5 rounded-sm font-normal!
+           bg-white px-4 py-2.5 rounded-sm font-normal
            transition-all duration-200 ease-in-out
            text-[#337E89] outline outline-solid outline-[#337E89]
-          hover:bg-[rgba(51,126,137,0.05)]
+           hover:bg-[rgba(51,126,137,0.05)]
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
-
+  
   /* Blue Button */
   .blue-button {
     @apply inline-flex items-center justify-center
-           text-white bg-[#021E35] 
-           px-4 py-2.5 rounded-sm font-normal!
+           text-white bg-[#021E35] px-4 py-2.5 rounded-sm font-normal
            transition-all duration-200 ease-in-out
            hover:bg-[#022A4B]
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
-
+  
   /* Green Button */
   .green-button {
     @apply inline-flex items-center justify-center
-           text-white bg-[#337E89] 
-           px-4 py-2.5 rounded-sm font-normal!
+           text-white bg-[#337E89] px-4 py-2.5 rounded-sm font-normal
            transition-all duration-200 ease-in-out
            hover:bg-[rgba(51,126,137,0.75)]
-
            disabled:opacity-50 disabled:cursor-not-allowed;
   }
+  
   /* Grey Button */
   .grey-button {
     @apply inline-flex items-center justify-center
-           text-white bg-[#6C6C6C] 
-           px-4 py-2.5 rounded-sm font-normal!
+           text-white bg-[#6C6C6C] px-4 py-2.5 rounded-sm font-normal
            transition-all duration-200 ease-in-out
            hover:bg-[rgba(108,108,108,0.75)]
            disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+  
+  /* Dashboard components */
+  /* Card */
+  .dash-card {
+    @apply flex bg-white flex-col justify-between 
+           w-72 h-36 p-6 rounded-lg 
+           border border-solid border-[rgba(0,0,0,0.10)];
   }
 }
 

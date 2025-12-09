@@ -4,8 +4,9 @@ import people from "../assets/svg/people.svg"
 import student from "../assets/svg/student.svg"
 import overview from "../assets/svg/overview.svg"
 import supervisor from "../assets/svg/supervisor.svg"
+import generate from "../assets/svg/Generate.svg"
 import view from "../assets/svg/view.svg"
-
+import type { BreadCarouselProps, dashboardCard } from "../../types/dashboard"
 import type { DashboardMode, DashboardProps, dashboardTimetable, jobTitle, schoolData, schoolDataPopUp } from '../../types/student' 
 import { useState } from "react"
 import ViewEmployee from "./pop-up/Dashboard"
@@ -13,14 +14,18 @@ import ViewEmployee from "./pop-up/Dashboard"
 /**
  * Card component, takes input of assisntant info and returns a card component with active, inactive and total number of employees.
  */
-function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees = 31, totalEmployees = 35} ){
+function Card( {activeAssistants = 3, activeSupervisors = 1, inactive = 31, totalNumber = 35}:dashboardCard ){
     return(
         <div className="cards flex justify-between">
                 {/**Active Lab Assistants */}
-                <div className="card flex bg-white flex-col justify-between  w-70 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                <div className="dash-card" >
                     <div className="top flex justify-between">
-                        <div className="left"><p>Total Lab Assistants</p></div>
-                        <div className="right flex items-center justify-between"><img src={student} alt="grad cap" /></div>
+                        <div className="left">
+                            <p>Total Lab Assistants</p>
+                        </div>
+                        <div className="right flex items-center justify-between">
+                            <img src={student} alt="grad cap" />
+                        </div>
                     </div>
                     <div className="bottom">
                         <div className="top"><h4 className="font-bold text-2xl">{activeAssistants}</h4></div>
@@ -29,7 +34,7 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees =
                 </div>
 
                 {/**Active Lab Supervisors */}
-                <div className="card flex bg-white flex-col justify-between w-70 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                <div className="dash-card">
                     <div className="top flex justify-between">
                         <div className="left"><p>Total Lab Supervisors</p></div>
                         <div className="right flex items-center justify-between"><img src={people} alt="grad cap" /></div>
@@ -41,25 +46,25 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees =
                 </div>
             
                 {/**Inactive Employees */}
-                <div className="card flex bg-white flex-col justify-between w-70 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                <div className="dash-card">
                     <div className="top flex justify-between">
                         <div className="left"><p>Inactive Employees</p></div>
                         <div className="right flex items-center justify-between"><img src={exclamation} alt="grad cap" /></div>
                     </div>
                     <div className="bottom">
-                        <div className="top"><h4 className="font-bold text-2xl">{inactiveEmployees}</h4></div>
+                        <div className="top"><h4 className="font-bold text-2xl">{inactive}</h4></div>
                         <div className="bottom text-[0.75rem]"><p>Missed a shift</p></div>
                     </div>
                 </div>
 
                 {/***Total number of employees*/}
-                <div className="card flex bg-white flex-col justify-between w-70 h-36 p-6 rounded-lg border border-solid border-[rgba(0,0,0,0.10)]">
+                <div className="dash-card">
                     <div className="top flex justify-between">
                         <div className="left"><p>Total number of users</p></div>
                         <div className="right flex items-center justify-between"><img src={up} alt="grad cap" /></div>
                     </div>
                     <div className="bottom">
-                        <div className="top"><h4 className="font-bold text-2xl">{totalEmployees}</h4></div>
+                        <div className="top"><h4 className="font-bold text-2xl">{totalNumber}</h4></div>
                         <div className="bottom text-[0.75rem]"><p>In the system</p></div>
                     </div>
                 </div>
@@ -67,59 +72,18 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactiveEmployees =
     )
 }
 
-function Overview({ data }: dashboardTimetable){
+function Overview(){
     return(
-        <div className="overview font-[Arimo] flex justify-between">
-            <div className="assistants bg-white min-w-[49%] border border-solid text-[0.995rem] rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
-                <div className="header flex justify-between">
-                    <div className="title">
-                        <h5 className="text-[0.99413rem]! text-[#0A0A0A] leading-[0.99413rem]!">Lab Assistant Manegment</h5>
-                        <p className="text-[0.99413rem]! text-[#717182]">View and manage all assistants</p>
-                    </div>
-                </div>
-                <div className="content overflow-y-auto">
-                    <table className="w-full rounded-md  bg-white">
-                        <tbody>
-                            {data.map((eachStudent) => {
-                                return(
-                                    <tr key={eachStudent.fullName} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                                        <td className="w-fit text-left font-normal">
-                                            <h6>{eachStudent.fullName}</h6>
-                                            <p>{eachStudent.modules.length} modules enrolled</p>
-                                        </td>
-                                    </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div className="supervisors bg-white min-w-[49%] border border-solid text-[0.995rem] rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
-                <div className="header flex justify-between">
-                    <div className="title">
-                        <h5 className="text-[0.99413rem]! text-[#0A0A0A] leading-[0.99413rem]!">Lab Supervisor Manegment</h5>
-                        <p className="text-[0.99413rem]! text-[#717182]">View and manage all supervisor</p>
-                    </div>
-                </div>
-                <div className="content overflow-y-auto">
-                    <table className="w-full rounded-md  bg-white">
-                        <tbody>
-                            {data.map((eachStudent) => {
-                                return(
-                                    <tr key={eachStudent.fullName} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                                        <td className="w-fit text-left font-normal">
-                                            <h6>{eachStudent.fullName}</h6>
-                                            <p>{eachStudent.modules.length} modules enrolled</p>
-                                        </td>
-                                    </tr>
-                                    )
-                                })
-                            }
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+        <div className="overview font-[Arimo] flex flex-col justify-between">
+            <img src={generate} alt="Generate AI" width="64rem" height="64rem"/>
+            <h2 className="font-semibold text-[#101828] text-[1.02175rem]">No Schedule generated yet</h2>
+            <p className="w-[24rem] text-[#4A5565]">
+                Click "Generate AI Schedule" to automatically
+                create an optimized work schedule for all lab 
+                assistants based on their availability and 
+                enrolled modules.
+            </p>
+            <button className=""></button>
         </div>
     )
 }
@@ -156,19 +120,7 @@ function DashboardTable(
             {
             mode === 'overview' 
             ?
-            <Overview 
-                mode={mode}
-                data=
-                {
-                    [
-                        {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
-                        {fullName: 'Mot Malebana', modules: ['SCOA031', 'SSTB021'], availability: 35, level: 'undergraduate' },
-                        {fullName: 'Mothibi Mana', modules: ['SCOA0321', 'SSTB231'], availability: 35, level: 'undergraduate' },
-                        {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSB031'], availability: 35, level: 'postgraduate' },
-                        {fullName: 'Moti bana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
-                    ]
-                }
-            />
+            <Overview/>
             :
             <div className="alt bg-white border border-solid rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
                 {employee && viewEmployee && <ViewEmployee fullName={employee.fullName} modules={employee.modules} availability={employee.availability} view={viewEmployee} title="Lab Assistant" setView={setViewEmployee} /> }       
@@ -200,9 +152,9 @@ function DashboardTable(
                                         <th className="text-left text-[0.99413rem]! text-[#0A0A0A] py-3 font-normal rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]" >Name</th>
                                     </tr>
                                     {
-                                    data.map((eachStudent) => {
+                                    data.map((eachStudent, id) => {
                                         return(
-                                            <tr key={eachStudent.fullName} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
+                                            <tr key={id} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                                 <td className="w-full! justify-between items-center flex text-left font-normal text-[0.99413rem]! text-[#0A0A0A]">
                                                     <div className="data">
                                                         <h6>{eachStudent.fullName}</h6>
@@ -225,9 +177,9 @@ function DashboardTable(
                                         <th className="text-left text-[0.99413rem]! text-[#0A0A0A] py-3 font-normal rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]" >Name</th>
                                     </tr>
                                     {
-                                    data.map((eachStudent) => {
+                                    data.map((eachStudent,id) => {
                                         return(
-                                            <tr key={eachStudent.fullName} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
+                                            <tr key={id} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                                 <td className="w-full! justify-between items-center flex text-left font-normal text-[0.99413rem]! text-[#0A0A0A]">
                                                     <div className="data">
                                                         <h6>{eachStudent.fullName}</h6>
@@ -243,7 +195,7 @@ function DashboardTable(
                                             </tr>
                                         )
                                     })}
-                                </tbody>
+                            </tbody>
                         }
                     </table>
                 </div>
@@ -257,7 +209,7 @@ function DashboardTable(
  * 
  * Button carousel to toggle between 'overview', 'lab assistants' and 'lab supervisors'
  */
-function ButtonCarousel( { active = 'overview' , setActive}: {active: any, setActive: any} ){
+function ButtonCarousel( { active = 'overview' , setActive}:BreadCarouselProps ){
 
     //functions to facilitate toggling between different options
     const switchToOverview = () => { setActive("overview") };
@@ -283,8 +235,8 @@ function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmploy
                 <Card
                 activeAssistants={activeAssistants}
                 activeSupervisors={activeSupervisors}
-                inactiveEmployees={inactiveEmployees}
-                totalEmployees={totalEmployees}
+                inactive={inactiveEmployees}
+                totalNumber={totalEmployees}
                 />
             </div>
             <div className="nav">
