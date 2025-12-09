@@ -5,10 +5,11 @@ import phoneError from "./assets/svg/phone-error-svgrepo-com.svg"
 import { useState } from "react";
 
 function App() {  
+  const [assistants, setAssistants] = useState()
   const getPage = window.location.pathname.slice(5);
   const currPage = getPage[0].toUpperCase() + getPage.slice(1);
 
-    const [page, setPage] = useState(currPage);
+  const [page, setPage] = useState(currPage);
 
   return (
     <div className="app">

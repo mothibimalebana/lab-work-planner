@@ -8,6 +8,7 @@ type LabScheduleSlot = {
     assistants: string[] | null;
     lab: number | null;
     role: role;
+    modules: string[];
 };
 
 

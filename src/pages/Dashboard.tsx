@@ -74,7 +74,7 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactive = 31, tota
 
 function Overview(){
     return(
-        <div className="overview font-[Arimo] flex flex-col justify-between">
+        <div className="overview bg-white py-9 px-12 font-[Arimo] flex flex-col items-center gap-3.5 justify-between">
             <img src={generate} alt="Generate AI" width="64rem" height="64rem"/>
             <h2 className="font-semibold text-[#101828] text-[1.02175rem]">No Schedule generated yet</h2>
             <p className="w-[24rem] text-[#4A5565]">
@@ -83,7 +83,7 @@ function Overview(){
                 assistants based on their availability and 
                 enrolled modules.
             </p>
-            <button className=""></button>
+            <button className="green-button w-fit rounded-2xl"><img className="w-[0.90731rem] h-[0.90731rem]" src={generate} alt="genarate ai button"/> <p>Generate Timetable</p></button>
         </div>
     )
 }

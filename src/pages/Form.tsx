@@ -1,8 +1,34 @@
 import { useState } from "react";
-import x from "../assets/svg/x.svg"
+import x from "../assets/svg/x.svg";
 import modules from "../assets/modules";
+import type { FormCarousel, FormMode } from "../../types/form"
+import student from "../assets/svg/student.svg"
+import supervisor from "../assets/svg/supervisor.svg"
+
+/**
+ * 
+ * Button carousel to toggle between 'overview', 'lab assistants' and 'lab supervisors'
+ */
+
+
+
+function ButtonCarousel( { mode = "employee" , setMode}:FormCarousel ){
+
+    //functions to facilitate toggling between different options
+    const switchToAssistant = () => { setMode("employee") };
+    const switchToSupervisor = () => { setMode("modules")};
+
+    return(
+        <div className="buttonCarousel rounded-[0.86988rem]! mt-8 flex items-center justify-between font-[Arimo] text-[#0A0A0A] text-[0.86988rem] w-full bg-[#ECECF0]">
+            <button onClick={switchToAssistant} className={mode === 'employee' ? 'flex justify-center items-center gap-[0.87rem] w-[26.38638rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] h-[1.85969rem]! text-[0.86988rem] text-[#0A0A0A] font-Arimo bg-[#FFFFFF] rounded-[0.86988rem]!' : 'w-[26.38638rem] h-[1.85969rem]! flex justify-center items-center gap-[0.87rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] bg-[#ECECF0] rounded-[0.86988rem]!'}><img src={student} className="h-[0.99319rem]! w-[0.99319rem]!" alt="student page" /><p>Lab Assistants</p></button>
+            <button onClick={switchToSupervisor} className={mode === 'modules' ? 'flex justify-center items-center gap-[0.87rem] w-[26.38638rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] h-[1.85969rem]! text-[0.86988rem] text-[#0A0A0A] font-Arimo bg-[#FFFFFF] rounded-[0.86988rem]!' : 'w-[26.38638rem] h-[1.85969rem]! flex justify-center items-center gap-[0.87rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] bg-[#ECECF0] rounded-[0.86988rem]!'}><img src={supervisor} className="h-[0.99319rem]! w-[0.99319rem]!" alt="" /><p>Lab Supervisor</p></button>
+        </div>
+    )
+}
+
 
 function Form(){
+    const [mode, setMode] = useState<FormMode>("employee")
 
     const schedule = [
     [
@@ -87,6 +113,7 @@ function Form(){
 
     return(
         <div className="registration px-[5.12rem] font-[Arimo] mt-6">
+            <ButtonCarousel mode={mode} setMode={setMode}/>
             <div className="form bg-white px-8 py-5 rounded-[0.73163rem]! border border-solid border-[rgba(0,0,0,0.10)]!">
                 <form method="POST" className="flex flex-col">
                     <div className="head mb-5">
