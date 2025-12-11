@@ -1,34 +1,9 @@
 import { useState } from "react";
 import x from "../assets/svg/x.svg";
-import modules from "../assets/modules";
-import type { FormCarousel, FormMode } from "../../types/form"
-import student from "../assets/svg/student.svg"
-import supervisor from "../assets/svg/supervisor.svg"
-
-/**
- * 
- * Button carousel to toggle between 'overview', 'lab assistants' and 'lab supervisors'
- */
-
-
-
-function ButtonCarousel( { mode = "employee" , setMode}:FormCarousel ){
-
-    //functions to facilitate toggling between different options
-    const switchToAssistant = () => { setMode("employee") };
-    const switchToSupervisor = () => { setMode("modules")};
-
-    return(
-        <div className="buttonCarousel rounded-[0.86988rem]! mt-8 flex items-center justify-between font-[Arimo] text-[#0A0A0A] text-[0.86988rem] w-full bg-[#ECECF0]">
-            <button onClick={switchToAssistant} className={mode === 'employee' ? 'flex justify-center items-center gap-[0.87rem] w-[26.38638rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] h-[1.85969rem]! text-[0.86988rem] text-[#0A0A0A] font-Arimo bg-[#FFFFFF] rounded-[0.86988rem]!' : 'w-[26.38638rem] h-[1.85969rem]! flex justify-center items-center gap-[0.87rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] bg-[#ECECF0] rounded-[0.86988rem]!'}><img src={student} className="h-[0.99319rem]! w-[0.99319rem]!" alt="student page" /><p>Lab Assistants</p></button>
-            <button onClick={switchToSupervisor} className={mode === 'modules' ? 'flex justify-center items-center gap-[0.87rem] w-[26.38638rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] h-[1.85969rem]! text-[0.86988rem] text-[#0A0A0A] font-Arimo bg-[#FFFFFF] rounded-[0.86988rem]!' : 'w-[26.38638rem] h-[1.85969rem]! flex justify-center items-center gap-[0.87rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] bg-[#ECECF0] rounded-[0.86988rem]!'}><img src={supervisor} className="h-[0.99319rem]! w-[0.99319rem]!" alt="" /><p>Lab Supervisor</p></button>
-        </div>
-    )
-}
+// import { mockModules } from "../assets/mockData";
 
 
 function Form(){
-    const [mode, setMode] = useState<FormMode>("employee")
 
     const schedule = [
     [
@@ -95,16 +70,9 @@ function Form(){
         }
     }
 
-    const moduleUpdatesSchedule = (index: number, secondIndex: number) => {
-        const updateList:any = [];
-        modules[index][secondIndex].slot.map((timeDayId, index) => schedule.map((day) => day.map((slot, secondIndex) => {timeDayId === slot.timeDay ? updateList.push([index, secondIndex]) : null }) ));
-        
-        const newTimetable = [...myTimeTable];
-        updateList.map( (change:any) => newTimetable[change[0]][change[1]].class = !newTimetable[change[0]][change[1]].class )
-        console.log(updateList)
-        setMyTimeTable(newTimetable)
-
-    }
+    // const moduleUpdatesSchedule = (index: number, secondIndex: number) => {
+        // console.log(index, secondIndex);
+    // }
 
     const onSubmit = (event: Event) => {
         event.preventDefault();
@@ -113,8 +81,7 @@ function Form(){
 
     return(
         <div className="registration px-[5.12rem] font-[Arimo] mt-6">
-            <ButtonCarousel mode={mode} setMode={setMode}/>
-            <div className="form bg-white px-8 py-5 rounded-[0.73163rem]! border border-solid border-[rgba(0,0,0,0.10)]!">
+\            <div className="form bg-white px-8 py-5 rounded-[0.73163rem]! border border-solid border-[rgba(0,0,0,0.10)]!">
                 <form method="POST" className="flex flex-col">
                     <div className="head mb-5">
                         <h6 className="font-normal">Lab Assistant Form</h6>
@@ -159,22 +126,22 @@ function Form(){
                             <div className="second-year-main mb-6 flex flex-col">
                                 <h2 className="text-[#4A5565] font-normal text-[1.5rem]">2nd Year Main:</h2>
                                 <div className="modules grid grid-cols-3 font-[Arimo]">
-                                    {modules[0].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input onChange={() => moduleUpdatesSchedule(0, module.id)} className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
-                                    {modules[1].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                    {/* {mockModules[0].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input onChange={() => moduleUpdatesSchedule(0, module.id)} className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                    {modules[1].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)}  */}
                                 </div>
                             </div>
                             <div className="second-year-main mb-6 flex flex-col">
                                 <h2 className="text-[#4A5565] font-normal text-[1.5rem]">2nd Year Extended:</h2>
                                 <div className="modules grid grid-cols-3 font-[Arimo]">
-                                    {modules[2].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
-                                    {modules[3].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                    {/* {modules[2].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)}  */}
+                                    {/* {modules[3].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)}  */}
                                 </div>
                             </div>
                             <div className="second-year-main mb-6 flex flex-col">
                                 <h2 className="text-[#4A5565] font-normal text-[1.5rem]">Final year:</h2>
                                 <div className="modules grid grid-cols-3 font-[Arimo]">
-                                    {modules[4].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
-                                    {modules[5].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                    {/* {modules[4].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)}  */}
+                                    {/* {modules[5].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)}  */}
                                 </div>
                             </div>
                         </ul>

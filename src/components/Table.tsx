@@ -1,6 +1,6 @@
 import type {  role, TableProps } from '../../types/timetable'
 
-const Table = ({mode, schedule, bookings }:TableProps) => {
+export const Table = ({mode, schedule, bookings }:TableProps) => {
     const role: role = "assistant"
   /**
    * @params - The Primitive component takes a nested array, with each cell representing a slot on the timetable
@@ -26,16 +26,16 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                         mode === "Shifts"
                         ?
                             schedule[0].map( (shift, id) => (
-                                <td key={id} className={shift.shift ? "mx-auto" : ""}>
-                                    <div className={shift.shift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                <td key={id} className={shift.isClass ? "mx-auto" : ""}>
+                                    <div className={shift.isClass ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { shift.shift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {`Lab ${shift.role}`}
+                                                {`Lab ${shift.shift.role}`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {shift.supervisor}
+                                                {shift.shift.supervisor}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {shift.lab}</p> 
+                                             <p className='text-[0.85163rem]'>Lab: {shift.shift.lab}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -46,16 +46,16 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                             )
                         :
                             bookings[0].map( (slot, id) => (
-                                <td key={id} className={ slot.class ? "mx-auto" : ""}>
-                                    <div className={slot.class ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                <td key={id} className={ slot.isClass ? "mx-auto" : ""}>
+                                    <div className={slot.isClass ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { slot.class ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {slot.module}
+                                                {slot.shift.supervisor}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {slot.lecture}
+                                                {slot.shift.supervisor}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {slot.lab}</p> 
+                                             <p className='text-[0.85163rem]'>Lab: {slot.shift.supervisor}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -76,12 +76,12 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                                     <div className={shift.shift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { shift.shift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {`Lab ${shift.role}`}
+                                                {`Lab ${shift.shift.role}`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {shift.supervisor}
+                                                {shift.shift.supervisor}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {shift.lab}</p> 
+                                             <p className='text-[0.85163rem]'>Lab: {shift.shift.lab}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -122,12 +122,12 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                                     <div className={shift.shift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { shift.shift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {`Lab ${shift.role}`}
+                                                {`Lab ${shift.shift.role}`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {shift.supervisor}
+                                                {shift.shift.supervisor}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {shift.lab}</p> 
+                                             <p className='text-[0.85163rem]'>Lab: {shift.shift.lab}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -168,12 +168,12 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                                     <div className={shift.shift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { shift.shift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {`Lab ${shift.role}`}
+                                                {`Lab ${shift.shift.role}`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {shift.supervisor}
+                                                {shift.shift.supervisor}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {shift.lab}</p> 
+                                             <p className='text-[0.85163rem]'>Lab: {shift.shift.lab}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -214,12 +214,12 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                                     <div className={shift.shift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { shift.shift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {`Lab ${shift.role}`}
+                                                {`Lab ${shift.shift.role}`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {shift.supervisor}
+                                                {shift.shift.supervisor}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {shift.lab}</p> 
+                                             <p className='text-[0.85163rem]'>Lab: {shift.shift.lab}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -255,5 +255,3 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
         </div>
     )
 }
-
-export default Table

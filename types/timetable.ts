@@ -1,14 +1,15 @@
+import type { Schedule } from "../src/assets/mockData";
+
 export type modeValue = "Shifts" | "Bookings";
 export type role = "assistant" | "supervisor";
 
 type LabScheduleSlot = {
     shift: boolean;
-    attended: boolean;
     supervisor: string | null;
     assistants: string[] | null;
     lab: number | null;
     role: role;
-    modules: string[];
+    classesID: number[];
 };
 
 
@@ -40,6 +41,6 @@ export type bookings = [
 
 export type TableProps = {
     mode: modeValue,
-    schedule: schedule,
-    bookings: bookings
+    schedule: Schedule,
+    bookings: Schedule,
 };
