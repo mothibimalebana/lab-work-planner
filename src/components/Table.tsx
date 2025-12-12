@@ -1,6 +1,6 @@
 import type {  role, TableProps } from '../../types/timetable'
 
-export const Table = ({mode, schedule, bookings }:TableProps) => {
+const Table = ({mode, schedule, bookings }:TableProps) => {
     const role: role = "assistant"
   /**
    * @params - The Primitive component takes a nested array, with each cell representing a slot on the timetable
@@ -96,7 +96,7 @@ export const Table = ({mode, schedule, bookings }:TableProps) => {
                                     <div className={slot.class ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { slot.class ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {slot.module}
+                                                {slot.shift.}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
                                                 {slot.lecture}
@@ -255,3 +255,6 @@ export const Table = ({mode, schedule, bookings }:TableProps) => {
         </div>
     )
 }
+
+
+export default Table
