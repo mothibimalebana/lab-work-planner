@@ -244,10 +244,10 @@ const slot6: Slot = {
     slotID: 6,
     isBooked: false,
     isUnavailable: false,
-    isShift: true,
-    isBlocked: true,
-    blockingModules: [mockModules[4]],
-    Shift: mockShift4,
+    isShift: false,
+    isBlocked: false,
+    blockingModules: [],
+    Shift: mockShift3,
     isClass: true,
 };
 
@@ -266,10 +266,10 @@ const slot8: Slot = {
     slotID: 8,
     isBooked: false,
     isUnavailable: false,
-    isShift: true,
-    isBlocked: true,
-    blockingModules: [mockModules[1], mockModules[6]],
-    Shift: mockShift1,
+    isShift: false,
+    isBlocked: false,
+    blockingModules: [],
+    Shift: mockShift3,
     isClass: true,
 };
 
@@ -309,7 +309,7 @@ const slot12: Slot = {
     slotID: 12,
     isBooked: false,
     isUnavailable: false,
-    isShift: true,
+    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift3,
@@ -319,8 +319,8 @@ const slot12: Slot = {
 const slot13: Slot = {
     slotID: 13,
     isBooked: false,
-    isUnavailable: true,
-    isShift: true,
+    isUnavailable: false,
+    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift3,
@@ -383,10 +383,10 @@ const slot18: Slot = {
 };
 
 const slot19: Slot = {
-    slotID: 19,
+    slotID: 2,
     isBooked: false,
     isUnavailable: false,
-    isShift: true,
+    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift3,
@@ -463,7 +463,7 @@ const slot26: Slot = {
     slotID: 26,
     isBooked: false,
     isUnavailable: false,
-    isShift: true,
+    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift3,
@@ -528,8 +528,8 @@ const slot31: Slot = {
 const slot32: Slot = {
     slotID: 32,
     isBooked: false,
-    isUnavailable: true,
-    isShift: true,
+    isUnavailable: false,
+    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift3,
@@ -540,7 +540,7 @@ const slot33: Slot = {
     slotID: 33,
     isBooked: false,
     isUnavailable: false,
-    isShift: true,
+    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift3,
@@ -578,4 +578,18 @@ export const mockSchedule: Schedule = [
     // Week 5
     [slot28, slot29, slot30, slot31, slot32, slot33, slot34]
 ];
+
+
+export const appSchedule: Schedule = [
+    // Week 1 (Monday to Sunday)
+    [slot0, slot1, slot2, slot3, slot4, slot5, slot6],
+    // Week 2
+    [slot7, slot8, slot9, slot10, slot11, slot12, slot13],
+    // Week 3
+    [slot14, slot15, slot16, slot17, slot18, slot19, slot20],
+    // Week 4
+    [slot21, slot22, slot23, slot24, slot25, slot26, slot27],
+    // Week 5
+    [slot28, slot29, slot30, slot31, slot32, slot33, slot34]
+]
 
