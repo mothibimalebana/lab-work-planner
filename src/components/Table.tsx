@@ -26,16 +26,16 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                         mode === "Shifts"
                         ?
                             schedule[0].map( (shift, id) => (
-                                <td key={id} className={shift.isClass ? "mx-auto" : ""}>
-                                    <div className={shift.isClass ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
-                                        { shift.shift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
+                                <td key={id} className={shift.isShift ? "mx-auto" : ""}>
+                                    <div className={shift.isShift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                        { shift.isShift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {`Lab ${shift.shift.role}`}
+                                                {`Lab Supervisor`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {shift.shift.supervisor}
+                                                {`${shift.Shift.supervisor.fullName}`}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {shift.shift.lab}</p> 
+                                             <p className='text-[0.85163rem]'>Lab: {shift.Shift.lab}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -46,16 +46,16 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                             )
                         :
                             bookings[0].map( (slot, id) => (
-                                <td key={id} className={ slot.isClass ? "mx-auto" : ""}>
-                                    <div className={slot.isClass ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
-                                        { slot.class ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
+                                <td key={id} className={ slot.isBooked ? "mx-auto" : ""}>
+                                    <div className={slot.isBooked ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                        { slot.isShift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {slot.shift.supervisor}
+                                                <p>{`${slot.booking?.Module}`}</p>
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {slot.shift.supervisor}
+                                                {`${slot.Shift.supervisor}`}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {slot.shift.supervisor}</p> 
+                                             <p className='text-[0.85163rem]'>{`Lab: ${slot.Shift.supervisor}`}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -67,21 +67,21 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                         }
                     </tr>
                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                        <td className="w-fit bg-[rgba(236,236,240,0.30)]  text-left font-normal">{mode === "Shifts" ? (role === "assistant" ? <p>11:00 <br />14:00</p> : <p>12:00 <br />16:00</p> ) :  <p>09:20 <br />11:00</p>}</td>
-                       {
+                        <td className="w-fit bg-[rgba(236,236,240,0.30)] text-left font-normal">{mode === "Shifts" ? ( role == "assistant" ? <p>08:00 <br />11:00</p> : <p>08:00 <br />12:00</p> ) :  <p>07:30 <br />09:10</p>}</td>
+                        {
                         mode === "Shifts"
                         ?
                             schedule[1].map( (shift, id) => (
-                                <td key={id} className={shift.shift ? "mx-auto" : ""}>
-                                    <div className={shift.shift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
-                                        { shift.shift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
+                                <td key={id} className={shift.isShift ? "mx-auto" : ""}>
+                                    <div className={shift.isShift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                        { shift.isShift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {`Lab ${shift.shift.role}`}
+                                                {`Lab Supervisor`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {shift.shift.supervisor}
+                                                {`${shift.Shift.supervisor}`}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {shift.shift.lab}</p> 
+                                             <p className='text-[0.85163rem]'>Lab: {shift.Shift.lab}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -92,16 +92,16 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                             )
                         :
                             bookings[1].map( (slot, id) => (
-                                <td key={id} className={ slot.class ? "mx-auto" : ""}>
-                                    <div className={slot.class ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
-                                        { slot.class ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
+                                <td key={id} className={ slot.isBooked ? "mx-auto" : ""}>
+                                    <div className={slot.isBooked ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                        { slot.isShift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {slot.shift.}
+                                                <p>{`${slot.booking?.Module}`}</p>
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {slot.lecture}
+                                                {`${slot.Shift.supervisor}`}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {slot.lab}</p> 
+                                             <p className='text-[0.85163rem]'>{`Lab: ${slot.Shift.supervisor}`}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -113,21 +113,21 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                         }
                     </tr>
                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                        <td className="w-fit bg-[rgba(236,236,240,0.30)]  text-left font-normal">{mode === "Shifts" ? (role === "assistant" ? <p>14:00 <br />17:00</p> : <p>16:00 <br />20:00</p> ) :  <p>11:10 <br />12:50</p>}</td>
-                       {
+                        <td className="w-fit bg-[rgba(236,236,240,0.30)] text-left font-normal">{mode === "Shifts" ? ( role == "assistant" ? <p>08:00 <br />11:00</p> : <p>08:00 <br />12:00</p> ) :  <p>07:30 <br />09:10</p>}</td>
+                        {
                         mode === "Shifts"
                         ?
                             schedule[2].map( (shift, id) => (
-                                <td key={id} className={shift.shift ? "mx-auto" : ""}>
-                                    <div className={shift.shift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
-                                        { shift.shift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
+                                <td key={id} className={shift.isShift ? "mx-auto" : ""}>
+                                    <div className={shift.isShift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                        { shift.isShift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {`Lab ${shift.shift.role}`}
+                                                {`Lab Supervisor`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {shift.shift.supervisor}
+                                                {`${shift.Shift.supervisor}`}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {shift.shift.lab}</p> 
+                                             <p className='text-[0.85163rem]'>Lab: {shift.Shift.lab}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -138,16 +138,16 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                             )
                         :
                             bookings[2].map( (slot, id) => (
-                                <td key={id} className={ slot.class ? "mx-auto" : ""}>
-                                    <div className={slot.class ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
-                                        { slot.class ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
+                                <td key={id} className={ slot.isBooked ? "mx-auto" : ""}>
+                                    <div className={slot.isBooked ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                        { slot.isShift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {slot.module}
+                                                <p>{`${slot.booking?.Module}`}</p>
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {slot.lecture}
+                                                {`${slot.Shift.supervisor}`}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {slot.lab}</p> 
+                                             <p className='text-[0.85163rem]'>{`Lab: ${slot.Shift.supervisor}`}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -159,21 +159,21 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                         }
                     </tr>
                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                        <td className="w-fit bg-[rgba(236,236,240,0.30)]  text-left font-normal">{mode === "Shifts" ? (role === "assistant" ? <p>20:00 <br />20:00</p> : <p>00:00 <br />12:00</p> ) :  <p>13:00 <br /> 14:40 </p>}</td>
-                       {
+                        <td className="w-fit bg-[rgba(236,236,240,0.30)] text-left font-normal">{mode === "Shifts" ? ( role == "assistant" ? <p>08:00 <br />11:00</p> : <p>08:00 <br />12:00</p> ) :  <p>07:30 <br />09:10</p>}</td>
+                        {
                         mode === "Shifts"
                         ?
                             schedule[3].map( (shift, id) => (
-                                <td key={id} className={shift.shift ? "mx-auto" : ""}>
-                                    <div className={shift.shift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
-                                        { shift.shift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
+                                <td key={id} className={shift.isShift ? "mx-auto" : ""}>
+                                    <div className={shift.isShift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                        { shift.isShift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {`Lab ${shift.shift.role}`}
+                                                {`Lab Supervisor`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {shift.shift.supervisor}
+                                                {`${shift.Shift.supervisor}`}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {shift.shift.lab}</p> 
+                                             <p className='text-[0.85163rem]'>Lab: {shift.Shift.lab}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -184,16 +184,16 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                             )
                         :
                             bookings[3].map( (slot, id) => (
-                                <td key={id} className={ slot.class ? "mx-auto" : ""}>
-                                    <div className={slot.class ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
-                                        { slot.class ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
+                                <td key={id} className={ slot.isBooked ? "mx-auto" : ""}>
+                                    <div className={slot.isBooked ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                        { slot.isShift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {slot.module}
+                                                <p>{`${slot.booking?.Module}`}</p>
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {slot.lecture}
+                                                {`${slot.Shift.supervisor}`}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {slot.lab}</p> 
+                                             <p className='text-[0.85163rem]'>{`Lab: ${slot.Shift.supervisor}`}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -205,21 +205,21 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                         }
                     </tr>
                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                        <td className="w-fit bg-[rgba(236,236,240,0.30)]  text-left font-normal">{mode === "Shifts" ? (role === "assistant" ? <p>20:00 <br />00:00</p> : "") :  <p> 14:50 <br /> 16:30</p>}</td>
-                       {
+                        <td className="w-fit bg-[rgba(236,236,240,0.30)] text-left font-normal">{mode === "Shifts" ? ( role == "assistant" ? <p>08:00 <br />11:00</p> : <p>08:00 <br />12:00</p> ) :  <p>07:30 <br />09:10</p>}</td>
+                        {
                         mode === "Shifts"
                         ?
                             schedule[4].map( (shift, id) => (
-                                <td key={id} className={shift.shift ? "mx-auto" : ""}>
-                                    <div className={shift.shift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
-                                        { shift.shift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
+                                <td key={id} className={shift.isShift ? "mx-auto" : ""}>
+                                    <div className={shift.isShift ? "working h-full flex  rounded-lg border border-solid border-[#337E89] bg-[rgba(142,184,190,0.20)]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                        { shift.isShift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {`Lab ${shift.shift.role}`}
+                                                {`Lab Supervisor`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {shift.shift.supervisor}
+                                                {`${shift.Shift.supervisor}`}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {shift.shift.lab}</p> 
+                                             <p className='text-[0.85163rem]'>Lab: {shift.Shift.lab}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>
@@ -230,16 +230,16 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                             )
                         :
                             bookings[4].map( (slot, id) => (
-                                <td key={id} className={ slot.class ? "mx-auto" : ""}>
-                                    <div className={slot.class ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
-                                        { slot.class ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
+                                <td key={id} className={ slot.isBooked ? "mx-auto" : ""}>
+                                    <div className={slot.isBooked ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)]text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
+                                        { slot.isShift ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
                                             <h6 className='text-[0.74513rem]'>
-                                                {slot.module}
+                                                <p>{`${slot.booking?.Module}`}</p>
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {slot.lecture}
+                                                {`${slot.Shift.supervisor}`}
                                             </p>
-                                             <p className='text-[0.85163rem]'>Lab: {slot.lab}</p> 
+                                             <p className='text-[0.85163rem]'>{`Lab: ${slot.Shift.supervisor}`}</p> 
                                         </div>
                                         :
                                             <p className='flex justify-start'>Free slot</p>

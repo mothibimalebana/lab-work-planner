@@ -4,566 +4,594 @@ export type role = "assistant" | "supervisor";
 
 export type lab = 1 | 2 | 3
 
-export type shift =  {
-    supervisor: string;
-    assistants: string;
+export type Shift = {
+    supervisor: Students;
+    assistants: Students[];
     attentded?: boolean;
     donated?: boolean;
     role: role;
     lab: lab;
 }
 
-export type module = {
+export type Module = {
     code: string,
     id: number,
-    enrolledStudents: students[]
-    classTimes: slot[]
+    enrolledStudents: Students[]
+    classTimes: Slot[]
 }
 
 export type classBooking = {
     lecturer: string,
     lab: lab,
-    module: module,
+    Module: Module,
+    slot: Slot
 }
 
-export type slot = {
+export type Slot = {
     slotID: number;
     isClass: boolean;
     isBooked: boolean;
     isUnavailable: boolean;
     isShift: boolean;
     isBlocked: boolean;
-    blockingModules: module[];
-    shift?: shift;
-    class?: module[];
-    booking?:classBooking
+    blockingModules: Module[];
+    Shift: Shift;
+    class?: Module[];
+    booking?: classBooking
 }
 
 export type Schedule = [
-    [slot, slot, slot, slot, slot, slot, slot],
-    [slot, slot, slot, slot, slot, slot, slot],
-    [slot, slot, slot, slot, slot, slot, slot],
-    [slot, slot, slot, slot, slot, slot, slot],
-    [slot, slot, slot, slot, slot, slot, slot]
+    [Slot, Slot, Slot, Slot, Slot, Slot, Slot],
+    [Slot, Slot, Slot, Slot, Slot, Slot, Slot],
+    [Slot, Slot, Slot, Slot, Slot, Slot, Slot],
+    [Slot, Slot, Slot, Slot, Slot, Slot, Slot],
+    [Slot, Slot, Slot, Slot, Slot, Slot, Slot]
 ];
 
-export type students = {
-    studentNo: number;
-    fullName: string;
-    role: role;
-    modules: module[];
-    shifts: slot[];
+export type Students = {
+    studentNo: number | null;
+    fullName: string | null;
+    role: role | null;
+    modules: Module[] | null;
+    shifts: Slot[] | null;
 }
 
+// Mock Modules (no dependencies)
+export const mockModules: Module[] = [
+    { code: "SMTA021", id: 0, enrolledStudents: [], classTimes: [] },
+    { code: "SAPA021", id: 1, enrolledStudents: [], classTimes: [] },
+    { code: "SCOA021", id: 2, enrolledStudents: [], classTimes: [] },
+    { code: "SSTA021", id: 3, enrolledStudents: [], classTimes: [] },
+    { code: "SPHA021", id: 4, enrolledStudents: [], classTimes: [] },
+    { code: "SPHB021", id: 5, enrolledStudents: [], classTimes: [] },
+    { code: "SMTA022", id: 6, enrolledStudents: [], classTimes: [] },
+    { code: "SAPA022", id: 7, enrolledStudents: [], classTimes: [] }
+];
 
+// Mock Students (use empty arrays for shifts initially)
+export const mockStudents: Students[] = [
+    {
+        studentNo: 12345678,
+        fullName: "Matlatsi Moholola",
+        role: "supervisor",
+        modules: [mockModules[0], mockModules[1]],
+        shifts: [] // Will be filled after slots are created
+    },
+    {
+        studentNo: 23456789,
+        fullName: "Pitsi Phihlela",
+        role: "assistant",
+        modules: [mockModules[2], mockModules[3]],
+        shifts: [] // Will be filled after slots are created
+    },
+    {
+        studentNo: 34567890,
+        fullName: "Thabiso Kgatla",
+        role: "assistant",
+        modules: [mockModules[4], mockModules[5]],
+        shifts: [] // Will be filled after slots are created
+    },
+    {
+        studentNo: 45678901,
+        fullName: "Themba Sechaba",
+        role: "supervisor",
+        modules: [mockModules[6], mockModules[7]],
+        shifts: [] // Will be filled after slots are created
+    },
+    {
+        studentNo: 56789012,
+        fullName: "John Doe",
+        role: "assistant",
+        modules: [mockModules[0], mockModules[2]],
+        shifts: [] // Will be filled after slots are created
+    },
+    {
+        studentNo: null,
+        fullName: null,
+        shifts: null,
+        role: null,
+        modules: null,
+    }
+];
 
-// Mock Shifts
-const mockShift1: shift = {
-    supervisor: "John Smith",
-    assistants: "Sarah Johnson, Michael Brown",
+// Mock Shifts (now mockStudents is defined)
+export const mockShift1: Shift = {
+    supervisor: mockStudents[0],
+    assistants: [mockStudents[1], mockStudents[2], mockStudents[4]],
     attentded: true,
     donated: false,
     role: "supervisor",
     lab: 1
 };
 
-const mockShift2: shift = {
-    supervisor: "Emily Davis",
-    assistants: "David Wilson",
+export const mockShift2: Shift = {
+    supervisor: mockStudents[3],
+    assistants: [mockStudents[1], mockStudents[2]],
     attentded: false,
     donated: true,
     role: "supervisor",
     lab: 2
 };
 
-const mockShift3: shift = {
-    supervisor: "",
-    assistants: "",
+export const mockShift3: Shift = {
+    supervisor: mockStudents[0],
+    assistants: [mockStudents[1], mockStudents[3], mockStudents[4]],
     role: "assistant",
     lab: 3
 };
 
-const mockShift4: shift = {
-    supervisor: "John Smith",
-    assistants: "Emily Davis",
+export const mockShift4: Shift = {
+    supervisor: mockStudents[3],
+    assistants: [mockStudents[1], mockStudents[2]],
     attentded: true,
     donated: false,
     role: "supervisor",
     lab: 3
 };
 
-const mockShift5: shift = {
-    supervisor: "Sarah Johnson",
-    assistants: "David Wilson, Michael Brown",
+export const mockShift5: Shift = {
+    supervisor: mockStudents[0],
+    assistants: [mockStudents[1], mockStudents[2], mockStudents[4]],
     attentded: false,
     donated: true,
     role: "supervisor",
     lab: 3
 };
 
+export const emptyShift: Shift = {
+    supervisor: mockStudents[5],
+    assistants: [mockStudents[5], mockStudents[5]],
+    attentded: false,
+    donated: false,
+    role: "assistant",
+    lab: 1,
+}
 
-
-
-
-
-// Mock Modules
-export const mockModules: module[] = [
-    { code: "SMTA021", id: 0, enrolledStudents: [], classTimes: []  },
-    { code: "SAPA021", id: 1, enrolledStudents: [], classTimes: []  },
-    { code: "SCOA021", id: 2, enrolledStudents: [], classTimes: []  },
-    { code: "SSTA021", id: 3, enrolledStudents: [], classTimes: []  },
-    { code: "SPHA021", id: 4, enrolledStudents: [], classTimes: []  },
-    { code: "SPHB021", id: 5, enrolledStudents: [], classTimes: []  },
-    { code: "SMTA022", id: 6, enrolledStudents: [], classTimes: []  },
-    { code: "SAPA022", id: 7, enrolledStudents: [], classTimes: []  }
-];
-
-// Individual slots for student data
-const slot0: slot = {
+// Individual slots (now all dependencies are defined)
+const slot0: Slot = {
     slotID: 0,
     isBooked: false,
     isUnavailable: false,
-    isShift: true,
+    isShift: false,
     isBlocked: true,
     blockingModules: [mockModules[0], mockModules[1]],
-    shift: mockShift1,
+    Shift: emptyShift,
     isClass: true,
     class: [mockModules[0], mockModules[1]],
 };
 
-const slot1: slot = {
+const slot1: Slot = {
     slotID: 1,
     isBooked: false,
     isUnavailable: true,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[2]]
 };
 
-const slot2: slot = {
+const slot2: Slot = {
     slotID: 2,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[3], mockModules[4]]
 };
 
-const slot3: slot = {
+const slot3: Slot = {
     slotID: 3,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[2], mockModules[3]],
-    shift: mockShift2,
+    Shift: mockShift2,
     isClass: true,
     class: [mockModules[5]]
 };
 
-const slot4: slot = {
+const slot4: Slot = {
     slotID: 4,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[6], mockModules[7]]
 };
 
-const slot5: slot = {
+const slot5: Slot = {
     slotID: 5,
     isBooked: false,
     isUnavailable: true,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[0], mockModules[2]]
 };
 
-const slot6: slot = {
+const slot6: Slot = {
     slotID: 6,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[4]],
-    shift: mockShift4,
+    Shift: mockShift4,
     isClass: true,
     class: [mockModules[3], mockModules[5], mockModules[7]]
 };
 
-const slot7: slot = {
+const slot7: Slot = {
     slotID: 7,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[0]]
 };
 
-const slot8: slot = {
+const slot8: Slot = {
     slotID: 8,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[1], mockModules[6]],
-    shift: mockShift1,
-    
+    Shift: mockShift1,
     isClass: true,
     class: [mockModules[1], mockModules[2]]
 };
 
-const slot9: slot = {
+const slot9: Slot = {
     slotID: 9,
     isBooked: false,
     isUnavailable: true,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: false
 };
 
-const slot10: slot = {
+const slot10: Slot = {
     slotID: 10,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[3], mockModules[4]]
 };
 
-const slot11: slot = {
+const slot11: Slot = {
     slotID: 11,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[0]],
-    shift: mockShift2,
-    
+    Shift: mockShift2,
     isClass: true,
     class: [mockModules[5]]
 };
 
-const slot12: slot = {
+const slot12: Slot = {
     slotID: 12,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[6]]
 };
 
-const slot13: slot = {
+const slot13: Slot = {
     slotID: 13,
     isBooked: false,
     isUnavailable: true,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[7]]
 };
 
-const slot14: slot = {
+const slot14: Slot = {
     slotID: 14,
     isBooked: false,
     isUnavailable: true,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[0]]
 };
 
-const slot15: slot = {
+const slot15: Slot = {
     slotID: 15,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[1], mockModules[3]]
 };
 
-const slot16: slot = {
+const slot16: Slot = {
     slotID: 16,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[5], mockModules[7]],
-    shift: mockShift4,
-    
+    Shift: mockShift4,
     isClass: true,
     class: [mockModules[2], mockModules[4]]
 };
 
-const slot17: slot = {
+const slot17: Slot = {
     slotID: 17,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[2]],
-    shift: mockShift1,
-    
+    Shift: mockShift1,
     isClass: true,
     class: [mockModules[5]]
 };
 
-const slot18: slot = {
+const slot18: Slot = {
     slotID: 18,
     isBooked: false,
     isUnavailable: true,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[6]]
 };
 
-const slot19: slot = {
+const slot19: Slot = {
     slotID: 19,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[7], mockModules[0]]
 };
 
-const slot20: slot = {
+const slot20: Slot = {
     slotID: 20,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[3], mockModules[4]],
-    shift: mockShift2,
-    
+    Shift: mockShift2,
     isClass: true,
     class: [mockModules[1], mockModules[2]]
 };
 
-const slot21: slot = {
+const slot21: Slot = {
     slotID: 21,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[3]]
 };
 
-const slot22: slot = {
+const slot22: Slot = {
     slotID: 22,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[1]],
-    shift: mockShift5,
-    
+    Shift: mockShift5,
     isClass: true,
     class: [mockModules[4], mockModules[5]]
 };
 
-const slot23: slot = {
+const slot23: Slot = {
     slotID: 23,
     isBooked: false,
     isUnavailable: true,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[6]]
 };
 
-const slot24: slot = {
+const slot24: Slot = {
     slotID: 24,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[7]]
 };
 
-const slot25: slot = {
+const slot25: Slot = {
     slotID: 25,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[6]],
-    shift: mockShift2,
-    
+    Shift: mockShift2,
     isClass: true,
     class: [mockModules[0], mockModules[1]]
 };
 
-const slot26: slot = {
+const slot26: Slot = {
     slotID: 26,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[2]]
 };
 
-const slot27: slot = {
+const slot27: Slot = {
     slotID: 27,
     isBooked: false,
     isUnavailable: true,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[3], mockModules[4]]
 };
 
-const slot28: slot = {
+const slot28: Slot = {
     slotID: 28,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[0], mockModules[5]],
-    shift: mockShift4,
-    
+    Shift: mockShift4,
     isClass: true,
     class: [mockModules[5]]
 };
 
-const slot29: slot = {
+const slot29: Slot = {
     slotID: 29,
     isBooked: false,
     isUnavailable: true,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: false
 };
 
-const slot30: slot = {
+const slot30: Slot = {
     slotID: 30,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[6], mockModules[7]]
 };
 
-const slot31: slot = {
+const slot31: Slot = {
     slotID: 31,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[2], mockModules[3], mockModules[4]],
-    shift: mockShift1,
-    
+    Shift: mockShift1,
     isClass: true,
     class: [mockModules[0], mockModules[2]]
 };
 
-const slot32: slot = {
+const slot32: Slot = {
     slotID: 32,
     isBooked: false,
     isUnavailable: true,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[1]]
 };
 
-const slot33: slot = {
+const slot33: Slot = {
     slotID: 33,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    shift: mockShift3,
-    
+    Shift: mockShift3,
     isClass: true,
     class: [mockModules[3], mockModules[4]]
 };
 
-const slot34: slot = {
+const slot34: Slot = {
     slotID: 34,
     isBooked: false,
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
     blockingModules: [mockModules[1], mockModules[7]],
-    shift: mockShift5,
-    
+    Shift: mockShift5,
     isClass: true,
     class: [mockModules[5], mockModules[6], mockModules[7]]
 };
+
+// Now update student shifts with the actual slots
+mockStudents[0].shifts = [slot0, slot1, slot2];
+mockStudents[1].shifts = [slot3, slot4, slot5];
+mockStudents[2].shifts = [slot6, slot7, slot8];
+mockStudents[3].shifts = [slot9, slot10, slot11];
+mockStudents[4].shifts = [slot12, slot13, slot14];
 
 // Mock Schedule
 export const mockSchedule: Schedule = [
@@ -579,41 +607,6 @@ export const mockSchedule: Schedule = [
     [slot28, slot29, slot30, slot31, slot32, slot33, slot34]
 ];
 
-// Mock Students
-export const mockStudents: students[] = [
-    {
-        studentNo: 12345678,
-        fullName: "Matlatsi Moholola",
-        role: "supervisor",
-        modules: [mockModules[0], mockModules[1]],
-        shifts: [slot0, slot1, slot2]
-    },
-    {
-        studentNo: 23456789,
-        fullName: "Pitsi Phihlela",
-        role: "assistant",
-        modules: [mockModules[2], mockModules[3]],
-        shifts: [slot3, slot4, slot5]
-    },
-    {
-        studentNo: 34567890,
-        fullName: "Thabiso Kgatla",
-        role: "assistant",
-        modules: [mockModules[4], mockModules[5]],
-        shifts: [slot6, slot7, slot8]
-    },
-    {
-        studentNo: 45678901,
-        fullName: "Themba Sechaba",
-        role: "supervisor",
-        modules: [mockModules[6], mockModules[7]],
-        shifts: [slot9, slot10, slot11]
-    },
-    {
-        studentNo: 56789012,
-        fullName: "John Doe",
-        role: "assistant",
-        modules: [mockModules[0], mockModules[2]],
-        shifts: [slot12, slot13, slot14]
-    }
-];
+export const mockBooking: classBooking = {
+
+}
