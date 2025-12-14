@@ -9,6 +9,7 @@ import LandingPage from './pages/LandingPage.tsx';
 import LoginPage from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import Form from './pages/Form.tsx';
+import { appSchedule } from './assets/mockData.tsx';
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "timetable",
-        element: <Timetable/>
+        element: <Timetable schedule={appSchedule}/>
       },
       {
         path: "dashboard",

@@ -2,17 +2,17 @@ import { useState } from "react";
 import BreadCrumbs from "../components/Breadcrumbs"
 import Table from "../components/Table";
 import type { modeValue } from "../../types/timetable";
-import { mockSchedule } from "../assets/mockData";
+import { type Schedule } from "../assets/mockData";
 
 
 
-const Timetable = () => {
+const Timetable = ({schedule}: {schedule: Schedule}) => {
     const [mode, setMode] = useState<modeValue>("Shifts");
 
     return(
         <div className="timetable">
             <BreadCrumbs mode={mode} setMode={setMode}/>
-            <Table mode={mode} schedule={mockSchedule} bookings={mockSchedule} />
+            <Table mode={mode} schedule={schedule} />
         </div>
     )
 }

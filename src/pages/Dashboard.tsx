@@ -10,6 +10,7 @@ import type { BreadCarouselProps, dashboardCard } from "../../types/dashboard"
 import type { DashboardMode, DashboardProps, dashboardTimetable, jobTitle, schoolData, schoolDataPopUp } from '../../types/student' 
 import { useState } from "react"
 import ViewEmployee from "./pop-up/Dashboard"
+import { appSchedule, mockStudents, type Students } from "../assets/mockData"
 
 /**
  * Card component, takes input of assisntant info and returns a card component with active, inactive and total number of employees.
@@ -73,6 +74,27 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactive = 31, tota
 }
 
 function Overview(){
+    
+    const generateSchedule = () => {
+        appSchedule.map( (timeSlot) => 
+        {
+            timeSlot.map( (slot) => {
+                //All the modules which have a class taking place during the slot:
+                const slotModules = slot.blockingModules.map( (blockedModules) => mockStudents.filter((eachStudent) => !eachStudent.modules?.includes(blockedModules)));
+                
+                //An array that will contain all students who are free for a shift
+                const availableStudents: Students[] = [];
+                slotModules.map((eachModule) => eachModule.map((student) => availableStudents.push(student))); //move all students from slotModules into availableStudents
+
+                //following loop removes those who are unavailble for the slot, but appear on availableStudents
+                slot.unavailable.map((eachStudent) => availableStudents.map( (student) => student === eachStudent && availableStudents.splice(availableStudents.indexOf(eachStudent), 1)))
+                console.log('unavailable: ',slot.unavailable, 'free for the shift:', availableStudents,)
+                
+            })
+        }
+        )
+    }
+
     return(
         <div className="overview bg-white py-9 px-12 font-[Arimo] flex flex-col items-center gap-3.5 justify-between">
             <img src={generate} alt="Generate AI" width="64rem" height="64rem"/>
@@ -83,7 +105,7 @@ function Overview(){
                 assistants based on their availability and 
                 enrolled modules.
             </p>
-            <button className="green-button w-fit rounded-2xl"><img className="w-[0.90731rem] h-[0.90731rem]" src={generate} alt="genarate ai button"/> <p>Generate Timetable</p></button>
+            <button onClick={generateSchedule} className="green-button w-fit rounded-2xl"><img className="w-[0.90731rem] h-[0.90731rem]" src={generate} alt="genarate ai button"/> <p>Generate Timetable</p></button>
         </div>
     )
 }

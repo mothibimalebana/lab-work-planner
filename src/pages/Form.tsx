@@ -81,7 +81,7 @@ function Form(){
 
     return(
         <div className="registration px-[5.12rem] font-[Arimo] mt-6">
-\            <div className="form bg-white px-8 py-5 rounded-[0.73163rem]! border border-solid border-[rgba(0,0,0,0.10)]!">
+            <div className="form bg-white px-8 py-5 rounded-[0.73163rem]! border border-solid border-[rgba(0,0,0,0.10)]!">
                 <form method="POST" className="flex flex-col">
                     <div className="head mb-5">
                         <h6 className="font-normal">Lab Assistant Form</h6>

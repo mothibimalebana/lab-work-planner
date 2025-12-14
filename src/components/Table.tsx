@@ -1,6 +1,6 @@
 import type {  role, TableProps } from '../../types/timetable'
 
-const Table = ({mode, schedule, bookings }:TableProps) => {
+const Table = ({mode, schedule }:TableProps) => {
     const role: role = "assistant"
   /**
    * @params - The Primitive component takes a nested array, with each cell representing a slot on the timetable
@@ -45,7 +45,7 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                                 )
                             )
                         :
-                            bookings[0].map( (slot, id) => (
+                            schedule[0].map( (slot, id) => (
                                 <td key={id} className={ slot.isBooked ? "mx-auto" : ""}>
                                     <div className={slot.isBooked ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)] text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { slot.isBooked ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
@@ -91,7 +91,7 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                                 )
                             )
                         :
-                            bookings[1].map( (slot, id) => (
+                            schedule[1].map( (slot, id) => (
                                 <td key={id} className={ slot.isBooked ? "mx-auto" : ""}>
                                     <div className={slot.isBooked ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)] text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { slot.isBooked ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
@@ -137,7 +137,7 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                                 )
                             )
                         :
-                            bookings[2].map( (slot, id) => (
+                            schedule[2].map( (slot, id) => (
                                 <td key={id} className={ slot.isBooked ? "mx-auto" : ""}>
                                     <div className={slot.isBooked ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)] text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { slot.isBooked ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
@@ -183,7 +183,7 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                                 )
                             )
                         :
-                            bookings[3].map( (slot, id) => (
+                            schedule[3].map( (slot, id) => (
                                 <td key={id} className={ slot.isBooked ? "mx-auto" : ""}>
                                     <div className={slot.isBooked ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)] text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { slot.isBooked ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
@@ -229,7 +229,7 @@ const Table = ({mode, schedule, bookings }:TableProps) => {
                                 )
                             )
                         :
-                            bookings[4].map( (slot, id) => (
+                            schedule[4].map( (slot, id) => (
                                 <td key={id} className={ slot.isBooked ? "mx-auto" : ""}>
                                     <div className={slot.isBooked ? "working border-[#EC1717] h-full flex  rounded-lg border border-solid bg-[rgba(236,23,23,0.1)] text-[0.74513rem]" : "freeSlot h-[80%] text-left text-[#99A1AF] rounded-lg border border-solid border-[#E5E8EB] cell p-[0.65rem] text-[0.74513rem]" }>
                                         { slot.isBooked ? <div className="cell p-[0.65rem] leading-[1.0645rem] text-[#B46161] text-[0.74513rem]"> 
