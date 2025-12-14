@@ -79,16 +79,25 @@ function Overview(){
         appSchedule.map( (timeSlot) => 
         {
             timeSlot.map( (slot) => {
+
+                /**Availability Check */
                 //All the modules which have a class taking place during the slot:
                 const slotModules = slot.blockingModules.map( (blockedModules) => mockStudents.filter((eachStudent) => !eachStudent.modules?.includes(blockedModules)));
                 
                 //An array that will contain all students who are free for a shift
-                const availableStudents: Students[] = [];
+                let availableStudents: Students[] = [];
                 slotModules.map((eachModule) => eachModule.map((student) => availableStudents.push(student))); //move all students from slotModules into availableStudents
 
                 //following loop removes those who are unavailble for the slot, but appear on availableStudents
                 slot.unavailable.map((eachStudent) => availableStudents.map( (student) => student === eachStudent && availableStudents.splice(availableStudents.indexOf(eachStudent), 1)))
-                console.log('unavailable: ',slot.unavailable, 'free for the shift:', availableStudents,)
+                const availableStudentsSet = new Set(availableStudents); //remove duplicates from array;
+                availableStudents = [...availableStudentsSet]
+
+                
+                /**Load balancing*/
+                availableStudents.sort((a, b) => a.shifts?.length - b.shifts?.length ) //sort by number of shifts (ascending)
+                console.log('free for the shift:', availableStudents)
+
                 
             })
         }

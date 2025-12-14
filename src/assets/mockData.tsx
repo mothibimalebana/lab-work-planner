@@ -5,11 +5,11 @@ export type role = "assistant" | "supervisor";
 export type lab = 1 | 2 | 3
 
 export type Shift = {
-    supervisor: Students;
-    assistants: Students[];
+    supervisor: Students | Students | [];
+    assistants: Students[] | [];
     attentded?: boolean;
     donated?: boolean;
-    role: role;
+    role?: role;
     lab: lab;
 }
 
@@ -52,7 +52,7 @@ export type Students = {
     fullName: string | null;
     role: role | null;
     modules: Module[] | null;
-    shifts: Slot[] | null;
+    shifts: Slot[] | [];
 }
 
 // Mock Modules (no dependencies)
@@ -590,9 +590,9 @@ const slot34: Slot = {
 // Now update student shifts with the actual slots
 mockStudents[0].shifts = [slot0, slot1, slot2];
 mockStudents[1].shifts = [slot3, slot4, slot5];
-mockStudents[2].shifts = [slot6, slot7, slot8];
-mockStudents[3].shifts = [slot9, slot10, slot11];
-mockStudents[4].shifts = [slot12, slot13, slot14];
+mockStudents[2].shifts = [slot6];
+mockStudents[3].shifts = [slot9, slot10];
+mockStudents[4].shifts = [slot12 ];
 
 // Mock Schedule
 export const mockSchedule: Schedule = [
