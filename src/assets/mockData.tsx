@@ -5,7 +5,7 @@ export type role = "assistant" | "supervisor";
 export type lab = 1 | 2 | 3
 
 export type Shift = {
-    supervisor: Students | Students[] | [];
+    supervisor: Students[];
     assistants: Students[] ;
     attentded?: boolean;
     donated?: boolean;
@@ -15,9 +15,9 @@ export type Shift = {
 
 export type Module = {
     code: string,
-    id: number,
-    enrolledStudents: Students[]
-    classTimes: Slot[]
+    moduleID: number,
+    name: string,
+
 }
 
 export type classBooking = {
@@ -55,16 +55,75 @@ export type Students = {
     shifts: Slot[] | [];
 }
 
-// Mock Modules (no dependencies)
-export const mockModules: Module[] = [
-    { code: "SMTA021", id: 0, enrolledStudents: [], classTimes: [] },
-    { code: "SAPA021", id: 1, enrolledStudents: [], classTimes: [] },
-    { code: "SCOA021", id: 2, enrolledStudents: [], classTimes: [] },
-    { code: "SSTA021", id: 3, enrolledStudents: [], classTimes: [] },
-    { code: "SPHA021", id: 4, enrolledStudents: [], classTimes: [] },
-    { code: "SPHB021", id: 5, enrolledStudents: [], classTimes: [] },
-    { code: "SMTA022", id: 6, enrolledStudents: [], classTimes: [] },
-    { code: "SAPA022", id: 7, enrolledStudents: [], classTimes: [] }
+const modules: Module[][] = [
+    // ===== YEAR 2 - REGULAR PROGRAMME =====
+    // Semester 1
+    [
+        {moduleID: 1, name: "Advanced Calculus", code: "SMTA021"},
+        {moduleID: 2, name: "Ordinary and Partial Differential Equations", code: "SAPA021"},
+        {moduleID: 3, name: "Data Structures", code: "SCOA021"},
+        {moduleID: 4, name: "Theory of Distributions", code: "SSTA021"},
+        {moduleID: 5, name: "Classical Mechanics", code: "SPHA021"},
+        {moduleID: 6, name: "Modern Physics", code: "SPHB021"},
+    ],
+    
+    // Semester 2
+    [
+        {moduleID: 7, name: "Advanced Calculus", code: "SMTA022"},
+        {moduleID: 8, name: "Numerical Analysis", code: "SAPA022"},
+        {moduleID: 9, name: "Computer Architecture", code: "SCOA022"},
+        {moduleID: 10, name: "Statistical Inference", code: "SSTA022"},
+        {moduleID: 11, name: "Electrodynamics and Electronics", code: "SPHA022"},
+        {moduleID: 12, name: "Waves and Physical Optics", code: "SPHB022"},
+    ],
+    
+    // ===== YEAR 2 - EXTENDED PROGRAMME (BSCE01) =====
+    [
+        {moduleID: 13, name: "Computing Concepts And Algorithms", code: "SCSC000"},
+        {moduleID: 14, name: "Health Education And Life Competencies I", code: "SHEL000"},
+        {moduleID: 15, name: "Pre-Calculus And Differential Calculus", code: "SMTH000"},
+        {moduleID: 16, name: "Introduction To General Physics 1A", code: "SPHS000"},
+        {moduleID: 17, name: "Descriptive Statistics", code: "SSTS000"},
+    ],
+    
+    // Year 2 of Extended Programme (equivalent to Year 1 foundation continuation)
+    [
+        {moduleID: 18, name: "Data Organization, AI", code: "SCOB000"},
+        {moduleID: 19, name: "Health Education And Life Competencies II", code: "SHEB000"},
+        {moduleID: 20, name: "Introductory Algebra And Integral Calculus", code: "SMTB000"},
+        {moduleID: 21, name: "Introduction To General Physics 1B", code: "SPHB000"},
+        {moduleID: 22, name: "Introduction To Statistical Inference", code: "SSTB000"},
+    ],
+    
+    
+    // ===== YEAR 3 - REGULAR PROGRAMME =====
+    // Semester 1
+    [
+        {moduleID: 23, name: "Fluid Mechanics", code: "SPA031"},
+        {moduleID: 24, name: "Introduction to Database Systems", code: "SCOA031"},
+        {moduleID: 25, name: "Operating Systems", code: "SCOB031"},
+        {moduleID: 26, name: "Mathematical Analysis I", code: "SMTA031"},
+        {moduleID: 27, name: "Abstract Algebra", code: "SMTB031"},
+        {moduleID: 28, name: "Quantum Mechanics", code: "SPHA031"},
+        {moduleID: 29, name: "Thermodynamics and Statistical Mechanics", code: "SPHB031"},
+        {moduleID: 30, name: "Time Series Analysis", code: "SSTA031"},
+        {moduleID: 31, name: "Applied Linear Regression", code: "SSTB031"},
+    ],
+    
+    // Semester 2
+    [
+        {moduleID: 32, name: "Mathematical Theory of Electromagnetism and Special Theory of Relativity", code: "SAPA032"},
+        {moduleID: 33, name: "Artificial Intelligence", code: "SCOA032"},
+        {moduleID: 34, name: "Computer Networks", code: "SCOB032"},
+        {moduleID: 35, name: "Complex Analysis", code: "SMTA032"},
+        {moduleID: 36, name: "Mathematical Analysis II", code: "SMTB032"},
+        {moduleID: 37, name: "Solid State Physics", code: "SPHA032"},
+        {moduleID: 38, name: "Electrodynamics and Electronics", code: "SPHB032"},
+        {moduleID: 39, name: "Design and Analysis of Experiments", code: "SSTA032"},
+        {moduleID: 40, name: "Multivariate Statistical Methods", code: "SSTB032"},
+        {moduleID: 41, name: "Sampling Theory", code: "SSTC032"},
+    ],
+    
 ];
 
 // Mock Students (use empty arrays for shifts initially)
@@ -73,96 +132,253 @@ export const mockStudents: Students[] = [
         studentNo: 12345678,
         fullName: "Matlatsi Moholola",
         role: "supervisor",
-        modules: [mockModules[0], mockModules[1]],
+        modules: [],
         shifts: [] // Will be filled after slots are created
     },
     {
         studentNo: 23456789,
         fullName: "Pitsi Phihlela",
         role: "assistant",
-        modules: [mockModules[2], mockModules[3]],
+        modules: [],
         shifts: [] // Will be filled after slots are created
     },
     {
         studentNo: 34567890,
         fullName: "Thabiso Kgatla",
         role: "assistant",
-        modules: [mockModules[4], mockModules[5]],
+        modules: [],
         shifts: [] // Will be filled after slots are created
     },
     {
         studentNo: 45678901,
         fullName: "Themba Sechaba",
         role: "supervisor",
-        modules: [mockModules[6], mockModules[7]],
+        modules: [],
         shifts: [] // Will be filled after slots are created
     },
     {
         studentNo: 56789012,
         fullName: "John Doe",
         role: "assistant",
-        modules: [mockModules[0], mockModules[2]],
+        modules: [],
         shifts: [] // Will be filled after slots are created
     },
 ];
 
-// Mock Shifts (now mockStudents is defined)
 export const mockShift1: Shift = {
-    supervisor: mockStudents[0],
-    assistants: [mockStudents[1], mockStudents[2], mockStudents[4]],
-    attentded: true,
-    donated: false,
-    role: "supervisor",
+    supervisor: [],
+    assistants: [],
     lab: 1
 };
 
 export const mockShift2: Shift = {
-    supervisor: mockStudents[3],
-    assistants: [ mockStudents[2] ],
-    attentded: false,
-    donated: true,
-    role: "supervisor",
-    lab: 2
+    supervisor: [],
+    assistants: [],
+    lab: 1
 };
 
 export const mockShift3: Shift = {
-    supervisor: mockStudents[0],
-    assistants: [mockStudents[1], mockStudents[3], mockStudents[4]],
-    role: "assistant",
-    lab: 3
+    supervisor: [],
+    assistants: [],
+    lab: 1
 };
 
 export const mockShift4: Shift = {
-    supervisor: mockStudents[3],
-    assistants: [ mockStudents[2] ],
-    attentded: true,
-    donated: false,
-    role: "supervisor",
-    lab: 3
+    supervisor: [],
+    assistants: [],
+    lab: 1
 };
 
 export const mockShift5: Shift = {
-    supervisor: mockStudents[0],
-    assistants: [ mockStudents[2], mockStudents[4]],
-    attentded: false,
-    donated: true,
-    role: "supervisor",
+    supervisor: [],
+    assistants: [],
+    lab: 1
+};
+
+export const mockShift6: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 1
+};
+
+export const mockShift7: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 1
+};
+
+export const mockShift8: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift9: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift10: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift11: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift12: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift13: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift14: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift15: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift16: Shift = {
+    supervisor: [],
+    assistants: [],
     lab: 3
 };
 
-export const emptyShift: Shift = {
+export const mockShift17: Shift = {
     supervisor: [],
     assistants: [],
-    attentded: false,
-    donated: false,
-    role: "assistant",
-    lab: 1,
-}
+    lab: 3
+};
+
+export const mockShift18: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 3
+};
+
+export const mockShift19: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 3
+};
+
+export const mockShift20: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 3
+};
+
+export const mockShift21: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 3
+};
+
+export const mockShift22: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 3
+};
+
+export const mockShift23: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 1
+};
+
+export const mockShift24: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 1
+};
+
+export const mockShift25: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift26: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift27: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 3
+};
+
+export const mockShift28: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 3
+};
+
+export const mockShift29: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 1
+};
+
+export const mockShift30: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift31: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 3
+};
+
+export const mockShift32: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 1
+};
+
+export const mockShift33: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 2
+};
+
+export const mockShift34: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 3
+};
+
+export const mockShift35: Shift = {
+    supervisor: [],
+    assistants: [],
+    lab: 1
+};
 
 export const mockBooking: classBooking = {
     lecturer: "Mr Mokwele",
     lab: 2,
-    Module: mockModules[2],
+    Module:modules[0][2],
 }
 
 // Individual slots with static unavailable students
@@ -172,11 +388,11 @@ const slot0: Slot = {
     isUnavailable: true,
     isShift: false,
     isBlocked: false,
-    blockingModules: [mockModules[0], mockModules[1]],
-    Shift: emptyShift,
+    blockingModules: [modules[0][0],modules[0][1]],
+    Shift: mockShift1,
     isClass: true,
     booking: mockBooking,
-    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]]
 };
 
 const slot1: Slot = {
@@ -186,9 +402,9 @@ const slot1: Slot = {
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    Shift: emptyShift,
+    Shift: mockShift2,
     isClass: false,
-    unavailable: [mockStudents[3], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[3], mockStudents[4]]
 };
 
 const slot2: Slot = {
@@ -200,7 +416,7 @@ const slot2: Slot = {
     blockingModules: [],
     Shift: mockShift3,
     isClass: true,
-    unavailable: [mockStudents[0]] // Static unavailable students
+    unavailable: [mockStudents[0]]
 };
 
 const slot3: Slot = {
@@ -210,9 +426,9 @@ const slot3: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift4,
     isClass: true,
-    unavailable: [mockStudents[1], mockStudents[2], mockStudents[3]] // Static unavailable students
+    unavailable: [mockStudents[1], mockStudents[2], mockStudents[3]]
 };
 
 const slot4: Slot = {
@@ -222,9 +438,9 @@ const slot4: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift5,
     isClass: true,
-    unavailable: [mockStudents[0], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[4]]
 };
 
 const slot5: Slot = {
@@ -234,9 +450,9 @@ const slot5: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift6,
     isClass: true,
-    unavailable: [mockStudents[2], mockStudents[3]] // Static unavailable students
+    unavailable: [mockStudents[2], mockStudents[3]]
 };
 
 const slot6: Slot = {
@@ -246,9 +462,9 @@ const slot6: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift7,
     isClass: true,
-    unavailable: [mockStudents[1], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[1], mockStudents[4]]
 };
 
 const slot7: Slot = {
@@ -258,9 +474,9 @@ const slot7: Slot = {
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift8,
     isClass: true,
-    unavailable: [mockStudents[0], mockStudents[2], mockStudents[3]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[2], mockStudents[3]]
 };
 
 const slot8: Slot = {
@@ -270,9 +486,9 @@ const slot8: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift9,
     isClass: true,
-    unavailable: [mockStudents[1]] // Static unavailable students
+    unavailable: [mockStudents[1]]
 };
 
 const slot9: Slot = {
@@ -282,9 +498,9 @@ const slot9: Slot = {
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift10,
     isClass: false,
-    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2], mockStudents[3], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2], mockStudents[3], mockStudents[4]]
 };
 
 const slot10: Slot = {
@@ -294,9 +510,9 @@ const slot10: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift11,
     isClass: true,
-    unavailable: [mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[4]]
 };
 
 const slot11: Slot = {
@@ -306,9 +522,9 @@ const slot11: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift12,
     isClass: true,
-    unavailable: [mockStudents[0], mockStudents[3]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[3]]
 };
 
 const slot12: Slot = {
@@ -318,9 +534,9 @@ const slot12: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift13,
     isClass: true,
-    unavailable: [mockStudents[1], mockStudents[2]] // Static unavailable students
+    unavailable: [mockStudents[1], mockStudents[2]]
 };
 
 const slot13: Slot = {
@@ -330,9 +546,9 @@ const slot13: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift14,
     isClass: true,
-    unavailable: [mockStudents[0], mockStudents[1], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[1], mockStudents[4]]
 };
 
 const slot14: Slot = {
@@ -342,9 +558,9 @@ const slot14: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift15,
     isClass: true,
-    unavailable: [mockStudents[2], mockStudents[3]] // Static unavailable students
+    unavailable: [mockStudents[2], mockStudents[3]]
 };
 
 const slot15: Slot = {
@@ -354,9 +570,9 @@ const slot15: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift16,
     isClass: true,
-    unavailable: [mockStudents[0], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[4]]
 };
 
 const slot16: Slot = {
@@ -366,9 +582,9 @@ const slot16: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift17,
     isClass: true,
-    unavailable: [mockStudents[1], mockStudents[3]] // Static unavailable students
+    unavailable: [mockStudents[1], mockStudents[3]]
 };
 
 const slot17: Slot = {
@@ -378,9 +594,9 @@ const slot17: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift18,
     isClass: true,
-    unavailable: [mockStudents[2]] // Static unavailable students
+    unavailable: [mockStudents[2]]
 };
 
 const slot18: Slot = {
@@ -390,9 +606,9 @@ const slot18: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift19,
     isClass: true,
-    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]]
 };
 
 const slot19: Slot = {
@@ -402,9 +618,9 @@ const slot19: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift20,
     isClass: true,
-    unavailable: [mockStudents[3], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[3], mockStudents[4]]
 };
 
 const slot20: Slot = {
@@ -413,10 +629,10 @@ const slot20: Slot = {
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
-    blockingModules: [mockModules[3], mockModules[4]],
-    Shift: mockShift2,
+    blockingModules: [modules[0][3],modules[0][4]],
+    Shift: mockShift21,
     isClass: true,
-    unavailable: [mockStudents[0], mockStudents[2], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[2], mockStudents[4]]
 };
 
 const slot21: Slot = {
@@ -426,9 +642,9 @@ const slot21: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift22,
     isClass: true,
-    unavailable: [mockStudents[1], mockStudents[3]] // Static unavailable students
+    unavailable: [mockStudents[1], mockStudents[3]]
 };
 
 const slot22: Slot = {
@@ -438,9 +654,9 @@ const slot22: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift23,
     isClass: true,
-    unavailable: [mockStudents[0]] // Static unavailable students
+    unavailable: [mockStudents[0]]
 };
 
 const slot23: Slot = {
@@ -450,9 +666,9 @@ const slot23: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift24,
     isClass: true,
-    unavailable: [mockStudents[2], mockStudents[3], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[2], mockStudents[3], mockStudents[4]]
 };
 
 const slot24: Slot = {
@@ -462,9 +678,9 @@ const slot24: Slot = {
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift25,
     isClass: true,
-    unavailable: [mockStudents[0], mockStudents[1]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[1]]
 };
 
 const slot25: Slot = {
@@ -473,10 +689,10 @@ const slot25: Slot = {
     isUnavailable: false,
     isShift: true,
     isBlocked: true,
-    blockingModules: [mockModules[6]],
-    Shift: mockShift2,
+    blockingModules: [modules[0][5]],
+    Shift: mockShift26,
     isClass: true,
-    unavailable: [mockStudents[2], mockStudents[3], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[2], mockStudents[3], mockStudents[4]]
 };
 
 const slot26: Slot = {
@@ -486,9 +702,9 @@ const slot26: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift27,
     isClass: true,
-    unavailable: [mockStudents[0], mockStudents[1]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[1]]
 };
 
 const slot27: Slot = {
@@ -498,9 +714,9 @@ const slot27: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift28,
     isClass: true,
-    unavailable: [mockStudents[2]] // Static unavailable students
+    unavailable: [mockStudents[2]]
 };
 
 const slot28: Slot = {
@@ -510,9 +726,9 @@ const slot28: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift29,
     isClass: true,
-    unavailable: [mockStudents[3], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[3], mockStudents[4]]
 };
 
 const slot29: Slot = {
@@ -522,9 +738,9 @@ const slot29: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift30,
     isClass: true,
-    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]]
 };
 
 const slot30: Slot = {
@@ -534,9 +750,9 @@ const slot30: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift31,
     isClass: true,
-    unavailable: [mockStudents[3]] // Static unavailable students
+    unavailable: [mockStudents[3]]
 };
 
 const slot31: Slot = {
@@ -546,9 +762,9 @@ const slot31: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift32,
     isClass: true,
-    unavailable: [mockStudents[0], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[0], mockStudents[4]]
 };
 
 const slot32: Slot = {
@@ -558,9 +774,9 @@ const slot32: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift33,
     isClass: true,
-    unavailable: [mockStudents[1], mockStudents[2], mockStudents[3]] // Static unavailable students
+    unavailable: [mockStudents[1], mockStudents[2], mockStudents[3]]
 };
 
 const slot33: Slot = {
@@ -570,9 +786,9 @@ const slot33: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift34,
     isClass: true,
-    unavailable: [mockStudents[0]] // Static unavailable students
+    unavailable: [mockStudents[0]]
 };
 
 const slot34: Slot = {
@@ -582,17 +798,11 @@ const slot34: Slot = {
     isShift: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: mockShift35,
     isClass: true,
-    unavailable: [mockStudents[1], mockStudents[2], mockStudents[3], mockStudents[4]] // Static unavailable students
+    unavailable: [mockStudents[1], mockStudents[2], mockStudents[3], mockStudents[4]]
 };
 
-// Now update student shifts with the actual slots
-mockStudents[0].shifts = [slot0, slot1, slot2];
-mockStudents[1].shifts = [slot3, slot4, slot5];
-mockStudents[2].shifts = [slot6];
-mockStudents[3].shifts = [slot9, slot10];
-mockStudents[4].shifts = [slot12 ];
 
 // Mock Schedule
 export const mockSchedule: Schedule = [
