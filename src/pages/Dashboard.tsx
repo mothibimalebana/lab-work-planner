@@ -77,19 +77,25 @@ function Overview(){
     // const [warning, setWarning] = useState<{warningId: number, warningMessage: string}[]>([])
     
     const generateSchedule = () => {
-        const warning = [];
+        const warning: any[] = [];
+        
 
         appSchedule.map( (timeSlot) => 
         {
             timeSlot.map( (slot) => {
+                console.log(`<------------------------------------slot ${slot.slotID} details------------------------------------->`)
 
                 /**Availability Check */
                 //All the modules which have a class taking place during the slot:
-                const slotModules = slot.blockingModules.map( (blockedModules) => mockStudents.filter((eachStudent) => !eachStudent.modules?.includes(blockedModules)));
+                const studentsAttendingClass = slot.blockingModules.map( (blockedModules) => mockStudents.filter((eachStudent) => !eachStudent.modules?.includes(blockedModules)));
                 
                 //An array that contains all students who are free for a shift during the slot:
                 let availableStudents: Students[] = [];
-                slotModules.map((eachModule) => eachModule.map((student) => availableStudents.push(student))); //move all students from slotModules into availableStudents
+                studentsAttendingClass.map((eachModule) => eachModule.map((student) => availableStudents.push(student))); //move all students from slotModules into availableStudents
+                console.log(`students who marked this slot as unavailable:`, slot.unavailable);
+                console.log(`students lab assistants working`, slot.Shift.assistants);
+                console.log(`students lab supervisors working`, slot.Shift.supervisor);
+
 
                 //following loop removes those who are unavailble for the slot, but appear on availableStudents
                 slot.unavailable.map((eachStudent) => availableStudents.map( (student) => student === eachStudent && availableStudents.splice(availableStudents.indexOf(eachStudent), 1)))
@@ -101,33 +107,54 @@ function Overview(){
                 availableStudents = availableStudents.sort((a, b) => a.shifts?.length - b.shifts?.length ); //sort by number of shifts (ascending)
 
                 /**Assignment */
+                const availableLabAssistants = availableStudents.filter( (student) => student.role === "assistant");
+                const availableSupervisors = availableStudents.filter( (student) => student.role === "supervisor");
+                console.log(`available lab assistants:`, availableLabAssistants);
+                console.log(`available lab supervisors:`, availableSupervisors);
 
                 //assistants
-                if(slot.Shift.assistants.length < 3 && availableStudents.length > 0){
-                    // console.log(`slots available: ${slot.Shift.assistants.length}`, 'more assistants required:');
+                if(slot.Shift.assistants.length < 3 && availableLabAssistants.length > 0){
+                    console.log(`free assistant slots:`, 3 - slot.Shift.assistants.length);
+                    console.log(`available lab assistants`, availableLabAssistants);
 
-                    let numFreeSlots = 3 - slot.Shift.assistants.length;
-                    while(numFreeSlots > 0){
-                        console.log(`slotId: ${slot.slotID}`, slot.Shift.assistants, `available assistants: ${availableStudents.length}`);
-
-                        if(availableStudents[0].role === "assistant"){
-                            slot.Shift.assistants.push(availableStudents[0]);
-                            availableStudents.splice(0, 1);
+                    while( availableLabAssistants.length > 0){
+                        if(availableLabAssistants[0].role === "assistant"){
+                            slot.Shift.assistants.push(availableLabAssistants[0]);
+                            availableLabAssistants.pop();
                         } 
                         else {
-                            console.log(`Not enough assistants in slotID : ${slot.slotID}`);
-                            warning.push({slotID: slot.slotID, msg: "not enough assistants"})
+                            warning.push({slotID: slot.slotID, msg:`not enough assistants in ${slot.slotID}`});
                         }
-                        numFreeSlots--;
                     }
                 } else{
-                    console.log(`assistant slots available: ${3 - slot.Shift.assistants.length}`, `assistants available: ${availableStudents.length}`);
-                    return availableStudents.length <= 0 ? warning.push({slotID: slot.slotID, msg: "0 assistants available"}) : null
+                    if(availableLabAssistants.length <= 0){
+                        warning.push({slotID: slot.slotID, msg: "0 assistants available"});
+                    }
+                }
+
+                //supervisor
+                if(slot.Shift.supervisor.length < 1 && availableSupervisors.length > 0){
+                    console.log(`free supervisor slots:`, 1 - slot.Shift.supervisor.length);
+                    console.log(`available lab supervisor`, availableSupervisors);
+
+                    while( availableSupervisors.length > 0){
+                        if(availableSupervisors[0].role === "supervisor"){
+                            slot.Shift.supervisor.push(availableSupervisors[0]);
+                            availableSupervisors.pop();
+                        } 
+                        else {
+                            warning.push({slotID: slot.slotID, msg:`not enough supervisors in ${slot.slotID}`});
+                        }
+                    }
+                } else{
+                    if(availableSupervisors.length <= 0){
+                        warning.push({slotID: slot.slotID, msg: "0 supervisors available"});
+                    }
                 }
             })
-
         }
         )
+        console.log(`warning: `, warning)
     }
 
     return(

@@ -5,7 +5,7 @@ export type role = "assistant" | "supervisor";
 export type lab = 1 | 2 | 3
 
 export type Shift = {
-    supervisor: Students | Students[] | [];
+    supervisor: Students[];
     assistants: Students[] ;
     attentded?: boolean;
     donated?: boolean;
@@ -108,7 +108,7 @@ export const mockStudents: Students[] = [
 
 // Mock Shifts (now mockStudents is defined)
 export const mockShift1: Shift = {
-    supervisor: mockStudents[0],
+    supervisor: [mockStudents[0]],
     assistants: [mockStudents[1], mockStudents[2], mockStudents[4]],
     attentded: true,
     donated: false,
@@ -117,7 +117,7 @@ export const mockShift1: Shift = {
 };
 
 export const mockShift2: Shift = {
-    supervisor: mockStudents[3],
+    supervisor: [mockStudents[3]],
     assistants: [ mockStudents[2] ],
     attentded: false,
     donated: true,
@@ -126,14 +126,14 @@ export const mockShift2: Shift = {
 };
 
 export const mockShift3: Shift = {
-    supervisor: mockStudents[0],
+    supervisor: [mockStudents[0]],
     assistants: [mockStudents[1], mockStudents[3], mockStudents[4]],
     role: "assistant",
     lab: 3
 };
 
 export const mockShift4: Shift = {
-    supervisor: mockStudents[3],
+    supervisor: [mockStudents[3]],
     assistants: [ mockStudents[2] ],
     attentded: true,
     donated: false,
@@ -142,7 +142,7 @@ export const mockShift4: Shift = {
 };
 
 export const mockShift5: Shift = {
-    supervisor: mockStudents[0],
+    supervisor: [mockStudents[0]],
     assistants: [ mockStudents[2], mockStudents[4]],
     attentded: false,
     donated: true,
