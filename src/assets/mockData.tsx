@@ -5,8 +5,8 @@ export type role = "assistant" | "supervisor";
 export type lab = 1 | 2 | 3
 
 export type Shift = {
-    supervisor: Students | Students | [];
-    assistants: Students[] | [];
+    supervisor: Students | Students[] | [];
+    assistants: Students[] ;
     attentded?: boolean;
     donated?: boolean;
     role?: role;
@@ -118,7 +118,7 @@ export const mockShift1: Shift = {
 
 export const mockShift2: Shift = {
     supervisor: mockStudents[3],
-    assistants: [mockStudents[1], mockStudents[2]],
+    assistants: [ mockStudents[2] ],
     attentded: false,
     donated: true,
     role: "supervisor",
@@ -134,7 +134,7 @@ export const mockShift3: Shift = {
 
 export const mockShift4: Shift = {
     supervisor: mockStudents[3],
-    assistants: [mockStudents[1], mockStudents[2]],
+    assistants: [ mockStudents[2] ],
     attentded: true,
     donated: false,
     role: "supervisor",
@@ -143,7 +143,7 @@ export const mockShift4: Shift = {
 
 export const mockShift5: Shift = {
     supervisor: mockStudents[0],
-    assistants: [mockStudents[1], mockStudents[2], mockStudents[4]],
+    assistants: [ mockStudents[2], mockStudents[4]],
     attentded: false,
     donated: true,
     role: "supervisor",
@@ -151,8 +151,8 @@ export const mockShift5: Shift = {
 };
 
 export const emptyShift: Shift = {
-    supervisor: mockStudents[5],
-    assistants: [mockStudents[5], mockStudents[5]],
+    supervisor: [],
+    assistants: [],
     attentded: false,
     donated: false,
     role: "assistant",
@@ -186,7 +186,7 @@ const slot1: Slot = {
     isShift: true,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: emptyShift,
     isClass: false,
     unavailable: [mockStudents[3], mockStudents[4]] // Static unavailable students
 };

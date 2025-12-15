@@ -33,7 +33,7 @@ const Table = ({mode, schedule }:TableProps) => {
                                                 {`Lab Supervisor`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {`${shift.Shift.supervisor.fullName}`}
+                                                {`${shift.Shift.supervisor}`}
                                             </p>
                                              <p className='text-[0.85163rem]'>Lab: {shift.Shift.lab}</p> 
                                         </div>
@@ -79,7 +79,7 @@ const Table = ({mode, schedule }:TableProps) => {
                                                 {`Lab Supervisor`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {`${shift.Shift.supervisor.fullName}`}
+                                                {`${shift.Shift.supervisor}`}
                                             </p>
                                              <p className='text-[0.85163rem]'>Lab: {shift.Shift.lab}</p> 
                                         </div>
@@ -125,7 +125,7 @@ const Table = ({mode, schedule }:TableProps) => {
                                                 {`Lab Supervisor`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {`${shift.Shift.supervisor.fullName}`}
+                                                {`${shift.Shift.supervisor}`}
                                             </p>
                                              <p className='text-[0.85163rem]'>Lab: {shift.Shift.lab}</p> 
                                         </div>
@@ -171,7 +171,7 @@ const Table = ({mode, schedule }:TableProps) => {
                                                 {`Lab Supervisor`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {`${shift.Shift.supervisor.fullName}`}
+                                                {`${shift.Shift.supervisor}`}
                                             </p>
                                              <p className='text-[0.85163rem]'>Lab: {shift.Shift.lab}</p> 
                                         </div>
@@ -217,7 +217,7 @@ const Table = ({mode, schedule }:TableProps) => {
                                                 {`Lab Supervisor`}
                                             </h6>
                                              <p className='text-[0.85163remrem]'>
-                                                {`${shift.Shift.supervisor.fullName}`}
+                                                {`${shift.Shift.supervisor}`}
                                             </p>
                                              <p className='text-[0.85163rem]'>Lab: {shift.Shift.lab}</p> 
                                         </div>
