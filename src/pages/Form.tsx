@@ -1,6 +1,7 @@
 import { useState } from "react";
-import x from "../assets/svg/x.svg"
-import modules from "../assets/modules";
+import x from "../assets/svg/x.svg";
+// import { mockModules } from "../assets/mockData";
+
 
 function Form(){
 
@@ -69,16 +70,9 @@ function Form(){
         }
     }
 
-    const moduleUpdatesSchedule = (index: number, secondIndex: number) => {
-        const updateList:any = [];
-        modules[index][secondIndex].slot.map((timeDayId, index) => schedule.map((day) => day.map((slot, secondIndex) => {timeDayId === slot.timeDay ? updateList.push([index, secondIndex]) : null }) ));
-        
-        const newTimetable = [...myTimeTable];
-        updateList.map( (change:any) => newTimetable[change[0]][change[1]].class = !newTimetable[change[0]][change[1]].class )
-        console.log(updateList)
-        setMyTimeTable(newTimetable)
-
-    }
+    // const moduleUpdatesSchedule = (index: number, secondIndex: number) => {
+        // console.log(index, secondIndex);
+    // }
 
     const onSubmit = (event: Event) => {
         event.preventDefault();
@@ -132,22 +126,22 @@ function Form(){
                             <div className="second-year-main mb-6 flex flex-col">
                                 <h2 className="text-[#4A5565] font-normal text-[1.5rem]">2nd Year Main:</h2>
                                 <div className="modules grid grid-cols-3 font-[Arimo]">
-                                    {modules[0].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input onChange={() => moduleUpdatesSchedule(0, module.id)} className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
-                                    {modules[1].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                    {/* {mockModules[0].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input onChange={() => moduleUpdatesSchedule(0, module.id)} className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                    {modules[1].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)}  */}
                                 </div>
                             </div>
                             <div className="second-year-main mb-6 flex flex-col">
                                 <h2 className="text-[#4A5565] font-normal text-[1.5rem]">2nd Year Extended:</h2>
                                 <div className="modules grid grid-cols-3 font-[Arimo]">
-                                    {modules[2].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
-                                    {modules[3].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                    {/* {modules[2].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)}  */}
+                                    {/* {modules[3].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)}  */}
                                 </div>
                             </div>
                             <div className="second-year-main mb-6 flex flex-col">
                                 <h2 className="text-[#4A5565] font-normal text-[1.5rem]">Final year:</h2>
                                 <div className="modules grid grid-cols-3 font-[Arimo]">
-                                    {modules[4].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
-                                    {modules[5].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)} 
+                                    {/* {modules[4].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)}  */}
+                                    {/* {modules[5].map((module) => <li key={module.code} className="flex gap-2 text-[#0A0A0A]"><input className="px-3 py-1" type="checkbox" name={module.code}/>{module.code}</li>)}  */}
                                 </div>
                             </div>
                         </ul>
