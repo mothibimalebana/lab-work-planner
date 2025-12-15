@@ -92,9 +92,6 @@ function Overview(){
                 //An array that contains all students who are free for a shift during the slot:
                 let availableStudents: Students[] = [];
                 studentsAttendingClass.map((eachModule) => eachModule.map((student) => availableStudents.push(student))); //move all students from slotModules into availableStudents
-                console.log(`students who marked this slot as unavailable:`, slot.unavailable);
-                console.log(`students lab assistants working`, slot.Shift.assistants);
-                console.log(`students lab supervisors working`, slot.Shift.supervisor);
 
 
                 //following loop removes those who are unavailble for the slot, but appear on availableStudents
@@ -109,14 +106,18 @@ function Overview(){
                 /**Assignment */
                 const availableLabAssistants = availableStudents.filter( (student) => student.role === "assistant");
                 const availableSupervisors = availableStudents.filter( (student) => student.role === "supervisor");
-                console.log(`available lab assistants:`, availableLabAssistants);
-                console.log(`available lab supervisors:`, availableSupervisors);
+                console.log(` >>>>>>>>>>>>>>>>>>>>>>>>>slot ${slot.slotID} before AI scheduling`)
+                console.log(`lab assistants available to work shift:`, availableLabAssistants.length);
+                console.log(`lab supervisors available to work shift:`, availableSupervisors.length);
+                console.log(`working lab assistants: `, slot.Shift.assistants.length);
+                console.log(`working lab supervisor: `, slot.Shift.supervisor.length);
+                console.log(`free lab assistant slots: `, 3 - slot.Shift.assistants.length);
+                console.log(`free lab supervisor slots: `, 1 - slot.Shift.supervisor.length);
+
+
 
                 //assistants
                 if(slot.Shift.assistants.length < 3 && availableLabAssistants.length > 0){
-                    console.log(`free assistant slots:`, 3 - slot.Shift.assistants.length);
-                    console.log(`available lab assistants`, availableLabAssistants);
-
                     while( availableLabAssistants.length > 0){
                         if(availableLabAssistants[0].role === "assistant"){
                             slot.Shift.assistants.push(availableLabAssistants[0]);
@@ -134,9 +135,6 @@ function Overview(){
 
                 //supervisor
                 if(slot.Shift.supervisor.length < 1 && availableSupervisors.length > 0){
-                    console.log(`free supervisor slots:`, 1 - slot.Shift.supervisor.length);
-                    console.log(`available lab supervisor`, availableSupervisors);
-
                     while( availableSupervisors.length > 0){
                         if(availableSupervisors[0].role === "supervisor"){
                             slot.Shift.supervisor.push(availableSupervisors[0]);
@@ -151,6 +149,13 @@ function Overview(){
                         warning.push({slotID: slot.slotID, msg: "0 supervisors available"});
                     }
                 }
+                console.log(` >>>>>>>>>>>>>>>>>>>>>>>>>slot ${slot.slotID} after AI scheduling`)
+                console.log(`lab assistants available to work shift:`, availableLabAssistants.length);
+                console.log(`lab supervisors available to work shift:`, availableSupervisors.length);
+                console.log(`working lab assistants: `, slot.Shift.assistants.length);
+                console.log(`working lab supervisor: `, slot.Shift.supervisor.length);
+                console.log(`free lab assistant slots: `, 3 - slot.Shift.assistants.length);
+                console.log(`free lab supervisor slots: `, 1 - slot.Shift.supervisor.length);
             })
         }
         )
