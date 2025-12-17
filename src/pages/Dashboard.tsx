@@ -7,19 +7,23 @@ import supervisor from "../assets/svg/supervisor.svg"
 import generate from "../assets/svg/Generate.svg"
 import view from "../assets/svg/view.svg"
 import type { BreadCarouselProps, dashboardCard } from "../../types/dashboard"
-import type { DashboardMode, DashboardProps, dashboardTimetable, jobTitle, schoolData, schoolDataPopUp } from '../../types/student' 
+import type { DashboardMode, DashboardProps, dashboardTimetable } from '../../types/student' 
 import { useState } from "react"
 import ViewEmployee from "./pop-up/Dashboard"
 import { generateSchedule } from "../../algorithms/GenerateSchedule"
-import { appSchedule, mockStudents } from "../assets/mockData"
+import { appSchedule, mockStudents, type Students } from "../assets/mockData"
 
 /**
  * Card component, takes input of assisntant info and returns a card component with active, inactive and total number of employees.
  */
-function Card( {activeAssistants = mockStudents.length, activeSupervisors = mockStudents.filter((eachStudent) => eachStudent.role === "supervisor").length, inactive = 1, totalNumber = mockStudents.length}:dashboardCard ){
+function Card( {activeAssistants = 3, activeSupervisors = 1, inactive = 31, totalNumber = 35}:dashboardCard ){
+    activeAssistants = mockStudents.filter((eachStudent) => eachStudent.role === "assistant").length;
+    activeSupervisors = mockStudents.filter((eachStudent) => eachStudent.role === "supervisor").length;
+    totalNumber = mockStudents.map((eachStudent) => eachStudent).length
+    inactive = totalNumber - (activeAssistants + activeSupervisors);
     return(
         <div className="cards flex justify-between">
-                {/**Active Lab Assistants */}
+                {/**Active Lab Assistants Card */}
                 <div className="dash-card" >
                     <div className="top flex justify-between">
                         <div className="left">
@@ -35,7 +39,7 @@ function Card( {activeAssistants = mockStudents.length, activeSupervisors = mock
                     </div>
                 </div>
 
-                {/**Active Lab Supervisors */}
+                {/**Active Lab Supervisors Card*/}
                 <div className="dash-card">
                     <div className="top flex justify-between">
                         <div className="left"><p>Total Lab Supervisors</p></div>
@@ -47,7 +51,7 @@ function Card( {activeAssistants = mockStudents.length, activeSupervisors = mock
                     </div>
                 </div>
             
-                {/**Inactive Employees */}
+                {/**Inactive Employees Card */}
                 <div className="dash-card">
                     <div className="top flex justify-between">
                         <div className="left"><p>Inactive Employees</p></div>
@@ -59,7 +63,7 @@ function Card( {activeAssistants = mockStudents.length, activeSupervisors = mock
                     </div>
                 </div>
 
-                {/***Total number of employees*/}
+                {/***Total number of employees Card*/}
                 <div className="dash-card">
                     <div className="top flex justify-between">
                         <div className="left"><p>Total number of users</p></div>
@@ -97,15 +101,15 @@ function Overview(){
 }
 
 function DashboardTable( { mode = 'overview', data = mockStudents }:dashboardTimetable ){
-        const [employee, setEmployee] = useState<schoolDataPopUp | null>(null);
-        const [viewEmployee, setViewEmployee] = useState<boolean>(false);
+    //student to be displayed when 'view' is clicked
+    const [employee, setEmployee] = useState<Students | "">();
+    const [viewEmployee, setViewEmployee] = useState<boolean>(false);
 
-        //function to pop up modal
-        function onClick(employee: schoolData, view: boolean, title: jobTitle){
-            setViewEmployee(true);
-            const employeeData = {...employee, view, title}
-            setEmployee(employeeData)
-        }
+    //function to pop up student
+    const getEmployeeDetails = ( student: Students ) => {
+        setEmployee(student);
+        setViewEmployee(true);        
+    }
 
     return(
         
@@ -116,7 +120,11 @@ function DashboardTable( { mode = 'overview', data = mockStudents }:dashboardTim
             <Overview/>
             :
             <div className="alt bg-white border border-solid rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
-                {employee && viewEmployee && <ViewEmployee fullName={employee.fullName} modules={employee.modules} availability={employee.availability} view={viewEmployee} title="Lab Assistant" setView={setViewEmployee} /> }       
+                {/* Displays the clicked student */}
+                {employee && viewEmployee && <ViewEmployee student={employee} view={viewEmployee} setView={setViewEmployee} setEmployee={setEmployee}/> }       
+    
+    
+    
                 <div className="header flex justify-between">
                     <div className="title">
                         <h5 className="text-[0.99413rem]! text-[#0A0A0A] leading-[0.99413rem]!">
@@ -138,57 +146,30 @@ function DashboardTable( { mode = 'overview', data = mockStudents }:dashboardTim
                 <div className="content overflow-y-auto w-full">
                     <table className="w-full rounded-md mt-3 bg-white">
                         { 
-                        mode === 'assistants' 
-                            ?
-                                <tbody>
-                                    <tr>
-                                        <th className="text-left text-[0.99413rem]! text-[#0A0A0A] py-3 font-normal rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]" >Name</th>
+                        <tbody>
+                            <tr>
+                                <th className="text-left text-[0.99413rem]! text-[#0A0A0A] py-3 font-normal rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]" >Name</th>
+                            </tr>
+                            {
+                            data.filter((eachStudent) => mode === "assistants" ? eachStudent.role === "assistant" : eachStudent.role === "supervisor").map((eachStudent, id) => {
+                                return(
+                                    <tr key={id} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
+                                        <td className="w-full! justify-between items-center flex text-left font-normal text-[0.99413rem]! text-[#0A0A0A]">
+                                            <div className="data">
+                                                <h6>{eachStudent.fullName}</h6>
+                                                <p>{eachStudent.modules?.length} modules enrolled</p>
+                                            </div>
+                                            <div className="view flex justify-center">
+                                                <button onClick={() => getEmployeeDetails(eachStudent)} className="w-25! border-none! flex justify-center items-center gap-1.5 hover:bg-[#F3F3F5]">
+                                                    <img src={view} alt="eye logo" />
+                                                    <p className="text-[0.86988rem]">view</p>
+                                                </button>
+                                            </div>
+                                        </td>
                                     </tr>
-                                    {
-                                    data.map((eachStudent, id) => {
-                                        return(
-                                            <tr key={id} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                                                <td className="w-full! justify-between items-center flex text-left font-normal text-[0.99413rem]! text-[#0A0A0A]">
-                                                    <div className="data">
-                                                        <h6>{eachStudent.fullName}</h6>
-                                                        <p>{eachStudent.modules.length} modules enrolled</p>
-                                                    </div>
-                                                    <div className="view flex justify-center">
-                                                        <button onClick={() => onClick && onClick(eachStudent, viewEmployee, "Lab Assistant")} className="w-25! border-none! flex justify-center items-center gap-1.5 hover:bg-[#F3F3F5]">
-                                                            <img src={view} alt="eye logo" />
-                                                            <p className="text-[0.86988rem]">view</p>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })}
-                                </tbody>
-                            :
-                                <tbody>
-                                    <tr>
-                                        <th className="text-left text-[0.99413rem]! text-[#0A0A0A] py-3 font-normal rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]" >Name</th>
-                                    </tr>
-                                    {
-                                    data.map((eachStudent,id) => {
-                                        return(
-                                            <tr key={id} className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                                                <td className="w-full! justify-between items-center flex text-left font-normal text-[0.99413rem]! text-[#0A0A0A]">
-                                                    <div className="data">
-                                                        <h6>{eachStudent.fullName}</h6>
-                                                        <p>{eachStudent.modules.length} modules enrolled</p>
-                                                    </div>
-                                                    <div className="view flex justify-center">
-                                                        <button className=" w-25! border-none! flex justify-center items-center gap-1.5 hover:bg-[#F3F3F5]">
-                                                            <img src={view} alt="eye logo" />
-                                                            <p className="text-[0.86988rem]">view</p>
-                                                        </button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        )
-                                    })}
-                            </tbody>
+                                )
+                            })}
+                        </tbody>
                         }
                     </table>
                 </div>

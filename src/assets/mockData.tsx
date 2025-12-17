@@ -6,7 +6,7 @@ export type lab = 1 | 2 | 3
 
 export type warning = {
     slotID: number,
-    msg: string,
+    msg: string
 }
 
 export type Shift = {
@@ -56,7 +56,7 @@ export type Students = {
     studentNo: number | null;
     fullName: string | null;
     role: role | null;
-    modules: Module[] | null;
+    modules: Module[] | [];
     shifts: Slot[] | [];
 }
 
