@@ -4,6 +4,11 @@ export type role = "assistant" | "supervisor";
 
 export type lab = 1 | 2 | 3
 
+export type warning = {
+    slotID: number,
+    msg: string,
+}
+
 export type Shift = {
     supervisor: Students[];
     assistants: Students[] ;

@@ -10,12 +10,13 @@ import type { BreadCarouselProps, dashboardCard } from "../../types/dashboard"
 import type { DashboardMode, DashboardProps, dashboardTimetable, jobTitle, schoolData, schoolDataPopUp } from '../../types/student' 
 import { useState } from "react"
 import ViewEmployee from "./pop-up/Dashboard"
-import { appSchedule, mockStudents, type Students } from "../assets/mockData"
+import { generateSchedule } from "../../algorithms/GenerateSchedule"
+import { appSchedule, mockStudents } from "../assets/mockData"
 
 /**
  * Card component, takes input of assisntant info and returns a card component with active, inactive and total number of employees.
  */
-function Card( {activeAssistants = 3, activeSupervisors = 1, inactive = 31, totalNumber = 35}:dashboardCard ){
+function Card( {activeAssistants = mockStudents.length, activeSupervisors = mockStudents.filter((eachStudent) => eachStudent.role === "supervisor").length, inactive = 1, totalNumber = mockStudents.length}:dashboardCard ){
     return(
         <div className="cards flex justify-between">
                 {/**Active Lab Assistants */}
@@ -73,94 +74,12 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactive = 31, tota
     )
 }
 
+//Toggling to overview on the carousel will display:
 function Overview(){
-    // const [warning, setWarning] = useState<{warningId: number, warningMessage: string}[]>([])
-    
-    const generateSchedule = () => {
-        const warning: any[] = [];
-        
-
-        appSchedule.map( (timeSlot) => 
-        {
-            timeSlot.map( (slot) => {
-                console.log(`<------------------------------------slot ${slot.slotID} details------------------------------------->`)
-
-                /**Availability Check */
-                //All the modules which have a class taking place during the slot:
-                const studentsAttendingClass = slot.blockingModules.map( (blockedModules) => mockStudents.filter((eachStudent) => !eachStudent.modules?.includes(blockedModules)));
-                
-                //An array that contains all students who are free for a shift during the slot:
-                let availableStudents: Students[] = [];
-                studentsAttendingClass.map((eachModule) => eachModule.map((student) => availableStudents.push(student))); //move all students from slotModules into availableStudents
-
-
-                //following loop removes those who are unavailble for the slot, but appear on availableStudents
-                slot.unavailable.map((eachStudent) => availableStudents.map( (student) => student === eachStudent && availableStudents.splice(availableStudents.indexOf(eachStudent), 1)))
-                const availableStudentsSet = new Set(availableStudents); //remove duplicates from array;
-                availableStudents = [...availableStudentsSet]
-
-                
-                /**Load balancing*/
-                availableStudents = availableStudents.sort((a, b) => a.shifts?.length - b.shifts?.length ); //sort by number of shifts (ascending)
-
-                /**Assignment */
-                const availableLabAssistants = availableStudents.filter( (student) => student.role === "assistant");
-                const availableSupervisors = availableStudents.filter( (student) => student.role === "supervisor");
-                console.log(` >>>>>>>>>>>>>>>>>>>>>>>>>slot ${slot.slotID} before AI scheduling`)
-                console.log(`lab assistants available to work shift:`, availableLabAssistants.length);
-                console.log(`lab supervisors available to work shift:`, availableSupervisors.length);
-                console.log(`working lab assistants: `, slot.Shift.assistants.length);
-                console.log(`working lab supervisor: `, slot.Shift.supervisor.length);
-                console.log(`free lab assistant slots: `, 3 - slot.Shift.assistants.length);
-                console.log(`free lab supervisor slots: `, 1 - slot.Shift.supervisor.length);
-
-
-
-                //assistants
-                if(slot.Shift.assistants.length < 3 && availableLabAssistants.length > 0){
-                    while( availableLabAssistants.length > 0){
-                        if(availableLabAssistants[0].role === "assistant"){
-                            slot.Shift.assistants.push(availableLabAssistants[0]);
-                            availableLabAssistants.pop();
-                        } 
-                        else {
-                            warning.push({slotID: slot.slotID, msg:`not enough assistants in ${slot.slotID}`});
-                        }
-                    }
-                } else{
-                    if(availableLabAssistants.length <= 0){
-                        warning.push({slotID: slot.slotID, msg: "0 assistants available"});
-                    }
-                }
-
-                //supervisor
-                if(slot.Shift.supervisor.length < 1 && availableSupervisors.length > 0){
-                    while( availableSupervisors.length > 0){
-                        if(availableSupervisors[0].role === "supervisor"){
-                            slot.Shift.supervisor.push(availableSupervisors[0]);
-                            availableSupervisors.pop();
-                        } 
-                        else {
-                            warning.push({slotID: slot.slotID, msg:`not enough supervisors in ${slot.slotID}`});
-                        }
-                    }
-                } else{
-                    if(availableSupervisors.length <= 0){
-                        warning.push({slotID: slot.slotID, msg: "0 supervisors available"});
-                    }
-                }
-                console.log(` >>>>>>>>>>>>>>>>>>>>>>>>>slot ${slot.slotID} after AI scheduling`)
-                console.log(`lab assistants available to work shift:`, availableLabAssistants.length);
-                console.log(`lab supervisors available to work shift:`, availableSupervisors.length);
-                console.log(`working lab assistants: `, slot.Shift.assistants.length);
-                console.log(`working lab supervisor: `, slot.Shift.supervisor.length);
-                console.log(`free lab assistant slots: `, 3 - slot.Shift.assistants.length);
-                console.log(`free lab supervisor slots: `, 1 - slot.Shift.supervisor.length);
-            })
-        }
-        )
-        console.log(`warning: `, warning)
+    const generateNewSchedule = () => {
+        generateSchedule(appSchedule);
     }
+    
 
     return(
         <div className="overview bg-white py-9 px-12 font-[Arimo] flex flex-col items-center gap-3.5 justify-between">
@@ -172,27 +91,12 @@ function Overview(){
                 assistants based on their availability and 
                 enrolled modules.
             </p>
-            <button onClick={generateSchedule} className="green-button w-fit rounded-2xl"><img className="w-[0.90731rem] h-[0.90731rem]" src={generate} alt="genarate ai button"/> <p>Generate Timetable</p></button>
+            <button onClick={generateNewSchedule} className="green-button w-fit rounded-2xl"><img className="w-[0.90731rem] h-[0.90731rem]" src={generate} alt="genarate ai button"/> <p>Generate Timetable</p></button>
         </div>
     )
 }
 
-function DashboardTable(
-    {
-        mode = 'overview',
-        data = 
-        [
-            {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
-            {fullName: 'Mot Malebana', modules: ['SCOA031', 'SSTB021'], availability: 35, level: 'undergraduate' },
-            {fullName: 'Mothibi Mana', modules: ['SCOA0321', 'SSTB231'], availability: 35, level: 'undergraduate' },
-            {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSB031'], availability: 35, level: 'postgraduate' },
-            {fullName: 'Moti bana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
-        ]
-        }
-        :
-        dashboardTimetable
-    )
-    {
+function DashboardTable( { mode = 'overview', data = mockStudents }:dashboardTimetable ){
         const [employee, setEmployee] = useState<schoolDataPopUp | null>(null);
         const [viewEmployee, setViewEmployee] = useState<boolean>(false);
 
@@ -334,15 +238,7 @@ function Dashboard( {activeAssistants = 3, activeSupervisors = 1, inactiveEmploy
             <div className="table w-full mt-8">
                 <DashboardTable 
                     mode={mode} 
-                    data={
-                        [
-                            {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
-                            {fullName: 'Mot Malebana', modules: ['SCOA031', 'SSTB021'], availability: 35, level: 'undergraduate' },
-                            {fullName: 'Mothibi Mana', modules: ['SCOA0321', 'SSTB231'], availability: 35, level: 'undergraduate' },
-                            {fullName: 'Mothibi Malebana', modules: ['SCOA032', 'SSB031'], availability: 35, level: 'postgraduate' },
-                            {fullName: 'Moti bana', modules: ['SCOA032', 'SSTB032'], availability: 35, level: 'undergraduate' },
-                        ]
-                    }
+                    data={mockStudents}
                 />
             </div>
         </div>
