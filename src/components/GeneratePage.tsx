@@ -3,8 +3,13 @@ import back from "../assets/svg/Bacj.svg";
 import { updateSchedule } from "../assets/mockData"
 import warning from "../assets/svg/warning.svg"
 import edit_Icon from "../assets/svg/edit_Icon.svg"
+import x from "../assets/svg/x-black.svg";
+import save from "../assets/svg/save.svg";
+import edit_white from "../assets/svg/edit-white.svg";
+import { useState } from "react";
 
 export const GeneratePage = () => {
+    const [edit, setEdit] = useState(true);
 
     
     return(
@@ -15,13 +20,23 @@ export const GeneratePage = () => {
                 <button className="white-button flex mx-[5.12rem] w-fit"><Link className="flex gap-1.5 items-center text-[#0A0A0A]! font-[Arimo] text-md font-normal!" to="/app/dashboard"><img src={back} alt="" /> <p>Back</p></Link></button>
 
                     {/* Warnings */}
-                    <div className="warning border border-solid border-[#E5E8EB] mx-[5.12rem] text-[#717182] text-[0.85rem] bg-white mt-6 px-6 py-2.5 rounded-md">
-                        <h3 className="text-[#717182] font-bold flex items-center1 gap-1 text-[0.875rem]"><img src={warning} alt="danger sign" /> Schedule Warnings: </h3>
-                        <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
-                        <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
-                        <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
-                        <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
-                    </div>
+
+                    { edit
+                        ?
+                            <div className="warning text-[#1C398E] border border-solid border-[#BEDBFF] mx-[5.12rem] text-[0.85rem] bg-[#EFF6FF] mt-6 px-6 py-2.5 rounded-md">
+                                <h3 className="font-bold flex items-center1 gap-1 text-[0.875rem]"><img src={edit_Icon} alt="danger sign" /> Edit Mode Active </h3>
+                                <p>Click on any time slot to add or remove lab assistants. The system will show you available assistants and warn you about conflicts.</p>
+                            </div>
+                        :
+                            <div className="warning border border-solid border-[#E5E8EB] mx-[5.12rem] text-[#717182] text-[0.85rem] bg-white mt-6 px-6 py-2.5 rounded-md">
+                                <h3 className="text-[#717182] font-bold flex items-center1 gap-1 text-[0.875rem]"><img src={warning} alt="danger sign" /> Schedule Warnings: </h3>
+                                <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
+                                <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
+                                <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
+                                <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
+                            </div>
+                    }
+                    
 
                     {/* Generate work schedule table */}
                     <div className="table px-[5.12rem] w-full mt-2.5">
@@ -32,7 +47,17 @@ export const GeneratePage = () => {
                                     <p className="text-[#717182]">AI-optimized schedule with 3 assistant(s) per time slot</p>
                                 </div>
                                 <div className="right">
-                                    <button className="white-green-button"><img src={edit_Icon} alt="edit icon" /> Edit Schedule</button>
+                                    {
+                                        edit 
+                                        ?
+                                        <div className="confirm-exit-buttons flex gap-2.5">
+                                            <button onClick={() => setEdit(!edit)} className="white-button"><img src={x} alt="edit icon"/>Cancel</button>
+                                            <button className="green-button"><img src={save} alt="edit icon" />Save Changes</button>
+                                        </div>
+                                        :
+                                        <button onClick={() => setEdit(!edit)} className="white-green-button"><img src={edit_Icon} alt="edit icon" /> Edit Schedule</button>
+
+                                    }
                                 </div>
                             </div>
                             <table className="w-full flex flex-col ">
@@ -53,17 +78,26 @@ export const GeneratePage = () => {
                                             updateSchedule[0].map( (shift, id) => (
                                                 <td key={id} className="mx-auto">
                                                     <div className="working h-fit flex flex-col">
-                                                        <div className="cell flex flex-col gap-1.5 p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
-                                                            {/* {
-                                                                shift.Shift.assistants.map((assistant) => (
-                                                                padding: 0.28025rem 2.47363rem 0.40431rem 0.59325rem;
-                                                                <p key={assistant.studentNo} className="text-[#016630]">{assistant.fullName}</p>
-                                                            ))
-                                                            } */}
-                                                                <p className="text-[#016630] text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">Name 1</p>
-                                                                <p className="text-[#016630] text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">Name 1</p>
-                                                                <p className="text-[#016630] text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">Name 1</p>
+                                                        <div className="cell flex flex-col relative gap-1.5 p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
+                                                            {
+                                                                edit
+                                                                ?
+                                                                <>
+                                                                <div className="edit text-[#016630]  text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">
+                                                                    <div className="cont ">
+                                                                        <div className="edit-circle absolute top-0 right-0 bg-[#337E89] rounded-full">
+                                                                            <img src={edit_white} width={0.05} alt="edit logo" className="relative z-90 w-6" />
+                                                                        </div>
+                                                                        <p>Name 1</p>
+                                                                    </div>
+                                                                </div>
+                                                                </>
+                                                                :
+                                                                    <p className="text-[#016630] relative text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">'Name 1</p>
 
+                                                            }
+                                                                <p className="text-[#016630] text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">Name 1</p>
+                                                                <p className="text-[#016630] text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">Name 1</p>
                                                         </div>
                                                     </div>
                                                 </td>
