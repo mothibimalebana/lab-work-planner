@@ -56,7 +56,7 @@ export type Students = {
     studentNo: number | null;
     fullName: string | null;
     role: role | null;
-    modules: Module[] | [];
+    modules: Module[];
     shifts: Slot[] | [];
 }
 
@@ -824,6 +824,19 @@ export const mockSchedule: Schedule = [
 ];
 
 export const appSchedule: Schedule = [
+    // Week 1 (Monday to Sunday)
+    [slot0, slot1, slot2, slot3, slot4, slot5, slot6],
+    // Week 2
+    [slot7, slot8, slot9, slot10, slot11, slot12, slot13],
+    // Week 3
+    [slot14, slot15, slot16, slot17, slot18, slot19, slot20],
+    // Week 4
+    [slot21, slot22, slot23, slot24, slot25, slot26, slot27],
+    // Week 5
+    [slot28, slot29, slot30, slot31, slot32, slot33, slot34]
+]
+ 
+export const updateSchedule: Schedule = [
     // Week 1 (Monday to Sunday)
     [slot0, slot1, slot2, slot3, slot4, slot5, slot6],
     // Week 2

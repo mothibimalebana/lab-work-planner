@@ -12,6 +12,7 @@ import { useState } from "react"
 import ViewEmployee from "./pop-up/Dashboard"
 import { generateSchedule } from "../../algorithms/GenerateSchedule"
 import { appSchedule, mockStudents, type Students } from "../assets/mockData"
+import { useNavigate } from "react-router"
 
 /**
  * Card component, takes input of assisntant info and returns a card component with active, inactive and total number of employees.
@@ -80,8 +81,11 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactive = 31, tota
 
 //Toggling to overview on the carousel will display:
 function Overview(){
+    const navigate = useNavigate();
+
     const generateNewSchedule = () => {
         generateSchedule(appSchedule);
+        navigate("/generate");
     }
     
 
@@ -122,9 +126,8 @@ function DashboardTable( { mode = 'overview', data = mockStudents }:dashboardTim
             <div className="alt bg-white border border-solid rounded-[0.87rem] py-[1.49125rem] px-[1.49125rem] border-[rgba(0,0,0,0.10)]">
                 {/* Displays the clicked student */}
                 {employee && viewEmployee && <ViewEmployee student={employee} view={viewEmployee} setView={setViewEmployee} setEmployee={setEmployee}/> }       
-    
-    
-    
+
+                {/**Table headers */}
                 <div className="header flex justify-between">
                     <div className="title">
                         <h5 className="text-[0.99413rem]! text-[#0A0A0A] leading-[0.99413rem]!">
