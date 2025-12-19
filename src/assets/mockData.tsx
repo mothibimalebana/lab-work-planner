@@ -387,6 +387,7 @@ export const mockBooking: classBooking = {
 }
 
 // Individual slots with static unavailable students
+
 const slot0: Slot = {
     slotID: 0,
     isBooked: true,
@@ -400,7 +401,7 @@ const slot0: Slot = {
     unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]]
 };
 
-const slot1: Slot = {
+export const slot1: Slot = {
     slotID: 1,
     isBooked: false,
     isUnavailable: true,

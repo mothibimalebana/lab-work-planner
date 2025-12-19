@@ -1,27 +1,70 @@
 import { Link } from "react-router";
 import back from "../assets/svg/Bacj.svg";
-import { updateSchedule } from "../assets/mockData"
 import warning from "../assets/svg/warning.svg"
 import edit_Icon from "../assets/svg/edit_Icon.svg"
 import x from "../assets/svg/x-black.svg";
 import save from "../assets/svg/save.svg";
 import edit_white from "../assets/svg/edit-white.svg";
+import people from "../assets/svg/people.svg";
+import { updateSchedule, type Slot } from "../assets/mockData";
 import { useState } from "react";
+import { slot1 } from "../assets/mockData";
+
+const PopUp = ({ slot, view, setView}: {slot: Slot, view: boolean, setView: (view: boolean) => void}) => {
+    return(
+        <div className="pop-up-container absolute inset-0 backdrop-blur-sm transition-opacity flex justify-center items-center bg-[rgba(0,0,0,0.5)] h-full z-10">
+            <div className="pop-up flex flex-col gap-2 w-[35%] h-[90%] bg-white py-6 px-6 rounded-md">
+                <div className="header flex justify-between items-center">
+                    <div className="left flex gap-2">
+                        <img src={people} alt="people icon" />
+                        <h3 className="font-semibold">Edit Shift Assignment</h3>
+                    </div>
+                    <div className="right hover:cursor-pointer"><img onClick={() => setView(!view)} src={x} alt="x icon" /></div>
+                </div>
+                <div className="content">
+                    <div className="available">
+                        <h3 className="font-semibold text-[0.875rem] text-[#101828]">Available Assistants</h3>
+                        {
+                            slot.Shift.assistants.map((assistant) => {
+                                return <p>{assistant.fullName}</p>
+                            }
+                        )
+                        }
+                    </div>
+                    <div className="unavailable flex items-center justify-between">
+                        <h3 className="font-semibold text-[0.875rem] text-[#101828]">Unavailable Assistants</h3>
+                        <p className="font-semibold text-[0.75rem] text-[#6A7282]">Click to override and assign anyway</p>
+                    </div>
+                </div>
+                <div className="buttons"></div>
+            </div>
+        </div>
+    )
+}
 
 export const GeneratePage = () => {
     const [edit, setEdit] = useState(true);
+    const [view, setView] = useState(false);
+    const [slot, setSlot] = useState<Slot>(slot1);
+
+    const adjustTimeTable = (slot: Slot) => {
+        setView(true);
+        setSlot(slot);
+    }
 
     
     return(
+        
         <div className="generate-container flex flex-col bg-[background: linear-gradient(135deg,#F8FAFC_0%,#FFF_50%,#F0FDFA_100%),#FFF]">
+            {(edit && view) &&  <PopUp slot={slot} view={view} setView={setView}/>}
             <div className="generate h-full justify-center font-[Arimo] text-[#0A0A0A]">
-
                 {/* Back Button */}
                 <button className="white-button flex mx-[5.12rem] w-fit"><Link className="flex gap-1.5 items-center text-[#0A0A0A]! font-[Arimo] text-md font-normal!" to="/app/dashboard"><img src={back} alt="" /> <p>Back</p></Link></button>
 
                     {/* Warnings */}
 
-                    { edit
+                    {
+                     edit
                         ?
                             <div className="warning text-[#1C398E] border border-solid border-[#BEDBFF] mx-[5.12rem] text-[0.85rem] bg-[#EFF6FF] mt-6 px-6 py-2.5 rounded-md">
                                 <h3 className="font-bold flex items-center1 gap-1 text-[0.875rem]"><img src={edit_Icon} alt="danger sign" /> Edit Mode Active </h3>
@@ -37,7 +80,6 @@ export const GeneratePage = () => {
                             </div>
                     }
                     
-
                     {/* Generate work schedule table */}
                     <div className="table px-[5.12rem] w-full mt-2.5">
                         <div className="flex flex-col gap-7  px-4 py-6 rounded-md border border-solid border-[#E5E8EB] bg-white">
@@ -75,18 +117,18 @@ export const GeneratePage = () => {
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                         <td className="w-fit text-left font-normal">{<p>08:00 <br />11:00</p>}</td>
                                         {
-                                            updateSchedule[0].map( (shift, id) => (
+                                            updateSchedule[0].map( (slot, id) => (
                                                 <td key={id} className="mx-auto">
-                                                    <div className="working h-fit flex flex-col">
-                                                        <div className="cell flex flex-col relative gap-1.5 p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem]"> 
+                                                    <div onClick={() => adjustTimeTable(slot)} className="working h-fit flex flex-col">
+                                                        <div className={`cell flex flex-col relative gap-1.5 p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem] ${edit && 'hover:cursor-pointer'}`}> 
                                                             {
                                                                 edit
                                                                 ?
                                                                 <>
                                                                 <div className="edit text-[#016630]  text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">
                                                                     <div className="cont ">
-                                                                        <div className="edit-circle absolute top-0 right-0 bg-[#337E89] rounded-full">
-                                                                            <img src={edit_white} width={0.05} alt="edit logo" className="relative z-90 w-6" />
+                                                                        <div className="edit-circle absolute top-0 right-0 bg-[#337E89] rounded-full px-1 py-1">
+                                                                            <img src={edit_white} width={0.01} alt="edit logo" className="relative z-5 w-3 object-contain" />
                                                                         </div>
                                                                         <p>Name 1</p>
                                                                     </div>
