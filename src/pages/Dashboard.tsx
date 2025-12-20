@@ -84,8 +84,11 @@ function Overview(){
     const navigate = useNavigate();
 
     const generateNewSchedule = () => {
-        generateSchedule(appSchedule);
-        navigate("/generate");
+        const {newSchedule, warnings} = generateSchedule(appSchedule);
+
+        navigate("/generate",{
+            state: {newSchedule, warnings}
+        }); 
     }
     
 

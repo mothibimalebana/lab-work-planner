@@ -4,6 +4,7 @@ import { mockStudents } from "../src/assets/mockData";
 export const generateSchedule = (appSchedule: Schedule) => {
     const warning: warning[] = [];
     const newSchedule: Schedule = JSON.parse(JSON.stringify(appSchedule));
+    
 
     newSchedule.map( (timeSlot) => 
     {

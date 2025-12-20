@@ -7,6 +7,7 @@ import { appSchedule, mockStudents, updateSchedule } from "./assets/mockData";
 import type { outletContextProp } from "../types/context";
 
 function App() {  
+  //global state
   const [schedule, setSchedule] = useState(appSchedule);
   const [students, setStudents] = useState(mockStudents);
 

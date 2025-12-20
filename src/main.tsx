@@ -10,9 +10,11 @@ import LoginPage from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import Form from './pages/Form.tsx';
 import GeneratePage from './components/GeneratePage.tsx';
+import AppDataProvider from './assets/context/ScheduleContext.tsx';
 
 const router = createBrowserRouter([
   {
+    index: true,
     path: "/",
     element: <LandingPage/>
   },
@@ -39,13 +41,15 @@ const router = createBrowserRouter([
     element: <LoginPage/>
   },
   {
-    path: "generate",
+    path: "/generate",
     element: <GeneratePage/>
   },
 ]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />
+    <AppDataProvider>
+      <RouterProvider router={router} />
+    </AppDataProvider>
   </StrictMode>
 )

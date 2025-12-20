@@ -1,5 +1,27 @@
-import { createContext } from "react";
-import { updateSchedule } from "../mockData";
+import React, { createContext, useContext, useState } from "react";
+import { appSchedule, updateSchedule } from "../mockData";
 
 
-export const NewScheduleContext = createContext(updateSchedule);
+const AppDataContext = createContext<any>({});
+
+const AppDataProvider = (children: any) => {
+
+const [schedule, setSchedule] = useState(appSchedule);
+const [ newSchedule, setNewSchedule ] = useState(updateSchedule);
+
+
+const value = {
+    schedule,
+    setSchedule,
+    newSchedule,
+    setNewSchedule,
+};
+
+return(
+    <AppDataContext.Provider value={value}>
+    {children}
+    </AppDataContext.Provider>
+)
+}
+
+export const useAppData = () => useContext(AppDataContext);

@@ -42,10 +42,14 @@ const PopUp = ({ slot, view, setView}: {slot: Slot, view: boolean, setView: (vie
     )
 }
 
+
+
 export const GeneratePage = () => {
+
     const [edit, setEdit] = useState(true);
     const [view, setView] = useState(false);
     const [slot, setSlot] = useState<Slot>(slot1);
+    
 
     const adjustTimeTable = (slot: Slot) => {
         setView(true);
