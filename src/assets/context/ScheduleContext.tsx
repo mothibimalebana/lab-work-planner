@@ -1,10 +1,12 @@
-import React, { createContext, useContext, useState } from "react";
+import { createContext, useState, type ReactNode } from "react";
 import { appSchedule, updateSchedule } from "../mockData";
+import type { AppDataContextType } from "../../../types/context";
 
 
-const AppDataContext = createContext<any>({});
+const AppDataContext = createContext<AppDataContextType | undefined>(undefined);
 
-const AppDataProvider = (children: any) => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const AppDataProvider = ({children}: {children: ReactNode})  => {
 
 const [schedule, setSchedule] = useState(appSchedule);
 const [ newSchedule, setNewSchedule ] = useState(updateSchedule);
@@ -24,4 +26,4 @@ return(
 )
 }
 
-export const useAppData = () => useContext(AppDataContext);
+export default AppDataProvider

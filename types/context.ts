@@ -9,3 +9,10 @@ export type outletContextProp = {
 
     newSchedule: Schedule,
 }
+
+export type AppDataContextType = {
+    schedule: Schedule,
+    setSchedule: React.Dispatch<React.SetStateAction<Schedule>>,
+    newSchedule: Schedule,
+    setNewSchedule: React.Dispatch<React.SetStateAction<Schedule>>,
+}
