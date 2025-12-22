@@ -13,6 +13,7 @@ import ViewEmployee from "./pop-up/Dashboard"
 import { generateSchedule } from "../../algorithms/GenerateSchedule"
 import { appSchedule, mockStudents, type Students } from "../assets/mockData"
 import { useNavigate } from "react-router"
+import { useAppData } from "../assets/context/ScheduleContext"
 
 /**
  * Card component, takes input of assisntant info and returns a card component with active, inactive and total number of employees.
@@ -82,9 +83,11 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactive = 31, tota
 //Toggling to overview on the carousel will display:
 function Overview(){
     const navigate = useNavigate();
+    const {setNewSchedule} = useAppData();
 
     const generateNewSchedule = () => {
         const {newSchedule, warnings} = generateSchedule(appSchedule);
+        setNewSchedule(newSchedule)
 
         navigate("/generate",{
             state: {newSchedule, warnings}

@@ -400,6 +400,18 @@ const slot0: Slot = {
     booking: mockBooking,
     unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]]
 };
+export const emptySlot: Slot = {
+    slotID: 0,
+    isBooked: false,
+    isShift: false,
+    isClass: false,
+    isUnavailable: false,
+    blockingModules: [],
+    Shift: mockShift1,
+    unavailable: [],
+    isBlocked: false
+    
+}
 
 export const slot1: Slot = {
     slotID: 1,
