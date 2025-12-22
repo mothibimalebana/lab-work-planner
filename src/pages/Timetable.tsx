@@ -2,13 +2,13 @@ import { useState } from "react";
 import BreadCrumbs from "../components/Breadcrumbs"
 import Table from "../components/Table";
 import type { modeValue } from "../../types/timetable";
-import { appOutletContext } from "../assets/context/appContext";
+import { useAppData } from "../assets/context/ScheduleContext";
 
 
 
 const Timetable = () => {
     const [mode, setMode] = useState<modeValue>("Shifts");
-    const { schedule } = appOutletContext();
+    const {schedule} = useAppData();
 
     return(
         <div className="timetable">

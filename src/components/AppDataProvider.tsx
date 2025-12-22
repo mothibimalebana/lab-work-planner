@@ -9,7 +9,7 @@ const AppDataProvider = ({children}: {children: ReactNode})  => {
 
 const [schedule, setSchedule] = useState(appSchedule);
 const [newSchedule, setNewSchedule] = useState(updateSchedule);
-const [warning, setWarning] = useState<warning | []>([])
+const [warnings, setWarning] = useState<warning[] | []>([])
 
 
 const value = {
@@ -18,8 +18,8 @@ const value = {
     newSchedule,
     setNewSchedule,
 
-    warning,
-    setWarning
+    warnings,
+    setWarning,
 };
 
 return(

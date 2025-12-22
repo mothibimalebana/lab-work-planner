@@ -9,6 +9,8 @@ export type warning = {
     msg: string
 }
 
+export type warnings = warning[];
+
 export type Shift = {
     supervisor: Students[];
     assistants: Students[] ;

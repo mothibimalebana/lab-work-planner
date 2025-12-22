@@ -10,8 +10,10 @@ import { emptySlot, type Slot } from "../assets/mockData";
 import { useState } from "react";
 import { useAppData } from "../assets/context/ScheduleContext";
 
+
+
 export const GeneratePage = () => {
-    const { newSchedule} = useAppData();
+    const {newSchedule, warnings} = useAppData();
 
     const [edit, setEdit] = useState(true);
     const [view, setView] = useState(false);
@@ -34,8 +36,7 @@ export const GeneratePage = () => {
                 {/* Back Button */}
                 <button className="white-button flex mx-[5.12rem] w-fit"><Link className="flex gap-1.5 items-center text-[#0A0A0A]! font-[Arimo] text-md font-normal!" to="/app/dashboard"><img src={back} alt="" /> <p>Back</p></Link></button>
 
-                    {/* Warnings */}
-
+                    {/* Warnings Section*/}
                     {
                      edit
                         ?
@@ -46,11 +47,9 @@ export const GeneratePage = () => {
                         :
                             <div className="warning border border-solid border-[#E5E8EB] mx-[5.12rem] text-[#717182] text-[0.85rem] bg-white mt-6 px-6 py-2.5 rounded-md">
                                 <h3 className="text-[#717182] font-bold flex items-center1 gap-1 text-[0.875rem]"><img src={warning} alt="danger sign" /> Schedule Warnings: </h3>
-                                <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
-                                <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
-                                <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
-                                <p>Only 1 assistant(s) available for Friday 17:00 - 20:00 (need 3)</p>
+                                {warnings.map((eachWarning, id) => <p key={id}>Slot: {eachWarning.slotID} - {eachWarning.msg}</p>)}
                             </div>
+                            
                     }
                     
                     {/* Generate work schedule table */}

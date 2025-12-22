@@ -83,15 +83,15 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactive = 31, tota
 //Toggling to overview on the carousel will display:
 function Overview(){
     const navigate = useNavigate();
-    const {setNewSchedule} = useAppData();
+    const {setNewSchedule, setWarning} = useAppData();
 
     const generateNewSchedule = () => {
         const {newSchedule, warnings} = generateSchedule(appSchedule);
-        setNewSchedule(newSchedule)
+        setNewSchedule(newSchedule);
+        setWarning(warnings)
+        
 
-        navigate("/generate",{
-            state: {newSchedule, warnings}
-        }); 
+        navigate("/generate"); 
     }
     
 
