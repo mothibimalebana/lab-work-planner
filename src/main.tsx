@@ -10,7 +10,7 @@ import LoginPage from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import Form from './pages/Form.tsx';
 import GeneratePage from './components/GeneratePage.tsx';
-import AppDataProvider from './assets/context/ScheduleContext.tsx';
+import AppDataProvider from './components/AppDataProvider.tsx';
 
 const router = createBrowserRouter([
   {

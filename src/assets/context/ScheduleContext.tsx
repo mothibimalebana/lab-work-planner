@@ -1,29 +1,15 @@
-import { createContext, useState, type ReactNode } from "react";
-import { appSchedule, updateSchedule } from "../mockData";
+import { createContext, useContext} from "react";
 import type { AppDataContextType } from "../../../types/context";
 
 
-const AppDataContext = createContext<AppDataContextType | undefined>(undefined);
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const AppDataProvider = ({children}: {children: ReactNode})  => {
-
-const [schedule, setSchedule] = useState(appSchedule);
-const [ newSchedule, setNewSchedule ] = useState(updateSchedule);
+export const AppDataContext = createContext<AppDataContextType | undefined>(undefined);
 
 
-const value = {
-    schedule,
-    setSchedule,
-    newSchedule,
-    setNewSchedule,
+
+export const useAppData = (): AppDataContextType => {
+  const context = useContext(AppDataContext);
+  if (context === undefined) {
+    throw new Error('useAppData must be used within an AppDataProvider');
+  }
+  return context;
 };
-
-return(
-    <AppDataContext.Provider value={value}>
-    {children}
-    </AppDataContext.Provider>
-)
-}
-
-export default AppDataProvider
