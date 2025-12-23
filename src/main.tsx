@@ -9,10 +9,12 @@ import LandingPage from './pages/LandingPage.tsx';
 import LoginPage from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
 import Form from './pages/Form.tsx';
-import { appSchedule } from './assets/mockData.tsx';
+import GeneratePage from './components/GeneratePage.tsx';
+import AppDataProvider from './components/AppDataProvider.tsx';
 
 const router = createBrowserRouter([
   {
+    index: true,
     path: "/",
     element: <LandingPage/>
   },
@@ -22,26 +24,32 @@ const router = createBrowserRouter([
     children: [
       {
         path: "timetable",
-        element: <Timetable schedule={appSchedule}/>
+        element: <Timetable/>
       },
       {
         path: "dashboard",
-        element: <Dashboard dashboardMode='overview'/>
+        element: <Dashboard dashboardMode='overview'/>,
       },
       {
         path: "form",
         element: <Form/>
-      }
+      },
     ]
   },
   {
     path: "/login",
     element: <LoginPage/>
   },
+  {
+    path: "/generate",
+    element: <GeneratePage/>
+  },
 ]);
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <RouterProvider router={router} />,
-  </StrictMode>,
+    <AppDataProvider>
+      <RouterProvider router={router} />
+    </AppDataProvider>
+  </StrictMode>
 )

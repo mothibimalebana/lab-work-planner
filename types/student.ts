@@ -1,3 +1,5 @@
+import type { Students } from "../src/assets/mockData";
+
 export type DashboardProps = {
     activeAssistants?: number;
     activeSupervisors?: number;
@@ -12,12 +14,7 @@ export type schoolLevel = "undergraduate" | "postgraduate";
 
 export type dashboardTimetable = {
     mode: DashboardMode,
-    data: {
-        fullName: string
-        modules: string[]
-        availability: number,
-        level: schoolLevel,
-    }[],
+    data: Students[]
 }
 
 export type schoolData = {

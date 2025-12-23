@@ -4,17 +4,19 @@ import Navbar from "./components/Navbar"
 import phoneError from "./assets/svg/phone-error-svgrepo-com.svg"
 import { useState } from "react";
 
-function App() {  
-  const getPage = window.location.pathname.slice(5);
-  const currPage = getPage[0].toUpperCase() + getPage.slice(1);
 
-  const [page, setPage] = useState(currPage);
+function App() {  
+  //Get
+  const getPathname = window.location.pathname.slice(5);
+  const pathNameStr = getPathname[0].toUpperCase() + getPathname.slice(1);
+
+  const [pathname, setPathname] = useState(pathNameStr);
 
   return (
     <div className="app">
       <div className="desktop hidden md:flex flex-col overflow-x-hidden">
-        <Navbar setLink={setPage}/>
-        <Header page={page}/>
+        <Navbar setLink={setPathname}/>
+        <Header page={pathname}/>
         <Outlet/>
       </div>
       <div className="mobile flex flex-col md:hidden">
@@ -24,5 +26,7 @@ function App() {
     </div>
   )
 }
+
+
 
 export default App

@@ -10,19 +10,13 @@ const LoginPage: React.FC = () => {
     const { pending } = useFormStatus();
 
     const onSubmit = (formData: FormData) => {
-
-
-
         const getStudentNumber = formData.get("studentNumber");
         const getPassword = formData.get("password");
     
         const user = {
             studentNumber: getStudentNumber,
             password: getPassword,
-
-
         }
-
         console.log(user);
         navigate("/app/timetable")
     }
@@ -37,7 +31,6 @@ const LoginPage: React.FC = () => {
                     <fieldset className="flex gap pt-6 flex-col">
                         <label htmlFor="studentNumber">Student Number</label>
                         <input className="h-9 p-[0.25rem_0.75rem] rounded-sm bg-[#F3F3F5] text-[#717182]" id="studentNumber" name="studentNumber" type="text" placeholder="202103987"/>
-
                         <label className="pt-4" htmlFor="password">Password</label>
                         <input className="h-9 p-[0.25rem_0.75rem] rounded-md bg-[#F3F3F5] text-[#717182]" id="password" type="password" name="password" placeholder="MyPassword@123"/>
                     </fieldset>
