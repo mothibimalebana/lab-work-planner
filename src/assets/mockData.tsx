@@ -176,91 +176,91 @@ export const mockStudents: Students[] = [
 export const mockShift1: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockShift2: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockShift3: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockShift4: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockShift5: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockShift6: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockShift7: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockShift8: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift9: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift10: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift11: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift12: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift13: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift14: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift15: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift16: Shift = {
@@ -308,25 +308,25 @@ export const mockShift22: Shift = {
 export const mockShift23: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockShift24: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockShift25: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift26: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift27: Shift = {
@@ -344,13 +344,13 @@ export const mockShift28: Shift = {
 export const mockShift29: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockShift30: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift31: Shift = {
@@ -362,13 +362,13 @@ export const mockShift31: Shift = {
 export const mockShift32: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockShift33: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 2
+    
 };
 
 export const mockShift34: Shift = {
@@ -380,7 +380,7 @@ export const mockShift34: Shift = {
 export const mockShift35: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 1
+    
 };
 
 export const mockBooking: classBooking = {
