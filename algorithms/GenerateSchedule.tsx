@@ -39,10 +39,10 @@ export const generateSchedule = (schedule: Map<string, Map<string, Slot>>) => {
                         assistantsToAssign.forEach(assistant => {
                             slot.Shift.assistants.push(assistant);
                         });
-                    }else{
-                    if(availableLabAssistants.length <= 0){
-                        warning.push({slotID: day + time, msg: "0 assistants available"});
-                    }
+                    }else if(availableLabAssistants.length <= 0){
+                        const index = warning.findIndex((value) => value.slotID === day + " " + time);
+                        const result = index == -1 ? warning.push({slotID: day + " " + time, msg: ["Managed to assign a few assistants, but not enough were available for the slot"]}) : warning[index].msg.push("MManaged to assign a few assistants, but not enough were available for the slotanaged to assign a few assistants, but not enough were available for the slot");
+                        console.log(result)               
                 }
 
                 //supervisor
@@ -55,15 +55,18 @@ export const generateSchedule = (schedule: Map<string, Map<string, Slot>>) => {
                 });
                 }else{
                     if(availableSupervisors.length <= 0){
-                        warning.push({slotID: day + time, msg: "0 supervisors available"});
+                        const index = warning.findIndex((value) => value.slotID === day + " " + time);
+                        const result = index == -1 ? warning.push({slotID: day + " " +  time, msg: ["No supervisor was available for this slot."]}) : warning[index].msg.push("No supervisor was available for this slot.");
+                        console.log(result)               
                     }
                 }
         })
 
     }
     )
-    console.log(scheduleArray);
+    const warningSet = new Set(warning);
+     
+    console.log(warningSet);
     const updatedSchedule = new Map(scheduleArray.map((timeSlot) => timeSlot));
-    console.log(updatedSchedule);
     return { updatedSchedule, warnings: warning};
 }

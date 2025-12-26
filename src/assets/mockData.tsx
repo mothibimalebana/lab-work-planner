@@ -7,7 +7,7 @@ export const schoolScheduleMap = new Map();
 
 export type warning = {
     slotID: string,
-    msg: string,
+    msg: string[],
 }
 export type warnings = warning[];
 
@@ -391,12 +391,11 @@ export const emptySlot: Slot = {
     slotID: 0,
     isBooked: true,
     isUnavailable: true,
-    
     isBlocked: false,
     blockingModules: [modules[0][0],modules[0][1]],
     Shift: Shift1,
     booking: mockBooking,
-    unavailable: []
+    unavailable: [mockStudents[1]],
 };
 
 const slot0: Slot = {

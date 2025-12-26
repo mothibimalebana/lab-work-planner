@@ -17,14 +17,20 @@ export const GeneratePage = () => {
 
     const [edit, setEdit] = useState(true);
     const [view, setView] = useState(false);
-    const [slot, setSlot] = useState(emptySlot); 
+    const [slot, setSlot] = useState(emptySlot);
+    const [timeDay, setTimeDay] = useState("");
 
     const scheduleArray = Array.from(newSchedule.entries() || []);
-    scheduleArray[0].map(([time, timeSlot]) => console.log(`time: ${time}, map: ${timeSlot}`));
 
-    const adjustTimeTable = (slot: Slot) => {
+    const adjustTimeTable = (slot: Slot, timeDay: string) => {
         setView(true);
         setSlot(slot);
+        setTimeDay(timeDay)
+    }
+
+    const closeAdjustTimeTable = () => {
+        setView(false);
+        setSlot(emptySlot);
     }
 
     console.log(warnings);
@@ -33,7 +39,7 @@ export const GeneratePage = () => {
     return(
         <div className="generate-container flex flex-col bg-[background: linear-gradient(135deg,#F8FAFC_0%,#FFF_50%,#F0FDFA_100%),#FFF]">
             {/* if edit mode and view is true, display the pop up of clicked student */}
-            {(edit && view) &&  <PopUp slot={slot} view={view} setView={setView}/>}
+            {(edit && view) &&  <PopUp slot={slot} timeDay={timeDay} closePopUp={closeAdjustTimeTable}/>}
 
             <div className="generate h-full justify-center font-[Arimo] text-[#0A0A0A]">
                 {/* Back Button */}
@@ -48,9 +54,9 @@ export const GeneratePage = () => {
                                 <p>Click on any time slot to add or remove lab assistants. The system will show you available assistants and warn you about conflicts.</p>
                             </div>
                         :
-                            <div className="warning border border-solid border-[#E5E8EB] mx-[5.12rem] text-[#717182] text-[0.85rem] bg-white mt-6 px-6 py-2.5 rounded-md">
+                            <div className="warning border border-solid border-[#E5E8EB] mx-[5.12rem] text-[#717182] text-[0.85rem] bg-white mt-6 px-6 py-2.5 rounded-md h-[9.59769rem] overflow-y-auto">
                                 <h3 className="text-[#717182] font-bold flex items-center1 gap-1 text-[0.875rem]"><img src={warning} alt="danger sign" /> Schedule Warnings: </h3>
-                                {warnings.map((eachWarning, id) => <p key={id}>Slot: {eachWarning.slotID} - {eachWarning.msg}</p>)}
+                                <div className="warning-messages">{warnings.map((eachWarning, id) => <div key={id}>{eachWarning.slotID}: {eachWarning.msg.map((warningMsg, id) => <p key={id}>• {warningMsg}</p>)}</div>)}</div>
                             </div>
                             
                     }
@@ -94,7 +100,7 @@ export const GeneratePage = () => {
                                         {
                                             Array.from(scheduleArray[0][1].entries() || []).map( ( [day, slot]) => 
                                                 <td key={day + scheduleArray[0][0]} className="mx-auto">
-                                                    <div onClick={() => adjustTimeTable(slot)} className="working h-fit flex flex-col">
+                                                    <div onClick={() => adjustTimeTable(slot, day+ " • " +scheduleArray[0][0])} className="working h-fit flex flex-col">
                                                         <div className={`cell flex flex-col relative gap-1.5 p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem] ${edit && 'hover:cursor-pointer'}`}> 
                                                             {
                                                                 edit
@@ -133,34 +139,41 @@ export const GeneratePage = () => {
 
 
 
-const PopUp = ({ slot, view, setView}: {slot: Slot, view: boolean, setView: (view: boolean) => void}) => {
+const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, closePopUp: () => void}) => {
     return(
         <div className="pop-up-container absolute inset-0 backdrop-blur-sm transition-opacity flex justify-center items-center bg-[rgba(0,0,0,0.5)] h-full z-10">
-            <div className="pop-up flex flex-col gap-2 w-[35%] h-[90%] bg-white py-6 px-6 rounded-md">
+            <div className="pop-up flex flex-col gap-2 w-[40%] h-[95%] bg-white py-6 px-6 rounded-md">
                 <div className="header flex justify-between items-center">
-                    <div className="left flex gap-2">
-                        <img src={people} alt="people icon" />
-                        <h3 className="font-semibold">Edit Shift Assignment</h3>
+                    <div className="left flex flex-col gap-1 non-italics font-normal">
+                        <div className="top flex gap-2">
+                            <img src={people} alt="people icon" />
+                            <h3 className="font-bold text-[1.25rem]">Edit Shift Assignment</h3>
+                        </div>
+                        <div className="bottom"><p className="text-[#717182] text-[0.875rem]">{timeDay}</p></div>
                     </div>
-                    <div className="right hover:cursor-pointer"><img onClick={() => setView(!view)} src={x} alt="x icon" /></div>
+                    
+                    <div className="right hover:cursor-pointer"><img onClick={closePopUp} src={x} alt="x icon" /></div>
                 </div>
                 <div className="content flex flex-col gap-3.5 ">
                     <div className="available">
-                        <h3 className="font-semibold text-[0.875rem] text-[#101828]">Available Assistants: </h3>
+                        <h3 className="font-bold text-[1rem] text-[#101828]">Available Assistants: </h3>
                         {
                             slot.Shift.assistants.map((assistant, id) => 
                                  <p key={id}>{assistant.fullName}</p>
                         )
                         }
+
                     </div>
-                    <div className="unavailable flex flex-col justify-between">
-                        <h3 className="font-semibold text-[0.875rem] text-[#101828]">Unavailable Assistants: </h3>
-                        <p className="font-semibold text-[0.75rem] text-[#6A7282]">Click to override and assign anyway</p>
+                    <div className="unavailable flex justify-between items-center">
+                        <h3 className="font-bold text-[1rem] text-[#101828]">Unavailable Assistants: </h3>
+                        <p className="text-[0.875rem] text-[#6A7282]">Click to override and assign anyway</p>
+                        <div className="items flex flex-col gap-3.5">
                         {
                             slot.unavailable.map((unavailableAssistant, id) => 
                                  <p key={id}>{unavailableAssistant?.fullName ?? 'Empty'}</p>
                         )
                         }
+                        </div>
                     </div>
                 </div>
                 <div className="buttons"></div>
