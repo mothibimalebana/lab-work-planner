@@ -17,12 +17,12 @@ export const GeneratePage = () => {
 
     const [edit, setEdit] = useState(true);
     const [view, setView] = useState(false);
-    const [slot, setSlot] = useState(emptySlot)
+    const [slot, setSlot] = useState(emptySlot);
     
 
     const adjustTimeTable = (slot: Slot) => {
         setView(true);
-        setSlot(slot)
+        setSlot(slot);
     }
 
     
@@ -95,23 +95,22 @@ export const GeneratePage = () => {
                                                         <div className={`cell flex flex-col relative gap-1.5 p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem] ${edit && 'hover:cursor-pointer'}`}> 
                                                             {
                                                                 edit
-                                                                ?
+                                                                ?           
                                                                 <>
-                                                                <div className="edit text-[#016630]  text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">
-                                                                    <div className="cont ">
-                                                                        <div className="edit-circle absolute top-0 right-0 bg-[#337E89] rounded-full px-1 py-1">
-                                                                            <img src={edit_white} width={0.01} alt="edit logo" className="relative z-5 w-3 object-contain" />
-                                                                        </div>
-                                                                        <p>Name 1</p>
+                                                                    <div className="edit text-[#016630]  text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">
+                                                                            <div className="cont ">
+                                                                                <div className="edit-circle absolute top-0 right-0 bg-[#337E89] rounded-full px-1 py-1">
+                                                                                    <img src={edit_white} width={0.01} alt="edit logo" className="relative z-5 w-3 object-contain" />
+                                                                                </div>
+                                                                                <p>{slot?.Shift?.assistants[0]?.fullName ?? 'Empty slot'}</p>
+                                                                            </div>
                                                                     </div>
-                                                                </div>
                                                                 </>
                                                                 :
-                                                                    <p className="text-[#016630] relative text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">'Name 1</p>
-
+                                                                    <p className="text-[#016630] relative text-[0.65rem] py-1.5 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">{slot?.Shift?.assistants[0]?.fullName ?? 'Empty slot'}</p>
                                                             }
-                                                                <p className="text-[#016630] text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">Name 1</p>
-                                                                <p className="text-[#016630] text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">Name 1</p>
+                                                                <p className="text-[#016630] text-[0.65rem] py-1.5 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">{slot?.Shift?.assistants[1]?.fullName ?? 'Empty slot'}</p>
+                                                                <p className="text-[#016630] text-[0.65rem] py-1.5 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">{slot?.Shift?.assistants[2]?.fullName ?? 'Empty slot'}</p>
                                                         </div>
                                                     </div>
                                                 </td>
@@ -142,19 +141,23 @@ const PopUp = ({ slot, view, setView}: {slot: Slot, view: boolean, setView: (vie
                     </div>
                     <div className="right hover:cursor-pointer"><img onClick={() => setView(!view)} src={x} alt="x icon" /></div>
                 </div>
-                <div className="content">
+                <div className="content flex flex-col gap-3.5 ">
                     <div className="available">
-                        <h3 className="font-semibold text-[0.875rem] text-[#101828]">Available Assistants</h3>
+                        <h3 className="font-semibold text-[0.875rem] text-[#101828]">Available Assistants: </h3>
                         {
-                            slot.Shift.assistants.map((assistant) => {
-                                return <p>{assistant.fullName}</p>
-                            }
+                            slot.Shift.assistants.map((assistant, id) => 
+                                 <p key={id}>{assistant.fullName}</p>
                         )
                         }
                     </div>
-                    <div className="unavailable flex items-center justify-between">
-                        <h3 className="font-semibold text-[0.875rem] text-[#101828]">Unavailable Assistants</h3>
+                    <div className="unavailable flex flex-col justify-between">
+                        <h3 className="font-semibold text-[0.875rem] text-[#101828]">Unavailable Assistants: </h3>
                         <p className="font-semibold text-[0.75rem] text-[#6A7282]">Click to override and assign anyway</p>
+                        {
+                            slot.unavailable.map((unavailableAssistant, id) => 
+                                 <p key={id}>{unavailableAssistant?.fullName ?? 'Empty'}</p>
+                        )
+                        }
                     </div>
                 </div>
                 <div className="buttons"></div>

@@ -1,12 +1,14 @@
 export type FormMode = "employee" | "modules";
-
 export type role = "assistant" | "supervisor";
+export type lab = 1 | 2 | 3;
 
-export type lab = 1 | 2 | 3
+
+const assistantSchedule = new Map();
+const schoolSchedule = new Map();
 
 export type warning = {
     slotID: number,
-    msg: string
+    msg: string,
 }
 
 export type warnings = warning[];
@@ -35,11 +37,9 @@ export type classBooking = {
 
 export type Slot = {
     slotID: number;
-    isClass: boolean;
     isBooked: boolean;
     isUnavailable: boolean;
     unavailable: Students[];
-    isShift: boolean;
     isBlocked: boolean;
     blockingModules: Module[];
     Shift: Shift;
@@ -55,12 +55,13 @@ export type Schedule = [
 ];
 
 export type Students = {
-    studentNo: number | null;
-    fullName: string | null;
+    studentNo: number ;
+    fullName: string ;
     role: role | null;
     modules: Module[];
     shifts: Slot[] | [];
 }
+
 
 const modules: Module[][] = [
     // ===== YEAR 2 - REGULAR PROGRAMME =====
@@ -394,19 +395,16 @@ const slot0: Slot = {
     slotID: 0,
     isBooked: true,
     isUnavailable: true,
-    isShift: false,
+    
     isBlocked: false,
     blockingModules: [modules[0][0],modules[0][1]],
     Shift: mockShift1,
-    isClass: true,
     booking: mockBooking,
     unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]]
 };
 export const emptySlot: Slot = {
     slotID: 0,
     isBooked: false,
-    isShift: false,
-    isClass: false,
     isUnavailable: false,
     blockingModules: [],
     Shift: mockShift1,
@@ -418,12 +416,11 @@ export const emptySlot: Slot = {
 export const slot1: Slot = {
     slotID: 1,
     isBooked: false,
-    isUnavailable: true,
-    isShift: true,
+    isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift2,
-    isClass: false,
+    
     unavailable: [mockStudents[3], mockStudents[4]]
 };
 
@@ -431,11 +428,10 @@ const slot2: Slot = {
     slotID: 2,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift3,
-    isClass: true,
+    
     unavailable: [mockStudents[0]]
 };
 
@@ -443,11 +439,9 @@ const slot3: Slot = {
     slotID: 3,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift4,
-    isClass: true,
     unavailable: [mockStudents[1], mockStudents[2], mockStudents[3]]
 };
 
@@ -455,11 +449,10 @@ const slot4: Slot = {
     slotID: 4,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift5,
-    isClass: true,
+    
     unavailable: [mockStudents[0], mockStudents[4]]
 };
 
@@ -467,11 +460,9 @@ const slot5: Slot = {
     slotID: 5,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift6,
-    isClass: true,
     unavailable: [mockStudents[2], mockStudents[3]]
 };
 
@@ -479,11 +470,9 @@ const slot6: Slot = {
     slotID: 6,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift7,
-    isClass: true,
     unavailable: [mockStudents[1], mockStudents[4]]
 };
 
@@ -491,352 +480,351 @@ const slot7: Slot = {
     slotID: 7,
     isBooked: false,
     isUnavailable: false,
-    isShift: true,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift8,
-    isClass: true,
-    unavailable: [mockStudents[0], mockStudents[2], mockStudents[3]]
+    unavailable: []
 };
 
 const slot8: Slot = {
     slotID: 8,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift9,
-    isClass: true,
-    unavailable: [mockStudents[1]]
+    unavailable: []
 };
 
 const slot9: Slot = {
     slotID: 9,
     isBooked: false,
     isUnavailable: true,
-    isShift: true,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift10,
-    isClass: false,
-    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2], mockStudents[3], mockStudents[4]]
+    unavailable: []
 };
 
 const slot10: Slot = {
     slotID: 10,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift11,
-    isClass: true,
-    unavailable: [mockStudents[4]]
+    unavailable: []
 };
 
 const slot11: Slot = {
     slotID: 11,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift12,
-    isClass: true,
-    unavailable: [mockStudents[0], mockStudents[3]]
+    unavailable: []
 };
 
 const slot12: Slot = {
     slotID: 12,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift13,
-    isClass: true,
-    unavailable: [mockStudents[1], mockStudents[2]]
+    unavailable: []
 };
 
 const slot13: Slot = {
     slotID: 13,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift14,
-    isClass: true,
-    unavailable: [mockStudents[0], mockStudents[1], mockStudents[4]]
+    unavailable: []
 };
 
 const slot14: Slot = {
     slotID: 14,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift15,
-    isClass: true,
-    unavailable: [mockStudents[2], mockStudents[3]]
+    unavailable: []
 };
 
 const slot15: Slot = {
     slotID: 15,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift16,
-    isClass: true,
-    unavailable: [mockStudents[0], mockStudents[4]]
+    unavailable: []
 };
 
 const slot16: Slot = {
     slotID: 16,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift17,
-    isClass: true,
-    unavailable: [mockStudents[1], mockStudents[3]]
+    unavailable: []
 };
 
 const slot17: Slot = {
     slotID: 17,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift18,
-    isClass: true,
-    unavailable: [mockStudents[2]]
+    unavailable: []
 };
 
 const slot18: Slot = {
     slotID: 18,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift19,
-    isClass: true,
-    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]]
+    
+    unavailable: []
 };
 
 const slot19: Slot = {
     slotID: 19,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
+    
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift20,
-    isClass: true,
-    unavailable: [mockStudents[3], mockStudents[4]]
+    
+    unavailable: []
 };
 
 const slot20: Slot = {
     slotID: 20,
     isBooked: false,
     isUnavailable: false,
-    isShift: true,
     isBlocked: true,
     blockingModules: [modules[0][3],modules[0][4]],
     Shift: mockShift21,
-    isClass: true,
-    unavailable: [mockStudents[0], mockStudents[2], mockStudents[4]]
+    
+    unavailable: []
 };
 
 const slot21: Slot = {
     slotID: 21,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
+    
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift22,
-    isClass: true,
-    unavailable: [mockStudents[1], mockStudents[3]]
+    
+    unavailable: []
 };
 
 const slot22: Slot = {
     slotID: 22,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
+    
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift23,
-    isClass: true,
-    unavailable: [mockStudents[0]]
+    
+    unavailable: []
 };
 
 const slot23: Slot = {
     slotID: 23,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
+    
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift24,
-    isClass: true,
-    unavailable: [mockStudents[2], mockStudents[3], mockStudents[4]]
+    
+    unavailable: []
 };
 
 const slot24: Slot = {
     slotID: 24,
     isBooked: false,
     isUnavailable: false,
-    isShift: true,
+    
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift25,
-    isClass: true,
-    unavailable: [mockStudents[0], mockStudents[1]]
+    
+    unavailable: []
 };
 
 const slot25: Slot = {
     slotID: 25,
     isBooked: false,
     isUnavailable: false,
-    isShift: true,
     isBlocked: true,
     blockingModules: [modules[0][5]],
     Shift: mockShift26,
-    isClass: true,
-    unavailable: [mockStudents[2], mockStudents[3], mockStudents[4]]
+    unavailable: []
 };
 
 const slot26: Slot = {
     slotID: 26,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift27,
-    isClass: true,
-    unavailable: [mockStudents[0], mockStudents[1]]
+    unavailable: []
 };
 
 const slot27: Slot = {
     slotID: 27,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift28,
-    isClass: true,
-    unavailable: [mockStudents[2]]
+    unavailable: []
 };
 
 const slot28: Slot = {
     slotID: 28,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift29,
-    isClass: true,
-    unavailable: [mockStudents[3], mockStudents[4]]
+    unavailable: []
 };
 
 const slot29: Slot = {
     slotID: 29,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift30,
-    isClass: true,
-    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]]
+    
+    unavailable: []
 };
 
 const slot30: Slot = {
     slotID: 30,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
+    
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift31,
-    isClass: true,
-    unavailable: [mockStudents[3]]
+    
+    unavailable: []
 };
 
 const slot31: Slot = {
     slotID: 31,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
+    
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift32,
-    isClass: true,
-    unavailable: [mockStudents[0], mockStudents[4]]
+    
+    unavailable: []
 };
 
 const slot32: Slot = {
     slotID: 32,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
+    
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift33,
-    isClass: true,
-    unavailable: [mockStudents[1], mockStudents[2], mockStudents[3]]
+    
+    unavailable: []
 };
 
 const slot33: Slot = {
     slotID: 33,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
+    
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift34,
-    isClass: true,
-    unavailable: [mockStudents[0]]
+    
+    unavailable: []
 };
 
 const slot34: Slot = {
     slotID: 34,
     isBooked: false,
     isUnavailable: false,
-    isShift: false,
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift35,
-    isClass: true,
-    unavailable: [mockStudents[1], mockStudents[2], mockStudents[3], mockStudents[4]]
+    unavailable: []
 };
 
+assistantSchedule.set("08h00-11h00", new Map<string, Slot>());
+assistantSchedule.get("08h00-11h00").set("Monday", slot0);
+assistantSchedule.get("08h00-11h00").set("Tuesday", slot1);
+assistantSchedule.get("08h00-11h00").set("Wednsday", slot2);
+assistantSchedule.get("08h00-11h00").set("Thursday", slot3);
+assistantSchedule.get("08h00-11h00").set("Friday", slot4);
+assistantSchedule.get("08h00-11h00").set("Saturday", slot5);
+assistantSchedule.get("08h00-11h00").set("Sunday", slot6);
+assistantSchedule.set("11h00-14h00", new Map());
+assistantSchedule.get("11h00-14h00").set("Monday", slot7);
+assistantSchedule.get("11h00-14h00").set("Tuesday", slot8);
+assistantSchedule.get("11h00-14h00").set("Wednsday", slot9);
+assistantSchedule.get("11h00-14h00").set("Thursday", slot10);
+assistantSchedule.get("11h00-14h00").set("Friday", slot11);
+assistantSchedule.get("11h00-14h00").set("Saturday", slot12);
+assistantSchedule.get("11h00-14h00").set("Sunday", slot13);
+assistantSchedule.set("14h00-17h00", new Map());
+assistantSchedule.get("14h00-17h00").set("Monday", slot14);
+assistantSchedule.get("14h00-17h00").set("Tuesday", slot15);
+assistantSchedule.get("14h00-17h00").set("Wednsday", slot16);
+assistantSchedule.get("14h00-17h00").set("Thursday", slot17);
+assistantSchedule.get("14h00-17h00").set("Friday", slot18);
+assistantSchedule.get("14h00-17h00").set("Saturday", slot19);
+assistantSchedule.get("14h00-17h00").set("Sunday", slot20);
+assistantSchedule.set("17h00-20h00", new Map());
+assistantSchedule.get("17h00-20h00").set("Monday", slot21);
+assistantSchedule.get("17h00-20h00").set("Tuesday", slot22);
+assistantSchedule.get("17h00-20h00").set("Wednsday", slot23);
+assistantSchedule.get("17h00-20h00").set("Thursday", slot24);
+assistantSchedule.get("17h00-20h00").set("Friday", slot25);
+assistantSchedule.get("17h00-20h00").set("Saturday", slot26);
+assistantSchedule.get("17h00-20h00").set("Sunday", slot27);
+assistantSchedule.set("20h00-00h00", new Map());
+assistantSchedule.get("20h00-00h00").set("Monday", slot28);
+assistantSchedule.get("20h00-00h00").set("Tuesday", slot29);
+assistantSchedule.get("20h00-00h00").set("Wednsday", slot30);
+assistantSchedule.get("20h00-00h00").set("Thursday", slot31);
+assistantSchedule.get("20h00-00h00").set("Friday", slot32);
+assistantSchedule.get("20h00-00h00").set("Saturday", slot33);
+assistantSchedule.get("20h00-00h00").set("Sunday", slot34);
 
-// Mock Schedule
-export const mockSchedule: Schedule = [
-    // Week 1 (Monday to Sunday)
-    [slot0, slot1, slot2, slot3, slot4, slot5, slot6],
-    // Week 2
-    [slot7, slot8, slot9, slot10, slot11, slot12, slot13],
-    // Week 3
-    [slot14, slot15, slot16, slot17, slot18, slot19, slot20],
-    // Week 4
-    [slot21, slot22, slot23, slot24, slot25, slot26, slot27],
-    // Week 5
-    [slot28, slot29, slot30, slot31, slot32, slot33, slot34]
-];
+schoolSchedule.set("07h30-09h10", new Map());
+schoolSchedule.set("09h10-11h00", new Map());
+schoolSchedule.set("11h10-12h50", new Map());
+schoolSchedule.set("13h00-14h40", new Map());
+schoolSchedule.set("14h50-16h30", new Map());
+schoolSchedule.set("16h40-18h20", new Map());
+
 
 export const appSchedule: Schedule = [
     // Week 1 (Monday to Sunday)
@@ -863,3 +851,5 @@ export const updateSchedule: Schedule = [
     // Week 5
     [slot28, slot29, slot30, slot31, slot32, slot33, slot34]
 ]
+
+console.log(assistantSchedule);

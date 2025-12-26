@@ -32,7 +32,7 @@ export const generateSchedule = (appSchedule: Schedule) => {
             const availableSupervisors = availableStudents.filter( (student) => student.role === "supervisor");
 
             //assistants
-                if(slot.Shift.assistants.length < 3 && availableLabAssistants.length > 0){
+                if(slot.Shift.assistants.length < 3 && availableLabAssistants.length > 0){ //if there are enough assistants
                     const assistantsNeeded = 3 - slot.Shift.assistants.length;
                     const assistantsToAssign = availableLabAssistants.slice(0, assistantsNeeded);
                     

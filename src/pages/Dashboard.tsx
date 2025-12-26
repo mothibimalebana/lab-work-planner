@@ -87,10 +87,9 @@ function Overview(){
 
     const generateNewSchedule = () => {
         const {newSchedule, warnings} = generateSchedule(appSchedule);
-        setNewSchedule(newSchedule);
-        setWarning(warnings)
+        setNewSchedule(() => newSchedule);
+        setWarning(warnings);
         
-
         navigate("/generate"); 
     }
     
@@ -110,7 +109,7 @@ function Overview(){
     )
 }
 
-function DashboardTable( { mode = 'overview', data = mockStudents }:dashboardTimetable ){
+function DashboardTable( { mode = 'overview', data = mockStudents }: dashboardTimetable ){
     //student to be displayed when 'view' is clicked
     const [employee, setEmployee] = useState<Students | "">();
     const [viewEmployee, setViewEmployee] = useState<boolean>(false);
