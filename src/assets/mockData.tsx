@@ -172,7 +172,7 @@ export const mockStudents: Students[] = [
 
 export const Shift1: Shift = {
     supervisor: [],
-    assistants: [mockStudents[0]],
+    assistants: [],
     
 };
 

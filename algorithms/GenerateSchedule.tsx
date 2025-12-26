@@ -2,10 +2,12 @@ import type { Students, warning } from "../src/assets/mockData"
 import { type Slot, mockStudents } from "../src/assets/mockData";
 
 export const generateSchedule = (schedule: Map<string, Map<string, Slot>>) => {
-    const warning: warning[] = [];    
+    const warning: warning[] = [];
+    const scheduleArray = Array.from(schedule.entries() || []);
 
-    Array.from(schedule.entries() || []).map( ([time, timeSlot]) => 
+    scheduleArray.map( ([time, timeSlot]) => 
     {
+        
         Array.from(timeSlot.entries()).map(([day, slot]) => {
                 /**Availability Check */
                 //All the modules which have a class taking place during the slot:
@@ -60,5 +62,8 @@ export const generateSchedule = (schedule: Map<string, Map<string, Slot>>) => {
 
     }
     )
-    return { warnings: warning};
+    console.log(scheduleArray);
+    const updatedSchedule = new Map(scheduleArray.map((timeSlot) => timeSlot));
+    console.log(updatedSchedule);
+    return { updatedSchedule, warnings: warning};
 }

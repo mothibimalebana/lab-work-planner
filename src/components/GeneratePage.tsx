@@ -17,17 +17,20 @@ export const GeneratePage = () => {
 
     const [edit, setEdit] = useState(true);
     const [view, setView] = useState(false);
-    const [slot, setSlot] = useState(emptySlot);
-    
+    const [slot, setSlot] = useState(emptySlot); 
+
+    const scheduleArray = Array.from(newSchedule.entries() || []);
+    scheduleArray[0].map(([time, timeSlot]) => console.log(`time: ${time}, map: ${timeSlot}`));
 
     const adjustTimeTable = (slot: Slot) => {
         setView(true);
         setSlot(slot);
     }
 
+    console.log(warnings);
+
     
     return(
-        
         <div className="generate-container flex flex-col bg-[background: linear-gradient(135deg,#F8FAFC_0%,#FFF_50%,#F0FDFA_100%),#FFF]">
             {/* if edit mode and view is true, display the pop up of clicked student */}
             {(edit && view) &&  <PopUp slot={slot} view={view} setView={setView}/>}
@@ -89,15 +92,15 @@ export const GeneratePage = () => {
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                         <td className="w-fit text-left font-normal">{<p>08:00 <br />11:00</p>}</td>
                                         {
-                                            newSchedule[0].map( (slot, id) => (
-                                                <td key={id} className="mx-auto">
+                                            Array.from(scheduleArray[0][1].entries() || []).map( ( [day, slot]) => 
+                                                <td key={day + scheduleArray[0][0]} className="mx-auto">
                                                     <div onClick={() => adjustTimeTable(slot)} className="working h-fit flex flex-col">
                                                         <div className={`cell flex flex-col relative gap-1.5 p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem] ${edit && 'hover:cursor-pointer'}`}> 
                                                             {
                                                                 edit
                                                                 ?           
                                                                 <>
-                                                                    <div className="edit text-[#016630]  text-[0.65rem] py-1.5 pr-10 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">
+                                                                    <div className="edit text-[#016630]  text-[0.65rem] py-1.5 pr-0 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">
                                                                             <div className="cont ">
                                                                                 <div className="edit-circle absolute top-0 right-0 bg-[#337E89] rounded-full px-1 py-1">
                                                                                     <img src={edit_white} width={0.01} alt="edit logo" className="relative z-5 w-3 object-contain" />
@@ -114,8 +117,8 @@ export const GeneratePage = () => {
                                                         </div>
                                                     </div>
                                                 </td>
-                                                )
                                             )
+                                            
                                         }
                                     </tr>
                                 </tbody>

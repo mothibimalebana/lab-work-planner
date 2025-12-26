@@ -86,10 +86,9 @@ function Overview(){
     const {newSchedule, setNewSchedule, setWarning} = useAppData();
 
     const generateNewSchedule = () => {
-        const {warnings} = generateSchedule(newSchedule);
-        setNewSchedule(newSchedule);
+        const {updatedSchedule, warnings} = generateSchedule(newSchedule);
         setWarning(warnings);
-        
+        setNewSchedule(updatedSchedule);
         navigate("/generate"); 
     }
     
