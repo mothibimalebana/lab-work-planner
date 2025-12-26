@@ -6,7 +6,7 @@ export const assistantScheduleMap = new Map();
 export const schoolScheduleMap = new Map();
 
 export type warning = {
-    slotID: number,
+    slotID: string,
     msg: string,
 }
 export type warnings = warning[];
@@ -387,6 +387,17 @@ export const mockBooking: classBooking = {
 }
 
 // Individual slots with static unavailable students
+export const emptySlot: Slot = {
+    slotID: 0,
+    isBooked: true,
+    isUnavailable: true,
+    
+    isBlocked: false,
+    blockingModules: [modules[0][0],modules[0][1]],
+    Shift: Shift1,
+    booking: mockBooking,
+    unavailable: []
+};
 
 const slot0: Slot = {
     slotID: 0,
@@ -397,18 +408,8 @@ const slot0: Slot = {
     blockingModules: [modules[0][0],modules[0][1]],
     Shift: Shift1,
     booking: mockBooking,
-    unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]]
+    unavailable: []
 };
-export const emptySlot: Slot = {
-    slotID: 0,
-    isBooked: false,
-    isUnavailable: false,
-    blockingModules: [],
-    Shift: Shift1,
-    unavailable: [],
-    isBlocked: false
-    
-}
 
 export const slot1: Slot = {
     slotID: 1,
@@ -416,9 +417,8 @@ export const slot1: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift2,
-    
-    unavailable: [mockStudents[3], mockStudents[4]]
+    Shift: mockShift2,  
+    unavailable: []
 };
 
 const slot2: Slot = {
@@ -429,7 +429,7 @@ const slot2: Slot = {
     blockingModules: [],
     Shift: mockShift3,
     
-    unavailable: [mockStudents[0]]
+    unavailable: []
 };
 
 const slot3: Slot = {
@@ -439,7 +439,7 @@ const slot3: Slot = {
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift4,
-    unavailable: [mockStudents[1], mockStudents[2], mockStudents[3]]
+    unavailable: []
 };
 
 const slot4: Slot = {
@@ -450,7 +450,7 @@ const slot4: Slot = {
     blockingModules: [],
     Shift: mockShift5,
     
-    unavailable: [mockStudents[0], mockStudents[4]]
+    unavailable: []
 };
 
 const slot5: Slot = {
@@ -460,7 +460,7 @@ const slot5: Slot = {
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift6,
-    unavailable: [mockStudents[2], mockStudents[3]]
+    unavailable: []
 };
 
 const slot6: Slot = {
@@ -470,7 +470,7 @@ const slot6: Slot = {
     isBlocked: false,
     blockingModules: [],
     Shift: mockShift7,
-    unavailable: [mockStudents[1], mockStudents[4]]
+    unavailable: []
 };
 
 const slot7: Slot = {
@@ -613,7 +613,6 @@ const slot20: Slot = {
     isBlocked: true,
     blockingModules: [modules[0][3],modules[0][4]],
     Shift: mockShift21,
-    
     unavailable: []
 };
 

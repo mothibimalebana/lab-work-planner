@@ -11,7 +11,7 @@ import type { DashboardMode, DashboardProps, dashboardTimetable } from '../../ty
 import { useState } from "react"
 import ViewEmployee from "./pop-up/Dashboard"
 import { generateSchedule } from "../../algorithms/GenerateSchedule"
-import { appSchedule, mockStudents, type Students } from "../assets/mockData"
+import { mockStudents, type Students } from "../assets/mockData"
 import { useNavigate } from "react-router"
 import { useAppData } from "../assets/context/ScheduleContext"
 
@@ -83,11 +83,11 @@ function Card( {activeAssistants = 3, activeSupervisors = 1, inactive = 31, tota
 //Toggling to overview on the carousel will display:
 function Overview(){
     const navigate = useNavigate();
-    const {setNewSchedule, setWarning} = useAppData();
+    const {newSchedule, setNewSchedule, setWarning} = useAppData();
 
     const generateNewSchedule = () => {
-        const {newSchedule, warnings} = generateSchedule(appSchedule);
-        setNewSchedule(() => newSchedule);
+        const {warnings} = generateSchedule(newSchedule);
+        setNewSchedule(newSchedule);
         setWarning(warnings);
         
         navigate("/generate"); 
