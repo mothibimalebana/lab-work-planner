@@ -2,15 +2,13 @@ export type FormMode = "employee" | "modules";
 export type role = "assistant" | "supervisor";
 export type lab = 1 | 2 | 3;
 
-
-const assistantSchedule = new Map();
-const schoolSchedule = new Map();
+export const assistantScheduleMap = new Map();
+export const schoolScheduleMap = new Map();
 
 export type warning = {
     slotID: number,
     msg: string,
 }
-
 export type warnings = warning[];
 
 export type Shift = {
@@ -19,7 +17,6 @@ export type Shift = {
     attentded?: boolean;
     donated?: boolean;
     role?: role;
-    lab: lab;
 }
 
 export type Module = {
@@ -266,43 +263,43 @@ export const mockShift15: Shift = {
 export const mockShift16: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 3
+    
 };
 
 export const mockShift17: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 3
+    
 };
 
 export const mockShift18: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 3
+    
 };
 
 export const mockShift19: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 3
+    
 };
 
 export const mockShift20: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 3
+    
 };
 
 export const mockShift21: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 3
+    
 };
 
 export const mockShift22: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 3
+    
 };
 
 export const mockShift23: Shift = {
@@ -332,13 +329,13 @@ export const mockShift26: Shift = {
 export const mockShift27: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 3
+    
 };
 
 export const mockShift28: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 3
+    
 };
 
 export const mockShift29: Shift = {
@@ -356,7 +353,7 @@ export const mockShift30: Shift = {
 export const mockShift31: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 3
+    
 };
 
 export const mockShift32: Shift = {
@@ -374,7 +371,7 @@ export const mockShift33: Shift = {
 export const mockShift34: Shift = {
     supervisor: [],
     assistants: [],
-    lab: 3
+    
 };
 
 export const mockShift35: Shift = {
@@ -777,53 +774,53 @@ const slot34: Slot = {
     unavailable: []
 };
 
-assistantSchedule.set("08h00-11h00", new Map<string, Slot>());
-assistantSchedule.get("08h00-11h00").set("Monday", slot0);
-assistantSchedule.get("08h00-11h00").set("Tuesday", slot1);
-assistantSchedule.get("08h00-11h00").set("Wednsday", slot2);
-assistantSchedule.get("08h00-11h00").set("Thursday", slot3);
-assistantSchedule.get("08h00-11h00").set("Friday", slot4);
-assistantSchedule.get("08h00-11h00").set("Saturday", slot5);
-assistantSchedule.get("08h00-11h00").set("Sunday", slot6);
-assistantSchedule.set("11h00-14h00", new Map());
-assistantSchedule.get("11h00-14h00").set("Monday", slot7);
-assistantSchedule.get("11h00-14h00").set("Tuesday", slot8);
-assistantSchedule.get("11h00-14h00").set("Wednsday", slot9);
-assistantSchedule.get("11h00-14h00").set("Thursday", slot10);
-assistantSchedule.get("11h00-14h00").set("Friday", slot11);
-assistantSchedule.get("11h00-14h00").set("Saturday", slot12);
-assistantSchedule.get("11h00-14h00").set("Sunday", slot13);
-assistantSchedule.set("14h00-17h00", new Map());
-assistantSchedule.get("14h00-17h00").set("Monday", slot14);
-assistantSchedule.get("14h00-17h00").set("Tuesday", slot15);
-assistantSchedule.get("14h00-17h00").set("Wednsday", slot16);
-assistantSchedule.get("14h00-17h00").set("Thursday", slot17);
-assistantSchedule.get("14h00-17h00").set("Friday", slot18);
-assistantSchedule.get("14h00-17h00").set("Saturday", slot19);
-assistantSchedule.get("14h00-17h00").set("Sunday", slot20);
-assistantSchedule.set("17h00-20h00", new Map());
-assistantSchedule.get("17h00-20h00").set("Monday", slot21);
-assistantSchedule.get("17h00-20h00").set("Tuesday", slot22);
-assistantSchedule.get("17h00-20h00").set("Wednsday", slot23);
-assistantSchedule.get("17h00-20h00").set("Thursday", slot24);
-assistantSchedule.get("17h00-20h00").set("Friday", slot25);
-assistantSchedule.get("17h00-20h00").set("Saturday", slot26);
-assistantSchedule.get("17h00-20h00").set("Sunday", slot27);
-assistantSchedule.set("20h00-00h00", new Map());
-assistantSchedule.get("20h00-00h00").set("Monday", slot28);
-assistantSchedule.get("20h00-00h00").set("Tuesday", slot29);
-assistantSchedule.get("20h00-00h00").set("Wednsday", slot30);
-assistantSchedule.get("20h00-00h00").set("Thursday", slot31);
-assistantSchedule.get("20h00-00h00").set("Friday", slot32);
-assistantSchedule.get("20h00-00h00").set("Saturday", slot33);
-assistantSchedule.get("20h00-00h00").set("Sunday", slot34);
+assistantScheduleMap.set("08h00-11h00", new Map<string, Slot>());
+assistantScheduleMap.get("08h00-11h00").set("Monday", slot0);
+assistantScheduleMap.get("08h00-11h00").set("Tuesday", slot1);
+assistantScheduleMap.get("08h00-11h00").set("Wednsday", slot2);
+assistantScheduleMap.get("08h00-11h00").set("Thursday", slot3);
+assistantScheduleMap.get("08h00-11h00").set("Friday", slot4);
+assistantScheduleMap.get("08h00-11h00").set("Saturday", slot5);
+assistantScheduleMap.get("08h00-11h00").set("Sunday", slot6);
+assistantScheduleMap.set("11h00-14h00", new Map());
+assistantScheduleMap.get("11h00-14h00").set("Monday", slot7);
+assistantScheduleMap.get("11h00-14h00").set("Tuesday", slot8);
+assistantScheduleMap.get("11h00-14h00").set("Wednsday", slot9);
+assistantScheduleMap.get("11h00-14h00").set("Thursday", slot10);
+assistantScheduleMap.get("11h00-14h00").set("Friday", slot11);
+assistantScheduleMap.get("11h00-14h00").set("Saturday", slot12);
+assistantScheduleMap.get("11h00-14h00").set("Sunday", slot13);
+assistantScheduleMap.set("14h00-17h00", new Map());
+assistantScheduleMap.get("14h00-17h00").set("Monday", slot14);
+assistantScheduleMap.get("14h00-17h00").set("Tuesday", slot15);
+assistantScheduleMap.get("14h00-17h00").set("Wednsday", slot16);
+assistantScheduleMap.get("14h00-17h00").set("Thursday", slot17);
+assistantScheduleMap.get("14h00-17h00").set("Friday", slot18);
+assistantScheduleMap.get("14h00-17h00").set("Saturday", slot19);
+assistantScheduleMap.get("14h00-17h00").set("Sunday", slot20);
+assistantScheduleMap.set("17h00-20h00", new Map());
+assistantScheduleMap.get("17h00-20h00").set("Monday", slot21);
+assistantScheduleMap.get("17h00-20h00").set("Tuesday", slot22);
+assistantScheduleMap.get("17h00-20h00").set("Wednsday", slot23);
+assistantScheduleMap.get("17h00-20h00").set("Thursday", slot24);
+assistantScheduleMap.get("17h00-20h00").set("Friday", slot25);
+assistantScheduleMap.get("17h00-20h00").set("Saturday", slot26);
+assistantScheduleMap.get("17h00-20h00").set("Sunday", slot27);
+assistantScheduleMap.set("20h00-00h00", new Map());
+assistantScheduleMap.get("20h00-00h00").set("Monday", slot28);
+assistantScheduleMap.get("20h00-00h00").set("Tuesday", slot29);
+assistantScheduleMap.get("20h00-00h00").set("Wednsday", slot30);
+assistantScheduleMap.get("20h00-00h00").set("Thursday", slot31);
+assistantScheduleMap.get("20h00-00h00").set("Friday", slot32);
+assistantScheduleMap.get("20h00-00h00").set("Saturday", slot33);
+assistantScheduleMap.get("20h00-00h00").set("Sunday", slot34);
 
-schoolSchedule.set("07h30-09h10", new Map());
-schoolSchedule.set("09h10-11h00", new Map());
-schoolSchedule.set("11h10-12h50", new Map());
-schoolSchedule.set("13h00-14h40", new Map());
-schoolSchedule.set("14h50-16h30", new Map());
-schoolSchedule.set("16h40-18h20", new Map());
+schoolScheduleMap.set("07h30-09h10", new Map());
+schoolScheduleMap.set("09h10-11h00", new Map());
+schoolScheduleMap.set("11h10-12h50", new Map());
+schoolScheduleMap.set("13h00-14h40", new Map());
+schoolScheduleMap.set("14h50-16h30", new Map());
+schoolScheduleMap.set("16h40-18h20", new Map());
 
 
 export const appSchedule: Schedule = [
@@ -852,4 +849,4 @@ export const updateSchedule: Schedule = [
     [slot28, slot29, slot30, slot31, slot32, slot33, slot34]
 ]
 
-console.log(assistantSchedule);
+console.log(assistantScheduleMap);

@@ -19,7 +19,6 @@ const BreadCrumbs = ({ hours = 0, rate = 36.5, setMode, mode }: BreadCrumbsProps
     const dd = splitDate[1];
     const mm = months[Number(splitDate[0]) - 1];
     const yyyy = splitDate[2];
-    console.log(splitDate)
     const dateString = dd + ' ' + ' ' + mm + ' '  + yyyy;
 
     //Switch between Shifts view and Bookings
