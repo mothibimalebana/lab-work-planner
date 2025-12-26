@@ -170,9 +170,9 @@ export const mockStudents: Students[] = [
     },
 ];
 
-export const mockShift1: Shift = {
+export const Shift1: Shift = {
     supervisor: [],
-    assistants: [],
+    assistants: [mockStudents[0]],
     
 };
 
@@ -395,7 +395,7 @@ const slot0: Slot = {
     
     isBlocked: false,
     blockingModules: [modules[0][0],modules[0][1]],
-    Shift: mockShift1,
+    Shift: Shift1,
     booking: mockBooking,
     unavailable: [mockStudents[0], mockStudents[1], mockStudents[2]]
 };
@@ -404,7 +404,7 @@ export const emptySlot: Slot = {
     isBooked: false,
     isUnavailable: false,
     blockingModules: [],
-    Shift: mockShift1,
+    Shift: Shift1,
     unavailable: [],
     isBlocked: false
     
