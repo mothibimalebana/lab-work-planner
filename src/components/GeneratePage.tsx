@@ -3,12 +3,16 @@ import back from "../assets/svg/Bacj.svg";
 import warning from "../assets/svg/warning.svg"
 import edit_Icon from "../assets/svg/edit_Icon.svg"
 import x from "../assets/svg/x-black.svg";
+import tick from "../assets/svg/tickIcon.svg";
 import save from "../assets/svg/save.svg";
 import edit_white from "../assets/svg/edit-white.svg";
+import unavailable from "../assets/svg/unavailable.svg";
+
 import people from "../assets/svg/people.svg";
 import { emptySlot, type Slot } from "../assets/mockData";
 import { useState } from "react";
 import { useAppData } from "../assets/context/ScheduleContext";
+
 
 
 
@@ -54,7 +58,7 @@ export const GeneratePage = () => {
                                 <p>Click on any time slot to add or remove lab assistants. The system will show you available assistants and warn you about conflicts.</p>
                             </div>
                         :
-                            <div className="warning border border-solid border-[#E5E8EB] mx-[5.12rem] text-[#717182] text-[0.85rem] bg-white mt-6 px-6 py-2.5 rounded-md h-[9.59769rem] overflow-y-auto">
+                            <div className="warning border border-solid border-[#E5E8EB] mx-[5.12rem] text-[#717182] text-[0.85rem] bg-white mt-6 px-6 py-2.5 rounded-md">
                                 <h3 className="text-[#717182] font-bold flex items-center1 gap-1 text-[0.875rem]"><img src={warning} alt="danger sign" /> Schedule Warnings: </h3>
                                 <div className="warning-messages">{warnings.map((eachWarning, id) => <div key={id}>{eachWarning.slotID}: {eachWarning.msg.map((warningMsg, id) => <p key={id}>• {warningMsg}</p>)}</div>)}</div>
                             </div>
@@ -141,7 +145,7 @@ export const GeneratePage = () => {
 
 const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, closePopUp: () => void}) => {
     return(
-        <div className="pop-up-container absolute inset-0 backdrop-blur-sm transition-opacity flex justify-center items-center bg-[rgba(0,0,0,0.5)] h-full z-10">
+        <div className="pop-up-container h-full! absolute inset-0 backdrop-blur-sm transition-opacity flex justify-center items-center bg-[rgba(0,0,0,0.5)] z-10">
             <div className="pop-up flex flex-col gap-2 w-[40%] h-[95%] bg-white py-6 px-6 rounded-md">
                 <div className="header flex justify-between items-center">
                     <div className="left flex flex-col gap-1 non-italics font-normal">
@@ -154,29 +158,74 @@ const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, close
                     
                     <div className="right hover:cursor-pointer"><img onClick={closePopUp} src={x} alt="x icon" /></div>
                 </div>
-                <div className="content flex flex-col gap-3.5 ">
-                    <div className="available">
+                <div className="content flex flex-col gap-4 h-full">
+                    <div className="available flex flex-col gap-1.5">
                         <h3 className="font-bold text-[1rem] text-[#101828]">Available Assistants: </h3>
                         {
-                            slot.Shift.assistants.map((assistant, id) => 
-                                 <p key={id}>{assistant.fullName}</p>
+                            slot.Shift.assistants.map((assistant, id) =>
+                                <div key={id} className="assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid border-[#337E89] bg-[rgba(51,126,137,0.10)] rounded-md">
+                                    <input defaultChecked={slot.Shift.assistants.includes(assistant)} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
+                                    <div className="name-modules">
+                                    <div className="fullName flex gap-3">
+                                        <p className="text-[#0A0A0A] text-[0.95rem] font-normal" key={id}>{assistant.fullName}</p>
+                                        <img src={tick} alt="green tick" width={15.98} />
+                                    </div>
+                                    <div className="modules">
+                                        { assistant.modules.length <= 2 
+                                            ?
+                                                assistant.modules.map((mods,id) => <p key={id} className="text-[#0A0A0A] border-2 border-solid border-[rgba(0,0,0,0.10)] w-fit rounded-lg px-2 py-0.5 text-[0.875rem] font-normal">{mods.code}</p>)
+                                            :
+                                                assistant.modules.slice(0, 4).map((mods, id) =>  {
+                                                
+                                                return <p key={id} className="text-[#0A0A0A] border-2 border-solid border-[rgba(0,0,0,0.10)] w-fit rounded-lg px-2 py-0.5 text-[0.875rem] font-normal">{mods.code}</p>
+                                                }
+                                            )
+                                        }
+                                    </div>
+                                    </div>
+                                </div>  
                         )
                         }
 
                     </div>
-                    <div className="unavailable flex justify-between items-center">
-                        <h3 className="font-bold text-[1rem] text-[#101828]">Unavailable Assistants: </h3>
-                        <p className="text-[0.875rem] text-[#6A7282]">Click to override and assign anyway</p>
+                    <div className="unavailable flex flex-col justify-between">
+                        <div className="unavailable-header">
+                            <h3 className="font-bold text-[1rem] text-[#101828]">Unavailable Assistants: </h3>
+                            <p className="text-[0.875rem] text-[#6A7282]">Click to override and assign anyway</p>
+                        </div>
                         <div className="items flex flex-col gap-3.5">
                         {
                             slot.unavailable.map((unavailableAssistant, id) => 
-                                 <p key={id}>{unavailableAssistant?.fullName ?? 'Empty'}</p>
-                        )
+                                <div key={id} className="assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid border-[#E5E7EB] opacity-75 bg-[#F9FAFB] rounded-md">
+                                    <input className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
+                                    <div className="name-modules flex flex-col gap-0.5">
+                                    <div className="fullName flex gap-1">
+                                        <img src={unavailable} alt="green tick" width={15.98} />
+                                        <p className="text-[#0A0A0A] text-[0.95rem] font-normal" key={id}>{unavailableAssistant.fullName}</p>
+                                    </div>
+                                    <p className="text-[0.75rem]">Marked unavailable - May have a class or other commitments</p>
+                                    <div className="modules">
+                                        { unavailableAssistant.modules.length <= 2 
+                                            ?
+                                                unavailableAssistant.modules.map((mods,id) => <p key={id} className="text-[#0A0A0A] border-2 border-solid border-[rgba(0,0,0,0.10)] w-fit rounded-lg px-2 py-0.5 text-[0.875rem] font-normal">{mods.code}</p>)
+                                            :
+                                                unavailableAssistant.modules.slice(0, 4).map((mods, id) =>  {
+                                                
+                                                return <p key={id} className="text-[#0A0A0A] border-2 border-solid border-[rgba(0,0,0,0.10)] w-fit rounded-lg px-2 py-0.5 text-[0.875rem] font-normal">{mods.code}</p>
+                                                }
+                                            )
+                                        }
+                                    </div>
+                                    </div>
+                                </div> 
+                            )
                         }
                         </div>
                     </div>
                 </div>
-                <div className="buttons"></div>
+                <div className="buttons">
+
+                </div>
             </div>
         </div>
     )

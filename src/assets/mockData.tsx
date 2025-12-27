@@ -144,14 +144,14 @@ export const mockStudents: Students[] = [
         studentNo: 23456789,
         fullName: "Pitsi Phihlela",
         role: "assistant",
-        modules: [],
+        modules: [modules[0][0]],
         shifts: [] // Will be filled after slots are created
     },
     {
         studentNo: 34567890,
         fullName: "Thabiso Kgatla",
         role: "assistant",
-        modules: [],
+        modules: [modules[0][1]],
         shifts: [] // Will be filled after slots are created
     },
     {
@@ -407,7 +407,7 @@ const slot0: Slot = {
     blockingModules: [modules[0][0],modules[0][1]],
     Shift: Shift1,
     booking: mockBooking,
-    unavailable: []
+    unavailable: [mockStudents[1]],
 };
 
 export const slot1: Slot = {
