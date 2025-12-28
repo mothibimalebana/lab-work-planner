@@ -10,7 +10,7 @@ import unavailable from "../assets/svg/unavailable.svg";
 
 import people from "../assets/svg/people.svg";
 import { emptySlot, type Slot } from "../assets/mockData";
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import { useAppData } from "../assets/context/ScheduleContext";
 
 
@@ -144,6 +144,36 @@ export const GeneratePage = () => {
 
 
 const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, closePopUp: () => void}) => {
+    const [assistantSlots, setAssistantSlots] = useState(slot.Shift.assistants);
+
+    const removeAssistant = (assistantStudentNO: number) => {
+        const isAssigned = assistantSlots.map((student) => student.studentNo).includes(Number(assistantStudentNO));
+        console.log('removing...assigned already:', isAssigned);
+        console.log('change: ', assistantStudentNO);
+
+    };
+
+    const addAssistant = (assistantStudentNO: number) => {
+        const isAssigned = assistantSlots.map((student) => student.studentNo).includes(Number(assistantStudentNO));
+        console.log('adding...assigned already: ', isAssigned);
+        console.log('change: ', assistantStudentNO);
+    }
+
+    const onClick = (e: ChangeEvent) => {
+        switch(e.target.checked){
+            case false:
+                removeAssistant(e.target.value);
+                break;
+            case true:
+                addAssistant(e.target.value);
+                break;
+            default:
+                console.warn('Something went wrong')
+        }
+
+    }
+
+
     return(
         <div className="pop-up-container h-full! absolute inset-0 backdrop-blur-sm transition-opacity flex justify-center items-center bg-[rgba(0,0,0,0.5)] z-10">
             <div className="pop-up flex flex-col gap-2 w-[40%] h-[95%] bg-white py-6 px-6 rounded-md">
@@ -164,7 +194,7 @@ const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, close
                         {
                             slot.Shift.assistants.map((assistant, id) =>
                                 <div key={id} className="assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid border-[#337E89] bg-[rgba(51,126,137,0.10)] rounded-md">
-                                    <input defaultChecked={slot.Shift.assistants.includes(assistant)} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
+                                    <input onChange={e => onClick(e)} defaultChecked={slot.Shift.assistants.includes(assistant)} value={assistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
                                     <div className="name-modules">
                                     <div className="fullName flex gap-3">
                                         <p className="text-[#0A0A0A] text-[0.95rem] font-normal" key={id}>{assistant.fullName}</p>

@@ -18,7 +18,6 @@ export const generateSchedule = (schedule: Map<string, Map<string, Slot>>) => {
         Array.from(timeSlot.entries()).forEach(([day, slot]) => {            
             // Reset for debugging
             const originalMockStudents = mockStudents.map(createStudentCopy);
-            console.log(`Total students: ${originalMockStudents.length}`);
             
             /** Filter by blocking modules */
             let availableStudents = originalMockStudents.filter(student => {
@@ -68,7 +67,6 @@ export const generateSchedule = (schedule: Map<string, Map<string, Slot>>) => {
                 assistantsToAssign.forEach(assistant => {
                     const assistantCopy = createStudentCopy(assistant);
                     slot.Shift.assistants.push(assistantCopy);
-                    console.log(`  Assigned assistant: ${assistantCopy.fullName} (ID: ${assistantCopy.studentNo})`);
                 });
                 
                 if (assistantsToAssign.length < assistantsNeeded) {
@@ -84,7 +82,6 @@ export const generateSchedule = (schedule: Map<string, Map<string, Slot>>) => {
                 const supervisorToAssign = availableSupervisors[0]; // Get first available
                 const supervisorCopy = createStudentCopy(supervisorToAssign);
                 slot.Shift.supervisor.push(supervisorCopy);
-                console.log(`  Assigned supervisor: ${supervisorCopy.fullName} (ID: ${supervisorCopy.studentNo})`);
             } else if (slot.Shift.supervisor.length === 0) {
                 console.warn(`WARNING: No supervisor available for ${day} ${time}`);
                 // Add to warnings
