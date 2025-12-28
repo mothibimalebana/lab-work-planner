@@ -202,19 +202,24 @@ const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, close
         };
     }
 
-    const onClick = (e: ChangeEvent) => {
-        switch(e.target.checked){
-            case false:
-                removeAssistant(e.target.value);
-                break;
-            case true:
-                addAssistant(e.target.value);
-                break;
-            default:
-                console.warn('Something went wrong')
+const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const target = e.target;
+    const isChecked = target.checked;
+    const assistantId = target.value;
+    
+    if (isChecked) {
+        // Check if we can add another assistant
+        if (assistantSlots.length >= 3) { // Already have 3 selected
+            e.preventDefault();
+            alert("You can only select up to 3 assistants.");
+            target.checked = false; // Uncheck the checkbox
+            return;
         }
-
+        addAssistant(Number(assistantId));
+    } else {
+        removeAssistant(Number(assistantId));
     }
+}
 
 
     return(
@@ -237,7 +242,7 @@ const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, close
                         {
                             availableStudents.map((assistant, id) =>
                                 <div key={id} className={`assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid ${assistantSlots.map((assistant) => assistant.studentNo).includes(assistant.studentNo) ? `border-[#337E89]  bg-[rgba(51,126,137,0.10)]` : `border-[rgba(0,0,0,0.10)]`}  rounded-md`}>
-                                    <input onChange={e => onClick(e)} defaultChecked={slot.Shift.assistants.map((assistant) => assistant.studentNo).includes(assistant.studentNo)} value={assistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
+                                    <input onChange={e => onCheckboxChange(e)} defaultChecked={slot.Shift.assistants.map((assistant) => assistant.studentNo).includes(assistant.studentNo)} value={assistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
                                     <div className="name-modules">
                                     <div className="fullName flex gap-3">
                                         <p className="text-[#0A0A0A] text-[0.95rem] font-normal" key={id}>{assistant.fullName}</p>
