@@ -7,7 +7,7 @@ import tick from "../assets/svg/tickIcon.svg";
 import save from "../assets/svg/save.svg";
 import edit_white from "../assets/svg/edit-white.svg";
 import unavailable from "../assets/svg/unavailable.svg";
-
+import type { Students } from "../assets/mockData";
 import people from "../assets/svg/people.svg";
 import { emptySlot, type Slot } from "../assets/mockData";
 import { useState, type ChangeEvent } from "react";
@@ -144,19 +144,62 @@ export const GeneratePage = () => {
 
 
 const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, closePopUp: () => void}) => {
-    const [assistantSlots, setAssistantSlots] = useState(slot.Shift.assistants);
+    //all students
+    const { students } = useAppData();
+    
+    //helper to create deep copy of all students
+    const createStudentCopy = (student: Students): Students => ({
+        ...student,
+        shifts: [...(student.shifts || [])], //make deep copy of shifts
+        modules: [...(student.modules || [])], //make deep copy of shifts
+    });
+    const intialAssistants = slot.Shift.assistants.map(createStudentCopy);
+
+    const copyStudents = students.map(createStudentCopy);
+    const [assistantSlots, setAssistantSlots] = useState(intialAssistants);
+
+    
+    /** Filter by blocking modules */
+    let availableStudents = copyStudents.filter(student => {
+        return slot.blockingModules.every(blockedModule => 
+            !student.modules?.includes(blockedModule)
+        );
+    });
+    
+    /** Remove unavailable students */
+    if (slot.unavailable && slot.unavailable.length > 0) {
+        const unavailableIds = slot.unavailable.map(s => s.studentNo);
+        availableStudents = availableStudents.filter(student => 
+            !unavailableIds.includes(student.studentNo)
+        );
+    }
+    
+    /**Remove duplicates */
+    const uniqueStudents: Students[] = [];
+    const seenIds = new Set();
+    
+    availableStudents.forEach(student => {
+        if (!seenIds.has(student.studentNo)) {
+            seenIds.add(student.studentNo);
+            uniqueStudents.push(student);
+        }
+    });
+    availableStudents = uniqueStudents;
 
     const removeAssistant = (assistantStudentNO: number) => {
-        const isAssigned = assistantSlots.map((student) => student.studentNo).includes(Number(assistantStudentNO));
-        console.log('removing...assigned already:', isAssigned);
-        console.log('change: ', assistantStudentNO);
-
+        const isAssignedAlready = assistantSlots.map((student) => student.studentNo).includes(Number(assistantStudentNO));
+        if(isAssignedAlready){
+            const newAssistantSlots = assistantSlots.filter((student) => student.studentNo != assistantStudentNO );
+            setAssistantSlots(newAssistantSlots);
+        };
     };
 
     const addAssistant = (assistantStudentNO: number) => {
-        const isAssigned = assistantSlots.map((student) => student.studentNo).includes(Number(assistantStudentNO));
-        console.log('adding...assigned already: ', isAssigned);
-        console.log('change: ', assistantStudentNO);
+        const isAssignedAlready = assistantSlots.map((student) => student.studentNo).includes(Number(assistantStudentNO));
+        if(!isAssignedAlready){
+            const newAssistantSlots = assistantSlots.push(copyStudents[students.map((students) => students.studentNo).indexOf(assistantStudentNO)]);
+            setAssistantSlots(newAssistantSlots);
+        };
     }
 
     const onClick = (e: ChangeEvent) => {
@@ -192,13 +235,13 @@ const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, close
                     <div className="available flex flex-col gap-1.5">
                         <h3 className="font-bold text-[1rem] text-[#101828]">Available Assistants: </h3>
                         {
-                            slot.Shift.assistants.map((assistant, id) =>
-                                <div key={id} className="assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid border-[#337E89] bg-[rgba(51,126,137,0.10)] rounded-md">
-                                    <input onChange={e => onClick(e)} defaultChecked={slot.Shift.assistants.includes(assistant)} value={assistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
+                            availableStudents.map((assistant, id) =>
+                                <div key={id} className={`assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid ${assistantSlots.map((assistant) => assistant.studentNo).includes(assistant.studentNo) ? `border-[#337E89]  bg-[rgba(51,126,137,0.10)]` : `border-[rgba(0,0,0,0.10)]`}  rounded-md`}>
+                                    <input onChange={e => onClick(e)} defaultChecked={slot.Shift.assistants.map((assistant) => assistant.studentNo).includes(assistant.studentNo)} value={assistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
                                     <div className="name-modules">
                                     <div className="fullName flex gap-3">
                                         <p className="text-[#0A0A0A] text-[0.95rem] font-normal" key={id}>{assistant.fullName}</p>
-                                        <img src={tick} alt="green tick" width={15.98} />
+                                        { assistantSlots.map((assistant) => assistant.studentNo).includes(assistant.studentNo) && <img src={tick} alt="green tick" width={15.98} /> }
                                     </div>
                                     <div className="modules">
                                         { assistant.modules.length <= 2 
