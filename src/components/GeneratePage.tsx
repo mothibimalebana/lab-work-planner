@@ -197,7 +197,7 @@ const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, close
     const addAssistant = (assistantStudentNO: number) => {
         const isAssignedAlready = assistantSlots.map((student) => student.studentNo).includes(Number(assistantStudentNO));
         if(!isAssignedAlready){
-            const newAssistantSlots = assistantSlots.push(copyStudents[students.map((students) => students.studentNo).indexOf(assistantStudentNO)]);
+            const newAssistantSlots = [...assistantSlots, copyStudents[copyStudents.map((student) => student.studentNo).indexOf(Number(assistantStudentNO))]];
             setAssistantSlots(newAssistantSlots);
         };
     }
