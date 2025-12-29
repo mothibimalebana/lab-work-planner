@@ -17,12 +17,14 @@ import { useAppData } from "../assets/context/ScheduleContext";
 
 
 export const GeneratePage = () => {
-    const {newSchedule, warnings} = useAppData();
+    const {newSchedule, setNewSchedule , warnings} = useAppData();
 
     const [edit, setEdit] = useState(true);
     const [view, setView] = useState(false);
     const [slot, setSlot] = useState(emptySlot);
     const [timeDay, setTimeDay] = useState("");
+
+
 
     const scheduleArray = Array.from(newSchedule.entries() || []);
 
@@ -37,13 +39,15 @@ export const GeneratePage = () => {
         setSlot(emptySlot);
     }
 
-    console.log(warnings);
+    const onSubmit = () => {
+        Array.from(scheduleArray.entries()).map(([time, timeSlot]) => Array.from(timeSlot.entries()).map((slot) => console.log(slot)) );
+    }
 
     
     return(
         <div className="generate-container flex flex-col bg-[background: linear-gradient(135deg,#F8FAFC_0%,#FFF_50%,#F0FDFA_100%),#FFF]">
             {/* if edit mode and view is true, display the pop up of clicked student */}
-            {(edit && view) &&  <PopUp slot={slot} timeDay={timeDay} closePopUp={closeAdjustTimeTable}/>}
+            {(edit && view) &&  <PopUp slot={slot} setSlot={setSlot} timeDay={timeDay} closePopUp={closeAdjustTimeTable}/>}
 
             <div className="generate h-full justify-center font-[Arimo] text-[#0A0A0A]">
                 {/* Back Button */}
@@ -79,7 +83,7 @@ export const GeneratePage = () => {
                                         ?
                                         <div className="confirm-exit-buttons flex gap-2.5">
                                             <button onClick={() => setEdit(!edit)} className="white-button"><img src={x} alt="edit icon"/>Cancel</button>
-                                            <button className="green-button"><img src={save} alt="edit icon" />Save Changes</button>
+                                            <button onClick={onSubmit} className="green-button"><img src={save} alt="edit icon" />Save Changes</button>
                                         </div>
                                         :
                                         <button onClick={() => setEdit(!edit)} className="white-green-button"><img src={edit_Icon} alt="edit icon" /> Edit Schedule</button>
@@ -143,7 +147,7 @@ export const GeneratePage = () => {
 
 
 
-const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, closePopUp: () => void}) => {
+const PopUp = ({ slot, timeDay, closePopUp, setSlot}: {slot: Slot, timeDay: string, closePopUp: () => void, setSlot: (slot: Slot) => void}) => {
     //all students
     const { students } = useAppData();
     
@@ -154,6 +158,21 @@ const PopUp = ({ slot, timeDay, closePopUp}: {slot: Slot, timeDay: string, close
         modules: [...(student.modules || [])], //make deep copy of shifts
     });
     const intialAssistants = slot.Shift.assistants.map(createStudentCopy);
+
+    const onSubmit = () => {
+        if(slot.Shift.assistants.length == 3){
+            const newSlot = {
+                ...slot,
+                Shift: {
+                    ...slot.Shift,
+                    assistants: [...assistantSlots],
+                }
+            }
+            setSlot(newSlot);
+        } else {
+            alert("Select exactly 3 assistants to continue");
+        }
+    };
 
     const copyStudents = students.map(createStudentCopy);
     const [assistantSlots, setAssistantSlots] = useState(intialAssistants);
@@ -224,7 +243,7 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
 
     return(
         <div className="pop-up-container h-full! absolute inset-0 backdrop-blur-sm transition-opacity flex justify-center items-center bg-[rgba(0,0,0,0.5)] z-10">
-            <div className="pop-up flex flex-col gap-2 w-[40%] h-[95%] bg-white py-6 px-6 rounded-md">
+            <div className="pop-up flex flex-col gap-2 w-[40%] h-[95%] bg-white py-6 px-6 rounded-md overflow-y-auto">
                 <div className="header flex justify-between items-center">
                     <div className="left flex flex-col gap-1 non-italics font-normal">
                         <div className="top flex gap-2">
@@ -274,8 +293,8 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
                         <div className="items flex flex-col gap-3.5">
                         {
                             slot.unavailable.map((unavailableAssistant, id) => 
-                                <div key={id} className="assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid border-[#E5E7EB] opacity-75 bg-[#F9FAFB] rounded-md">
-                                    <input className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
+                                <div key={id} className={`assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid ${assistantSlots.map((assistant) => assistant.studentNo).includes(unavailableAssistant.studentNo) ? `border-[#FF8904]  bg-[#FFF7ED]` : `border-[#E5E7EB] opacity-75 bg-[#F9FAFB]`} rounded-md`}>
+                                    <input onChange={e => onCheckboxChange(e)} value={unavailableAssistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
                                     <div className="name-modules flex flex-col gap-0.5">
                                     <div className="fullName flex gap-1">
                                         <img src={unavailable} alt="green tick" width={15.98} />
@@ -301,8 +320,9 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
                         </div>
                     </div>
                 </div>
-                <div className="buttons">
-
+                <div className="buttons flex gap-2.5">
+                    <button onClick={closePopUp} className="white-button text-black">Cancel</button>
+                    <button onClick={onSubmit} className="white-green-button">Save</button>
                 </div>
             </div>
         </div>
