@@ -11,7 +11,7 @@ const Timetable = () => {
     const {schedule} = useAppData();
 
     return(
-        <div className="timetable">
+        <div className="timetable mb-20">
             <BreadCrumbs mode={mode} setMode={setMode}/>
             <Table mode={mode} schedule={schedule} />
         </div>
