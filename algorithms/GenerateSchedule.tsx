@@ -1,9 +1,9 @@
-import type { Students, warning } from "../src/assets/mockData"
+import type { Students } from "../src/assets/mockData"
 import { type Slot, mockStudents } from "../src/assets/mockData";
 
 
 export const generateSchedule = (schedule: Map<string, Map<string, Slot>>) => {
-    const warning: warning[] = [];
+    const warning = new Map();
     const scheduleArray = Array.from(schedule.entries() || []);
         
     // Helper to create student copies
@@ -71,8 +71,8 @@ export const generateSchedule = (schedule: Map<string, Map<string, Slot>>) => {
                 
                 if (assistantsToAssign.length < assistantsNeeded) {
                     const msg = `Only ${assistantsToAssign.length} assistants available, needed ${assistantsNeeded}`;
-                    console.warn(`WARNING: ${msg}`);
                     // Add to warnings
+                    warning.set(time+day, msg);
                     
                 }
             }
@@ -83,8 +83,8 @@ export const generateSchedule = (schedule: Map<string, Map<string, Slot>>) => {
                 const supervisorCopy = createStudentCopy(supervisorToAssign);
                 slot.Shift.supervisor.push(supervisorCopy);
             } else if (slot.Shift.supervisor.length === 0) {
-                console.warn(`WARNING: No supervisor available for ${day} ${time}`);
                 // Add to warnings
+                warning.set(time+ " " + day, `WARNING: No supervisor available.`);
             }
             
         });

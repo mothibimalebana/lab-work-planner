@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import back from "../assets/svg/Bacj.svg";
 import warning from "../assets/svg/warning.svg"
 import edit_Icon from "../assets/svg/edit_Icon.svg"
@@ -17,15 +17,14 @@ import { useAppData } from "../assets/context/ScheduleContext";
 
 
 export const GeneratePage = () => {
-    const {newSchedule, setNewSchedule , warnings} = useAppData();
+    const {newSchedule, setNewSchedule, setSchedule , warnings} = useAppData();
+    const navigate = useNavigate();
 
     const [edit, setEdit] = useState(true);
     const [view, setView] = useState(false);
     const [slot, setSlot] = useState(emptySlot);
     const [selectedTime, setSelectedTime] = useState("");
     const [selectedDay, setSelectedDay] = useState("");
-
-
 
     const scheduleArray = Array.from(newSchedule.entries() || []);
 
@@ -42,7 +41,8 @@ export const GeneratePage = () => {
     }
 
     const onSubmit = () => {
-        Array.from(scheduleArray.entries()).map(([time, timeSlot]) => Array.from(timeSlot.entries()).map((slot) => console.log(slot, time)) );
+        setSchedule(newSchedule);
+        navigate("/timetable");
     }
 
     
@@ -66,7 +66,13 @@ export const GeneratePage = () => {
                         :
                             <div className="warning border border-solid border-[#E5E8EB] mx-[5.12rem] text-[#717182] text-[0.85rem] bg-white mt-6 px-6 py-2.5 rounded-md">
                                 <h3 className="text-[#717182] font-bold flex items-center1 gap-1 text-[0.875rem]"><img src={warning} alt="danger sign" /> Schedule Warnings: </h3>
-                                <div className="warning-messages">{warnings.map((eachWarning, id) => <div key={id}>{eachWarning.slotID}: {eachWarning.msg.map((warningMsg, id) => <p key={id}>• {warningMsg}</p>)}</div>)}</div>
+                                <div className="warning-messages">
+                                    {Array.from(warnings.entries() || []).map( ([timeDay, msg])  => 
+                                    <div key={timeDay}>
+                                        {timeDay}: <p key={timeDay}> • {msg}</p>
+                                    </div>
+                                    )}
+                                </div>
                             </div>
                             
                     }

@@ -1,4 +1,4 @@
-import type { Slot, Students, warnings } from "../src/assets/mockData";
+import type { Slot, Students } from "../src/assets/mockData";
 
 export type AppDataContextType = {
     schedule: Map<string, Map<string, Slot>>,
@@ -8,6 +8,6 @@ export type AppDataContextType = {
     setNewSchedule: React.Dispatch<React.SetStateAction<Map<string, Map<string, Slot>>>>,
     students: Students[],
     setStudents: React.Dispatch<React.SetStateAction<Students[]>>,
-    warnings: warnings,
-    setWarning: React.Dispatch<React.SetStateAction<warnings>>,
+    warnings: Map<string, string>,
+    setWarning: React.Dispatch<React.SetStateAction<Map<string, string>>>,
 }
