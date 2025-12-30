@@ -22,16 +22,18 @@ export const GeneratePage = () => {
     const [edit, setEdit] = useState(true);
     const [view, setView] = useState(false);
     const [slot, setSlot] = useState(emptySlot);
-    const [timeDay, setTimeDay] = useState("");
+    const [selectedTime, setSelectedTime] = useState("");
+    const [selectedDay, setSelectedDay] = useState("");
 
 
 
     const scheduleArray = Array.from(newSchedule.entries() || []);
 
-    const adjustTimeTable = (slot: Slot, timeDay: string) => {
+    const adjustTimeTable = (slot: Slot, time: string, day: string) => {
         setView(true);
         setSlot(slot);
-        setTimeDay(timeDay)
+        setSelectedTime(time);
+        setSelectedDay(day);
     }
 
     const closeAdjustTimeTable = () => {
@@ -40,14 +42,14 @@ export const GeneratePage = () => {
     }
 
     const onSubmit = () => {
-        Array.from(scheduleArray.entries()).map(([time, timeSlot]) => Array.from(timeSlot.entries()).map((slot) => console.log(slot)) );
+        Array.from(scheduleArray.entries()).map(([time, timeSlot]) => Array.from(timeSlot.entries()).map((slot) => console.log(slot, time)) );
     }
 
     
     return(
         <div className="generate-container flex flex-col bg-[background: linear-gradient(135deg,#F8FAFC_0%,#FFF_50%,#F0FDFA_100%),#FFF]">
             {/* if edit mode and view is true, display the pop up of clicked student */}
-            {(edit && view) &&  <PopUp slot={slot} setSlot={setSlot} timeDay={timeDay} closePopUp={closeAdjustTimeTable}/>}
+            {(edit && view) &&  <PopUp slot={slot} setSlot={setSlot} time={selectedTime} day={selectedDay} closePopUp={closeAdjustTimeTable} newSchedule={newSchedule} setNewSchedule={setNewSchedule}/>}
 
             <div className="generate h-full justify-center font-[Arimo] text-[#0A0A0A]">
                 {/* Back Button */}
@@ -107,8 +109,8 @@ export const GeneratePage = () => {
                                         <td className="w-fit text-left font-normal">{<p>08:00 <br />11:00</p>}</td>
                                         {
                                             Array.from(scheduleArray[0][1].entries() || []).map( ( [day, slot]) => 
-                                                <td key={day + scheduleArray[0][0]} className="mx-auto">
-                                                    <div onClick={() => adjustTimeTable(slot, day+ " • " +scheduleArray[0][0])} className="working h-fit flex flex-col">
+                                                <td key={day + scheduleArray[0][0]/**time*/} className="mx-auto">
+                                                    <div onClick={() => adjustTimeTable(slot, scheduleArray[0][0]/**time*/,day,)} className="working h-fit flex flex-col">
                                                         <div className={`cell flex flex-col relative gap-1.5 p-[0.65rem] leading-[1.0645rem] text-[#337E89] text-[0.74513rem] ${edit && 'hover:cursor-pointer'}`}> 
                                                             {
                                                                 edit
@@ -147,7 +149,7 @@ export const GeneratePage = () => {
 
 
 
-const PopUp = ({ slot, timeDay, closePopUp, setSlot}: {slot: Slot, timeDay: string, closePopUp: () => void, setSlot: (slot: Slot) => void}) => {
+const PopUp = ({ slot, time, day, closePopUp, newSchedule, setNewSchedule}: {slot: Slot, time: string, day: string, closePopUp: () => void, setSlot: (slot: Slot) => void, newSchedule: Map<string, Map<string, Slot>>, setNewSchedule: (schedule: Map<string, Map<string, Slot>>) => void}) => {
     //all students
     const { students } = useAppData();
     
@@ -159,23 +161,19 @@ const PopUp = ({ slot, timeDay, closePopUp, setSlot}: {slot: Slot, timeDay: stri
     });
     const intialAssistants = slot.Shift.assistants.map(createStudentCopy);
 
+    const copyStudents = students.map(createStudentCopy);
+    const [assistantSlots, setAssistantSlots] = useState(intialAssistants);
+
     const onSubmit = () => {
-        if(slot.Shift.assistants.length == 3){
-            const newSlot = {
-                ...slot,
-                Shift: {
-                    ...slot.Shift,
-                    assistants: [...assistantSlots],
-                }
-            }
-            setSlot(newSlot);
+        if(assistantSlots.length == 3){
+            console.log(newSchedule.get(time)?.get(day))
+
         } else {
             alert("Select exactly 3 assistants to continue");
         }
     };
 
-    const copyStudents = students.map(createStudentCopy);
-    const [assistantSlots, setAssistantSlots] = useState(intialAssistants);
+
 
     
     /** Filter by blocking modules */
@@ -250,7 +248,7 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
                             <img src={people} alt="people icon" />
                             <h3 className="font-bold text-[1.25rem]">Edit Shift Assignment</h3>
                         </div>
-                        <div className="bottom"><p className="text-[#717182] text-[0.875rem]">{timeDay}</p></div>
+                        <div className="bottom"><p className="text-[#717182] text-[0.875rem]">{day + " • " + time}</p></div>
                     </div>
                     
                     <div className="right hover:cursor-pointer"><img onClick={closePopUp} src={x} alt="x icon" /></div>
