@@ -152,6 +152,7 @@ export const GeneratePage = () => {
 const PopUp = ({ slot, time, day, closePopUp, newSchedule, setNewSchedule}: {slot: Slot, time: string, day: string, closePopUp: () => void, setSlot: (slot: Slot) => void, newSchedule: Map<string, Map<string, Slot>>, setNewSchedule: (schedule: Map<string, Map<string, Slot>>) => void}) => {
     //all students
     const { students } = useAppData();
+    const [newSlot, setNewSlot] = useState(slot);
     
     //helper to create deep copy of all students
     const createStudentCopy = (student: Students): Students => ({
@@ -159,14 +160,14 @@ const PopUp = ({ slot, time, day, closePopUp, newSchedule, setNewSchedule}: {slo
         shifts: [...(student.shifts || [])], //make deep copy of shifts
         modules: [...(student.modules || [])], //make deep copy of shifts
     });
-    const intialAssistants = slot.Shift.assistants.map(createStudentCopy);
 
     const copyStudents = students.map(createStudentCopy);
-    const [assistantSlots, setAssistantSlots] = useState(intialAssistants);
 
     const onSubmit = () => {
-        if(assistantSlots.length == 3){
-            console.log(newSchedule.get(time)?.get(day))
+        if(newSlot.Shift.assistants.length == 3){
+            newSchedule.get(time)?.set(day, newSlot);
+            setNewSchedule(newSchedule);
+            closePopUp();
 
         } else {
             alert("Select exactly 3 assistants to continue");
@@ -204,18 +205,32 @@ const PopUp = ({ slot, time, day, closePopUp, newSchedule, setNewSchedule}: {slo
     availableStudents = uniqueStudents;
 
     const removeAssistant = (assistantStudentNO: number) => {
-        const isAssignedAlready = assistantSlots.map((student) => student.studentNo).includes(Number(assistantStudentNO));
+        const isAssignedAlready = newSlot.Shift.assistants.map((student) => student.studentNo).includes(Number(assistantStudentNO));
         if(isAssignedAlready){
-            const newAssistantSlots = assistantSlots.filter((student) => student.studentNo != assistantStudentNO );
-            setAssistantSlots(newAssistantSlots);
+            const newAssistantSlots = newSlot.Shift.assistants.filter((student) => student.studentNo != assistantStudentNO );
+            const updateSlot = {
+                ...newSlot,
+                Shift: {
+                    ...newSlot.Shift,
+                    assistants: newAssistantSlots
+                }
+            }
+            setNewSlot(updateSlot);
         };
     };
 
     const addAssistant = (assistantStudentNO: number) => {
-        const isAssignedAlready = assistantSlots.map((student) => student.studentNo).includes(Number(assistantStudentNO));
+        const isAssignedAlready = newSlot.Shift.assistants.map((student) => student.studentNo).includes(Number(assistantStudentNO));
         if(!isAssignedAlready){
-            const newAssistantSlots = [...assistantSlots, copyStudents[copyStudents.map((student) => student.studentNo).indexOf(Number(assistantStudentNO))]];
-            setAssistantSlots(newAssistantSlots);
+            const newAssistantSlots = [...newSlot.Shift.assistants, copyStudents[copyStudents.map((student) => student.studentNo).indexOf(Number(assistantStudentNO))]];
+            const updateSlot = {
+                ...newSlot,
+                Shift: {
+                    ...newSlot.Shift,
+                    assistants: newAssistantSlots
+                }
+            }
+            setNewSlot(updateSlot);
         };
     }
 
@@ -226,7 +241,7 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     
     if (isChecked) {
         // Check if we can add another assistant
-        if (assistantSlots.length >= 3) { // Already have 3 selected
+        if (newSlot.Shift.assistants.length >= 3) { // Already have 3 selected
             e.preventDefault();
             alert("You can only select up to 3 assistants.");
             target.checked = false; // Uncheck the checkbox
@@ -258,12 +273,12 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
                         <h3 className="font-bold text-[1rem] text-[#101828]">Available Assistants: </h3>
                         {
                             availableStudents.map((assistant, id) =>
-                                <div key={id} className={`assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid ${assistantSlots.map((assistant) => assistant.studentNo).includes(assistant.studentNo) ? `border-[#337E89]  bg-[rgba(51,126,137,0.10)]` : `border-[rgba(0,0,0,0.10)]`}  rounded-md`}>
+                                <div key={id} className={`assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid ${newSlot.Shift.assistants.map((assistant) => assistant.studentNo).includes(assistant.studentNo) ? `border-[#337E89]  bg-[rgba(51,126,137,0.10)]` : `border-[rgba(0,0,0,0.10)]`}  rounded-md`}>
                                     <input onChange={e => onCheckboxChange(e)} defaultChecked={slot.Shift.assistants.map((assistant) => assistant.studentNo).includes(assistant.studentNo)} value={assistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
                                     <div className="name-modules">
                                     <div className="fullName flex gap-3">
                                         <p className="text-[#0A0A0A] text-[0.95rem] font-normal" key={id}>{assistant.fullName}</p>
-                                        { assistantSlots.map((assistant) => assistant.studentNo).includes(assistant.studentNo) && <img src={tick} alt="green tick" width={15.98} /> }
+                                        { newSlot.Shift.assistants.map((assistant) => assistant.studentNo).includes(assistant.studentNo) && <img src={tick} alt="green tick" width={15.98} /> }
                                     </div>
                                     <div className="modules">
                                         { assistant.modules.length <= 2 
@@ -291,7 +306,7 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
                         <div className="items flex flex-col gap-3.5">
                         {
                             slot.unavailable.map((unavailableAssistant, id) => 
-                                <div key={id} className={`assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid ${assistantSlots.map((assistant) => assistant.studentNo).includes(unavailableAssistant.studentNo) ? `border-[#FF8904]  bg-[#FFF7ED]` : `border-[#E5E7EB] opacity-75 bg-[#F9FAFB]`} rounded-md`}>
+                                <div key={id} className={`assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid ${newSlot.Shift.assistants.map((assistant) => assistant.studentNo).includes(unavailableAssistant.studentNo) ? `border-[#FF8904]  bg-[#FFF7ED]` : `border-[#E5E7EB] opacity-75 bg-[#F9FAFB]`} rounded-md`}>
                                     <input onChange={e => onCheckboxChange(e)} value={unavailableAssistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
                                     <div className="name-modules flex flex-col gap-0.5">
                                     <div className="fullName flex gap-1">
