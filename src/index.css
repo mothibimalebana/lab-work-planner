@@ -157,7 +157,10 @@ td {
   padding: 0.33869rem 0.63869rem;
 
 }
+p, pre, blockquote, ol, ul, menu, li, dl, dt, dd, a, em, strong, small, s, cite, q, dfn, abbr, code, sub, sup, i, b, span, ins, del, caption, th, td, form, label, input, button, select, datalist, optgroup, option, textarea, output, progress, meter, fieldset, legend, details, summary, dialog, slot {
+  backface-visibility: hidden !important;
+  -webkit-filter: blur(0.000001px);
+  -webkit-transform: translate3d(0,0,0) !important;
+  transform: translate3d(0,0,0) !important;
+}
 
-/* form {
-  font-family: 'Arimo';
-} */
