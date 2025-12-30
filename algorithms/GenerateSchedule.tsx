@@ -72,7 +72,7 @@ export const generateSchedule = (schedule: Map<string, Map<string, Slot>>) => {
                 if (assistantsToAssign.length < assistantsNeeded) {
                     const msg = `Only ${assistantsToAssign.length} assistants available, needed ${assistantsNeeded}`;
                     // Add to warnings
-                    warning.set(time+day, msg);
+                    warning.set(time+" "+ day, msg);
                     
                 }
             }
