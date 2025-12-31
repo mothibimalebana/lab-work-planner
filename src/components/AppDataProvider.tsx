@@ -11,7 +11,7 @@ const [schedule, setSchedule] = useState(assistantScheduleMap);
 const [schoolSchedule, setSchoolSchedule ] = useState(schoolScheduleMap);
 const [newSchedule, setNewSchedule] = useState(structuredClone(schedule));
 const [students, setStudents] = useState(mockStudents);
-const [warnings, setWarning] = useState<warning[] | []>([])
+const [warnings, setWarning] = useState< warning>(new Map<string, string>());
 
 
 const value = {

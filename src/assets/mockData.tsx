@@ -5,10 +5,8 @@ export type lab = 1 | 2 | 3;
 export const assistantScheduleMap = new Map();
 export const schoolScheduleMap = new Map();
 
-export type warning = {
-    slotID: string,
-    msg: string[],
-}
+export type warning = Map<string, string>
+
 export type warnings = warning[];
 
 export type Shift = {
@@ -131,6 +129,85 @@ const modules: Module[][] = [
     
 ];
 
+export const enrolledModules = new Map()
+enrolledModules.set("secondYearMain", new Map<string, string>());
+enrolledModules.set("secondYearMain", new Map<string, string>([
+    // Semester 1 Modules
+    ["SMTA021", "Advanced Calculus"],
+    ["SAPA021", "Ordinary and Partial Differential Equations"],
+    ["SCOA021", "Data Structures"],
+    ["SSTA021", "Theory of Distributions"],
+    ["SPHA021", "Classical Mechanics"],
+    ["SPHB021", "Modern Physics"],
+    
+    // Semester 2 Modules
+    ["SMTA022", "Advanced Calculus"],
+    ["SAPA022", "Numerical Analysis"],
+    ["SCOA022", "Computer Architecture"],
+    ["SSTA022", "Statistical Inference"],
+    ["SPHA022", "Electrodynamics and Electronics"],
+    ["SPHB022", "Waves and Physical Optics"]
+]));
+enrolledModules.set("secondYearExtended", new Map<string, string>());
+enrolledModules.set("secondYearMain", new Map<string, string>([
+    // Semester 1
+    ["SMTA021", "Advanced Calculus"],
+    ["SAPA021", "Ordinary and Partial Differential Equations"],
+    ["SCOA021", "Data Structures"],
+    ["SSTA021", "Theory of Distributions"],
+    ["SPHA021", "Classical Mechanics"],
+    ["SPHB021", "Modern Physics"],
+    // Semester 2
+    ["SMTA022", "Advanced Calculus"],
+    ["SAPA022", "Numerical Analysis"],
+    ["SCOA022", "Computer Architecture"],
+    ["SSTA022", "Statistical Inference"],
+    ["SPHA022", "Electrodynamics and Electronics"],
+    ["SPHB022", "Waves and Physical Optics"]
+]));
+
+// All Year 2 Extended Programme
+enrolledModules.set("secondYearExtended", new Map<string, string>([
+    // Semester 1
+    ["SCSC000", "Computing Concepts And Algorithms"],
+    ["SHEL000", "Health Education And Life Competencies I"],
+    ["SMTH000", "Pre-Calculus And Differential Calculus"],
+    ["SPHS000", "Introduction To General Physics 1A"],
+    ["SSTS000", "Descriptive Statistics"],
+    // Semester 2
+    ["SCOB000", "Data Organization, AI"],
+    ["SHEB000", "Health Education And Life Competencies II"],
+    ["SMTB000", "Introductory Algebra And Integral Calculus"],
+    ["SPHB000", "Introduction To General Physics 1B"],
+    ["SSTB000", "Introduction To Statistical Inference"]
+]));
+
+// All Year 3 Regular Programme
+enrolledModules.set("thirdYearMain", new Map<string, string>([
+    // Semester 1
+    ["SPA031", "Fluid Mechanics"],
+    ["SCOA031", "Introduction to Database Systems"],
+    ["SCOB031", "Operating Systems"],
+    ["SMTA031", "Mathematical Analysis I"],
+    ["SMTB031", "Abstract Algebra"],
+    ["SPHA031", "Quantum Mechanics"],
+    ["SPHB031", "Thermodynamics and Statistical Mechanics"],
+    ["SSTA031", "Time Series Analysis"],
+    ["SSTB031", "Applied Linear Regression"],
+    // Semester 2
+    ["SAPA032", "Mathematical Theory of Electromagnetism and Special Theory of Relativity"],
+    ["SCOA032", "Artificial Intelligence"],
+    ["SCOB032", "Computer Networks"],
+    ["SMTA032", "Complex Analysis"],
+    ["SMTB032", "Mathematical Analysis II"],
+    ["SPHA032", "Solid State Physics"],
+    ["SPHB032", "Electrodynamics and Electronics"],
+    ["SSTA032", "Design and Analysis of Experiments"],
+    ["SSTB032", "Multivariate Statistical Methods"],
+    ["SSTC032", "Sampling Theory"]
+]))
+
+console.log(enrolledModules);
 // Mock Students (use empty arrays for shifts initially)
 export const mockStudents: Students[] = [
     {
@@ -144,14 +221,14 @@ export const mockStudents: Students[] = [
         studentNo: 23456789,
         fullName: "Pitsi Phihlela",
         role: "assistant",
-        modules: [modules[0][0]],
+        modules: [],
         shifts: [] // Will be filled after slots are created
     },
     {
         studentNo: 34567890,
         fullName: "Thabiso Kgatla",
         role: "assistant",
-        modules: [modules[0][1]],
+        modules: [],
         shifts: [] // Will be filled after slots are created
     },
     {
@@ -176,205 +253,205 @@ export const Shift1: Shift = {
     
 };
 
-export const mockShift2: Shift = {
+export const shift2: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift3: Shift = {
+export const shift3: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift4: Shift = {
+export const shift4: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift5: Shift = {
+export const shift5: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift6: Shift = {
+export const shift6: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift7: Shift = {
+export const shift7: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift8: Shift = {
+export const shift8: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift9: Shift = {
+export const shift9: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift10: Shift = {
+export const shift10: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift11: Shift = {
+export const shift11: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift12: Shift = {
+export const shift12: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift13: Shift = {
+export const shift13: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift14: Shift = {
+export const shift14: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift15: Shift = {
+export const shift15: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift16: Shift = {
+export const shift16: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift17: Shift = {
+export const shift17: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift18: Shift = {
+export const shift18: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift19: Shift = {
+export const shift19: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift20: Shift = {
+export const shift20: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift21: Shift = {
+export const shift21: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift22: Shift = {
+export const shift22: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift23: Shift = {
+export const shift23: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift24: Shift = {
+export const shift24: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift25: Shift = {
+export const shift25: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift26: Shift = {
+export const shift26: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift27: Shift = {
+export const shift27: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift28: Shift = {
+export const shift28: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift29: Shift = {
+export const shift29: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift30: Shift = {
+export const shift30: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift31: Shift = {
+export const shift31: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift32: Shift = {
+export const shift32: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift33: Shift = {
+export const shift33: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift34: Shift = {
+export const shift34: Shift = {
     supervisor: [],
     assistants: [],
     
 };
 
-export const mockShift35: Shift = {
+export const shift35: Shift = {
     supervisor: [],
     assistants: [],
     
@@ -404,10 +481,9 @@ const slot0: Slot = {
     isUnavailable: true,
     
     isBlocked: false,
-    blockingModules: [modules[0][0],modules[0][1]],
+    blockingModules: [],
     Shift: Shift1,
-    booking: mockBooking,
-    unavailable: [mockStudents[1]],
+    unavailable: [],
 };
 
 export const slot1: Slot = {
@@ -416,7 +492,7 @@ export const slot1: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift2,  
+    Shift: shift2,  
     unavailable: []
 };
 
@@ -426,7 +502,7 @@ const slot2: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift3,
+    Shift: shift3,
     
     unavailable: []
 };
@@ -437,7 +513,7 @@ const slot3: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift4,
+    Shift: shift4,
     unavailable: []
 };
 
@@ -447,7 +523,7 @@ const slot4: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift5,
+    Shift: shift5,
     
     unavailable: []
 };
@@ -458,7 +534,7 @@ const slot5: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift6,
+    Shift: shift6,
     unavailable: []
 };
 
@@ -468,7 +544,7 @@ const slot6: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift7,
+    Shift: shift7,
     unavailable: []
 };
 
@@ -478,7 +554,7 @@ const slot7: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift8,
+    Shift: shift8,
     unavailable: []
 };
 
@@ -488,7 +564,7 @@ const slot8: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift9,
+    Shift: shift9,
     unavailable: []
 };
 
@@ -498,7 +574,7 @@ const slot9: Slot = {
     isUnavailable: true,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift10,
+    Shift: shift10,
     unavailable: []
 };
 
@@ -508,7 +584,7 @@ const slot10: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift11,
+    Shift: shift11,
     unavailable: []
 };
 
@@ -518,7 +594,7 @@ const slot11: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift12,
+    Shift: shift12,
     unavailable: []
 };
 
@@ -528,7 +604,7 @@ const slot12: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift13,
+    Shift: shift13,
     unavailable: []
 };
 
@@ -538,7 +614,7 @@ const slot13: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift14,
+    Shift: shift14,
     unavailable: []
 };
 
@@ -548,7 +624,7 @@ const slot14: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift15,
+    Shift: shift15,
     unavailable: []
 };
 
@@ -558,7 +634,7 @@ const slot15: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift16,
+    Shift: shift16,
     unavailable: []
 };
 
@@ -568,7 +644,7 @@ const slot16: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift17,
+    Shift: shift17,
     unavailable: []
 };
 
@@ -578,7 +654,7 @@ const slot17: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift18,
+    Shift: shift18,
     unavailable: []
 };
 
@@ -588,7 +664,7 @@ const slot18: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift19,
+    Shift: shift19,
     
     unavailable: []
 };
@@ -600,7 +676,7 @@ const slot19: Slot = {
     
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift20,
+    Shift: shift20,
     
     unavailable: []
 };
@@ -611,7 +687,7 @@ const slot20: Slot = {
     isUnavailable: false,
     isBlocked: true,
     blockingModules: [modules[0][3],modules[0][4]],
-    Shift: mockShift21,
+    Shift: shift21,
     unavailable: []
 };
 
@@ -622,7 +698,7 @@ const slot21: Slot = {
     
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift22,
+    Shift: shift22,
     
     unavailable: []
 };
@@ -634,7 +710,7 @@ const slot22: Slot = {
     
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift23,
+    Shift: shift23,
     
     unavailable: []
 };
@@ -646,7 +722,7 @@ const slot23: Slot = {
     
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift24,
+    Shift: shift24,
     
     unavailable: []
 };
@@ -658,7 +734,7 @@ const slot24: Slot = {
     
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift25,
+    Shift: shift25,
     
     unavailable: []
 };
@@ -669,7 +745,7 @@ const slot25: Slot = {
     isUnavailable: false,
     isBlocked: true,
     blockingModules: [modules[0][5]],
-    Shift: mockShift26,
+    Shift: shift26,
     unavailable: []
 };
 
@@ -679,7 +755,7 @@ const slot26: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift27,
+    Shift: shift27,
     unavailable: []
 };
 
@@ -689,7 +765,7 @@ const slot27: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift28,
+    Shift: shift28,
     unavailable: []
 };
 
@@ -699,7 +775,7 @@ const slot28: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift29,
+    Shift: shift29,
     unavailable: []
 };
 
@@ -709,7 +785,7 @@ const slot29: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift30,
+    Shift: shift30,
     
     unavailable: []
 };
@@ -721,7 +797,7 @@ const slot30: Slot = {
     
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift31,
+    Shift: shift31,
     
     unavailable: []
 };
@@ -733,7 +809,7 @@ const slot31: Slot = {
     
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift32,
+    Shift: shift32,
     
     unavailable: []
 };
@@ -745,7 +821,7 @@ const slot32: Slot = {
     
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift33,
+    Shift: shift33,
     
     unavailable: []
 };
@@ -757,7 +833,7 @@ const slot33: Slot = {
     
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift34,
+    Shift: shift34,
     
     unavailable: []
 };
@@ -768,7 +844,7 @@ const slot34: Slot = {
     isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
-    Shift: mockShift35,
+    Shift: shift35,
     unavailable: []
 };
 
@@ -847,4 +923,3 @@ export const updateSchedule: Schedule = [
     [slot28, slot29, slot30, slot31, slot32, slot33, slot34]
 ]
 
-console.log(assistantScheduleMap);
