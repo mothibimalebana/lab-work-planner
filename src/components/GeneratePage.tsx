@@ -1,5 +1,7 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import back from "../assets/svg/Bacj.svg";
+import supervisor from "../assets/svg/supervisor.svg"
+import student from "../assets/svg/student.svg"
 import warning from "../assets/svg/warning.svg"
 import edit_Icon from "../assets/svg/edit_Icon.svg"
 import x from "../assets/svg/x-black.svg";
@@ -14,18 +16,30 @@ import { useState, type ChangeEvent } from "react";
 import { useAppData } from "../assets/context/ScheduleContext";
 
 
+function ButtonCarousel( { active = 'assistants' , setActive}:{active: string, setActive: (page: string) => void} ){
 
+    //functions to facilitate toggling between different options
+    const switchToAssistant = () => { setActive("assistants") };
+    const switchToSupervisor = () => { setActive("supervisors")};
+
+    return(
+        <div className="buttonCarousel ml-[5.12rem] rounded-[0.86988rem]! mt-8 flex items-center justify-between font-[Arimo] text-[#0A0A0A] text-[0.86988rem] w-fit bg-[#ECECF0]">
+            <button onClick={switchToAssistant} className={active === 'assistants' ? 'flex justify-center items-center gap-[0.87rem] w-fit px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] h-[1.85969rem]! text-[0.86988rem] text-[#0A0A0A] font-Arimo bg-[#FFFFFF] rounded-[0.86988rem]!' : 'w-fit h-[1.85969rem]! flex justify-center items-center gap-[0.87rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] bg-[#ECECF0] rounded-[0.86988rem]!'}><img src={student} className="h-[0.99319rem]! w-[0.99319rem]!" alt="student page" /><p>Lab Assistants</p></button>
+            <button onClick={switchToSupervisor} className={active === 'supervisors' ? 'flex justify-center items-center gap-[0.87rem] w-fit px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] h-[1.85969rem]! text-[0.86988rem] text-[#0A0A0A] font-Arimo bg-[#FFFFFF] rounded-[0.86988rem]!' : 'w-fit h-[1.85969rem]! flex justify-center items-center gap-[0.87rem] px-[0.27913rem_9.6805rem_0.3305rem_9.21825rem] bg-[#ECECF0] rounded-[0.86988rem]!'}><img src={supervisor} className="h-[0.99319rem]! w-[0.99319rem]!" alt="" /><p>Lab Supervisor</p></button>
+        </div>
+    )
+}
 
 export const GeneratePage = () => {
-    const {newSchedule, setNewSchedule , warnings} = useAppData();
+    const {newSchedule, setNewSchedule, setSchedule , warnings, setWarning} = useAppData();
+    const navigate = useNavigate();
 
     const [edit, setEdit] = useState(true);
     const [view, setView] = useState(false);
     const [slot, setSlot] = useState(emptySlot);
     const [selectedTime, setSelectedTime] = useState("");
     const [selectedDay, setSelectedDay] = useState("");
-
-
+    const [activePage, setActivePage]  = useState("assistants");
 
     const scheduleArray = Array.from(newSchedule.entries() || []);
 
@@ -42,19 +56,22 @@ export const GeneratePage = () => {
     }
 
     const onSubmit = () => {
-        Array.from(scheduleArray.entries()).map(([time, timeSlot]) => Array.from(timeSlot.entries()).map((slot) => console.log(slot, time)) );
+        setSchedule(newSchedule);
+        navigate("/app/timetable");
     }
 
     
     return(
         <div className="generate-container flex flex-col bg-[background: linear-gradient(135deg,#F8FAFC_0%,#FFF_50%,#F0FDFA_100%),#FFF]">
+
             {/* if edit mode and view is true, display the pop up of clicked student */}
-            {(edit && view) &&  <PopUp slot={slot} setSlot={setSlot} time={selectedTime} day={selectedDay} closePopUp={closeAdjustTimeTable} newSchedule={newSchedule} setNewSchedule={setNewSchedule}/>}
+            {(edit && view) &&  <PopUp slot={slot} setSlot={setSlot} time={selectedTime} day={selectedDay} closePopUp={closeAdjustTimeTable} newSchedule={newSchedule} setNewSchedule={setNewSchedule} warning={warnings} setWarning={setWarning} activePage={activePage}/>}
 
             <div className="generate h-full justify-center font-[Arimo] text-[#0A0A0A]">
                 {/* Back Button */}
                 <button className="white-button flex mx-[5.12rem] w-fit"><Link className="flex gap-1.5 items-center text-[#0A0A0A]! font-[Arimo] text-md font-normal!" to="/app/dashboard"><img src={back} alt="" /> <p>Back</p></Link></button>
 
+                    <ButtonCarousel active={activePage} setActive={setActivePage}/>
                     {/* Warnings Section*/}
                     {
                      edit
@@ -66,7 +83,13 @@ export const GeneratePage = () => {
                         :
                             <div className="warning border border-solid border-[#E5E8EB] mx-[5.12rem] text-[#717182] text-[0.85rem] bg-white mt-6 px-6 py-2.5 rounded-md">
                                 <h3 className="text-[#717182] font-bold flex items-center1 gap-1 text-[0.875rem]"><img src={warning} alt="danger sign" /> Schedule Warnings: </h3>
-                                <div className="warning-messages">{warnings.map((eachWarning, id) => <div key={id}>{eachWarning.slotID}: {eachWarning.msg.map((warningMsg, id) => <p key={id}>• {warningMsg}</p>)}</div>)}</div>
+                                <div className="warning-messages">
+                                    {Array.from(warnings.entries() || []).map( ([timeDay, msg])  => 
+                                    <div key={timeDay}>
+                                        {timeDay}: <p key={timeDay}> • {msg}</p>
+                                    </div>
+                                    )}
+                                </div>
                             </div>
                             
                     }
@@ -106,7 +129,7 @@ export const GeneratePage = () => {
                                         <th className="bg-[rgba(236,236,240,0.30)] text-[#0A0A0A] font-dm-sans text-[0.85163rem] not-italic font-normal leading-[1.27744rem] w-8.5 h-[2.59031rem] text-left">Sunday</th>
                                     </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                                        <td className="w-fit text-left font-normal">{<p>08:00 <br />11:00</p>}</td>
+                                        <td className="w-fit text-left font-normal">{activePage === "assistants" ? <p>08:00 <br />11:00</p> : <p>08:00 <br />12:00</p>}</td>
                                         {
                                             Array.from(scheduleArray[0][1].entries() || []).map( ( [day, slot]) => 
                                                 <td key={day + scheduleArray[0][0]/**time*/} className="mx-auto">
@@ -121,20 +144,19 @@ export const GeneratePage = () => {
                                                                                 <div className="edit-circle absolute top-0 right-0 bg-[#337E89] rounded-full px-1 py-1">
                                                                                     <img src={edit_white} width={0.01} alt="edit logo" className="relative z-5 w-3 object-contain" />
                                                                                 </div>
-                                                                                <p>{slot?.Shift?.assistants[0]?.fullName ?? 'Empty slot'}</p>
+                                                                                <p>{ activePage === "assistants" ? (slot?.Shift?.assistants[0]?.fullName ?? 'Empty slot') : (slot?.Shift?.supervisor[0]?.fullName ?? 'Empty slot') }</p>
                                                                             </div>
                                                                     </div>
                                                                 </>
                                                                 :
                                                                     <p className="text-[#016630] relative text-[0.65rem] py-1.5 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">{slot?.Shift?.assistants[0]?.fullName ?? 'Empty slot'}</p>
                                                             }
-                                                                <p className="text-[#016630] text-[0.65rem] py-1.5 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">{slot?.Shift?.assistants[1]?.fullName ?? 'Empty slot'}</p>
-                                                                <p className="text-[#016630] text-[0.65rem] py-1.5 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">{slot?.Shift?.assistants[2]?.fullName ?? 'Empty slot'}</p>
+                                                                { activePage === "assistants" && <p className="text-[#016630] text-[0.65rem] py-1.5 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">{slot?.Shift?.assistants[1]?.fullName ?? 'Empty slot'}</p> }
+                                                                { activePage === "assistants" && <p className="text-[#016630] text-[0.65rem] py-1.5 pl-1 rounded-sm border border-solid bg-[#DCFCE7] border-[#7BF1A8]">{slot?.Shift?.assistants[2]?.fullName ?? 'Empty slot'}</p> }
                                                         </div>
                                                     </div>
                                                 </td>
-                                            )
-                                            
+                                            ) 
                                         }
                                     </tr>
                                 </tbody>
@@ -149,7 +171,7 @@ export const GeneratePage = () => {
 
 
 
-const PopUp = ({ slot, time, day, closePopUp, newSchedule, setNewSchedule}: {slot: Slot, time: string, day: string, closePopUp: () => void, setSlot: (slot: Slot) => void, newSchedule: Map<string, Map<string, Slot>>, setNewSchedule: (schedule: Map<string, Map<string, Slot>>) => void}) => {
+const PopUp = ({ slot, time, day, closePopUp, newSchedule, setNewSchedule, warning, setWarning, activePage}: {slot: Slot, time: string, day: string, closePopUp: () => void, setSlot: (slot: Slot) => void, newSchedule: Map<string, Map<string, Slot>>, setNewSchedule: (schedule: Map<string, Map<string, Slot>>) => void, warning: Map<string, string>, setWarning: (warning: Map<string, string>) => void, activePage: string}) => {
     //all students
     const { students } = useAppData();
     const [newSlot, setNewSlot] = useState(slot);
@@ -164,11 +186,12 @@ const PopUp = ({ slot, time, day, closePopUp, newSchedule, setNewSchedule}: {slo
     const copyStudents = students.map(createStudentCopy);
 
     const onSubmit = () => {
-        if(newSlot.Shift.assistants.length == 3){
+        if(newSlot.Shift.assistants.length == 3 || newSlot.Shift.supervisor.length === 1){
             newSchedule.get(time)?.set(day, newSlot);
+            warning.delete(time+" "+day);
+            setWarning(warning);
             setNewSchedule(newSchedule);
             closePopUp();
-
         } else {
             alert("Select exactly 3 assistants to continue");
         }
@@ -203,35 +226,68 @@ const PopUp = ({ slot, time, day, closePopUp, newSchedule, setNewSchedule}: {slo
         }
     });
     availableStudents = uniqueStudents;
+    const availableAssistants = availableStudents.filter((student) => student.role === "assistant");
+    const availableSupervisor = availableStudents.filter((student) => student.role === "supervisor");
 
     const removeAssistant = (assistantStudentNO: number) => {
-        const isAssignedAlready = newSlot.Shift.assistants.map((student) => student.studentNo).includes(Number(assistantStudentNO));
-        if(isAssignedAlready){
-            const newAssistantSlots = newSlot.Shift.assistants.filter((student) => student.studentNo != assistantStudentNO );
-            const updateSlot = {
-                ...newSlot,
-                Shift: {
-                    ...newSlot.Shift,
-                    assistants: newAssistantSlots
+        if(activePage === "assistants"){
+            const isAssignedAlready = newSlot.Shift.assistants.map((student) => student.studentNo).includes(Number(assistantStudentNO));
+            if(isAssignedAlready){
+                const newAssistantSlots = newSlot.Shift.assistants.filter((student) => student.studentNo != assistantStudentNO );
+                const updateSlot = {
+                    ...newSlot,
+                    Shift: {
+                        ...newSlot.Shift,
+                        assistants: newAssistantSlots
+                    }
                 }
-            }
-            setNewSlot(updateSlot);
-        };
+                setNewSlot(updateSlot);
+            };
+        } else{
+            const isAssignedAlready = newSlot.Shift.supervisor.map((student) => student.studentNo).includes(Number(assistantStudentNO));
+            if(isAssignedAlready){
+                const newAssistantSlots = newSlot.Shift.supervisor.filter((student) => student.studentNo != assistantStudentNO );
+                const updateSlot = {
+                    ...newSlot,
+                    Shift: {
+                        ...newSlot.Shift,
+                        supervisor: newAssistantSlots
+                    }
+                }
+                setNewSlot(updateSlot);
+            };
+        }
     };
 
     const addAssistant = (assistantStudentNO: number) => {
-        const isAssignedAlready = newSlot.Shift.assistants.map((student) => student.studentNo).includes(Number(assistantStudentNO));
-        if(!isAssignedAlready){
-            const newAssistantSlots = [...newSlot.Shift.assistants, copyStudents[copyStudents.map((student) => student.studentNo).indexOf(Number(assistantStudentNO))]];
-            const updateSlot = {
-                ...newSlot,
-                Shift: {
-                    ...newSlot.Shift,
-                    assistants: newAssistantSlots
+        if(activePage === "assistants"){
+            const isAssignedAlready = newSlot.Shift.assistants.map((student) => student.studentNo).includes(Number(assistantStudentNO));
+            if(!isAssignedAlready){
+                const newAssistantSlots = [...newSlot.Shift.assistants, copyStudents[copyStudents.map((student) => student.studentNo).indexOf(Number(assistantStudentNO))]];
+                const updateSlot = {
+                    ...newSlot,
+                    Shift: {
+                        ...newSlot.Shift,
+                        assistants: newAssistantSlots
+                    }
                 }
-            }
-            setNewSlot(updateSlot);
-        };
+                setNewSlot(updateSlot);
+            };
+        }
+        else{
+            const isAssignedAlready = newSlot.Shift.supervisor.map((student) => student.studentNo).includes(Number(assistantStudentNO));
+            if(!isAssignedAlready){
+                const newAssistantSlots = [...newSlot.Shift.supervisor, copyStudents[copyStudents.map((student) => student.studentNo).indexOf(Number(assistantStudentNO))]];
+                const updateSlot = {
+                    ...newSlot,
+                    Shift: {
+                        ...newSlot.Shift,
+                        supervisor: newAssistantSlots
+                    }
+                }
+                setNewSlot(updateSlot);
+            };
+        }
     }
 
 const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -241,9 +297,10 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
     
     if (isChecked) {
         // Check if we can add another assistant
-        if (newSlot.Shift.assistants.length >= 3) { // Already have 3 selected
+        if (newSlot.Shift.assistants.length >= 3 && newSlot.Shift.supervisor.length >= 1) { // Already have 3 selected
             e.preventDefault();
-            alert("You can only select up to 3 assistants.");
+            const msg = activePage === "assistants" ? "You can only select up to 3 assistants" : "You can only select 1 supervisor per slot";
+            alert(msg);
             target.checked = false; // Uncheck the checkbox
             return;
         }
@@ -271,8 +328,10 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
                 <div className="content flex flex-col gap-4 h-full">
                     <div className="available flex flex-col gap-1.5">
                         <h3 className="font-bold text-[1rem] text-[#101828]">Available Assistants: </h3>
-                        {
-                            availableStudents.map((assistant, id) =>
+                        {   
+                            activePage === "assistants"
+                            ?
+                            availableAssistants.map((assistant, id) =>
                                 <div key={id} className={`assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid ${newSlot.Shift.assistants.map((assistant) => assistant.studentNo).includes(assistant.studentNo) ? `border-[#337E89]  bg-[rgba(51,126,137,0.10)]` : `border-[rgba(0,0,0,0.10)]`}  rounded-md`}>
                                     <input onChange={e => onCheckboxChange(e)} defaultChecked={slot.Shift.assistants.map((assistant) => assistant.studentNo).includes(assistant.studentNo)} value={assistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
                                     <div className="name-modules">
@@ -293,8 +352,33 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
                                         }
                                     </div>
                                     </div>
-                                </div>  
-                        )
+                                </div> 
+                            )
+                            : 
+                            availableSupervisor.map((assistant, id) =>
+                                <div key={id} className={`assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid ${newSlot.Shift.supervisor.map((assistant) => assistant.studentNo).includes(assistant.studentNo) ? `border-[#337E89]  bg-[rgba(51,126,137,0.10)]` : `border-[rgba(0,0,0,0.10)]`}  rounded-md`}>
+                                    <input onChange={e => onCheckboxChange(e)} defaultChecked={slot.Shift.supervisor.map((assistant) => assistant.studentNo).includes(assistant.studentNo)} value={assistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
+                                    <div className="name-modules">
+                                    <div className="fullName flex gap-3">
+                                        <p className="text-[#0A0A0A] text-[0.95rem] font-normal" key={id}>{assistant.fullName}</p>
+                                        { newSlot.Shift.supervisor.map((assistant) => assistant.studentNo).includes(assistant.studentNo) && <img src={tick} alt="green tick" width={15.98} /> }
+                                    </div>
+                                    <div className="modules">
+                                        { assistant.modules.length <= 2 
+                                            ?
+                                                assistant.modules.map((mods,id) => <p key={id} className="text-[#0A0A0A] border-2 border-solid border-[rgba(0,0,0,0.10)] w-fit rounded-lg px-2 py-0.5 text-[0.875rem] font-normal">{mods.code}</p>)
+                                            :
+                                                assistant.modules.slice(0, 4).map((mods, id) =>  {
+                                                
+                                                return <p key={id} className="text-[#0A0A0A] border-2 border-solid border-[rgba(0,0,0,0.10)] w-fit rounded-lg px-2 py-0.5 text-[0.875rem] font-normal">{mods.code}</p>
+                                                }
+                                            )
+                                        }
+                                    </div>
+                                    </div>
+                                </div>
+                            )
+                        
                         }
 
                     </div>
@@ -305,7 +389,9 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
                         </div>
                         <div className="items flex flex-col gap-3.5">
                         {
-                            slot.unavailable.map((unavailableAssistant, id) => 
+                            activePage === "assistants"
+                            ?
+                            slot.unavailable.filter((unavailableAssistant) => unavailableAssistant.role === "assistant").map( (unavailableAssistant, id) => 
                                 <div key={id} className={`assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid ${newSlot.Shift.assistants.map((assistant) => assistant.studentNo).includes(unavailableAssistant.studentNo) ? `border-[#FF8904]  bg-[#FFF7ED]` : `border-[#E5E7EB] opacity-75 bg-[#F9FAFB]`} rounded-md`}>
                                     <input onChange={e => onCheckboxChange(e)} value={unavailableAssistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
                                     <div className="name-modules flex flex-col gap-0.5">
@@ -327,7 +413,32 @@ const onCheckboxChange = (e: ChangeEvent<HTMLInputElement>) => {
                                         }
                                     </div>
                                     </div>
-                                </div> 
+                                </div>
+                            )
+                                :
+                            slot.unavailable.filter((unavailableAssistant) => unavailableAssistant.role === "supervisor").map((unavailableAssistant, id) => 
+                                <div key={id} className={`assistantInfo px-[0.74rem] py-4 flex gap-3 border-2 border-solid ${newSlot.Shift.assistants.map((assistant) => assistant.studentNo).includes(unavailableAssistant.studentNo) ? `border-[#FF8904]  bg-[#FFF7ED]` : `border-[#E5E7EB] opacity-75 bg-[#F9FAFB]`} rounded-md`}>
+                                    <input onChange={e => onCheckboxChange(e)} value={unavailableAssistant.studentNo} className="w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name="" id="" />
+                                    <div className="name-modules flex flex-col gap-0.5">
+                                    <div className="fullName flex gap-1">
+                                        <img src={unavailable} alt="green tick" width={15.98} />
+                                        <p className="text-[#0A0A0A] text-[0.95rem] font-normal" key={id}>{unavailableAssistant.fullName}</p>
+                                    </div>
+                                    <p className="text-[0.75rem]">Marked unavailable - May have a class or other commitments</p>
+                                    <div className="modules">
+                                        { unavailableAssistant.modules.length <= 2 
+                                            ?
+                                                unavailableAssistant.modules.map((mods,id) => <p key={id} className="text-[#0A0A0A] border-2 border-solid border-[rgba(0,0,0,0.10)] w-fit rounded-lg px-2 py-0.5 text-[0.875rem] font-normal">{mods.code}</p>)
+                                            :
+                                                unavailableAssistant.modules.slice(0, 4).map((mods, id) =>  {
+                                                
+                                                return <p key={id} className="text-[#0A0A0A] border-2 border-solid border-[rgba(0,0,0,0.10)] w-fit rounded-lg px-2 py-0.5 text-[0.875rem] font-normal">{mods.code}</p>
+                                                }
+                                            )
+                                        }
+                                    </div>
+                                    </div>
+                                </div>
                             )
                         }
                         </div>
