@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, type ChangeEvent } from "react";
 import x from "../assets/svg/x.svg";
-import { enrolledModules } from "../assets/mockData";
+import { enrolledModules, type Module } from "../assets/mockData";
 import supervisor from "../assets/svg/supervisor.svg"
 import student from "../assets/svg/student.svg"
 import { useAppData } from "../assets/context/ScheduleContext";
@@ -23,15 +23,16 @@ function ButtonCarousel( { active = 'assistants' , setActive}:{active: string, s
 }
 
 function Form(){
-    const {newSchedule, setNewSchedule} = useAppData();
+    const { newSchedule } = useAppData();
     const arraySchedule = Array.from(newSchedule.entries());
     const [myTimeTable, setMyTimeTable] = useState(newSchedule);
+    const [selectedModules, setSelectedModules] = useState<Module[] | []>([]);
     const diffTimeTable = myTimeTable;
     console.log(diffTimeTable.get("08h00-11h00")?.get("Monday"));
 
 
 
-    const modul: string[] = Array.from(enrolledModules.get("secondYearMain").entries() || []);
+    const secondYearMain: string[] = Array.from(enrolledModules.get("secondYearMain").entries() || []);
     const secondYearExtended: string[] = Array.from(enrolledModules.get("secondYearExtended").entries() || []);
     const thirdYearMain: string[] = Array.from(enrolledModules.get("thirdYearMain").entries() || []);
     const [active, setActive] = useState("");
@@ -44,19 +45,24 @@ function Form(){
 
             updatedSlot!.isUnavailable = false;
             newTimeTable.get(time)?.set(day, updatedSlot!);
-            setNewSchedule(newTimeTable);
+            setMyTimeTable(newTimeTable);
             
 
 
         } else{
             updatedSlot!.isUnavailable = true;
             newTimeTable.get(time)?.set(day, updatedSlot!);
-            setNewSchedule(newTimeTable);
+            setMyTimeTable(newTimeTable);
         }
     }
 
     const onSubmit = (formData: FormData) => {
+        console.log(formData);
         
+    }
+
+    const onModuleChange = (e:  ChangeEvent<HTMLInputElement>) => {
+
     }
 
 
@@ -109,9 +115,9 @@ function Form(){
                                 <h2 className="text-[#4A5565] font-normal text-[1.5rem]">2nd Year Main:</h2>
                                 <div className="modules grid grid-cols-2 font-[Arimo]">
                                     {
-                                        modul.map((eachModule, )  => 
+                                        secondYearMain.map((eachModule, )  => 
                                             <li key={eachModule[0]} className="flex gap-2 h-fit text-[#0A0A0A] text-[0.9rem]">
-                                                <input className="px-3 py-1  w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name={eachModule}/>
+                                                <input value={eachModule[0]} onChange={e => onModuleChange(e)} className="px-3 py-1  w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name={eachModule}/>
                                                 {eachModule[0]} - {eachModule[1]}
                                             </li>
                                         )
@@ -187,91 +193,100 @@ function Form(){
                                     </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                         <td className="w-[4.43731rem]! text-left font-normal">08:00 <br />11:00</td>
-                                            {Array.from(arraySchedule[0][1].entries()).map(([string, slot], id) => (
+                                            {Array.from(arraySchedule[0][1].entries()).map(([day, slot], id) => (
                                                 <td key={id} className="h-[2.59031rem]! w-[4.43731rem]!">
                                                     <div 
-                                                        onClick={() => updateSchedule(0, shift.id)}
+                                                        onClick={() => updateSchedule(arraySchedule[0][0], day)}
 
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                shift.class
+                                                                selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule))
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
-                                                                : ( shift.unavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
-                                                            }`}
+                                                                : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
+                                                            }`
+                                                        }
                                                     >
-                                                        {shift.class && <img src={x}/> }
+                                                        {selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule)) && <img src={x}/> }
                                                     </div>
                                                 </td>
                                             ))}
                                     </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                         <td className="w-[4.43731rem]! text-left font-normal">11:00 <br />14:00</td>
-                                            {myTimeTable[1].map((shift) => (
-                                                <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
+                                            {Array.from(arraySchedule[1][1].entries()).map(([day, slot], id) => (
+                                                <td key={id} className="h-[2.59031rem]! w-[4.43731rem]!">
                                                     <div 
-                                                        onClick={() => updateSchedule(1, shift.id)}
+                                                        onClick={() => updateSchedule(arraySchedule[1][0], day)}
+
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                shift.class
+                                                                selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule))
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
-                                                                : ( shift.unavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
-                                                            }`}
+                                                                : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
+                                                            }`
+                                                        }
                                                     >
-                                                        {shift.class && <img src={x}/> }
+                                                        {selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule)) && <img src={x}/> }
                                                     </div>
                                                 </td>
                                             ))}
                                     </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
-                                        <td className="w-[4.43731rem]!  text-left font-normal">14:00 <br />17:00</td>
-                                            {myTimeTable[2].map((shift) => (
-                                                <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
+                                        <td className="w-[4.43731rem]! text-left font-normal">08:00 <br />11:00</td>
+                                            {Array.from(arraySchedule[2][1].entries()).map(([day, slot], id) => (
+                                                <td key={id} className="h-[2.59031rem]! w-[4.43731rem]!">
                                                     <div 
-                                                        onClick={() => updateSchedule(2, shift.id)}
+                                                        onClick={() => updateSchedule(arraySchedule[2][0], day)}
+
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                shift.class
+                                                                selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule))
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
-                                                                : ( shift.unavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
-                                                            }`}
+                                                                : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
+                                                            }`
+                                                        }
                                                     >
-                                                        {shift.class && <img src={x}/> }
+                                                        {selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule)) && <img src={x}/> }
                                                     </div>
                                                 </td>
                                             ))}
                                     </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                         <td className="w-[4.43731rem]! text-left font-normal">17:00 <br />20:00</td>
-                                            {myTimeTable[3].map((shift) => (
-                                                <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
+                                            {Array.from(arraySchedule[3][1].entries()).map(([day, slot], id) => (
+                                                <td key={id} className="h-[2.59031rem]! w-[4.43731rem]!">
                                                     <div 
-                                                        onClick={() => updateSchedule(3, shift.id)}
+                                                        onClick={() => updateSchedule(arraySchedule[3][0], day)}
+
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                shift.class
+                                                                selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule))
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
-                                                                : ( shift.unavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
-                                                            }`}
+                                                                : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
+                                                            }`
+                                                        }
                                                     >
-                                                        {shift.class && <img src={x}/> }
+                                                        {selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule)) && <img src={x}/> }
                                                     </div>
                                                 </td>
                                             ))}
                                     </tr>
                                     <tr className="rounded-lg font-[Arimo] border-b border-b-solid border-b-[#E5E8EB]">
                                         <td className="w-[4.43731rem]! text-left font-normal">20:00 <br />00:00</td>
-                                            {myTimeTable[4].map((shift) => (
-                                                <td key={shift.id} className="h-[2.59031rem]! w-[4.43731rem]!">
+                                            {Array.from(arraySchedule[4][1].entries()).map(([day, slot], id) => (
+                                                <td key={id} className="h-[2.59031rem]! w-[4.43731rem]!">
                                                     <div 
-                                                        onClick={() => updateSchedule(4, shift.id)}
+                                                        onClick={() => updateSchedule(arraySchedule[4][0], day)}
+
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                shift.class
+                                                                selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule))
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
-                                                                : ( shift.unavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
-                                                            }`}
+                                                                : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
+                                                            }`
+                                                        }
                                                     >
-                                                        {shift.class && <img src={x}/> }
+                                                        {selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule)) && <img src={x}/> }
                                                     </div>
                                                 </td>
                                             ))}
