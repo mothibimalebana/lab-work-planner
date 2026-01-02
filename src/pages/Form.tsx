@@ -37,22 +37,26 @@ function Form(){
     const [active, setActive] = useState("");
 
     const updateSchedule = (time: string, day: string) => {
+        const newTimeTable: Map<string, Map<string, Slot>> = myTimeTable;
+        const updatedSlot = newTimeTable.get(time)!.get(day);
+        
         if(myTimeTable.get(time)!.get(day)!.isUnavailable === true){
-            const newTimeTable: Map<string, Map<string, Slot>> = myTimeTable;
-            const updatedSlot = newTimeTable.get(time)!.get(day)
+
             updatedSlot!.isUnavailable = false;
+            newTimeTable.get(time)?.set(day, updatedSlot!);
+            setNewSchedule(newTimeTable);
             
 
 
         } else{
-            const newTimetable = [...myTimeTable];
-            newTimetable[index][secondIndex].unavailable = true;
-            setMyTimeTable(newTimetable);
+            updatedSlot!.isUnavailable = true;
+            newTimeTable.get(time)?.set(day, updatedSlot!);
+            setNewSchedule(newTimeTable);
         }
     }
 
-    const onSubmit = (event: Event) => {
-        event.preventDefault();
+    const onSubmit = (formData: FormData) => {
+        
     }
 
 
@@ -60,7 +64,7 @@ function Form(){
         <div className="registration px-[5.12rem] font-[Arimo] mt-6">
             <ButtonCarousel active={active} setActive={setActive}/>
             <div className="form bg-white px-8 py-5 rounded-[0.73163rem]! border border-solid border-[rgba(0,0,0,0.10)]!">
-                <form method="POST" className="flex flex-col">
+                <form action={onSubmit} className="flex flex-col">
                     <div className="head mb-5">
                         <h6 className="font-normal">Lab Assistant Form</h6>
                         <p className="text-[#717182]">Select your enrolled modules and mark any additional times you're unavailable</p>
