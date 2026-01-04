@@ -1,6 +1,6 @@
 import { useState, type ChangeEvent } from "react";
 import x from "../assets/svg/x.svg";
-import { enrolledModules, type Module } from "../assets/mockData";
+import { enrolledModules } from "../assets/mockData";
 import supervisor from "../assets/svg/supervisor.svg"
 import student from "../assets/svg/student.svg"
 import { useAppData } from "../assets/context/ScheduleContext";
@@ -22,11 +22,12 @@ function ButtonCarousel( { active = 'assistants' , setActive}:{active: string, s
     )
 }
 
+
 function Form(){
     const { newSchedule } = useAppData();
     const arraySchedule = Array.from(newSchedule.entries());
     const [myTimeTable, setMyTimeTable] = useState(newSchedule);
-    const [selectedModules, setSelectedModules] = useState<Module[] | []>([]);
+    const [selectedModules, setSelectedModules] = useState<string[]>([]);
     const diffTimeTable = myTimeTable;
     console.log(diffTimeTable.get("08h00-11h00")?.get("Monday"));
 
@@ -62,10 +63,23 @@ function Form(){
     }
 
     const onModuleChange = (e:  ChangeEvent<HTMLInputElement>) => {
+        const isChecked = e.target.checked;
+        const moduleName = e.target.value;
 
+        if(isChecked){
+            const updatedModuleList = [...selectedModules];
+            updatedModuleList.push(moduleName);
+            setSelectedModules(updatedModuleList);
+        } else{
+            const indexOfSelectedModule =  selectedModules.indexOf(moduleName);
+            if(indexOfSelectedModule !== -1){
+                const updateModuleList = [...selectedModules];
+                updateModuleList.splice(indexOfSelectedModule,1);
+                setSelectedModules(updateModuleList);
+            }
+        }
     }
-
-
+    // console.log(Array.from(arraySchedule[0][1].entries()).map(([day, slot ]) => slot.blockingModules ));
     return(
         <div className="registration px-[5.12rem] font-[Arimo] mt-6">
             <ButtonCarousel active={active} setActive={setActive}/>
@@ -117,7 +131,7 @@ function Form(){
                                     {
                                         secondYearMain.map((eachModule, )  => 
                                             <li key={eachModule[0]} className="flex gap-2 h-fit text-[#0A0A0A] text-[0.9rem]">
-                                                <input value={eachModule[0]} onChange={e => onModuleChange(e)} className="px-3 py-1  w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name={eachModule}/>
+                                                <input value={eachModule[1]} onChange={e => onModuleChange(e)} className="px-3 py-1  w-4 h-4 self-center p-[0.10] accent-[#030213] disabled:accent-[#F3F3F5][#030213] border-[1.5px] border-solid border-[#030213]" type="checkbox" name={eachModule}/>
                                                 {eachModule[0]} - {eachModule[1]}
                                             </li>
                                         )
@@ -200,13 +214,13 @@ function Form(){
 
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule))
+                                                                slot.blockingModules.map((blockedModule) => Array.from(blockedModule.entries()).map(([code, module]) => code))
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
                                                                 : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
                                                             }`
                                                         }
                                                     >
-                                                        {selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule)) && <img src={x}/> }
+                                                        {/* {slot.blockingModules.map((blockedModule) => blockedModule.code).map((blockedModuleCode) => selectedModules.includes(blockedModuleCode)) && <img src={x}/> } */}
                                                     </div>
                                                 </td>
                                             ))}
@@ -220,13 +234,13 @@ function Form(){
 
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule))
+                                                                slot.blockingModules.map((blockedModule) => Array.from(blockedModule.entries()))
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
                                                                 : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
                                                             }`
                                                         }
                                                     >
-                                                        {selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule)) && <img src={x}/> }
+                                                        {/* {slot.blockingModules.map((blockedModule) => blockedModule.code).map((blockedModuleCode) => selectedModules.includes(blockedModuleCode)) && <img src={x}/> } */}
                                                     </div>
                                                 </td>
                                             ))}
@@ -240,13 +254,13 @@ function Form(){
 
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule))
+                                                                slot.blockingModules.map((blockedModule) => Array.from(blockedModule.entries()))
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
                                                                 : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
                                                             }`
                                                         }
                                                     >
-                                                        {selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule)) && <img src={x}/> }
+                                                        {/* {slot.blockingModules.map((blockedModule) => blockedModule.code).map((blockedModuleCode) => selectedModules.includes(blockedModuleCode)) && <img src={x}/> } */}
                                                     </div>
                                                 </td>
                                             ))}
@@ -260,13 +274,13 @@ function Form(){
 
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule))
+                                                                slot.blockingModules.map((blockedModule) => Array.from(blockedModule.entries()))
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
                                                                 : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
                                                             }`
                                                         }
                                                     >
-                                                        {selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule)) && <img src={x}/> }
+                                                        {/* {slot.blockingModules.map((blockedModule) => blockedModule.code).map((blockedModuleCode) => selectedModules.includes(blockedModuleCode)) && <img src={x}/> } */}
                                                     </div>
                                                 </td>
                                             ))}
@@ -280,13 +294,13 @@ function Form(){
 
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule))
+                                                                slot.blockingModules.map((blockedModule) => Array.from(blockedModule.entries()))
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
                                                                 : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
                                                             }`
                                                         }
                                                     >
-                                                        {selectedModules.map((selectedModule) => slot.blockingModules.includes(selectedModule)) && <img src={x}/> }
+                                                        {/* {slot.blockingModules.map((blockedModule) => blockedModule.code).map((blockedModuleCode) => selectedModules.includes(blockedModuleCode)) && <img src={x}/> } */}
                                                     </div>
                                                 </td>
                                             ))}

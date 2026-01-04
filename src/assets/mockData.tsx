@@ -1,3 +1,4 @@
+
 export type FormMode = "employee" | "modules";
 export type role = "assistant" | "supervisor";
 export type lab = 1 | 2 | 3;
@@ -36,7 +37,7 @@ export type Slot = {
     isUnavailable: boolean;
     unavailable: Students[];
     isBlocked: boolean;
-    blockingModules: Module[];
+    blockingModules: Map<string, Module>[];
     Shift: Shift;
     booking?: classBooking
 }
@@ -207,7 +208,6 @@ enrolledModules.set("thirdYearMain", new Map<string, string>([
     ["SSTC032", "Sampling Theory"]
 ]))
 
-console.log(enrolledModules);
 // Mock Students (use empty arrays for shifts initially)
 export const mockStudents: Students[] = [
     {
@@ -469,19 +469,18 @@ export const emptySlot: Slot = {
     isBooked: true,
     isUnavailable: true,
     isBlocked: false,
-    blockingModules: [modules[0][0],modules[0][1]],
+    blockingModules: [],
     Shift: Shift1,
     booking: mockBooking,
-    unavailable: [mockStudents[1]],
+    unavailable: [],
 };
 
 const slot0: Slot = {
     slotID: 0,
     isBooked: true,
     isUnavailable: true,
-    
     isBlocked: false,
-    blockingModules: [],
+    blockingModules: [enrolledModules.get("secondYearMain").get("SMTA021"), enrolledModules.get("secondYearMain").get("SAPA021")],
     Shift: Shift1,
     unavailable: [],
 };
@@ -686,7 +685,7 @@ const slot20: Slot = {
     isBooked: false,
     isUnavailable: false,
     isBlocked: true,
-    blockingModules: [modules[0][3],modules[0][4]],
+    blockingModules: [],
     Shift: shift21,
     unavailable: []
 };
@@ -744,7 +743,7 @@ const slot25: Slot = {
     isBooked: false,
     isUnavailable: false,
     isBlocked: true,
-    blockingModules: [modules[0][5]],
+    blockingModules: [],
     Shift: shift26,
     unavailable: []
 };
