@@ -27,7 +27,7 @@ function Form(){
     const { newSchedule } = useAppData();
     const arraySchedule = Array.from(newSchedule.entries());
     const [myTimeTable, setMyTimeTable] = useState(newSchedule);
-    const [selectedModules, setSelectedModules] = useState<string[]>([]);
+    const [selectedModules, setSelectedModules] = useState<string[]>([enrolledModules.get("secondYearMain").get("SMTA021")]);
     const diffTimeTable = myTimeTable;
     console.log(diffTimeTable.get("08h00-11h00")?.get("Monday"));
 
@@ -79,7 +79,10 @@ function Form(){
             }
         }
     }
-    // console.log(Array.from(arraySchedule[0][1].entries()).map(([day, slot ]) => slot.blockingModules ));
+    console.log(Array.from(arraySchedule[0][1].entries()).map(([day, slot ]) => slot.blockingModules ));
+    console.log(selectedModules)
+    console.log(Array.from(arraySchedule[0][1].entries()).map(([day, slot ]) => slot.blockingModules.map((eachModule) => selectedModules.includes(eachModule)))[0]);
+
     return(
         <div className="registration px-[5.12rem] font-[Arimo] mt-6">
             <ButtonCarousel active={active} setActive={setActive}/>
@@ -210,17 +213,17 @@ function Form(){
                                             {Array.from(arraySchedule[0][1].entries()).map(([day, slot], id) => (
                                                 <td key={id} className="h-[2.59031rem]! w-[4.43731rem]!">
                                                     <div 
-                                                        onClick={() => updateSchedule(arraySchedule[0][0], day)}
+                                                        onClick={() => updateSchedule(arraySchedule[0][0]/**time */, day)}
 
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                slot.blockingModules.map((blockedModule) => Array.from(blockedModule.entries()).map(([code, module]) => code))
+                                                                slot.blockingModules.map((blockedModule) => selectedModules.includes(blockedModule)).includes(true)
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
                                                                 : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
                                                             }`
                                                         }
                                                     >
-                                                        {/* {slot.blockingModules.map((blockedModule) => blockedModule.code).map((blockedModuleCode) => selectedModules.includes(blockedModuleCode)) && <img src={x}/> } */}
+                                                        {slot.blockingModules.map((blockedModule) => selectedModules.includes(blockedModule)).includes(true) && <img src={x}/> }
                                                     </div>
                                                 </td>
                                             ))}
@@ -234,13 +237,13 @@ function Form(){
 
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                slot.blockingModules.map((blockedModule) => Array.from(blockedModule.entries()))
+                                                                slot.blockingModules.map((blockedModule) => selectedModules.includes(blockedModule)).includes(true)
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
                                                                 : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
                                                             }`
                                                         }
                                                     >
-                                                        {/* {slot.blockingModules.map((blockedModule) => blockedModule.code).map((blockedModuleCode) => selectedModules.includes(blockedModuleCode)) && <img src={x}/> } */}
+                                                        {slot.blockingModules.map((blockedModule) => selectedModules.includes(blockedModule)).includes(true) && <img src={x}/> }
                                                     </div>
                                                 </td>
                                             ))}
@@ -254,13 +257,13 @@ function Form(){
 
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                slot.blockingModules.map((blockedModule) => Array.from(blockedModule.entries()))
+                                                                slot.blockingModules.map((blockedModule) => selectedModules.includes(blockedModule)).includes(true)
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
                                                                 : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
                                                             }`
                                                         }
                                                     >
-                                                        {/* {slot.blockingModules.map((blockedModule) => blockedModule.code).map((blockedModuleCode) => selectedModules.includes(blockedModuleCode)) && <img src={x}/> } */}
+                                                        {slot.blockingModules.map((blockedModule) => selectedModules.includes(blockedModule)).includes(true) && <img src={x}/> }
                                                     </div>
                                                 </td>
                                             ))}
@@ -274,13 +277,13 @@ function Form(){
 
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                slot.blockingModules.map((blockedModule) => Array.from(blockedModule.entries()))
+                                                                slot.blockingModules.map((blockedModule) => selectedModules.includes(blockedModule)).includes(true)
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
                                                                 : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
                                                             }`
                                                         }
                                                     >
-                                                        {/* {slot.blockingModules.map((blockedModule) => blockedModule.code).map((blockedModuleCode) => selectedModules.includes(blockedModuleCode)) && <img src={x}/> } */}
+                                                        {slot.blockingModules.map((blockedModule) => selectedModules.includes(blockedModule)).includes(true) && <img src={x}/> }
                                                     </div>
                                                 </td>
                                             ))}
@@ -294,13 +297,13 @@ function Form(){
 
                                                         className={`h-[2.59031rem]! text-left w-[4.43731rem]! flex justify-center items-center text-[#99A1AF] rounded-lg cell p-[0.65rem] text-[0.74513rem] 
                                                             ${
-                                                                slot.blockingModules.map((blockedModule) => Array.from(blockedModule.entries()))
+                                                                slot.blockingModules.map((blockedModule) => selectedModules.includes(blockedModule)).includes(true)
                                                                 ? 'bg-[#FFE2E2] border border-solid border-[#FF6467]' 
                                                                 : ( slot.isUnavailable ? 'bg-[#FFEDD4] border border-solid border-[#FF8904]' : 'bg-[#DCFCE7] border border-solid border-[#05DF72] hover:bg-[#8CFFB4]')
                                                             }`
                                                         }
                                                     >
-                                                        {/* {slot.blockingModules.map((blockedModule) => blockedModule.code).map((blockedModuleCode) => selectedModules.includes(blockedModuleCode)) && <img src={x}/> } */}
+                                                        {slot.blockingModules.map((blockedModule) => selectedModules.includes(blockedModule)).includes(true) && <img src={x}/> }
                                                     </div>
                                                 </td>
                                             ))}

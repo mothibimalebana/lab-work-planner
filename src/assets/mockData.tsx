@@ -37,7 +37,7 @@ export type Slot = {
     isUnavailable: boolean;
     unavailable: Students[];
     isBlocked: boolean;
-    blockingModules: Map<string, Module>[];
+    blockingModules: string[];
     Shift: Shift;
     booking?: classBooking
 }
@@ -478,7 +478,7 @@ export const emptySlot: Slot = {
 const slot0: Slot = {
     slotID: 0,
     isBooked: true,
-    isUnavailable: true,
+    isUnavailable: false,
     isBlocked: false,
     blockingModules: [enrolledModules.get("secondYearMain").get("SMTA021"), enrolledModules.get("secondYearMain").get("SAPA021")],
     Shift: Shift1,
@@ -570,7 +570,7 @@ const slot8: Slot = {
 const slot9: Slot = {
     slotID: 9,
     isBooked: false,
-    isUnavailable: true,
+    isUnavailable: false,
     isBlocked: false,
     blockingModules: [],
     Shift: shift10,
