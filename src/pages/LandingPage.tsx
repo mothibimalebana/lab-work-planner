@@ -18,7 +18,7 @@ const LandingPage = () => {
                         <p className="flex items-center text-[1.125rem] text-[#021E35]">Lab Work Planner</p>
                     </div>
                     <button className="white-button">
-                        <Link to="/login" className="flex items-center gap-2">
+                        <Link to="/app/login" className="flex items-center gap-2">
                             {logOut.element}
                             <p className="text-[#6C6C6C] text-[0.875rem]">Login</p>
                         </Link>

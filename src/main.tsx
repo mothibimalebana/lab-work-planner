@@ -24,6 +24,11 @@ const router = createBrowserRouter([
     element: <App/>,
     children: [
       {
+        index: true,
+        path: "app",
+        element: <App/>
+      },
+      {
         path: "timetable",
         element: <Timetable/>
       },
@@ -35,15 +40,16 @@ const router = createBrowserRouter([
       //   path: "form",
       //   element: <Form/>
       // },
+      {
+        path: "login",
+        element: <LoginPage/>
+      },
+      {
+        path: "generate",
+        element: <GeneratePage/>
+      },
+      
     ]
-  },
-  {
-    path: "/login",
-    element: <LoginPage/>
-  },
-  {
-    path: "/generate",
-    element: <GeneratePage/>
   },
 ]);
 
