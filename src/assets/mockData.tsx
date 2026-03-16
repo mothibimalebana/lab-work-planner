@@ -46,7 +46,7 @@ export type Schedule = [
     [Slot, Slot, Slot, Slot, Slot, Slot, Slot],
     [Slot, Slot, Slot, Slot, Slot, Slot, Slot],
     [Slot, Slot, Slot, Slot, Slot, Slot, Slot],
-    [Slot, Slot, Slot, Slot, Slot, Slot, Slot]
+    [Slot, Slot, Slot, Slot, Slot, Slot, Slot],
 ];
 
 export type Students = {

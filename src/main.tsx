@@ -8,7 +8,7 @@ import Timetable from './pages/Timetable.tsx';
 import LandingPage from './pages/LandingPage.tsx';
 import LoginPage from './pages/Login.tsx';
 import Dashboard from './pages/Dashboard.tsx';
-import Form from './pages/Form.tsx';
+// import Form from './pages/Form.tsx';
 import GeneratePage from './components/GeneratePage.tsx';
 import AppDataProvider from './components/AppDataProvider.tsx';
 
@@ -30,10 +30,10 @@ const router = createBrowserRouter([
         path: "dashboard",
         element: <Dashboard dashboardMode='overview'/>,
       },
-      {
-        path: "form",
-        element: <Form/>
-      },
+      // {
+      //   path: "form",
+      //   element: <Form/>
+      // },
     ]
   },
   {

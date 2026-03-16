@@ -196,8 +196,10 @@ const LandingPage = () => {
                     </div>
                 </div>
             </div>
-            <div className="footer">
-
+            <div className="footer pt-24 pb-8">
+                <h6 className="footer flex justify-center color-[#6C6C6C]">
+                    Designed for COSC LABS
+                </h6>
             </div>
         </div>
     )

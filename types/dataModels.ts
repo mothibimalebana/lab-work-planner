@@ -42,6 +42,5 @@ export type students = {
     role: role;
     modules: module[];
     unavailable: number[];
-    modulesID: number;
     shifts: number[];
 }
