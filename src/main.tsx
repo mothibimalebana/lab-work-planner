@@ -16,7 +16,8 @@ const router = createBrowserRouter([
   {
     index: true,
     path: "/",
-    element: <LandingPage/>
+    element: <LandingPage/>,
+
   },
   {
     path: "/app",

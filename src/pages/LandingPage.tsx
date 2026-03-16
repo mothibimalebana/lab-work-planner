@@ -8,10 +8,6 @@ import blueBullet from "../assets/svg/blueBullet.svg"
 import greyB from "../assets/svg/greyB.svg"
 import { Link } from "react-router"
 
-
-
-
-
 const LandingPage = () => {
     return (
         <div className="landing-page font-[Arimo]">
